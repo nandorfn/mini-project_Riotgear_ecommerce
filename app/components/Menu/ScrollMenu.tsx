@@ -22,7 +22,7 @@ const ScrollMenu: React.FC = () => {
           <ul className="flex gap-3 text-sm breadcrumbs">
             {category?.map((item, index) => 
               <li className="inline-block" key={index}>
-                <Link className="bg-base-200 py-2 px-4 hover:bg-base-300 rounded-full" href={`/find/${item.link}`}>{item.label}</Link>
+                <Link className="bg-base-200 py-2 px-4 hover:bg-neutral-content rounded-full" href={`/find/${item.link}`}>{item.label}</Link>
               </li>
             )}
           </ul>
