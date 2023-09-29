@@ -8,13 +8,14 @@ import HeroImg from "./HeroImg";
 const Hero: React.FC = () => {
   return (
     <>
-      <section className="flex  w-full mt-4 max-w-6xl gap-4 justify-between p-4 lg:mx-auto">
-        <div className="mx-auto lg:w-3/4">
+      <section className="flex w-full md:mt-4 max-w-6xl gap-4 justify-between p-4 lg:mx-auto">
+        <div className="mx-auto w-full md:w-3/4">
           <Navbar />
           <HeroContent />
           <HeroImg />
         </div>
-        <div className="w-1/4 hidden lg:block">
+        
+        <div className="w-1/4 hidden md:block">
           <Image
             className="h-full object-cover rounded-xl"
             src={HeroImgDesktop}

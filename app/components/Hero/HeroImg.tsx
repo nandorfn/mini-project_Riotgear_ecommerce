@@ -12,7 +12,7 @@ const HeroImg: React.FC = () => {
               alt="Event"
             />
             <Image
-              className="hidden md:block md:w-1/2"
+              className="hidden w-full sm:block sm:w-full md:w-1/2"
               src={HeroImgSecondary}
               alt="Event"
             />
