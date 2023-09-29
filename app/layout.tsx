@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={rubik.className}>
+      <body className={`max-w-6xl mx-auto ${rubik.className}`}>
       <Hero />
       {children}
       </body>
