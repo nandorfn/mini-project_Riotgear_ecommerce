@@ -19,7 +19,7 @@ const ScrollMenuContainer: React.FC = () => {
       <section className="flex">
         <div className="mx-auto overflow-x-hidden">
           <div className="flex flex-row whitespace-nowrap">
-            <div className="flex px-4 bg-base-200 rounded-full me-3">
+            <div className="flex ms-3 px-4 bg-base-200 rounded-full me-3">
               {input &&
                 <input
                   className="me-2 rounded-full focus:outline-none ps-2 border-2"
@@ -29,7 +29,7 @@ const ScrollMenuContainer: React.FC = () => {
                   value={search}
                 />
               }
-              <button onClick={handleClick}>Cari</button>
+              <button onClick={handleClick}>Search</button>
             </div>
             <ScrollMenu />
           </div>
