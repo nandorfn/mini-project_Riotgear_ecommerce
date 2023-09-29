@@ -5,7 +5,7 @@ import StarLogo from '../../assets/Star.svg'
 const ProductCard: React.FC = () => {
   return (
     <>
-      <div className="card w-64 bg-base-100 hover:bg-base-200 cursor-pointer">
+      <div className="card w-fit shadow-md bg-base-100 hover:bg-base-200 cursor-pointer">
         <figure>
           <Image 
             className='w-full'
@@ -13,16 +13,16 @@ const ProductCard: React.FC = () => {
             alt="Jacket"
             />
         </figure>
-        <div className="flex flex-col gap-3">
-          <h2 className="card-title">Pocketable UV Protection Parka 3D Cut</h2>
-          <p>Rp600.000</p>
+        <div className="flex flex-col gap-3 p-3">
+          <h2 className="card-title text-lg text-base-300 font-normal">Pocketable UV Protection Parka 3D Cut</h2>
+          <p className='font-medium text-base'>Rp600.000</p>
           <div className='flex items-center gap-2'>
             <Image
               className='w-6'
               src={StarLogo}
               alt='star logo'
             />
-            <p>4.0 (200 Reviews)</p>
+            <p className='text-base-300 font-normal'>4.0 (200 Reviews)</p>
           </div>
         </div>
       </div>

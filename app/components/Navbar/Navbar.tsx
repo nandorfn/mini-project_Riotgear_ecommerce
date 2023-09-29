@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
                 />
               </label>
             </div>
-            <div className="drawer-side">
+            <div className="drawer-side z-50">
               <label htmlFor="my-drawer" className="drawer-overlay"></label>
               <ul className='menu w-80 pt-16 min-h-full bg-[#EBEBED] text-lg'>
                 <Menus />

@@ -20,16 +20,16 @@ const ScrollMenuContainer: React.FC = () => {
         <div className="mx-auto overflow-x-hidden">
           <div className="flex flex-row whitespace-nowrap">
             <div className="flex px-4 bg-base-200 rounded-full me-3">
-              <button onClick={handleClick}>Cari</button>
               {input &&
                 <input
-                  className="ms-2 border-2 rounded-e-full"
+                  className="me-2 rounded-full focus:outline-none ps-2 border-2"
                   name="searchQuery"
                   placeholder="Search..."
                   onChange={(e) => handleSearch(e)}
                   value={search}
                 />
               }
+              <button onClick={handleClick}>Cari</button>
             </div>
             <ScrollMenu />
           </div>
