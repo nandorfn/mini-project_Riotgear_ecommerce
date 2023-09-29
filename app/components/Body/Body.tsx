@@ -1,10 +1,11 @@
-import ScrollMenu from "../Menu/ScrollMenu";
-import ScrollMenuContainer from "../Menu/ScrollMenuContainer";
+import ProductCard from "../Card/ProductCard";
 
 const Body: React.FC = () => {
     return (
         <>
-          <ScrollMenuContainer />
+          <section className="mt-4">
+            <ProductCard />
+          </section>
         </>
     );
 };

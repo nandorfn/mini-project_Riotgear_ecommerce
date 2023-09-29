@@ -1,6 +1,5 @@
 'use client'
 import { useState } from "react";
-import Input from "../Form/Input";
 import ScrollMenu from "./ScrollMenu";
 
 const ScrollMenuContainer: React.FC = () => {
