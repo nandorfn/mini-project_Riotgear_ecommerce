@@ -2,6 +2,7 @@ import Image from 'next/image';
 import BrandLogo from '../../assets/RiotLogoBlack.svg'
 import MenuBtn from '../../assets/MenuIcon.svg'
 import Menus from './Menus';
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
 
@@ -14,10 +15,12 @@ const Navbar: React.FC = () => {
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-row justify-between">
               {/* Page content here */}
-              <Image
-                src={BrandLogo}
-                alt='Brand Logo'
-              />
+              <Link className='cursor-pointer flex items-center' href="/">
+                <Image
+                  src={BrandLogo}
+                  alt='Brand Logo'
+                />
+              </Link>
               <ul className='hidden md:flex flex-row gap-4 pe-3'>
                 <Menus />
               </ul>
