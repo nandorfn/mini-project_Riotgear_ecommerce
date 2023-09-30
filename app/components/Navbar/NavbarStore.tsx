@@ -1,18 +1,15 @@
 'use client'
 import Image from 'next/image';
-import { useMediaQuery } from 'usehooks-ts'
 import BrandLogo from '../../assets/RiotLogo.svg'
-import BrandLogoBlack from '../../assets/RiotLogoBlack.svg'
 import MenuBtn from '../../assets/MenuIcon.svg'
 import Menus from './Menus';
 import Link from 'next/link';
 import Avatar from '../Avatar';
-import IconWrapper from '../IconWrapper';
+import Drawer from '../Drawer/Drawer';
 
 
 const NavbarStore: React.FC = () => {
 
-  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   return (
     <>
@@ -24,20 +21,15 @@ const NavbarStore: React.FC = () => {
               {/* Page content here */}
               <div className='md:flex gap-4 flex-row'>
                 <Link className='cursor-pointer flex items-center' href="/">
-                  {isDesktop
-                    ? <Image
-                      src={BrandLogo}
-                      alt='Brand Logo'
-                    />
-                    : <Image
-                      className='mt-4'
-                      src={BrandLogoBlack}
-                      alt='Brand Logo'
-                    />
-                  }
-
+                  <Image
+                    src={BrandLogo}
+                    alt='Brand Logo'
+                  />
                 </Link>
                 <ul className='hidden md:flex flex-row gap-4 pe-3 items-center'>
+                  <li>
+                    <Link className="hover:font-medium" href={'/'}>{'Home'}</Link>
+                  </li>
                   <Menus
                     menuFor={"store"}
                   />
@@ -54,15 +46,7 @@ const NavbarStore: React.FC = () => {
                 <Avatar />
               </div>
             </div>
-            <div className="drawer-side z-50">
-              <label htmlFor="my-drawer" className="drawer-overlay"></label>
-              <ul className='menu w-80 pt-4 min-h-full bg-[#EBEBED] text-lg relative'>
-                { !isDesktop && <IconWrapper />}
-                <Menus
-                  menuFor='store'
-                  />
-              </ul>
-            </div>
+            <Drawer />
           </div>
         </nav>
       </header>
