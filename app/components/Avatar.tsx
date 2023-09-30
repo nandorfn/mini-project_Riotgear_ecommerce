@@ -26,24 +26,6 @@ const Avatar: React.FC = () => {
           </li>
         </ul>
       </div>
-
-      {/* <div className="collapse bg-[#EBEBED] w-fit">
-        <input type="checkbox" />
-        <div className="collapse-title p-0">
-          <div className="avatar items-center gap-2">
-            <div className="w-8 rounded-full">
-              <Image
-                src={AvatarIcon}
-                alt="User Icon"
-              />
-            </div>
-            <p className=" font-normal text-base">John Doe</p>
-          </div>
-        </div>
-        <div className="collapse-content">
-          <button className="btn btn-sm btn-error">Log Out</button>
-        </div>
-      </div> */}
     </>
   );
 };
