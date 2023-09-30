@@ -37,6 +37,7 @@ const Page: React.FC = () => {
             label=""
             headTable={headTableBlog}
           />
+          
         </>
     );
 };
