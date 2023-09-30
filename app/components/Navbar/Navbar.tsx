@@ -22,6 +22,9 @@ const Navbar: React.FC = () => {
                 />
               </Link>
               <ul className='hidden md:flex flex-row gap-4 pe-3'>
+                <li>
+                  <Link className="hover:font-medium" href={'/store'}>{'Store'}</Link>
+                </li>
                 <Menus
                   menuFor='landing-page'
                 />
@@ -37,6 +40,9 @@ const Navbar: React.FC = () => {
             <div className="drawer-side z-50">
               <label htmlFor="my-drawer" className="drawer-overlay"></label>
               <ul className='menu w-80 pt-16 min-h-full bg-[#EBEBED] text-lg'>
+                <li>
+                  <Link className="hover:font-medium" href={'/'}>{'Store'}</Link>
+                </li>
                 <Menus
                   menuFor='landing-page'
                 />
