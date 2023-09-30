@@ -22,7 +22,9 @@ const Navbar: React.FC = () => {
                 />
               </Link>
               <ul className='hidden md:flex flex-row gap-4 pe-3'>
-                <Menus />
+                <Menus
+                  menuFor='landing-page'
+                />
               </ul>
               <label htmlFor="my-drawer" className="drawer-button md:hidden">
                 <Image
@@ -35,7 +37,9 @@ const Navbar: React.FC = () => {
             <div className="drawer-side z-50">
               <label htmlFor="my-drawer" className="drawer-overlay"></label>
               <ul className='menu w-80 pt-16 min-h-full bg-[#EBEBED] text-lg'>
-                <Menus />
+                <Menus
+                  menuFor='landing-page'
+                />
               </ul>
             </div>
           </div>
