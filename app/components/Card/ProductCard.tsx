@@ -1,7 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import ProductImg from '../../assets/Product.png'
 import StarLogo from '../../assets/Star.svg'
-import Link from 'next/link';
 
 const ProductCard: React.FC = () => {
   return (

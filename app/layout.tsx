@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`max-w-6xl mx-auto ${rubik.className}`}>
+      <body className={` ${rubik.className}`}>
       {children}
       <Footer />
       </body>
