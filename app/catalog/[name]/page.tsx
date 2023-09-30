@@ -1,27 +1,38 @@
 import NavbarStore from "@/app/components/Navbar/NavbarStore";
 import Image from "next/image";
-import ProductImg from '../../assets/Product.png'
-import SizeChart from "@/app/components/Filter/SizeChart";
+import ProductImg from '../../assets/Content/jacketParka.jpg'
+import ProductDetails from "@/app/components/Card/ProductDetails";
+import Accordion from "@/app/components/Accordion/Accordion";
+
 
 const page: React.FC = () => {
-    return (
-        <>
-          <NavbarStore />
-          <figure className="flex w-full">
-            <div className="w-2/3">
-              <Image
-              src={ProductImg}
-              alt="Product Image" 
-              />
-            </div>
-            <article className="w-1/3">
-              <h1>Pocketable UV Protection Parka 3D Cut</h1>
-              <h3>Rp600.000</h3>
-              <SizeChart />
-            </article>
-          </figure>
-        </>
-    );
+  return (
+    <>
+      <NavbarStore />
+      <figure className="flex w-full gap-6 mt-3 p-4">
+        <div className="w-4/6">
+          <Image
+            className="w-full object-cover rounded-xl"
+            src={ProductImg}
+            alt="Product Image"
+          />
+        </div>
+        <ProductDetails />
+      </figure>
+      <section>
+      <div className="w-4/6 p-4">
+        <Accordion
+          label="Description"
+          content="- Hybrid down outerwear developed in collaboration with professional snowboarder, Ayumu Hirano.
+              - A combination of lightweight high-performance cotton padding with Heat of Absorption technology, and premium down with a fill power of 750* or more.
+              - Water-repellent finish. *The fabric is coated with a water-repellent agent so the effect lasts longer. The finish is not permanent.
+              - Collar stands up neatly without the hood up.
+              "
+        />
+      </div>
+      </section>
+    </>
+  );
 };
 
 export default page;
