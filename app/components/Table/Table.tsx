@@ -1,9 +1,13 @@
+import Button from "../Button/Button";
+
 interface LabelProps {
   label: string,
+  headTable: string[]
 }
 
 const Table: React.FC<LabelProps> = ({
-  label
+  label,
+  headTable
 }) => {
   return (
     <>
@@ -14,11 +18,9 @@ const Table: React.FC<LabelProps> = ({
             {/* head */}
             <thead>
               <tr>
-                <th>No</th>
-                <th>Product Name</th>
-                <th>Product ID</th>
-                <th>Category</th>
-                <th>Action</th>
+                {headTable?.map((head, index) =>
+                  <th key={index}>{head}</th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -27,24 +29,36 @@ const Table: React.FC<LabelProps> = ({
                 <th>1</th>
                 <td>Cy Ganderton</td>
                 <td>Quality Control Specialist</td>
-                <td>Blue</td>
-                <td>Blue</td>
+                <td>
+                  <Button
+                    addClass="btn-error btn-sm capitalize"
+                    label="Delete"
+                  />
+                </td>
               </tr>
               {/* row 2 */}
               <tr>
                 <th>2</th>
                 <td>Hart Hagerty</td>
                 <td>Desktop Support Technician</td>
-                <td>Purple</td>
-                <td>Purple</td>
+                <td>
+                  <Button
+                    addClass="btn-error btn-sm capitalize"
+                    label="Delete"
+                  />
+                </td>
               </tr>
               {/* row 3 */}
               <tr>
                 <th>3</th>
                 <td>Brice Swyre</td>
                 <td>Tax Accountant</td>
-                <td>Red</td>
-                <td>Red</td>
+                <td>
+                  <Button
+                    addClass="btn-error btn-sm capitalize"
+                    label="Delete"
+                  />
+                </td>
               </tr>
             </tbody>
           </table>

@@ -31,3 +31,6 @@ export const faq: FaqItem[] = [
   a: 'You can reach us through the "Contact Us" page on our website or by emailing us at [contact email address]. Our team is ready to answer any questions and provide the assistance you need.'
 }
 ]
+
+export const headTableBlog = ['No', 'Article Title', 'Created At', 'Action']
+export const headTableProduct = ['No', 'Product Name', 'Category', 'Action']
