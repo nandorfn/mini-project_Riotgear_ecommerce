@@ -28,6 +28,7 @@ const TableBody: React.FC<Props> = ({
           <th>{index + 1}</th>
           <td>{product.productName}</td>
           <td>{product.productMainCategory}</td>
+          <td>{product.productSubCategory}</td>
           <td>{product.productStock}</td>
           <td>{product.productPrice}</td>
           <td className="flex flex-row gap-3">

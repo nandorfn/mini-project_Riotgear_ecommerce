@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import Button from "@/app/components/Button/Button";
 import Input from "@/app/components/Form/Input";
