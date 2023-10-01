@@ -1,10 +1,11 @@
 import { ProductData } from "@/app/utils/utils";
-import Button from "../Button/Button";
 import deleteIcon from '../../assets/icon/delete.svg'
 import editIcon from '../../assets/icon/edit.svg'
+import Image from "next/image";
 
 interface LabelProps {
-  dataProducts: any ;
+  dataProducts: ProductData[] ;
+  handleDelete: (id: string) => void;
   label: string,
   headTable: string[],
 }
@@ -13,10 +14,8 @@ const Table: React.FC<LabelProps> = ({
   label,
   headTable,
   dataProducts,
+  handleDelete,
 }) => {
-
-  console.log(dataProducts);
-
   return (
     <>
       <label className="font-medium text-xl">
@@ -30,7 +29,7 @@ const Table: React.FC<LabelProps> = ({
                 )}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-base font-normal">
               {dataProducts?.map((product: any, index: number) => 
               <tr key={index}>
                 <th>{index + 1}</th>
@@ -38,9 +37,21 @@ const Table: React.FC<LabelProps> = ({
                 <td>{product.productMainCategory}</td>
                 <td>{product.productStock}</td>
                 <td>{product.productPrice}</td>
-                <td>
-                  <button>Delete</button>
-                  <button>Edit</button>
+                <td className="flex flex-row gap-3">
+                  <button>
+                    <Image
+                      src={editIcon}
+                      alt="Edit Icon"
+                    />
+                  </button>
+                  <button
+                    onClick={(e) => handleDelete(product.productId)}
+                  >
+                    <Image 
+                      src={deleteIcon}
+                      alt="Delete Icon"
+                    />
+                  </button>
                 </td>
               </tr>
               )}

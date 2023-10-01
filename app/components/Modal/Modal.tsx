@@ -9,6 +9,7 @@ import Input from "../Form/Input";
 import Button from "../Button/Button";
 import OptionInput from '../Form/Option';
 import axios from 'axios';
+import { ProductData } from '@/app/utils/utils';
 
 interface Props {
   setDataProducts: React.Dispatch<React.SetStateAction<any>>
@@ -25,7 +26,7 @@ const initialState = {
   productPrice: '',
 };
 
-const Modal: React.FC<Props> = ({ handleModal, }) => {
+const Modal: React.FC<Props> = ({ handleModal, setDataProducts }) => {
   const [form, setForm] = useState(initialState);
   
   const handleInput = (e: React.SyntheticEvent) => {
@@ -51,6 +52,15 @@ const Modal: React.FC<Props> = ({ handleModal, }) => {
       productDesc: form.productDesc,
       productPrice: productPrice
     })
+    .then(response => {
+      setDataProducts((prevState: ProductData[]) => [
+        ...prevState,
+        response.data
+      ])
+    })
+    .catch(error => {
+      console.error('Request Rejected:', error);
+    });
   }
 
   const handleSubmit = () => {

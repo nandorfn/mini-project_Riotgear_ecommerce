@@ -17,15 +17,29 @@ const Page: React.FC = () => {
     if (dataProducts.length === 0) {
       axios.get('/api/products')
         .then(response => {
-          const newDataProducts = [...dataProducts, ...response.data];
+          const newDataProducts = [
+            ...dataProducts, 
+            ...response.data
+          ];
           setDataProducts(newDataProducts);
         })
         .catch(error => {
           console.error(error);
         });
     }
-  }, [dataProducts]); 
-  console.log(dataProducts);
+  }, []); 
+  
+  const handleDelete = (id: string) => {
+    axios.delete(`/api/products/${id}`)
+    .then(() => {
+      const filteredProducts = [
+        ...dataProducts.filter((product) => 
+        product.productId !== id
+      )];
+      setDataProducts(filteredProducts)
+    })
+    .catch(error => {console.error(error)});
+  }
 
   const handleInput = (e: React.SyntheticEvent) => {
     const { value } = (e.target as HTMLInputElement);
@@ -39,7 +53,6 @@ const Page: React.FC = () => {
     <>
       <section className="relative">
         <h2 className="text-2xl font-medium">List Products</h2>
-
         <div className="flex flex-row w-2/4 items-center gap-3 my-4">
           <Input
             name="Search"
@@ -61,6 +74,7 @@ const Page: React.FC = () => {
         </div>
         <Table
           dataProducts={dataProducts}
+          handleDelete={handleDelete}
           label=""
           headTable={headTableProduct}
         />
