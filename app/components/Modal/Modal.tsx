@@ -3,12 +3,12 @@ import './Modal.css'
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { mainCategory, subCategory } from '@/app/data/faqData';
-import { ProductData, createObject } from "@/app/utils/utils";
 
 import { TextArea } from "../Form/TextArea";
 import Input from "../Form/Input";
 import Button from "../Button/Button";
 import OptionInput from '../Form/Option';
+import axios from 'axios';
 
 interface Props {
   handleModal: () => void;
@@ -35,27 +35,27 @@ const Modal: React.FC<Props> = ({ handleModal, }) => {
       [name]: value
     })
   }
+  
 
-  const sendData = () => {
+  const sendData = async () => {
     const id = uuidv4();
     const productStock = parseInt(form.productStock)
-    const productPrice = parseInt(form.productPrice)
-    const newProduct = createObject(
-      id,
-      form.productName,
-      form.productMainCategory,
-      form.productSubCategory,
-      form.productImgLink,
-      productStock,
-      form.productDesc,
-      productPrice
-    )
-    console.log(newProduct)
-    
+    const productPrice = parseFloat(form.productPrice)
+    await axios.post("/api/products", {
+      productId: id,
+      productName: form.productName,
+      productMainCategory: form.productMainCategory,
+      productSubCategory: form.productSubCategory,
+      productImgLink: form.productImgLink,
+      productStock: productStock,
+      productDesc: form.productDesc,
+      productPrice: productPrice
+    })
   }
 
   const handleSubmit = () => {
     sendData();
+    handleModal();
     setForm(initialState);
   }
   

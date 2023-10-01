@@ -27,7 +27,7 @@ const Table: React.FC<LabelProps> = ({
               </tr>
             </thead>
             <tbody>
-              {productData?.map((product, index) => 
+              {/* {productData?.map((product, index) => 
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{product.productName}</td>
@@ -39,7 +39,7 @@ const Table: React.FC<LabelProps> = ({
                   <button>{editIcon}</button>
                 </td>
               </tr>
-              )}
+              )} */}
             </tbody>
           </table>
         </div>
