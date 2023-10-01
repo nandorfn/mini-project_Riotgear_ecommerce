@@ -2,6 +2,7 @@ interface InputProps {
   name: string,
   value: string,
   label: string | null,
+  type: string,
   placeholder: string,
   handleInput: (e: React.SyntheticEvent) => void,
 }
@@ -9,6 +10,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   name,
   value,
+  type,
   label,
   handleInput,
   placeholder
@@ -23,7 +25,7 @@ const Input: React.FC<InputProps> = ({
         id={name}
         value={value}
         onChange={(e) => handleInput(e)}
-        type="text"
+        type={type}
         placeholder={placeholder}
         className="input input-bordered flex w-full" />
     </>

@@ -1,14 +1,15 @@
 interface Props {
   addClass: string;
   label: string;
+  handleClick?: () => void;
 }
 
 const Button: React.FC<Props> = (
-  { addClass, label }
+  { addClass, label, handleClick }
 ) => {
     return (
         <>
-          <button className={`btn ${addClass}`} type="button">{label}</button>
+          <button onClick={handleClick} className={`btn ${addClass}`} type="button">{label}</button>
         </>
     );
 };

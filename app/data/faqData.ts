@@ -34,3 +34,15 @@ export const faq: FaqItem[] = [
 
 export const headTableBlog = ['No', 'Article Title', 'Created At', 'Action']
 export const headTableProduct = ['No', 'Product Name', 'Category', 'Action']
+
+export type category = {
+  key: string;
+  value: string;
+}
+
+export const mainCategory = [
+  { key: 'Top', value: 'Top' },
+  { key: 'Outwear', value: 'Outwear' },
+  { key: 'Bottom', value: 'Bottom' },
+  { key: 'Accessories', value: 'Accessories' },
+];
