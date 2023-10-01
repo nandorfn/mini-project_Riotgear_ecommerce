@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 
 export const POST = async (req: Request) => {
   const body: Product = await req.json();
-  console.log(body);
   const product = await prisma.product.create({
     data: {
       productId: body.productId,
@@ -20,4 +19,9 @@ export const POST = async (req: Request) => {
   });
   
   return NextResponse.json(product, {status: 201});
+}
+
+export const GET = async (request: Request) =>{
+  const product = await prisma.product.findMany();
+  return NextResponse.json(product, {status: 200});
 }

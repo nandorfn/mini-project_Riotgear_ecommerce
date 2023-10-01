@@ -4,6 +4,7 @@ import deleteIcon from '../../assets/icon/delete.svg'
 import editIcon from '../../assets/icon/edit.svg'
 
 interface LabelProps {
+  dataProducts: any ;
   label: string,
   headTable: string[],
 }
@@ -11,7 +12,10 @@ interface LabelProps {
 const Table: React.FC<LabelProps> = ({
   label,
   headTable,
+  dataProducts,
 }) => {
+
+  console.log(dataProducts);
 
   return (
     <>
@@ -27,7 +31,7 @@ const Table: React.FC<LabelProps> = ({
               </tr>
             </thead>
             <tbody>
-              {/* {productData?.map((product, index) => 
+              {dataProducts?.map((product: any, index: number) => 
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{product.productName}</td>
@@ -35,11 +39,11 @@ const Table: React.FC<LabelProps> = ({
                 <td>{product.productStock}</td>
                 <td>{product.productPrice}</td>
                 <td>
-                  <button>{deleteIcon}</button>
-                  <button>{editIcon}</button>
+                  <button>Delete</button>
+                  <button>Edit</button>
                 </td>
               </tr>
-              )} */}
+              )}
             </tbody>
           </table>
         </div>

@@ -5,12 +5,28 @@ import Modal from "@/app/components/Modal/Modal";
 import Table from "@/app/components/Table/Table";
 import { headTableProduct } from "@/app/data/faqData";
 import { ProductData } from "@/app/utils/utils";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Page: React.FC = () => {
+  const [dataProducts, setDataProducts] = useState<ProductData[]>([])
   const [search, setSearch] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  
+
+  useEffect(() => {
+    if (dataProducts.length === 0) {
+      axios.get('/api/products')
+        .then(response => {
+          const newDataProducts = [...dataProducts, ...response.data];
+          setDataProducts(newDataProducts);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }, [dataProducts]); 
+  console.log(dataProducts);
+
   const handleInput = (e: React.SyntheticEvent) => {
     const { value } = (e.target as HTMLInputElement);
     setSearch(value)
@@ -44,13 +60,15 @@ const Page: React.FC = () => {
           />
         </div>
         <Table
+          dataProducts={dataProducts}
           label=""
           headTable={headTableProduct}
         />
-        {isOpen && 
-          <Modal 
-          handleModal={handleModal} 
-        />}
+        {isOpen &&
+          <Modal
+            setDataProducts={setDataProducts}
+            handleModal={handleModal}
+          />}
       </section>
     </>
   );

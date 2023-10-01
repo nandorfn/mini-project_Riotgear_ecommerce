@@ -11,6 +11,7 @@ import OptionInput from '../Form/Option';
 import axios from 'axios';
 
 interface Props {
+  setDataProducts: React.Dispatch<React.SetStateAction<any>>
   handleModal: () => void;
 }
 
@@ -29,7 +30,6 @@ const Modal: React.FC<Props> = ({ handleModal, }) => {
   
   const handleInput = (e: React.SyntheticEvent) => {
     const { name, value } = (e.target as HTMLInputElement);
-    console.log(e.target as HTMLInputElement)
     setForm({
       ...form,
       [name]: value
