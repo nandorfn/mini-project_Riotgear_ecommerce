@@ -1,13 +1,16 @@
 import { ProductData } from "@/app/utils/utils";
-import deleteIcon from '../../assets/icon/delete.svg'
-import editIcon from '../../assets/icon/edit.svg'
-import Image from "next/image";
+import TableBody from "./TableBody";
+
 
 interface LabelProps {
-  dataProducts: ProductData[] ;
-  handleDelete: (id: string) => void;
-  label: string,
+  dataProducts: ProductData[];
+  filteredData: ProductData[];
   headTable: string[],
+  label: string,
+  search: string,
+  handleDelete: (id: string) => void;
+  handleEdit: (id: string) => void;
+  handleEditModal: () => void;
 }
 
 const Table: React.FC<LabelProps> = ({
@@ -15,7 +18,12 @@ const Table: React.FC<LabelProps> = ({
   headTable,
   dataProducts,
   handleDelete,
+  handleEdit,
+  handleEditModal,
+  filteredData,
+  search
 }) => {
+
   return (
     <>
       <label className="font-medium text-xl">
@@ -30,31 +38,20 @@ const Table: React.FC<LabelProps> = ({
               </tr>
             </thead>
             <tbody className="text-base font-normal">
-              {dataProducts?.map((product: any, index: number) => 
-              <tr key={index}>
-                <th>{index + 1}</th>
-                <td>{product.productName}</td>
-                <td>{product.productMainCategory}</td>
-                <td>{product.productStock}</td>
-                <td>{product.productPrice}</td>
-                <td className="flex flex-row gap-3">
-                  <button>
-                    <Image
-                      src={editIcon}
-                      alt="Edit Icon"
-                    />
-                  </button>
-                  <button
-                    onClick={(e) => handleDelete(product.productId)}
-                  >
-                    <Image 
-                      src={deleteIcon}
-                      alt="Delete Icon"
-                    />
-                  </button>
-                </td>
-              </tr>
-              )}
+              {search === ""
+                ? <TableBody
+                  dataMapping={dataProducts}
+                  handleEdit={handleEdit}
+                  handleEditModal={handleEditModal}
+                  handleDelete={handleDelete}
+                />
+                : <TableBody
+                  dataMapping={filteredData}
+                  handleEdit={handleEdit}
+                  handleEditModal={handleEditModal}
+                  handleDelete={handleDelete}
+                />
+              }
             </tbody>
           </table>
         </div>

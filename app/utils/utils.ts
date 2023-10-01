@@ -9,6 +9,16 @@ export type ProductData = {
   productPrice: number;
 };
 
+export type productFormState = {
+  productName: string;
+  productImgLink: string;
+  productStock: string;
+  productMainCategory: string;
+  productSubCategory: string;
+  productDesc: string;
+  productPrice: string;
+}
+
 export const createObject = (
   productId: string,
   productName: string,

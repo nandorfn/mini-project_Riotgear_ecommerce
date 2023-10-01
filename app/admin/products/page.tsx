@@ -1,17 +1,23 @@
 'use client'
 import Button from "@/app/components/Button/Button";
 import Input from "@/app/components/Form/Input";
-import Modal from "@/app/components/Modal/Modal";
 import Table from "@/app/components/Table/Table";
 import { headTableProduct } from "@/app/data/faqData";
 import { ProductData } from "@/app/utils/utils";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import FormProduct from "./FormProduct";
+import FormEditProduct from "./FormEditProduct";
 
 const Page: React.FC = () => {
   const [dataProducts, setDataProducts] = useState<ProductData[]>([])
+  const [filteredData, setFilteredData] = useState<ProductData[]>([])
+  const [editedProduct, setEditedProduct] = useState<ProductData>()
   const [search, setSearch] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [modal, setModal] = useState({
+    editModal: false,
+    addModal: false,
+  })
 
   useEffect(() => {
     if (dataProducts.length === 0) {
@@ -40,15 +46,36 @@ const Page: React.FC = () => {
     })
     .catch(error => {console.error(error)});
   }
-
+  
+  const handleEdit = (id: string) => {
+    const dataToEdit = [...dataProducts.filter((product) => product.productId === id)];
+    setEditedProduct(dataToEdit[0]);
+  };
+  
   const handleInput = (e: React.SyntheticEvent) => {
     const { value } = (e.target as HTMLInputElement);
     setSearch(value)
+    onFilter(value);
   }
-  const handleModal = () => {
-    setIsOpen(!isOpen)
-  }
-
+  const handleAddModal = () => {
+    setModal((prevState) => ({
+      ...prevState,
+      addModal: !prevState.addModal
+    }));
+  };
+  const handleEditModal = () => {
+    setModal((prevState) => ({
+      ...prevState,
+      editModal: !prevState.editModal
+    }));
+  };
+  
+  const onFilter = (query: string) => {
+    let filter = dataProducts?.filter((item) =>
+        item.productName.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredData(filter)
+}
   return (
     <>
       <section className="relative">
@@ -67,22 +94,35 @@ const Page: React.FC = () => {
             addClass="btn-info capitalize"
           />
           <Button
-            handleClick={handleModal}
+            handleClick={handleAddModal}
             label="Add product"
             addClass="btn-success capitalize"
           />
         </div>
         <Table
           dataProducts={dataProducts}
+          search={search}
+          filteredData={filteredData}
           handleDelete={handleDelete}
+          handleEditModal={handleEditModal}
+          handleEdit={handleEdit}
           label=""
           headTable={headTableProduct}
         />
-        {isOpen &&
-          <Modal
+        {modal.editModal &&
+          <FormEditProduct 
+          dataProducts={dataProducts}
+          setDataProducts={setDataProducts}
+          editedData={editedProduct}
+            handleModal={handleEditModal}
+          />
+        }
+        {modal.addModal &&
+          <FormProduct
             setDataProducts={setDataProducts}
-            handleModal={handleModal}
-          />}
+            handleModal={handleAddModal}
+          />
+        }
       </section>
     </>
   );

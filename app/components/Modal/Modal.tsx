@@ -1,80 +1,35 @@
 'use client'
 import './Modal.css'
-import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
 import { mainCategory, subCategory } from '@/app/data/faqData';
+import { productFormState } from '@/app/utils/utils';
 
 import { TextArea } from "../Form/TextArea";
 import Input from "../Form/Input";
 import Button from "../Button/Button";
 import OptionInput from '../Form/Option';
-import axios from 'axios';
-import { ProductData } from '@/app/utils/utils';
 
 interface Props {
-  setDataProducts: React.Dispatch<React.SetStateAction<any>>
+  handleInput: (e: React.SyntheticEvent) => void;
   handleModal: () => void;
+  handleSubmit: () => void;
+  form: productFormState;
+  label: string;
 }
+const Modal: React.FC<Props> = ({
+  handleInput,
+  handleModal,
+  handleSubmit,
+  form,
+  label
+}) => {
 
-const initialState = {
-  productName: '',
-  productImgLink: '',
-  productStock: '',
-  productMainCategory: '',
-  productSubCategory: '',
-  productDesc: '',
-  productPrice: '',
-};
-
-const Modal: React.FC<Props> = ({ handleModal, setDataProducts }) => {
-  const [form, setForm] = useState(initialState);
-  
-  const handleInput = (e: React.SyntheticEvent) => {
-    const { name, value } = (e.target as HTMLInputElement);
-    setForm({
-      ...form,
-      [name]: value
-    })
-  }
-  
-
-  const sendData = async () => {
-    const id = uuidv4();
-    const productStock = parseInt(form.productStock)
-    const productPrice = parseFloat(form.productPrice)
-    await axios.post("/api/products", {
-      productId: id,
-      productName: form.productName,
-      productMainCategory: form.productMainCategory,
-      productSubCategory: form.productSubCategory,
-      productImgLink: form.productImgLink,
-      productStock: productStock,
-      productDesc: form.productDesc,
-      productPrice: productPrice
-    })
-    .then(response => {
-      setDataProducts((prevState: ProductData[]) => [
-        ...prevState,
-        response.data
-      ])
-    })
-    .catch(error => {
-      console.error('Request Rejected:', error);
-    });
-  }
-
-  const handleSubmit = () => {
-    sendData();
-    handleModal();
-    setForm(initialState);
-  }
   
   return (
     <>
       <div className="inset-0 bg-opacity-50 bg-black bgModal">
       <div className="modalWrapper">
         <form className="form__add-product bg-base-200">
-          <h4>Add Product</h4>
+          <h4>{label}</h4>
           <Input
             name={'productName'}
             label={'Product Name'}
