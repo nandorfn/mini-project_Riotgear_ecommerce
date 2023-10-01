@@ -39,10 +39,23 @@ export type category = {
   key: string;
   value: string;
 }
-
 export const mainCategory = [
   { key: 'Top', value: 'Top' },
   { key: 'Outwear', value: 'Outwear' },
   { key: 'Bottom', value: 'Bottom' },
   { key: 'Accessories', value: 'Accessories' },
 ];
+export const subCategory = [
+  { key: 'T-Shirt', value: 'T-shirt' },
+  { key: 'Shirt', value: 'Shirt' },
+  { key: 'Oversize T-Shirt', value: 'Oversize T-Shirt' },
+  { key: 'Jacket', value: 'Jacket' },
+  { key: 'Sweater', value: 'Sweater' },
+  { key: 'Jenas', value: 'Jeans' },
+  { key: 'Ripped Jeans', value: 'Ripped Jeans' },
+  { key: 'Ankle Pants', value: 'Ankle Pants' },
+  { key: 'Skate Shoes', value: 'Skate Shoes' },
+  { key: 'Sneaker', value: 'Sneaker' },
+  { key: 'Running Shoes', value: 'Running Shoes' },
+
+]

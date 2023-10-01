@@ -10,6 +10,7 @@ const Page: React.FC = () => {
   const [productData, setProductData] = useState([]);
   const [search, setSearch] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  
   const handleInput = (e: React.SyntheticEvent) => {
     const { value } = (e.target as HTMLInputElement);
     setSearch(value)

@@ -1,10 +1,13 @@
 'use client'
+import './Modal.css'
 import { useState } from "react";
 import Input from "../Form/Input";
 import { TextArea } from "../Form/TextArea";
 import Button from "../Button/Button";
 import { v4 as uuidv4 } from 'uuid';
 import { createObject } from "@/app/utils/utils";
+import OptionInput from '../Form/Option';
+import { mainCategory, subCategory } from '@/app/data/faqData';
 
 interface Props {
   setProductData: React.Dispatch<React.SetStateAction<any>>;
@@ -13,16 +16,17 @@ interface Props {
 
 const initialState = {
   productName: '',
-  productMainCategory: '',
-  productSubCategory: '',
   productImgLink: '',
   productStock: '',
+  productMainCategory: '',
+  productSubCategory: '',
   productDesc: '',
   productPrice: '',
 };
 
 const Modal: React.FC<Props> = ({ setProductData, handleModal }) => {
   const [form, setForm] = useState(initialState);
+  
   const handleInput = (e: React.SyntheticEvent) => {
     const { name, value } = (e.target as HTMLInputElement);
     console.log(e.target as HTMLInputElement)
@@ -46,7 +50,6 @@ const Modal: React.FC<Props> = ({ setProductData, handleModal }) => {
       form.productDesc,
       productPrice
     )
-    console.log(newProduct)
     setProductData(newProduct)
   }
 
@@ -57,9 +60,9 @@ const Modal: React.FC<Props> = ({ setProductData, handleModal }) => {
   
   return (
     <>
-      <div onClick={handleModal} className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-      <div className="absolute overflow-hidden top-[23.2rem] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <form className="flex flex-col gap-3 mx-4 max-w-2xl w-[90vw] bg-base-200 p-4 rounded-xl">
+      <div className="inset-0 bg-opacity-50 bg-black bgModal">
+      <div className="modalWrapper">
+        <form className="form__add-product bg-base-200">
           <h4>Add Product</h4>
           <Input
             name={'productName'}
@@ -85,6 +88,26 @@ const Modal: React.FC<Props> = ({ setProductData, handleModal }) => {
             handleInput={handleInput}
             placeholder="Product Stock"
           />
+          <div className='flex justify-between w-full gap-3'>
+            <OptionInput
+              label={"Main Category"}
+              name='productMainCategory'
+              optionLabel='Select'
+              value={form.productMainCategory}
+              optionValue={mainCategory}
+              handleInput={handleInput}
+              error=''
+            />
+            <OptionInput
+              label={"Sub Category"}
+              name='productSubCategory'
+              optionLabel='Select'
+              value={form.productSubCategory}
+              optionValue={subCategory}
+              handleInput={handleInput}
+              error=''
+            />
+          </div>
           <TextArea
             name={'productDesc'}
             label="Product Description"

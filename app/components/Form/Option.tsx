@@ -24,17 +24,14 @@ const OptionInput: React.FC<Props> = ({
 
   return (
     <>
-      <div>
-        <label className="form-label" htmlFor="productCategory">
+        <label className="form-label flex flex-col w-full" htmlFor="productCategory">
           {label}
-        </label>
-        <br />
         <select
           name={name}
           aria-label="Default select example"
           onChange={(e) => handleInput(e)}
           value={value}
-          className={`form-control ${error 
+          className={`form-control select ${error 
             ? "border-1 border-danger" 
             : ""}`
           }>
@@ -48,7 +45,7 @@ const OptionInput: React.FC<Props> = ({
           ))}
         </select>
         <ErrorMsg name={name} error={error}/>
-      </div>
+        </label>
     </>
   );
 }
