@@ -1,16 +1,16 @@
 'use client'
 import './Modal.css'
 import { useState } from "react";
-import Input from "../Form/Input";
-import { TextArea } from "../Form/TextArea";
-import Button from "../Button/Button";
 import { v4 as uuidv4 } from 'uuid';
-import { createObject } from "@/app/utils/utils";
-import OptionInput from '../Form/Option';
 import { mainCategory, subCategory } from '@/app/data/faqData';
+import { ProductData, createObject } from "@/app/utils/utils";
+
+import { TextArea } from "../Form/TextArea";
+import Input from "../Form/Input";
+import Button from "../Button/Button";
+import OptionInput from '../Form/Option';
 
 interface Props {
-  setProductData: React.Dispatch<React.SetStateAction<any>>;
   handleModal: () => void;
 }
 
@@ -24,7 +24,7 @@ const initialState = {
   productPrice: '',
 };
 
-const Modal: React.FC<Props> = ({ setProductData, handleModal }) => {
+const Modal: React.FC<Props> = ({ handleModal, }) => {
   const [form, setForm] = useState(initialState);
   
   const handleInput = (e: React.SyntheticEvent) => {
@@ -50,7 +50,8 @@ const Modal: React.FC<Props> = ({ setProductData, handleModal }) => {
       form.productDesc,
       productPrice
     )
-    setProductData(newProduct)
+    console.log(newProduct)
+    
   }
 
   const handleSubmit = () => {

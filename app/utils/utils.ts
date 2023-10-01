@@ -1,3 +1,14 @@
+export type ProductData = {
+  productId: string;
+  productName: string;
+  productMainCategory: string;
+  productSubCategory: string;
+  productImgLink: string;
+  productStock: number;
+  productDesc: string;
+  productPrice: number;
+};
+
 export const createObject = (
   productId: string,
   productName: string,
@@ -16,6 +27,6 @@ export const createObject = (
     productImgLink,
     productStock,
     productDesc,
-    productPrice
+    productPrice,
   };
 };

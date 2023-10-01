@@ -1,21 +1,24 @@
+import { ProductData } from "@/app/utils/utils";
 import Button from "../Button/Button";
+import deleteIcon from '../../assets/icon/delete.svg'
+import editIcon from '../../assets/icon/edit.svg'
 
 interface LabelProps {
   label: string,
-  headTable: string[]
+  headTable: string[],
 }
 
 const Table: React.FC<LabelProps> = ({
   label,
-  headTable
+  headTable,
 }) => {
+
   return (
     <>
       <label className="font-medium text-xl">
         {label}
         <div className="overflow-x-auto p-1 mt-3">
           <table className="table table-zebra bg-base-100">
-            {/* head */}
             <thead>
               <tr>
                 {headTable?.map((head, index) =>
@@ -24,42 +27,19 @@ const Table: React.FC<LabelProps> = ({
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
+              {productData?.map((product, index) => 
+              <tr key={index}>
+                <th>{index + 1}</th>
+                <td>{product.productName}</td>
+                <td>{product.productMainCategory}</td>
+                <td>{product.productStock}</td>
+                <td>{product.productPrice}</td>
                 <td>
-                  <Button
-                    addClass="btn-error btn-sm capitalize"
-                    label="Delete"
-                  />
+                  <button>{deleteIcon}</button>
+                  <button>{editIcon}</button>
                 </td>
               </tr>
-              {/* row 2 */}
-              <tr>
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>
-                  <Button
-                    addClass="btn-error btn-sm capitalize"
-                    label="Delete"
-                  />
-                </td>
-              </tr>
-              {/* row 3 */}
-              <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>
-                  <Button
-                    addClass="btn-error btn-sm capitalize"
-                    label="Delete"
-                  />
-                </td>
-              </tr>
+              )}
             </tbody>
           </table>
         </div>

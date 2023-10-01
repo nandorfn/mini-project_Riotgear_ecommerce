@@ -4,10 +4,10 @@ import Input from "@/app/components/Form/Input";
 import Modal from "@/app/components/Modal/Modal";
 import Table from "@/app/components/Table/Table";
 import { headTableProduct } from "@/app/data/faqData";
+import { ProductData } from "@/app/utils/utils";
 import { useState } from "react";
 
 const Page: React.FC = () => {
-  const [productData, setProductData] = useState([]);
   const [search, setSearch] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   
@@ -47,7 +47,10 @@ const Page: React.FC = () => {
           label=""
           headTable={headTableProduct}
         />
-        {isOpen && <Modal handleModal={handleModal} setProductData={setProductData}/>}
+        {isOpen && 
+          <Modal 
+          handleModal={handleModal} 
+        />}
       </section>
     </>
   );
