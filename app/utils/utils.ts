@@ -1,3 +1,6 @@
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export type ProductData = {
   productId: string;
   productName: string;
@@ -40,3 +43,7 @@ export const createObject = (
     productPrice,
   };
 };
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}

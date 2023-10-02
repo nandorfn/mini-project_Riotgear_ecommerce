@@ -1,6 +1,6 @@
 import PurchaseBtn from "../Button/PurchaseBtn";
 import ColorChart from "../Filter/ColorChart";
-import SizeChart from "../Filter/SizeChart";
+import SizeChart from "../List";
 import Select from "../Form/Select";
 
 const ProductDetails: React.FC = () => {

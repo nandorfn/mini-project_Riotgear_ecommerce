@@ -2,10 +2,12 @@
 import Image from "next/image";
 import filterIcon from '../../assets/icon/list.svg'
 import OptionInput from "../Form/Option";
-import { genderOption, sortBy } from "@/app/data/faqData";
+import { genderOption, sizeChart, sortBy } from "@/app/data/faqData";
 import { useRouter, useSearchParams } from "next/navigation";
 import Checkbox from "../Form/Checkbox";
-import SizeChart from "../Filter/SizeChart";
+import SizeChart from "../List";
+import { Button } from "../Button/Button";
+import List from "../List";
 
 const MenuFilter: React.FC = () => {
   const searchParams = useSearchParams();
@@ -39,8 +41,12 @@ const MenuFilter: React.FC = () => {
             addClass="flex flex-col gap-2"
           />
         </label>
-        
-        <SizeChart />
+        <List
+          data={sizeChart}
+          renderItem={(size) => (
+            <Button variant={'zinc'}>{size}</Button>
+          )}
+        />
 
       </aside>
     </>

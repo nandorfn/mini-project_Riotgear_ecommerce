@@ -68,7 +68,7 @@ export const subCategory = [
   { key: 'Running Shoes', value: 'Running Shoes' },
   
 ]
-
+export const sizeChart = ["S", "M", "L", "XL", "XXL", "3XL"];
 export type genderOptionType = {
   name: string;
   value: string;
