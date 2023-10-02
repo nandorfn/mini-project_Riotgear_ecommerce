@@ -3,7 +3,18 @@ import Link from 'next/link';
 import ProductImg from '../../assets/Product.png'
 import StarLogo from '../../assets/Star.svg'
 
-const ProductCard: React.FC = () => {
+interface Product {
+  productImg: string,
+  productName: string,
+  productPrice: number,
+}
+
+const ProductCard: React.FC<Product> = ({
+  productImg,
+  productName,
+  productPrice
+
+}) => {
   return (
     <>
       <Link href={'/catalog/jacket'}>
@@ -16,8 +27,8 @@ const ProductCard: React.FC = () => {
               />
           </figure>
           <div className="flex flex-col gap-3 p-3">
-            <h2 className="card-title text-lg text-base-300 font-normal">Pocketable UV Protection Parka 3D Cut</h2>
-            <p className='font-medium text-base'>Rp600.000</p>
+            <h2 className="card-title text-lg text-base-300 font-normal">{productName}</h2>
+            <p className='font-medium text-base'>{productPrice}</p>
             <div className='flex items-center gap-2'>
               <Image
                 className='w-6'

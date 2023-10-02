@@ -11,7 +11,8 @@ export const DELETE = async (
   const product = await prisma.product.delete({
     where: {
       productId: params.id
-    }});
+    }
+  });
   return NextResponse.json(product, { status: 200 });
 }
 

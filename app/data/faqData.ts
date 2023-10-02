@@ -46,6 +46,14 @@ export const mainCategory = [
   { key: 'Bottom', value: 'Bottom' },
   { key: 'Accessories', value: 'Accessories' },
 ];
+export const sortBy = [
+  { key: '', value: 'Choose' },
+  { key: '1', value: 'New Release' },
+  { key: '2', value: 'Popular' },
+  { key: '3', value: 'Low to High' },
+  { key: '4', value: 'High to Low' },
+  { key: '5', value: 'Top Rated' },
+];
 export const subCategory = [
   { key: 'T-Shirt', value: 'T-shirt' },
   { key: 'Shirt', value: 'Shirt' },
@@ -58,5 +66,16 @@ export const subCategory = [
   { key: 'Skate Shoes', value: 'Skate Shoes' },
   { key: 'Sneaker', value: 'Sneaker' },
   { key: 'Running Shoes', value: 'Running Shoes' },
+  
+]
+
+export type genderOptionType = {
+  name: string;
+  value: string;
+};
+export const genderOption: genderOptionType[] = [
+  { name: 'Male', value: 'Male' },
+  { name: 'Female', value: 'Female' },
+  { name: 'Unisex', value: 'Unisex' },
 
 ]

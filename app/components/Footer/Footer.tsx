@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
 
   return (
     <>
-      <footer className='mx-4'>
+      <footer className='px-4 max-w-6xl mx-auto'>
         <figure className='flex justify-between pt-4 border-t-2 mt-20 mb-3'>
           <Image
             src={RiotLogo}

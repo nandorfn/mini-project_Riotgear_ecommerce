@@ -1,6 +1,7 @@
 
 const SizeChart: React.FC = () => {
-  const sizeChart = ["S", "M", "L", "XL", "XXL", "3XL"]
+  const sizeChart = ["S", "M", "L", "XL", "XXL", "3XL"];
+  
 
     return (
         <>
