@@ -20,8 +20,8 @@ const ProductCard: React.FC<Product> = ({
   return (
     <>
       <Link href={`/catalog/${productId}`}>
-        <div className="card w-fit shadow-md bg-base-100 hover:bg-base-200 cursor-pointer">
-          <figure>
+        <div className="card w-fit min-h-full shadow-md bg-base-100 hover:bg-base-200 cursor-pointer">
+          <figure className='h-[60%]'>
             <Image 
               className='w-full'
               src={productImg} 
@@ -30,16 +30,18 @@ const ProductCard: React.FC<Product> = ({
               height={500}
               />
           </figure>
-          <div className="flex flex-col gap-3 p-3">
-            <h2 className="card-title text-lg text-base-300 font-normal">{productName}</h2>
-            <p className='font-medium text-base'>{`Rp${price}`}</p>
-            <div className='flex items-center gap-2'>
-              <Image
-                className='w-6'
-                src={StarLogo}
-                alt='star logo'
-              />
-              <p className='text-zinc-500 font- text-sm'>4.0 (200 Reviews)</p>
+          <div className="flex flex-col gap-3 p-3 h-[40%]">
+            <h2 className="card-title items-start h-[4rem] text-lg text-base-300 font-normal">{productName}</h2>
+            <div className='flex flex-col gap-3'>
+              <p className='font-medium text-base'>{`Rp${price}`}</p>
+              <div className='flex items-center gap-2'>
+                <Image
+                  className='w-6'
+                  src={StarLogo}
+                  alt='star logo'
+                />
+                <p className='text-zinc-500 font- text-sm'>4.0 (200 Reviews)</p>
+              </div>
             </div>
           </div>
         </div>

@@ -125,5 +125,5 @@ export const priceRange: checkboxOptionType[] = [
   {name: 'priceRanges', value: '200000-399000', label: 'Rp200.000 - Rp399.000'},
   {name: 'priceRanges', value: '400000-599000', label: 'Rp400.000 - Rp599.000'},
   {name: 'priceRanges', value: '600000-799000', label: 'Rp600.000 - Rp799.000'},
-  {name: 'priceRanges', value: '800000-0', label: 'Rp800.000 +'}
+  {name: 'priceRanges', value: '800000-5000000', label: 'Rp800.000 +'}
 ]

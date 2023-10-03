@@ -3,7 +3,14 @@ import MenuFilter from "../components/Menu/MenuFillter";
 import ScrollMenuContainer from "../components/Menu/ScrollMenuContainer";
 import NavbarStore from "../components/Navbar/NavbarStore";
 
-const page: React.FC = () => {  
+const page = async ({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) => { 
+
   return (
     <>
       <section className="max-w-6xl p-4 mx-auto">
@@ -14,7 +21,9 @@ const page: React.FC = () => {
           </div>
           <div className="w-full pe-3 mt-3 md:mt-0 md:w-[73.4%]">
             <ScrollMenuContainer />
-            <CardContainer />
+            <CardContainer 
+              query={searchParams}
+            />
           </div>
         </div>
       </section>
