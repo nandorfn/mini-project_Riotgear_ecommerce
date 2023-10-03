@@ -1,30 +1,35 @@
-'use client'
-import { priceRangeType } from "@/app/data/faqData";
-
+import { checkboxOptionType } from "@/app/data/faqData";
+import { InputHTMLAttributes } from "react";
 
 interface Props {
-  data: priceRangeType[];
+  data: checkboxOptionType[];
   addClass: string;
   handleInput: (e: React.SyntheticEvent) => void;
-  value: string | null;
+  value: any;
 }
 
-const Checkbox: React.FC<Props> = ({ data, addClass, handleInput, value }) => {
+const Checkbox: React.FC<Props> = ({
+  data,
+  addClass,
+  handleInput,
+  value
+}) => {
 
   return (
     <>
       <div className={`${addClass} form-control`}>
-        {data?.map((item, index) =>
+        {data?.map((item: any, index: number) =>
           <label className="flex gap-3 cursor-pointer items-center" key={index} htmlFor={item.name}>
-            <input 
-              className="radio radio-sm" 
-              type="radio" 
-              name={item.name} 
+            <input
+              className={`radio radio-sm ${item.name === 'gender' ? 'rounded-md' : ''}`}
+              type="radio"
+              name={item.name}
               value={item.value}
               onChange={(e) => handleInput(e)}
               checked={item.value === value}
-              />
-            <span className="label-text text-base">{item.label}</span> 
+              defaultChecked={value}
+            />
+            <span className="label-text text-base">{item.label}</span>
           </label>
         )}
       </div>

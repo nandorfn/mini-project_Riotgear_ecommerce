@@ -67,23 +67,30 @@ export const subCategory = [
   { key: 'Sneaker', value: 'Sneaker' },
   { key: 'Running Shoes', value: 'Running Shoes' },
   
-]
-export const sizeChart = ["S", "M", "L", "XL", "XXL", "3XL"];
-export type checkboxOption = {
-  name: string;
-  value: string;
-};
-export const genderOption: checkboxOption[] = [
-  { name: 'Male', value: 'Male' },
-  { name: 'Female', value: 'Female' },
-  { name: 'Unisex', value: 'Unisex' },
-]
-export type priceRangeType = {
+];
+export type sizeType = {
+  key: string,
+  value: string,
+}
+export const sizeChart = [
+  { key: 's', value: 'S'},
+  { key: 'm', value: 'M'},
+  { key: 'l', value: 'L'},
+  { key: 'xl', value: 'XL'},
+  { key: 'xxl', value: 'XXL'},
+  { key: '3xl', value: '3XL'},
+];
+export type checkboxOptionType = {
   name: string,
   value: string,
   label: string
 }
-export const priceRange: priceRangeType[] = [
+export const genderOption: checkboxOptionType[] = [
+  { name: 'gender', value: 'male', label: 'Male' },
+  { name: 'gender', value: 'female', label: 'Female'},
+  { name: 'gender', value: 'unisex', label: 'Unisex'},
+]
+export const priceRange: checkboxOptionType[] = [
   {name: 'priceRanges', value: '0-100000', label: 'Under Rp99.000'},
   {name: 'priceRanges', value: '100000-299000', label: 'Rp100.000 - Rp299.000'},
   {name: 'priceRanges', value: '200000-399000', label: 'Rp200.000 - Rp399.000'},

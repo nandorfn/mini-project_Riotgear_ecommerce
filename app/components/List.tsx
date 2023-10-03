@@ -1,8 +1,9 @@
 import React from 'react';
+import { sizeChart, sizeType } from '../data/faqData';
 
 interface Props {
-  data: string[];
-  renderItem: (size: string) => React.ReactNode;
+  data: sizeType[];
+  renderItem: (item: any) => React.ReactNode;
 }
 
 const List: React.FC<Props> = ({ renderItem, data }) => {
@@ -11,7 +12,7 @@ const List: React.FC<Props> = ({ renderItem, data }) => {
     <div>
       <h4 className="font-medium mb-3">Size</h4>
       <ul className="flex gap-3 flex-wrap">
-        {data?.map((item: string, index: number) => (
+        {data?.map((item, index: number) => (
           <li key={index}>
             {renderItem(item)}
           </li>

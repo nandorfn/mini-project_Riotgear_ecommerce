@@ -7,7 +7,7 @@ interface Props {
   value: any;
   addClass: string;
   optionValue: category[];
-  handleInput?: (e: React.SyntheticEvent) => void | undefined;
+  handleInput: (e: React.SyntheticEvent) => void;
   error?: string;
 }
 
@@ -29,10 +29,7 @@ const OptionInput: React.FC<Props> = ({
         <select
           name={name}
           aria-label="Default select example"
-          onChange={(e) => handleInput 
-            ? handleInput(e) 
-            : undefined
-          }          
+          onChange={(e) => handleInput(e)}          
           value={value}
           className={`form-control select ${addClass} ${error 
             ? "border-1 border-danger" 

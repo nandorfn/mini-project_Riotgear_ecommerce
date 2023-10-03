@@ -10,7 +10,8 @@ const buttonVariants = cva(
         default: 'btn-base-200 hover:bg-base-100',
         red: 'btn-error',
         grey: 'btn-base-300',
-        zinc: 'bg-[#D9D9D9]'
+        zinc: 'bg-[#D9D9D9]',
+        checked: 'bg-accent'
       },
       size: {
         sm: 'btn-sm',
