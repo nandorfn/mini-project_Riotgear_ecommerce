@@ -9,6 +9,7 @@ const CardContainer: React.FC = async () => {
             {products?.map((product) =>
               <article className="" key={product.id}>
                 <ProductCard 
+                  productId={product.productId}
                   productImg={product.productImgLink}
                   productName={product.productName}
                   productPrice={product.productPrice}

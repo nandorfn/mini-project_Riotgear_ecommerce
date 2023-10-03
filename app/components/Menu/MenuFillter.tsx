@@ -2,20 +2,39 @@
 import Image from "next/image";
 import filterIcon from '../../assets/icon/list.svg'
 import OptionInput from "../Form/Option";
-import { genderOption, sizeChart, sortBy } from "@/app/data/faqData";
-import { useRouter, useSearchParams } from "next/navigation";
+import { genderOption, priceRange, sizeChart, sortByOptions } from "@/app/data/faqData";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Checkbox from "../Form/Checkbox";
-import SizeChart from "../List";
 import { Button } from "../Button/Button";
+import ColorChart from "../Filter/ColorChart";
+import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import List from "../List";
 
+
+
 const MenuFilter: React.FC = () => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const selectedSortBy = searchParams.get('sort');
-  const handleFilter = (e: React.SyntheticEvent) => {
-    const { value } = (e.target as HTMLSelectElement)
-    router.push(`?sort=${value}`);
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()!
+  const sortBy = searchParams.get('sort')
+  const price = searchParams.get('priceRanges')
+  const color = searchParams.get('color')
+
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams)
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
+  
+  const handleInput = (e: React.SyntheticEvent) => {
+    const { name, value } = (e.target as HTMLInputElement)
+    router.push(pathname + `?` + createQueryString(name, value))
   }
 
   return (
@@ -26,29 +45,42 @@ const MenuFilter: React.FC = () => {
           <h1>Filter</h1>
         </figure>
         <OptionInput
-          name="sortByOptions"
+          name="sort"
           label="Sort By"
           addClass="select-sm"
-          optionValue={sortBy}
-          value={selectedSortBy}
-          handleInput={handleFilter}
+          value={sortBy}
+          optionValue={sortByOptions}
+          handleInput={handleInput}
         />
 
-        <label>
+      {/* <label>
           Gender
           <Checkbox
             data={genderOption}
             addClass="flex flex-col gap-2"
           />
-        </label>
-        <List
+        </label> */}
+        {/* <List
           data={sizeChart}
           renderItem={(size) => (
             <Button variant={'zinc'}>{size}</Button>
           )}
+        /> */}
+        <ColorChart 
+          value={color}
+          handleInput={handleInput}
         />
+        <label>
+          Price
+          <Checkbox
+            data={priceRange}
+            addClass="flex flex-col gap-2"
+            handleInput={handleInput}
+            value={price}
+          />
+        </label>
 
-      </aside>
+    </aside >
     </>
   );
 };

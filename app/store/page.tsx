@@ -3,7 +3,7 @@ import MenuFilter from "../components/Menu/MenuFillter";
 import ScrollMenuContainer from "../components/Menu/ScrollMenuContainer";
 import NavbarStore from "../components/Navbar/NavbarStore";
 
-const page: React.FC = () => {
+const page: React.FC = () => {  
   return (
     <>
       <section className="max-w-6xl p-4 mx-auto">

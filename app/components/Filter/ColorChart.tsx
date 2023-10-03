@@ -1,5 +1,8 @@
-
-const ColorChart: React.FC = () => {
+interface Props {
+  handleInput: (e:React.SyntheticEvent) => void;
+  value: string | null;
+}
+const ColorChart: React.FC<Props> = ({handleInput, value}) => {
   const color = [
     {label: 'Black', color:'bg-black'},
     {label: 'Grey', color:'bg-zinc-300'},
@@ -18,7 +21,13 @@ const ColorChart: React.FC = () => {
             <ul className="grid grid-cols-4 text-center">
               {color?.map((item, index) =>
                 <li key={index}>
-                  <input type="checkbox" className={`checkbox rounded-full p-3 mt-3 ${item.color}`} />
+                  <input 
+                    name="color"
+                    type="radio"
+                    checked={item.label === value}
+                    value={item.label}
+                    onChange={(e) => handleInput(e)} 
+                    className={`radio p-3 mt-3 ${item.color}`} />
                   <p>{item.label}</p>
                 </li>
               )}

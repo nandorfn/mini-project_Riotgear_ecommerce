@@ -46,7 +46,7 @@ export const mainCategory = [
   { key: 'Bottom', value: 'Bottom' },
   { key: 'Accessories', value: 'Accessories' },
 ];
-export const sortBy = [
+export const sortByOptions = [
   { key: '', value: 'Choose' },
   { key: '1', value: 'New Release' },
   { key: '2', value: 'Popular' },
@@ -69,13 +69,25 @@ export const subCategory = [
   
 ]
 export const sizeChart = ["S", "M", "L", "XL", "XXL", "3XL"];
-export type genderOptionType = {
+export type checkboxOption = {
   name: string;
   value: string;
 };
-export const genderOption: genderOptionType[] = [
+export const genderOption: checkboxOption[] = [
   { name: 'Male', value: 'Male' },
   { name: 'Female', value: 'Female' },
   { name: 'Unisex', value: 'Unisex' },
-
+]
+export type priceRangeType = {
+  name: string,
+  value: string,
+  label: string
+}
+export const priceRange: priceRangeType[] = [
+  {name: 'priceRanges', value: '0-100000', label: 'Under Rp99.000'},
+  {name: 'priceRanges', value: '100000-299000', label: 'Rp100.000 - Rp299.000'},
+  {name: 'priceRanges', value: '200000-399000', label: 'Rp200.000 - Rp399.000'},
+  {name: 'priceRanges', value: '400000-599000', label: 'Rp400.000 - Rp599.000'},
+  {name: 'priceRanges', value: '600000-799000', label: 'Rp600.000 - Rp799.000'},
+  {name: 'priceRanges', value: '800000-0', label: 'Rp800.000 +'}
 ]

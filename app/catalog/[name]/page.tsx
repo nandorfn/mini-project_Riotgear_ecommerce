@@ -5,9 +5,14 @@ import ProductDetails from "@/app/components/Card/ProductDetails";
 import Accordion from "@/app/components/Accordion/Accordion";
 import ReviewWrap from "@/app/components/Review/ReviewWrap";
 import PurchaseBtn from "@/app/components/Button/PurchaseBtn";
+import { getProduct } from "@/app/utils/getItem";
 
-
-const page: React.FC = () => {
+const Page = async ({
+  params: { name },
+}: {
+  params: { name: string }
+}) => {
+  const product = await getProduct(name);  
   return (
     <>
       <section className="max-w-6xl mx-auto">
@@ -22,7 +27,10 @@ const page: React.FC = () => {
           />
         </div>
         <article className="hidden sm:w-2/6 sm:flex flex-col gap-3 relative">
-          <ProductDetails />
+          <ProductDetails
+            name={product?.productName}
+            price={product?.productPrice}
+          />
         </article>
         <div className="btn-nav sm:hidden">
         <PurchaseBtn/>
@@ -32,11 +40,7 @@ const page: React.FC = () => {
         <div className="w-full sm:w-4/6 p-4">
           <Accordion
             label="Description"
-            content="- Hybrid down outerwear developed in collaboration with professional snowboarder, Ayumu Hirano.
-              - A combination of lightweight high-performance cotton padding with Heat of Absorption technology, and premium down with a fill power of 750* or more.
-              - Water-repellent finish. *The fabric is coated with a water-repellent agent so the effect lasts longer. The finish is not permanent.
-              - Collar stands up neatly without the hood up.
-              "
+            content={product?.productDesc}
           />
         </div>
         <ReviewWrap />
@@ -46,4 +50,4 @@ const page: React.FC = () => {
   );
 };
 
-export default page;
+export default Page;

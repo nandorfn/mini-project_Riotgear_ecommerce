@@ -1,6 +1,6 @@
 interface AccordionProps {
   label: string;
-  content: string;
+  content?: string;
 }
 
 const Accordion: React.FC<AccordionProps> = ({label, content}) => {
