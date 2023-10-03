@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import ProductImg from '../../assets/Product.png'
 import StarLogo from '../../assets/Star.svg'
 
 interface Product {
@@ -25,8 +24,10 @@ const ProductCard: React.FC<Product> = ({
           <figure>
             <Image 
               className='w-full'
-              src={ProductImg} 
+              src={productImg} 
               alt="Jacket"
+              width={500}
+              height={500}
               />
           </figure>
           <div className="flex flex-col gap-3 p-3">

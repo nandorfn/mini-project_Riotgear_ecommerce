@@ -20,10 +20,13 @@ const FormEditProduct: React.FC<Props> = ({
 
   const [product, setProduct] = useState<productFormState>({
     productName: editedData?.productName ?? '',
-    productImgLink: editedData?.productImgLink ?? '',
-    productStock: editedData?.productStock.toString() ?? '',
     productMainCategory: editedData?.productMainCategory ?? '',
     productSubCategory: editedData?.productSubCategory ?? '',
+    productImgLink: editedData?.productImgLink ?? '',
+    productSize: editedData?.productSize ?? '',
+    productColor: editedData?.productColor ?? '',
+    productGender: editedData?.productGender ?? '',
+    productStock: editedData?.productStock.toString() ?? '',
     productDesc: editedData?.productDesc ?? '',
     productPrice: editedData?.productPrice.toString() ?? '',
   });

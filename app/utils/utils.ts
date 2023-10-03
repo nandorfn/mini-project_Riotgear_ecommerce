@@ -7,6 +7,9 @@ export type ProductData = {
   productMainCategory: string;
   productSubCategory: string;
   productImgLink: string;
+  productSize: string;
+  productGender: string;
+  productColor: string;
   productStock: number;
   productDesc: string;
   productPrice: number;
@@ -14,10 +17,13 @@ export type ProductData = {
 
 export type productFormState = {
   productName: string;
-  productImgLink: string;
-  productStock: string;
   productMainCategory: string;
   productSubCategory: string;
+  productImgLink: string;
+  productSize: string;
+  productGender: string;
+  productColor: string;
+  productStock: string;
   productDesc: string;
   productPrice: string;
 }

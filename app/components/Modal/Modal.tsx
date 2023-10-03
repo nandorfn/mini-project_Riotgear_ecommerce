@@ -1,11 +1,11 @@
 'use client'
 import './Modal.css'
-import { mainCategory, subCategory } from '@/app/data/faqData';
+import { colorCategory, genderCategory, mainCategory, sizeCategory, sizeChart, subCategory } from '@/app/data/faqData';
 import { productFormState } from '@/app/utils/utils';
 
 import { TextArea } from "../Form/TextArea";
 import Input from "../Form/Input";
-import Button from "../Button/Button";
+import { Button } from '../Button/Button';
 import OptionInput from '../Form/Option';
 
 interface Props {
@@ -58,7 +58,7 @@ const Modal: React.FC<Props> = ({
             <OptionInput
               label={"Main Category"}
               name='productMainCategory'
-              optionLabel='Select'
+              addClass="select-sm mt-3"
               value={form.productMainCategory}
               optionValue={mainCategory}
               handleInput={handleInput}
@@ -67,9 +67,36 @@ const Modal: React.FC<Props> = ({
             <OptionInput
               label={"Sub Category"}
               name='productSubCategory'
-              optionLabel='Select'
+              addClass="select-sm mt-3"
               value={form.productSubCategory}
               optionValue={subCategory}
+              handleInput={handleInput}
+              error=''
+            />
+            <OptionInput
+              label={"Size Chart"}
+              name='productSize'
+              addClass="select-sm mt-3"
+              value={form.productSize}
+              optionValue={sizeCategory}
+              handleInput={handleInput}
+              error=''
+            />
+            <OptionInput
+              label={"Color"}
+              name='productColor'
+              addClass="select-sm mt-3"
+              value={form.productColor}
+              optionValue={colorCategory}
+              handleInput={handleInput}
+              error=''
+            />
+            <OptionInput
+              label={"Gender"}
+              name='productGender'
+              addClass="select-sm mt-3"
+              value={form.productGender}
+              optionValue={genderCategory}
               handleInput={handleInput}
               error=''
             />
@@ -90,8 +117,18 @@ const Modal: React.FC<Props> = ({
             placeholder="Product Price"
           />
           <div className="flex flex-row w-full justify-between">
-            <Button handleClick={handleModal} label="Cancel" addClass="btn-info capitalize w-[48.5%]" />
-            <Button handleClick={handleSubmit} label="Submit" addClass="btn-success capitalize w-[48.5%]" />
+            <Button 
+              onClick={handleModal} 
+              variant={'info'}
+              size={'half'}
+              >Cancel
+            </Button>
+            <Button 
+              onClick={handleSubmit} 
+              variant={'success'}
+              size={'half'}
+              >Submit
+            </Button>
           </div>
         </form>
       </div>

@@ -11,11 +11,14 @@ interface Props {
 
 export const initialState = {
   productName: '',
-  productImgLink: '',
-  productStock: '',
   productMainCategory: '',
   productSubCategory: '',
+  productSize: '',
+  productGender: '',
+  productColor: '',
+  productStock: '',
   productDesc: '',
+  productImgLink: '',
   productPrice: '',
 };
 
@@ -34,6 +37,8 @@ const FormProduct: React.FC<Props> = ({
     })
   }
   
+  console.log(form.productColor)
+  
   const sendData = async () => {
     const id = uuidv4();
     const productStock = parseInt(form.productStock)
@@ -44,6 +49,9 @@ const FormProduct: React.FC<Props> = ({
       productMainCategory: form.productMainCategory,
       productSubCategory: form.productSubCategory,
       productImgLink: form.productImgLink,
+      productSize: form.productSize,
+      productGender: form.productGender,
+      productColor: form.productColor,
       productStock: productStock,
       productDesc: form.productDesc,
       productPrice: productPrice

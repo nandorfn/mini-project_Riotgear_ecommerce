@@ -33,7 +33,7 @@ export const faq: FaqItem[] = [
 ]
 
 export const headTableBlog = ['No', 'Article Title', 'Created At', 'Action']
-export const headTableProduct = ['No', 'Product Name', 'Main Category', 'Sub Category', 'Stock', 'Price', 'Action']
+export const headTableProduct = ['No', 'Product Name', 'Main Category', 'Sub Category', 'Size', 'Color', 'Stock', 'Price', 'Action']
 
 
 export type category = {
@@ -41,20 +41,14 @@ export type category = {
   value: string;
 }
 export const mainCategory = [
+  { key: '', value: 'Choose' },
   { key: 'Top', value: 'Top' },
   { key: 'Outwear', value: 'Outwear' },
   { key: 'Bottom', value: 'Bottom' },
   { key: 'Accessories', value: 'Accessories' },
 ];
-export const sortByOptions = [
-  { key: '', value: 'Choose' },
-  { key: '1', value: 'New Release' },
-  { key: '2', value: 'Popular' },
-  { key: '3', value: 'Low to High' },
-  { key: '4', value: 'High to Low' },
-  { key: '5', value: 'Top Rated' },
-];
 export const subCategory = [
+  { key: '', value: 'Choose' },
   { key: 'T-Shirt', value: 'T-shirt' },
   { key: 'Shirt', value: 'Shirt' },
   { key: 'Oversize T-Shirt', value: 'Oversize T-Shirt' },
@@ -66,12 +60,47 @@ export const subCategory = [
   { key: 'Skate Shoes', value: 'Skate Shoes' },
   { key: 'Sneaker', value: 'Sneaker' },
   { key: 'Running Shoes', value: 'Running Shoes' },
-  
+];
+
+export const genderCategory = [
+  { key: '', value: 'Choose' },
+  { key: 'male', value: 'Male' },
+  { key: 'female', value: 'Female' },
+  { key: 'unisex', value: 'Unisex' },
+]
+export const colorCategory = [
+  {key: '', value:'Choose'},
+  {key: 'Black', value:'Black'},
+  {key: 'Grey', value:'Grey'},
+  {key: 'White', value:'White'},
+  {key: 'Red', value:'Red'},
+  {key: 'Green', value:'Green'},
+  {key: 'Blue', value:'Blue'},
+  {key: 'Yellow', value:'Yellow'},
+  {key: 'Orange', value:'Orange'},
+]
+
+export const sortByOptions = [
+  { key: '', value: 'Choose' },
+  { key: '1', value: 'New Release' },
+  { key: '2', value: 'Popular' },
+  { key: '3', value: 'Low to High' },
+  { key: '4', value: 'High to Low' },
+  { key: '5', value: 'Top Rated' },
 ];
 export type sizeType = {
   key: string,
   value: string,
 }
+export const sizeCategory = [
+  { key: '', value: 'Choose'},
+  { key: 's', value: 'S'},
+  { key: 'm', value: 'M'},
+  { key: 'l', value: 'L'},
+  { key: 'xl', value: 'XL'},
+  { key: 'xxl', value: 'XXL'},
+  { key: '3xl', value: '3XL'},
+];
 export const sizeChart = [
   { key: 's', value: 'S'},
   { key: 'm', value: 'M'},

@@ -21,12 +21,12 @@ const MenuFilter: React.FC = () => {
   const color = searchParams.get('color')
   const gender = searchParams.get('gender')
   const sizes = searchParams.get('size')
-  
+
   useEffect(() => {
-    const data = {sortBy, price, color, gender, sizes}
-  
+    const data = { sortBy, price, color, gender, sizes }
+
   }, [searchParams])
-  
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams)
@@ -36,12 +36,12 @@ const MenuFilter: React.FC = () => {
     },
     [searchParams]
   )
-  
+
   const handleInput = (e: React.SyntheticEvent) => {
     const { name, value } = (e.target as HTMLInputElement)
     router.push(pathname + `?` + createQueryString(name, value))
   }
-  
+
   const handleClick = (e: React.SyntheticEvent) => {
     const { name, value } = (e.target as HTMLButtonElement)
     router.push(pathname + `?` + createQueryString(name, value))
@@ -63,7 +63,7 @@ const MenuFilter: React.FC = () => {
           handleInput={handleInput}
         />
 
-      <label>
+        <label>
           Gender
           <Checkbox
             value={gender}
@@ -75,18 +75,19 @@ const MenuFilter: React.FC = () => {
         <List
           data={sizeChart}
           renderItem={(size) => {
-          const { key, value } = size;
-          const isSelected = key === sizes;
-          return (
-            <Button 
-              onClick={(e) => handleClick(e)} 
-              name={'size'} 
-              value={key}
-              variant={isSelected ? 'checked' : 'zinc'}>{value}
-            </Button>
-          )}}
+            const { key, value } = size;
+            const isSelected = key === sizes;
+            return (
+              <Button
+                onClick={(e) => handleClick(e)}
+                name={'size'}
+                value={key}
+                variant={isSelected ? 'checked' : 'zinc'}>{value}
+              </Button>
+            )
+          }}
         />
-        <ColorChart 
+        <ColorChart
           value={color}
           handleInput={handleInput}
         />
@@ -99,8 +100,7 @@ const MenuFilter: React.FC = () => {
             value={price}
           />
         </label>
-
-    </aside >
+      </aside >
     </>
   );
 };

@@ -27,10 +27,14 @@ export const PATCH = async (
       productId: params.id
     },
     data: {
+      productId: body.productId,
       productName: body.productName,
       productMainCategory: body.productMainCategory,
       productSubCategory: body.productSubCategory,
       productImgLink: body.productImgLink,
+      productSize: body.productSize,
+      productGender: body.productGender,
+      productColor: body.productColor,
       productStock: body.productStock,
       productDesc: body.productDesc,
       productPrice: body.productPrice

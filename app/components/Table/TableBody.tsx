@@ -20,6 +20,7 @@ const TableBody: React.FC<Props> = ({
     handleEdit(id);
     handleEditModal();
   }
+  
 
   return (
     <>
@@ -29,8 +30,10 @@ const TableBody: React.FC<Props> = ({
           <td>{product.productName}</td>
           <td>{product.productMainCategory}</td>
           <td>{product.productSubCategory}</td>
+          <td>{product.productColor}</td>
+          <td>{product.productSize}</td>
           <td>{product.productStock}</td>
-          <td>{product.productPrice}</td>
+          <td>{`Rp${product.productPrice.toLocaleString('id-ID')}`}</td>
           <td className="flex flex-row gap-3">
             <button
               onClick={() => handleEditProduct(product.productId)}

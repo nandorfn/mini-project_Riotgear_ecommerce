@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
-import Button from "@/app/components/Button/Button";
 import Input from "@/app/components/Form/Input";
 import Table from "@/app/components/Table/Table";
 import { headTableProduct } from "@/app/data/faqData";
@@ -9,6 +8,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import FormProduct from "./FormProduct";
 import FormEditProduct from "./FormEditProduct";
+import { Button } from "@/app/components/Button/Button";
 
 const Page: React.FC = () => {
   const [dataProducts, setDataProducts] = useState<ProductData[]>([])
@@ -90,15 +90,13 @@ const Page: React.FC = () => {
             handleInput={handleInput}
             placeholder="Find products"
           />
-          <Button
-            label="Search product"
-            addClass="btn-info capitalize"
-          />
-          <Button
-            handleClick={handleAddModal}
-            label="Add product"
-            addClass="btn-success capitalize"
-          />
+          <Button 
+            variant={'info'} >Search Product
+          </Button>
+          <Button 
+            onClick={handleAddModal} 
+            variant={'success'} >Add Product
+          </Button>
         </div>
         <Table
           dataProducts={dataProducts}

@@ -17,6 +17,9 @@ model Product {
   productMainCategory String
   productSubCategory String
   productImgLink   String
+  productSize     String
+  productGender     String
+  productColor     String
   productStock     Int
   productDesc      String
   productPrice     Float

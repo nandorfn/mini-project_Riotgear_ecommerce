@@ -3,12 +3,14 @@ import { VariantProps, cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes } from 'react';
 
 const buttonVariants = cva(
-  'btn btn-sm w-14 ',
+  'btn w-fit ',
   {
     variants: {
       variant: {
         default: 'btn-base-200 hover:bg-base-100',
         red: 'btn-error',
+        success: 'btn-success capitalize',
+        info: 'btn-info capitalize',
         grey: 'btn-base-300',
         zinc: 'bg-[#D9D9D9]',
         checked: 'bg-accent'
@@ -17,6 +19,9 @@ const buttonVariants = cva(
         sm: 'btn-sm',
         base: 'btn-base',
         lg: 'btn-lg',
+        wide: 'btn-wide',
+        full: 'w-full',
+        half: 'w-[48.5%]'
       }
     },
     defaultVariants: {

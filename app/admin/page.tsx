@@ -1,5 +1,3 @@
-import LayoutAdmin from "./layout";
-
 const page: React.FC = () => {
   return (
     <>

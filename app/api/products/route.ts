@@ -12,6 +12,9 @@ export const POST = async (req: Request) => {
       productMainCategory: body.productMainCategory,
       productSubCategory: body.productSubCategory,
       productImgLink: body.productImgLink,
+      productSize: body.productSize,
+      productGender: body.productGender,
+      productColor: body.productColor,
       productStock: body.productStock,
       productDesc: body.productDesc,
       productPrice: body.productPrice
