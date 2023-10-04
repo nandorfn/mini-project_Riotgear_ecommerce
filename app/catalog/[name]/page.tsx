@@ -6,6 +6,7 @@ import ReviewWrap from "@/app/components/Review/ReviewWrap";
 import PurchaseBtn from "@/app/components/Button/PurchaseBtn";
 import { getProduct } from "@/app/utils/getItem";
 import ImageNotFound from "@/app/components/404/ImageNotFound";
+import Link from "next/link";
 
 const Page = async ({
   params: { name },
@@ -17,8 +18,15 @@ const Page = async ({
     <>
       <section className="max-w-6xl mx-auto">
         <NavbarStore />
+        <div className="text-base breadcrumbs p-4">
+          <ul>
+            <li><Link href={'/'}>RIOTGEAR</Link></li>
+            <li><Link href={'/store'}>Store</Link></li>
+            <li><Link href={`/store?=${product?.productSubCategory}`}>{product?.productSubCategory}</Link></li>
 
-        <figure className="flex flex-col sm:flex-row w-full gap-6 mt-3 p-4">
+          </ul>
+        </div>
+        <figure className="flex flex-col sm:flex-row w-full gap-6 px-4">
           <div className="w-full sm:w-4/6">
             {!product?.productImgLink
               ? <ImageNotFound />
