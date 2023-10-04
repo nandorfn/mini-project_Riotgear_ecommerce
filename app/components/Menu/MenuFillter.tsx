@@ -6,7 +6,7 @@ import { genderOption, priceRange, sizeChart, sortByOptions } from "@/app/data/f
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Checkbox from "../Form/Checkbox";
 import ColorChart from "../Filter/ColorChart";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import List from "../List";
 import { Button } from "../Button/Button";
 
@@ -22,8 +22,16 @@ const MenuFilter: React.FC = () => {
   const color = searchParams.get('color')
   const gender = searchParams.get('gender')
   const sizes = searchParams.get('size')
-  const query = searchParams.get('search')
+  const category = searchParams.get('category')
 
+  useEffect(() => {
+    if (category !== null) {
+      setQueryExist(true);
+    } else {
+      setQueryExist(false);
+    }
+  }, [category]);
+  
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams)
@@ -43,9 +51,10 @@ const MenuFilter: React.FC = () => {
     const { name, value } = (e.target as HTMLButtonElement)
     router.push(pathname + `?` + createQueryString(name, value))
   }
-  
+
   const deleteUrlState = () => {
     router.push(pathname);
+    setQueryExist(false)
   }
 
   return (
@@ -57,7 +66,7 @@ const MenuFilter: React.FC = () => {
             <h1>Filter</h1>
           </div>
           {queryExist &&
-          <Button onClick={deleteUrlState} className="capitalize font-medium" variant={'zinc'} size={'sm'}>Clear Filter</Button>
+            <Button onClick={deleteUrlState} className="capitalize font-medium" variant={'zinc'} size={'sm'}>Clear Filter</Button>
           }
         </figure>
         <OptionInput

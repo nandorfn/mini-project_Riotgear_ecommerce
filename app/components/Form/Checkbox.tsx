@@ -1,5 +1,4 @@
 import { checkboxOptionType } from "@/app/data/faqData";
-import { InputHTMLAttributes } from "react";
 
 interface Props {
   data: checkboxOptionType[];

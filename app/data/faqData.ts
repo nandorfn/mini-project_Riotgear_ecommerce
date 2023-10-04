@@ -79,6 +79,21 @@ export const colorCategory = [
   {key: 'Yellow', value:'Yellow'},
   {key: 'Orange', value:'Orange'},
 ]
+export const scrollMenuLabel = [
+  {label: 'T-Shirt', link: 't-shirt'},
+  {label: 'Shirt', link: 'shirt'},
+  {label: 'UT-Shirt', link: 'ut-shirt'},
+  {label: 'Jeans', link: 'jeans'},
+  {label: 'Polo Shirt', link: 'polo-shirt'},
+  {label: 'Casual T-shirt', link: 'casual-t-shirt'},
+  {label: 'Hoodie', link: 'hoodie'},
+  {label: 'Sweater', link: 'sweater'},
+  {label: 'Oversize T-Shirt', link: 'oversize-t-shirt'},
+  {label: 'Jacket', link: 'Jacket'},
+  {label: 'Chino', link: 'Chino'},
+  {label: 'Ankle Pants', link: 'Ankle Pants'},
+  {label: 'Shoes', link: 'Shoes'},
+]
 
 export const sortByOptions = [
   { key: '', value: 'Choose' },
