@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useCallback } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { scrollMenuLabel } from "@/app/data/faqData";
+import { subCategory } from "@/app/helpers/dataObject";
 
 const ScrollMenu: React.FC = () => {
   const pathname = usePathname()
@@ -22,10 +22,10 @@ const ScrollMenu: React.FC = () => {
   return (
     <>
       <ul className="flex gap-3 text-sm breadcrumbs relative ">
-        {scrollMenuLabel?.map((item, index) =>
+        {subCategory?.map((item, index) =>
           <li className='inline-block' key={index}>
             <Link
-              href={pathname + '?' + createQueryString('category', item.label)}
+              href={pathname + '?' + createQueryString('category', item.value)}
               className={`bg-base-200 py-2 px-4 hover:bg-neutral-content rounded-full ${activeCategory === item.label && 'border-2 bg-white'}`}>{item.label}
             </Link>
           </li>

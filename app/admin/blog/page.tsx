@@ -2,7 +2,7 @@
 import Button from "@/app/components/Button/Button";
 import Input from "@/app/components/Form/Input";
 import Table from "@/app/components/Table/Table";
-import { headTableBlog } from "@/app/data/faqData";
+import { headTableBlog } from "@/app/helpers/faqData";
 import { useState } from "react";
 
 const Page: React.FC = () => {

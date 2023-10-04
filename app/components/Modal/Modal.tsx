@@ -1,6 +1,6 @@
 'use client'
 import './Modal.css'
-import { colorCategory, featuredOption, genderCategory, mainCategory, sizeCategory, subCategory } from '@/app/data/faqData';
+import { colorCategory, featuredOption, genderCategory, mainCategory, sizeCategory, subCategory } from '@/app/helpers/dataObject';
 import { productFormState } from '@/app/utils/utils';
 
 import { TextArea } from "../Form/TextArea";

@@ -1,7 +1,7 @@
 import Hero from "../components/Hero/Hero";
 import faqBanner from '../assets/Content/faq.png'
 import HeroTitleOnyl from "../components/Hero/HeroTitleOnyl";
-import { faq,  FaqItem } from '../data/faqData'
+import { faq,  FaqItem } from '../helpers/dataObject'
 import Accordion from "../components/Accordion/Accordion";
 import { bebas_neue } from "../utils/fonts";
 

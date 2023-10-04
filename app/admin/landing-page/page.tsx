@@ -1,4 +1,4 @@
-import { headTableProduct } from "@/app/data/faqData";
+import { headTableProduct } from "@/app/helpers/faqData";
 import HeroSection from "./components/HeroSection";
 import Table from "@/app/components/Table/Table";
 

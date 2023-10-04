@@ -51,15 +51,15 @@ export const subCategory = [
   { id: 1, label: 'Choose', value: '' },
   { id: 2, label: 'T-Shirt', value: 't-shirt' },
   { id: 3, label: 'Shirt', value: 'shirt' },
-  { id: 4, label: 'Oversize T-Shirt', value: 'oversize T-Shirt' },
+  { id: 4, label: 'Oversize T-Shirt', value: 'oversize' },
   { id: 5, label: 'Jacket', value: 'jacket' },
   { id: 6, label: 'Sweater', value: 'sweater' },
   { id: 7, label: 'Jeans', value: 'jeans' },
-  { id: 8, label: 'Ripped Jeans', value: 'ripped Jeans' },
-  { id: 9, label: 'Ankle Pants', value: 'ankle Pants' },
-  { id: 10, label: 'Skate Shoes', value: 'skate Shoes' },
+  { id: 8, label: 'Ripped Jeans', value: 'ripped-jeans' },
+  { id: 9, label: 'Ankle Pants', value: 'ankle-pants' },
+  { id: 10, label: 'Skate Shoes', value: 'skate-shoes' },
   { id: 11, label: 'Sneaker', value: 'sneaker' },
-  { id: 12, label: 'Running Shoes', value: 'running Shoes' },
+  { id: 12, label: 'Running Shoes', value: 'running-shoes' },
 ];
 
 export const genderCategory = [
@@ -69,66 +69,52 @@ export const genderCategory = [
   { id: 4, label: 'Unisex', value: 'unisex' },
 ];
 export const featuredOption = [
-  { key: false, value: 'Choose' },
-  { key: true, value: 'True' },
-  { key: false, value: 'False' },
+  { id:1, label: 'Choose', value: false },
+  { id:2, label: 'Active', value: true },
+  { id:3, label: 'Inactive', value: false },
 ]
 export const colorCategory = [
-  {key: '', value:'Choose'},
-  {key: 'Black', value:'Black'},
-  {key: 'Grey', value:'Grey'},
-  {key: 'White', value:'White'},
-  {key: 'Red', value:'Red'},
-  {key: 'Green', value:'Green'},
-  {key: 'Blue', value:'Blue'},
-  {key: 'Yellow', value:'Yellow'},
-  {key: 'Orange', value:'Orange'},
-]
-export const scrollMenuLabel = [
-  {label: 'T-Shirt', link: 't-shirt'},
-  {label: 'Shirt', link: 'shirt'},
-  {label: 'UT-Shirt', link: 'ut-shirt'},
-  {label: 'Jeans', link: 'jeans'},
-  {label: 'Polo Shirt', link: 'polo-shirt'},
-  {label: 'Casual T-shirt', link: 'casual-t-shirt'},
-  {label: 'Hoodie', link: 'hoodie'},
-  {label: 'Sweater', link: 'sweater'},
-  {label: 'Oversize T-Shirt', link: 'oversize-t-shirt'},
-  {label: 'Jacket', link: 'Jacket'},
-  {label: 'Chino', link: 'Chino'},
-  {label: 'Ankle Pants', link: 'Ankle Pants'},
-  {label: 'Shoes', link: 'Shoes'},
-]
-
+  { id: 1, label: 'Choose', value: '' },
+  { id: 2, label: 'Black', value: 'black' },
+  { id: 3, label: 'Grey', value: 'grey' },
+  { id: 4, label: 'White', value: 'white' },
+  { id: 5, label: 'Red', value: 'red' },
+  { id: 6, label: 'Green', value: 'green' },
+  { id: 7, label: 'Blue', value: 'blue' },
+  { id: 8, label: 'Yellow', value: 'yellow' },
+  { id: 9, label: 'Orange', value: 'orange' },
+];
 export const sortByOptions = [
-  { key: '', value: 'Choose' },
-  { key: '1', value: 'New Release' },
-  { key: '2', value: 'Popular' },
-  { key: '3', value: 'Low to High' },
-  { key: '4', value: 'High to Low' },
-  { key: '5', value: 'Top Rated' },
+  { id: 0, label: 'Choose', value: '' },
+  { id: 1, label: 'New Release', value: '1' },
+  { id: 2, label: 'Popular', value: '2' },
+  { id: 3, label: 'Low to High', value: '3' },
+  { id: 4, label: 'High to Low', value: '4' },
+  { id: 5, label: 'Top Rated', value: '5' },
 ];
-export type sizeType = {
-  key: string,
-  value: string,
-}
 export const sizeCategory = [
-  { key: '', value: 'Choose'},
-  { key: 's', value: 'S'},
-  { key: 'm', value: 'M'},
-  { key: 'l', value: 'L'},
-  { key: 'xl', value: 'XL'},
-  { key: 'xxl', value: 'XXL'},
-  { key: '3xl', value: '3XL'},
+  { id: 0, label: 'Choose', value: '' },
+  { id: 1, label: 'S', value: 's' },
+  { id: 2, label: 'M', value: 'm' },
+  { id: 3, label: 'L', value: 'l' },
+  { id: 4, label: 'XL', value: 'xl' },
+  { id: 5, label: 'XXL', value: 'xxl' },
+  { id: 6, label: '3XL', value: '3xl' },
 ];
+
 export const sizeChart = [
-  { key: 's', value: 'S'},
-  { key: 'm', value: 'M'},
-  { key: 'l', value: 'L'},
-  { key: 'xl', value: 'XL'},
-  { key: 'xxl', value: 'XXL'},
-  { key: '3xl', value: '3XL'},
+  { id: 1, label: 'S', value: 's' },
+  { id: 2, label: 'M', value: 'm' },
+  { id: 3, label: 'L', value: 'l' },
+  { id: 4, label: 'XL', value: 'xl' },
+  { id: 5, label: 'XXL', value: 'xxl' },
+  { id: 6, label: '3XL', value: '3xl' },
 ];
+export type categoryOption = {
+  id: number,
+  label: string,
+  value: string | boolean,
+}
 export type checkboxOptionType = {
   name: string,
   value: string,

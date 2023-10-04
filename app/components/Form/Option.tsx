@@ -1,4 +1,4 @@
-import { category } from "@/app/data/faqData";
+import { categoryOption } from "@/app/helpers/dataObject";
 import ErrorMsg from "../ErrorMsg";
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   name: string,
   value: any;
   addClass: string;
-  optionValue: any;
+  optionValue: categoryOption[];
   handleInput: (e: React.SyntheticEvent) => void;
   error?: string;
 }
@@ -36,8 +36,8 @@ const OptionInput: React.FC<Props> = ({
             : ""}`
           }>
           {optionValue.map((option: any) => (
-            <option key={option.key} value={option.key}>
-              {option.value}
+            <option key={option.id} value={option.value}>
+              {option.label}
             </option>
           ))}
         </select>

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import filterIcon from '../../assets/icon/list.svg'
 import OptionInput from "../Form/Option";
-import { genderOption, priceRange, sizeChart, sortByOptions } from "@/app/data/faqData";
+import { genderOption, priceRange, sizeChart, sortByOptions } from "@/app/helpers/dataObject";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Checkbox from "../Form/Checkbox";
 import ColorChart from "../Filter/ColorChart";
@@ -94,16 +94,16 @@ const MenuFilter: React.FC = () => {
         <List
           data={sizeChart}
           renderItem={(size) => {
-            const { key, value } = size;
-            const isSelected = key === sizes;
+            const { label, value } = size;
+            const isSelected = value === sizes;
             return (
               <Button
                 onClick={(e) => handleClick(e)}
                 name={'size'}
-                value={key}
+                value={value}
                 size={'sm'}
                 font={'normal'}
-                variant={isSelected ? 'checked' : 'zinc'}>{value}
+                variant={isSelected ? 'checked' : 'zinc'}>{label}
               </Button>
             )
           }}

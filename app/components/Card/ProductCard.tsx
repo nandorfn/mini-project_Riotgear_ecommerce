@@ -31,7 +31,7 @@ const ProductCard: React.FC<Product> = ({
               />
           </figure>
           <div className="flex flex-col gap-3 p-3 h-[40%]">
-            <h2 className="card-title items-start h-[4rem] text-lg text-base-300 font-normal">{productName}</h2>
+            <h2 className="card-title items-start h-[3.6rem] text-lg text-base-300 overflow-hidden font-normal">{productName}</h2>
             <div className='flex flex-col gap-3'>
               <p className='font-medium text-base'>{`Rp${price}`}</p>
               <div className='flex items-center gap-2'>

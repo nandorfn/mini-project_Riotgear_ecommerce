@@ -1,6 +1,5 @@
 import NavbarStore from "@/app/components/Navbar/NavbarStore";
 import Image from "next/image";
-import ProductImg from '../../assets/Content/jacketParka.jpg'
 import ProductDetails from "@/app/components/Card/ProductDetails";
 import Accordion from "@/app/components/Accordion/Accordion";
 import ReviewWrap from "@/app/components/Review/ReviewWrap";
@@ -20,11 +19,13 @@ const Page = async ({
 
       <figure className="flex flex-col sm:flex-row w-full gap-6 mt-3 p-4">
         <div className="w-full sm:w-4/6">
-          <Image
-            className="w-full object-cover rounded-xl"
-            src={ProductImg}
-            alt="Product Image"
-          />
+        <Image 
+              className='w-full rounded-xl'
+              src={product?.productImgLink ?? ''} 
+              alt="Jacket"
+              width={500}
+              height={500}
+              />
         </div>
         <article className="hidden sm:w-2/6 sm:flex flex-col gap-3 relative">
           <ProductDetails

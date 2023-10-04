@@ -1,5 +1,5 @@
 import React from 'react';
-import { sizeChart, sizeType } from '../data/faqData';
+import { sizeChart, sizeType } from '../helpers/dataObject';
 
 interface Props {
   data: sizeType[];

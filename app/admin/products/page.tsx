@@ -2,7 +2,7 @@
 'use client'
 import Input from "@/app/components/Form/Input";
 import Table from "@/app/components/Table/Table";
-import { headTableProduct } from "@/app/data/faqData";
+import { headTableProduct } from "@/app/helpers/faqData";
 import { ProductData } from "@/app/utils/utils";
 import axios from "axios";
 import { useEffect, useState } from "react";
