@@ -30,7 +30,7 @@ const OptionInput: React.FC<Props> = ({
           name={name}
           aria-label="Default select example"
           onChange={(e) => handleInput(e)}          
-          value={value}
+          value={value ?? ''}
           className={`form-control select ${addClass} ${error 
             ? "border-1 border-danger" 
             : ""}`

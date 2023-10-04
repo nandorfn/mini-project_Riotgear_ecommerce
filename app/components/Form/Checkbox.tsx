@@ -27,7 +27,6 @@ const Checkbox: React.FC<Props> = ({
               value={item.value}
               onChange={(e) => handleInput(e)}
               checked={item.value === value}
-              defaultChecked={value}
             />
             <span className="label-text text-base">{item.label}</span>
           </label>
