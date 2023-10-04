@@ -22,10 +22,18 @@ const buttonVariants = cva(
         wide: 'btn-wide',
         full: 'w-full',
         half: 'w-[48.5%]'
+      },
+      text: {
+        normal: 'capitalize'
+      },
+      font: {
+        normal: 'font-normal',
+        med: 'font-medium',
       }
     },
     defaultVariants: {
       variant: 'default',
+      text: 'normal',
     }
   }
 )

@@ -15,8 +15,8 @@ const ProductDetails: React.FC<Props> = ({name, price}) => {
     <>
       <h1 className=" text-4xl ">{name}</h1>
       <h3 className=" text-2xl">{formattedPrice}</h3>
-      <SizeChart />
-      <ColorChart />
+      {/* <SizeChart />
+      <ColorChart /> */}
       <Select />
       <PurchaseBtn />
     </>

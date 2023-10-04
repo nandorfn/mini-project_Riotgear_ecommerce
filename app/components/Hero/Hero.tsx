@@ -1,17 +1,9 @@
 import Image, { StaticImageData } from "next/image";
 import Navbar from "../Navbar/Navbar";
-import HeroContent from "./HeroContent";
-
-import HeroImgDesktop from '../../assets/Content/HeroImgDesktop.png'
-import HeroImg from "./HeroImg";
-import HeroTitleOnyl from "./HeroTitleOnyl";
-
 interface HeroProps {
   childComponent: React.ReactNode;
   img: StaticImageData;
-
 }
-
 const Hero: React.FC<HeroProps> = ({childComponent, img}) => {
   return (
     <>

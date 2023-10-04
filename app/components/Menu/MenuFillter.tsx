@@ -16,21 +16,20 @@ const MenuFilter: React.FC = () => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()!
-  const [queryExist, setQueryExist] = useState(false)
   const sortBy = searchParams.get('sort')
   const price = searchParams.get('priceRanges')
   const color = searchParams.get('color')
   const gender = searchParams.get('gender')
   const sizes = searchParams.get('size')
-  const category = searchParams.get('category')
 
+  const paramsToCheck = ['sort', 'priceRanges', 'color', 'gender', 'size', 'category'];
+  const hasQueryString = paramsToCheck.some(param => searchParams.get(param) !== null);
+  const [queryExist, setQueryExist] = useState(hasQueryString)
+  
   useEffect(() => {
-    if (category !== null) {
-      setQueryExist(true);
-    } else {
-      setQueryExist(false);
-    }
-  }, [category]);
+    setQueryExist(hasQueryString);
+  }, [hasQueryString]);
+  
   
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -61,12 +60,17 @@ const MenuFilter: React.FC = () => {
     <>
       <aside className="flex flex-col w-full bg-base-200 h-fit rounded-xl gap-3 p-3">
         <figure className="flex gap-3 justify-between">
-          <div className="flex gap-3 items-center">
+          <div className=" flex gap-3 items-center">
             <Image src={filterIcon} alt="Filter icon" />
             <h1>Filter</h1>
           </div>
           {queryExist &&
-            <Button onClick={deleteUrlState} className="capitalize font-medium" variant={'zinc'} size={'sm'}>Clear Filter</Button>
+            <Button 
+              onClick={deleteUrlState} 
+              variant={'zinc'} 
+              size={'sm'}
+              font={'med'}>Clear Filter
+            </Button>
           }
         </figure>
         <OptionInput
@@ -77,7 +81,6 @@ const MenuFilter: React.FC = () => {
           optionValue={sortByOptions}
           handleInput={handleInput}
         />
-
         <label>
           Gender
           <Checkbox
@@ -87,6 +90,7 @@ const MenuFilter: React.FC = () => {
             addClass="flex flex-col gap-2 mt-3"
           />
         </label>
+        
         <List
           data={sizeChart}
           renderItem={(size) => {
@@ -97,6 +101,8 @@ const MenuFilter: React.FC = () => {
                 onClick={(e) => handleClick(e)}
                 name={'size'}
                 value={key}
+                size={'sm'}
+                font={'normal'}
                 variant={isSelected ? 'checked' : 'zinc'}>{value}
               </Button>
             )

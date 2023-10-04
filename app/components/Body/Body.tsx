@@ -6,14 +6,12 @@ import skateBg from '../../assets/Content/Skate.png'
 import shoesBg from '../../assets/Content/Shoes.png'
 import { getItem } from "@/app/utils/getItem";
 
-const Body: React.FC = async () => {
-  const products = await getItem();
-
-
+const Body = async () => {
+  // const products = await getItem();
   return (
     <>
       <section className="p-4 gap-4 mt-4  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
-        {products?.map((product) =>
+        {/* {products?.map((product) =>
           <article className="" key={product.id}>
             <ProductCard
               productId={product.productId}
@@ -23,7 +21,7 @@ const Body: React.FC = async () => {
             />
           </article>
 
-        )}
+        )} */}
       </section>
       <section className="mt-8">
         <h1 className="text-3xl p-4 font-medium md:text-5xl">Upgrade Your Style with Our Streetwear Collection</h1>

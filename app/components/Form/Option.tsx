@@ -6,7 +6,7 @@ interface Props {
   name: string,
   value: any;
   addClass: string;
-  optionValue: category[];
+  optionValue: any;
   handleInput: (e: React.SyntheticEvent) => void;
   error?: string;
 }
@@ -35,7 +35,7 @@ const OptionInput: React.FC<Props> = ({
             ? "border-1 border-danger" 
             : ""}`
           }>
-          {optionValue.map((option) => (
+          {optionValue.map((option: any) => (
             <option key={option.key} value={option.key}>
               {option.value}
             </option>

@@ -41,32 +41,37 @@ export type category = {
   value: string;
 }
 export const mainCategory = [
-  { key: '', value: 'Choose' },
-  { key: 'Top', value: 'Top' },
-  { key: 'Outwear', value: 'Outwear' },
-  { key: 'Bottom', value: 'Bottom' },
-  { key: 'Accessories', value: 'Accessories' },
+  { id: 1, label: 'Choose', value: '' },
+  { id: 2, label: 'Top', value: 'top' },
+  { id: 3, labe: 'Outwear', value: 'outwear' },
+  { id: 4, label: 'Bottom', value: 'bottom' },
+  { id: 5, label: 'Accessories', value: 'accessories' },
 ];
 export const subCategory = [
-  { key: '', value: 'Choose' },
-  { key: 'T-Shirt', value: 'T-shirt' },
-  { key: 'Shirt', value: 'Shirt' },
-  { key: 'Oversize T-Shirt', value: 'Oversize T-Shirt' },
-  { key: 'Jacket', value: 'Jacket' },
-  { key: 'Sweater', value: 'Sweater' },
-  { key: 'Jenas', value: 'Jeans' },
-  { key: 'Ripped Jeans', value: 'Ripped Jeans' },
-  { key: 'Ankle Pants', value: 'Ankle Pants' },
-  { key: 'Skate Shoes', value: 'Skate Shoes' },
-  { key: 'Sneaker', value: 'Sneaker' },
-  { key: 'Running Shoes', value: 'Running Shoes' },
+  { id: 1, label: 'Choose', value: '' },
+  { id: 2, label: 'T-Shirt', value: 't-shirt' },
+  { id: 3, label: 'Shirt', value: 'shirt' },
+  { id: 4, label: 'Oversize T-Shirt', value: 'oversize T-Shirt' },
+  { id: 5, label: 'Jacket', value: 'jacket' },
+  { id: 6, label: 'Sweater', value: 'sweater' },
+  { id: 7, label: 'Jeans', value: 'jeans' },
+  { id: 8, label: 'Ripped Jeans', value: 'ripped Jeans' },
+  { id: 9, label: 'Ankle Pants', value: 'ankle Pants' },
+  { id: 10, label: 'Skate Shoes', value: 'skate Shoes' },
+  { id: 11, label: 'Sneaker', value: 'sneaker' },
+  { id: 12, label: 'Running Shoes', value: 'running Shoes' },
 ];
 
 export const genderCategory = [
-  { key: '', value: 'Choose' },
-  { key: 'male', value: 'Male' },
-  { key: 'female', value: 'Female' },
-  { key: 'unisex', value: 'Unisex' },
+  { id: 1, label: 'Choose', value: '' },
+  { id: 2, label: 'Male', value: 'male' },
+  { id: 3, label: 'Female', value: 'female' },
+  { id: 4, label: 'Unisex', value: 'unisex' },
+];
+export const featuredOption = [
+  { key: false, value: 'Choose' },
+  { key: true, value: 'True' },
+  { key: false, value: 'False' },
 ]
 export const colorCategory = [
   {key: '', value:'Choose'},
