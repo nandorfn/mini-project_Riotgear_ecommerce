@@ -13,6 +13,7 @@ export type ProductData = {
   productStock: number;
   productDesc: string;
   productPrice: number;
+  featured: number;
 };
 
 export type productFormState = {
@@ -26,6 +27,7 @@ export type productFormState = {
   productStock: string;
   productDesc: string;
   productPrice: string;
+  featured: number;
 }
 
 export const createObject = (

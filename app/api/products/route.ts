@@ -17,7 +17,8 @@ export const POST = async (req: Request) => {
       productColor: body.productColor,
       productStock: body.productStock,
       productDesc: body.productDesc,
-      productPrice: body.productPrice
+      productPrice: body.productPrice,
+      featured: body.featured
     }
   });
   

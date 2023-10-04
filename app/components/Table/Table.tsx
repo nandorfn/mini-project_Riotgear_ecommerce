@@ -3,14 +3,14 @@ import TableBody from "./TableBody";
 
 
 interface LabelProps {
-  dataProducts: ProductData[];
-  filteredData: ProductData[];
+  dataProducts?: ProductData[];
+  filteredData?: ProductData[];
   headTable: string[],
-  label: string,
-  search: string,
-  handleDelete: (id: string) => void;
-  handleEdit: (id: string) => void;
-  handleEditModal: () => void;
+  label?: string,
+  search?: string,
+  handleDelete?: (id: string) => void;
+  handleEdit?: (id: string) => void;
+  handleEditModal?: () => void;
 }
 
 const Table: React.FC<LabelProps> = ({

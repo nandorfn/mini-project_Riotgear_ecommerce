@@ -43,7 +43,7 @@ export type category = {
 export const mainCategory = [
   { id: 1, label: 'Choose', value: '' },
   { id: 2, label: 'Top', value: 'top' },
-  { id: 3, labe: 'Outwear', value: 'outwear' },
+  { id: 3, label: 'Outwear', value: 'outwear' },
   { id: 4, label: 'Bottom', value: 'bottom' },
   { id: 5, label: 'Accessories', value: 'accessories' },
 ];
@@ -69,9 +69,9 @@ export const genderCategory = [
   { id: 4, label: 'Unisex', value: 'unisex' },
 ];
 export const featuredOption = [
-  { id:1, label: 'Choose', value: false },
-  { id:2, label: 'Active', value: true },
-  { id:3, label: 'Inactive', value: false },
+  { id:1, label: 'Choose', value: 0 },
+  { id:2, label: 'Active', value: 1 },
+  { id:3, label: 'Inactive', value: 0 },
 ]
 export const colorCategory = [
   { id: 1, label: 'Choose', value: '' },
@@ -113,7 +113,7 @@ export const sizeChart = [
 export type categoryOption = {
   id: number,
   label: string,
-  value: string | boolean,
+  value: string | number,
 }
 export type checkboxOptionType = {
   name: string,

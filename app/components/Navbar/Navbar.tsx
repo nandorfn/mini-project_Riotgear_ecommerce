@@ -8,7 +8,6 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <header>
         <nav className='md:bg-accent flex flex-row justify-between px-3 rounded-xl p-4'>
 
           <div className="drawer">
@@ -50,7 +49,6 @@ const Navbar: React.FC = () => {
             </div>
           </div>
         </nav>
-      </header>
     </>
   );
 };

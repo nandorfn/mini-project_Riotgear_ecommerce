@@ -22,6 +22,7 @@ export const PATCH = async (
     params: { id: string }
   }) => {
   const body: Product = await request.json();
+  console.log(body.featured);
   const product = await prisma.product.update({
     where: {
       productId: params.id
@@ -37,7 +38,8 @@ export const PATCH = async (
       productColor: body.productColor,
       productStock: body.productStock,
       productDesc: body.productDesc,
-      productPrice: body.productPrice
+      productPrice: body.productPrice,
+      featured: body.featured
     }
   });
   return NextResponse.json(product, { status: 200 });

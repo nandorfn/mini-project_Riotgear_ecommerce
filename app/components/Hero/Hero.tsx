@@ -7,7 +7,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({childComponent, img}) => {
   return (
     <>
-      <section className="flex w-full md:mt-4 gap-4 justify-between p-4 lg:mx-auto">
+      <header className="flex w-full md:mt-4 gap-4 justify-between p-4 max-w-6xl lg:mx-auto">
         <div className="mx-auto w-full md:w-3/4">
           <Navbar />
           {childComponent}
@@ -20,7 +20,7 @@ const Hero: React.FC<HeroProps> = ({childComponent, img}) => {
             alt="Event"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
         </div>
-      </section>
+      </header>
     </>
   );
 };

@@ -29,8 +29,8 @@ const FormEditProduct: React.FC<Props> = ({
     productStock: editedData?.productStock.toString() ?? '',
     productDesc: editedData?.productDesc ?? '',
     productPrice: editedData?.productPrice.toString() ?? '',
+    featured: editedData?.featured ? 1 : 0,
   });
-
   const handleInput = (e: React.SyntheticEvent) => {
     const { name, value } = (e.target as HTMLInputElement);
     setProduct({
@@ -42,6 +42,7 @@ const FormEditProduct: React.FC<Props> = ({
   const editData = async () => {
     const updatedProduct = {
       ...product,
+      featured: product.featured !== 1,
       productStock: parseInt(product.productStock),
       productPrice: parseFloat(product.productPrice),
     };

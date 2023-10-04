@@ -20,6 +20,7 @@ export const initialState = {
   productDesc: '',
   productImgLink: '',
   productPrice: '',
+  featured: 0,
 };
 
 const FormProduct: React.FC<Props> = ({
@@ -54,7 +55,9 @@ const FormProduct: React.FC<Props> = ({
       productColor: form.productColor,
       productStock: productStock,
       productDesc: form.productDesc,
-      productPrice: productPrice
+      productPrice: productPrice,
+      featured: form.featured !== 1,
+
     })
     .then(response => {
       setDataProducts((prevState: ProductData[]) => [

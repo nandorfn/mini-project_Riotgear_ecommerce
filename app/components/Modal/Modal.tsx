@@ -28,31 +28,27 @@ const Modal: React.FC<Props> = ({
         <div className="modalWrapper">
           <form className="form__add-product bg-base-200">
             <h4>{label}</h4>
+            <label>
+            Product Name
             <Input
               name={'productName'}
-              label={'Product Name'}
               value={form.productName}
               type={'text'}
               handleInput={handleInput}
               placeholder="Product Name"
             />
+            </label>
+            <label>
+              Product Image
             <Input
               name={'productImgLink'}
-              label={'Product Image Link'}
               value={form.productImgLink}
               type={'text'}
               handleInput={handleInput}
               placeholder="Link image product"
             />
-            <Input
-              name={'productStock'}
-              label={'Product Stock'}
-              type={'number'}
-              value={form.productStock}
-              handleInput={handleInput}
-              placeholder="Product Stock"
-            />
-            <div className='flex justify-between w-full gap-3'>
+            </label>
+            <div className='grid grid-cols-2 sm:grid-cols-3 gap-3'>
               <OptionInput
                 label={"Main Category"}
                 name='productMainCategory'
@@ -99,10 +95,10 @@ const Modal: React.FC<Props> = ({
                 error=''
               />
               <OptionInput
-                label={"Gender"}
-                name='productGender'
+                label={"Featured"}
+                name='featured'
                 addClass="select-sm mt-3"
-                value={form.productGender}
+                value={form.featured}
                 optionValue={featuredOption}
                 handleInput={handleInput}
                 error=''
@@ -115,14 +111,28 @@ const Modal: React.FC<Props> = ({
               handleInput={handleInput}
               error=""
             />
-            <Input
-              name={'productPrice'}
-              label={'Product Price'}
-              type={'number'}
-              value={form.productPrice}
-              handleInput={handleInput}
-              placeholder="Product Price"
-            />
+            <div className='grid grid-cols-2 gap-4'>
+              <label>
+                Product Stock
+                <Input
+                  name={'productStock'}
+                  type={'number'}
+                  value={form.productStock}
+                  handleInput={handleInput}
+                  placeholder="Product Stock"
+                />
+              </label>
+              <label>
+                Product Price
+                <Input
+                  name={'productPrice'}
+                  type={'number'}
+                  value={form.productPrice}
+                  handleInput={handleInput}
+                  placeholder="Product Price"
+                />
+              </label>
+            </div>
             <div className="flex flex-row w-full justify-between">
               <Button
                 onClick={handleModal}

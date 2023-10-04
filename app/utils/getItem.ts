@@ -4,12 +4,20 @@ const prisma = new PrismaClient;
 
 export const revalidate = 3600
 
+export const getFeatured = async () => {
+  const productFeatured = await prisma.product.findMany({
+    where: {
+      featured: true
+    }
+  
+  })
+  return productFeatured;
+}
+
 export const getItem = async (filters: any) => {
   const priceRanges = filters.priceRanges
     ? filters.priceRanges.split('-').map((price: any) => parseInt(price))
     : undefined;
-  console.log(filters)
-
   const sortBy = filters.sort || '';
 
   let sortOptions = {};
@@ -28,7 +36,6 @@ export const getItem = async (filters: any) => {
       },
     };
   }
-  console.log(sortOptions);
 
   const items = await prisma.product.findMany({
     where: {
