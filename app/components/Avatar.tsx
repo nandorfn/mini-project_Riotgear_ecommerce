@@ -4,7 +4,7 @@ import AvatarIcon from '../assets/Ellipse 1.png'
 const Avatar: React.FC = () => {
   return (
     <>
-      <div className="flex-none">
+      <div className="flex-none z-50">
         <ul className="menu menu-horizontal">
           <li>
             <details className="p-0">

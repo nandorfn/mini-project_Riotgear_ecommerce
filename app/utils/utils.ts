@@ -14,6 +14,7 @@ export type ProductData = {
   productDesc: string;
   productPrice: number;
   featured: number | boolean;
+  reviews: any;
 };
 
 export type productFormState = {
@@ -28,6 +29,7 @@ export type productFormState = {
   productDesc: string;
   productPrice: string;
   featured: number;
+  reviews: any;
 }
 
 export const createObject = (
