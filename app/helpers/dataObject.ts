@@ -60,6 +60,10 @@ export const subCategory = [
   { id: 10, label: 'Skate Shoes', value: 'skate-shoes' },
   { id: 11, label: 'Sneaker', value: 'sneaker' },
   { id: 12, label: 'Running Shoes', value: 'running-shoes' },
+  { id: 13, label: 'Blazzer', value: 'blazzer' },
+  { id: 14, label: 'Chino', value: 'chino' },
+  { id: 15, label: 'Wide Pants', value: 'wide-pants' },
+  { id: 15, label: 'Casual Pants', value: 'casual-pants' },
 ];
 
 export const genderCategory = [
@@ -83,6 +87,7 @@ export const colorCategory = [
   { id: 7, label: 'Blue', value: 'blue' },
   { id: 8, label: 'Yellow', value: 'yellow' },
   { id: 9, label: 'Orange', value: 'orange' },
+  { id: 10, label: 'Brown', value: 'brown' },
 ];
 export const sortByOptions = [
   { id: 0, label: 'Choose', value: '' },

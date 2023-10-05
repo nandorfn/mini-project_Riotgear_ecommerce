@@ -14,7 +14,7 @@ export const getFeatured = async () => {
   return productFeatured;
 }
 
-export const getItem = async (filters: any) => {
+export const getItem = cache(async(filters: any) => {
   const priceRanges = filters.priceRanges
     ? filters.priceRanges.split('-').map((price: any) => parseInt(price))
     : undefined;
@@ -51,15 +51,34 @@ export const getItem = async (filters: any) => {
     orderBy: sortOptions,
   });
   return items;
-};
-
+});
 
 export const getProduct = cache(async (id: string) => {
   const product = await prisma.product.findUnique({
     where: {
       productId: id,
-    }
+    },
   });
+  if (product) {
+    await prisma.product.update({
+      where: {
+        productId: id,
+      },
+      data: {
+        viewsCount: product.viewsCount + 1,
+      },
+    });
+  }
   return product;
+});
 
+export const getPopularProducts = cache(async() => {
+  const popularProducts = await prisma.product.findMany({
+    orderBy: {
+      viewsCount: 'desc'
+    },
+    take: 10
+  })
+  
+  return popularProducts;
 })

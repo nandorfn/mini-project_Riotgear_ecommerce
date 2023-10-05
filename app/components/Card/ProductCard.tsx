@@ -20,7 +20,7 @@ const ProductCard: React.FC<Product> = ({
   return (
     <>
       <Link href={`/catalog/${productId}`}>
-        <div className="card w-fit min-h-full shadow-md bg-base-100 hover:bg-base-200 cursor-pointer">
+        <div className="card w-fit min-h-full shadow-sm md:shadow-md bg-base-100 hover:bg-base-200 cursor-pointer">
           <figure className='h-[60%]'>
             <Image 
               className='w-full'
@@ -40,7 +40,7 @@ const ProductCard: React.FC<Product> = ({
                   src={StarLogo}
                   alt='star logo'
                 />
-                <p className='text-zinc-500 font- text-sm'>4.0 (200 Reviews)</p>
+                <p className='text-zinc-500 text-sm'>4.0 (200 Reviews)</p>
               </div>
             </div>
           </div>

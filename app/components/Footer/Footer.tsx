@@ -29,11 +29,11 @@ const Footer: React.FC = () => {
             <Image src={ttIcon} alt='Instagram icon' />
           </div>
         </figure>
-        <div className='flex flex-col md:flex-row items-center  md:justify-between text-base text-[#9FA0A2] mb-8'>
+        <div className='flex flex-col md:flex-row items-center text-center md:justify-between text-base text-[#9FA0A2] mb-8'>
           <span>
             &copy;2023 RIOTGEAR. All Right reserved
           </span>
-          <ul className='flex gap-3'>
+          <ul className='flex flex-col md:flex-row md:gap-3'>
             {menus?.map((menu, index) =>
               <li key={index}>
                 <Link className=' hover:text-base-300' href={menu.link}>{menu.label}</Link>

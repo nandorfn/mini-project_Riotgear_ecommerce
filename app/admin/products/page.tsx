@@ -82,14 +82,16 @@ const Page: React.FC = () => {
       <section className="relative">
         <h2 className="text-2xl font-medium">List Products</h2>
         <div className="flex flex-row w-2/4 items-center gap-3 my-4">
+        <label>
+          Search Product
           <Input
             name="Search"
-            label={null}
             value={search}
             type="text"
             handleInput={handleInput}
             placeholder="Find products"
           />
+        </label>
           <Button 
             variant={'info'} >Search Product
           </Button>

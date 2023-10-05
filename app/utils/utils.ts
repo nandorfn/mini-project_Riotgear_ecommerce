@@ -13,7 +13,7 @@ export type ProductData = {
   productStock: number;
   productDesc: string;
   productPrice: number;
-  featured: number;
+  featured: number | boolean;
 };
 
 export type productFormState = {

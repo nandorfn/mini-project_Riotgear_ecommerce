@@ -25,7 +25,7 @@ const TableBody: React.FC<Props> = ({
   return (
     <>
       {dataMapping?.map((product: any, index: number) =>
-        <tr key={index}>
+        <tr className='capitalize' key={index}>
           <th>{index + 1}</th>
           <td>{product.productName}</td>
           <td>{product.productMainCategory}</td>

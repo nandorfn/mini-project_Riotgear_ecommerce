@@ -2,9 +2,9 @@ import NavbarStore from "@/app/components/Navbar/NavbarStore";
 import Image from "next/image";
 import ProductDetails from "@/app/components/Card/ProductDetails";
 import Accordion from "@/app/components/Accordion/Accordion";
-import ReviewWrap from "@/app/components/Review/ReviewWrap";
+import ReviewWrap from "@/app/components/Navbar/Review/ReviewWrap";
 import PurchaseBtn from "@/app/components/Button/PurchaseBtn";
-import { getProduct } from "@/app/utils/getItem";
+import { getProduct } from "@/app/utils/queryDb";
 import ImageNotFound from "@/app/components/404/ImageNotFound";
 import Link from "next/link";
 

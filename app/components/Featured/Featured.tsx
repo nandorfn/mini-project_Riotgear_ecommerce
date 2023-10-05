@@ -4,7 +4,7 @@ import shirtBg from '../../assets/Content/shirt.png'
 import jacketBg from '../../assets/Content/Jacket.png'
 import skateBg from '../../assets/Content/Skate.png'
 import shoesBg from '../../assets/Content/Shoes.png'
-import { getFeatured } from "@/app/utils/getItem";
+import { getFeatured } from "@/app/utils/queryDb";
 
 const Featured = async () => {
   const products = await getFeatured();

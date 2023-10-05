@@ -26,7 +26,7 @@ const ColorChart: React.FC<Props> = ({handleInput, value}) => {
                     name="color"
                     type="radio"
                     checked={item.label === value}
-                    value={item.label}
+                    value={item.label.toLocaleLowerCase()}
                     onChange={(e) => handleInput(e)} 
                     className={`radio p-3 mt-3 ${item.color}`} />
                   <p>{item.label}</p>

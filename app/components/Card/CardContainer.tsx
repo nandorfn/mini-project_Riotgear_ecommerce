@@ -1,4 +1,4 @@
-import { getItem } from "@/app/utils/getItem";
+import { getItem } from "@/app/utils/queryDb";
 import ProductCard from "./ProductCard";
 
 export interface QueryProps {

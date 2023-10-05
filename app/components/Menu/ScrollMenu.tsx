@@ -22,7 +22,7 @@ const ScrollMenu: React.FC = () => {
   return (
     <>
       <ul className="flex gap-3 text-sm breadcrumbs relative ">
-        {subCategory?.map((item, index) => {
+        {subCategory?.slice(1).map((item, index) => {
           const url = pathname + '?' + createQueryString('category', item.value)
         return (
           <li className='inline-block' key={index}>
