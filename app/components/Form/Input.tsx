@@ -1,3 +1,4 @@
+
 interface InputProps {
   name: string,
   value: string,
@@ -22,7 +23,7 @@ const Input: React.FC<InputProps> = ({
         onChange={(e) => handleInput(e)}
         type={type}
         placeholder={placeholder}
-        className="input input-bordered mt-2 flex w-full" />
+        className="input input-bordered flex w-full" />
     </>
   );
 };

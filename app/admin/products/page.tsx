@@ -25,7 +25,7 @@ const Page: React.FC = () => {
       axios.get('/api/products')
         .then(response => {
           const newDataProducts = [
-            ...dataProducts, 
+            ...dataProducts,
             ...response.data
           ];
           setDataProducts(newDataProducts);
@@ -34,25 +34,25 @@ const Page: React.FC = () => {
           console.error(error);
         });
     }
-  }, []); 
-  
+  }, []);
+
   const handleDelete = (id: string) => {
     axios.delete(`/api/products/${id}`)
-    .then(() => {
-      const filteredProducts = [
-        ...dataProducts.filter((product) => 
-        product.productId !== id
-      )];
-      setDataProducts(filteredProducts)
-    })
-    .catch(error => {console.error(error)});
+      .then(() => {
+        const filteredProducts = [
+          ...dataProducts.filter((product) =>
+            product.productId !== id
+          )];
+        setDataProducts(filteredProducts)
+      })
+      .catch(error => { console.error(error) });
   }
-  
+
   const handleEdit = (id: string) => {
     const dataToEdit = [...dataProducts.filter((product) => product.productId === id)];
     setEditedProduct(dataToEdit[0]);
   };
-  
+
   const handleInput = (e: React.SyntheticEvent) => {
     const { value } = (e.target as HTMLInputElement);
     setSearch(value)
@@ -70,20 +70,18 @@ const Page: React.FC = () => {
       editModal: !prevState.editModal
     }));
   };
-  
+
   const onFilter = (query: string) => {
     let filter = dataProducts?.filter((item) =>
-        item.productName.toLowerCase().includes(query.toLowerCase())
+      item.productName.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredData(filter)
-}
+  }
   return (
     <>
       <section className="relative">
         <h2 className="text-2xl font-medium">List Products</h2>
-        <div className="flex flex-row w-2/4 items-center gap-3 my-4">
-        <label>
-          Search Product
+        <div className="flex flex-row w-2/4 items-center gap-3 my-4"> 
           <Input
             name="Search"
             value={search}
@@ -91,12 +89,11 @@ const Page: React.FC = () => {
             handleInput={handleInput}
             placeholder="Find products"
           />
-        </label>
-          <Button 
+          <Button
             variant={'info'} >Search Product
           </Button>
-          <Button 
-            onClick={handleAddModal} 
+          <Button
+            onClick={handleAddModal}
             variant={'success'} >Add Product
           </Button>
         </div>
@@ -111,10 +108,10 @@ const Page: React.FC = () => {
           headTable={headTableProduct}
         />
         {modal.editModal &&
-          <FormEditProduct 
-          dataProducts={dataProducts}
-          setDataProducts={setDataProducts}
-          editedData={editedProduct}
+          <FormEditProduct
+            dataProducts={dataProducts}
+            setDataProducts={setDataProducts}
+            editedData={editedProduct}
             handleModal={handleEditModal}
           />
         }
