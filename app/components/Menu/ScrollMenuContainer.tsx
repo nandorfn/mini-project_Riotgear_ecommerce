@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react";
 import ScrollMenu from "./ScrollMenu";
+import { Flex } from "../Container/Flex";
 
 const ScrollMenuContainer: React.FC = () => {
   const [search, setSearch] = useState('');
@@ -18,8 +19,8 @@ const ScrollMenuContainer: React.FC = () => {
     <>
       <section className="flex">
         <div className="mx-auto overflow-x-hidden">
-          <div className="flex flex-row whitespace-nowrap">
-            <div className="flex ms-3 px-4 bg-base-200 rounded-full me-3">
+          <Flex variant={'row'} className="whitespace-nowrap">
+            <Flex clr={'base2'} rounded={'full'} className="ms-3 px-4 me-3 w-fit">
               {input &&
                 <input
                   className="me-2 rounded-full focus:outline-none ps-2 border-2"
@@ -30,9 +31,9 @@ const ScrollMenuContainer: React.FC = () => {
                 />
               }
               <button onClick={handleClick}>Search</button>
-            </div>
+            </Flex>
             <ScrollMenu />
-          </div>
+          </Flex>
         </div>
       </section>
     </>

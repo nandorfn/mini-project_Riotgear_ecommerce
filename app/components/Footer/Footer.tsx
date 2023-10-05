@@ -5,6 +5,7 @@ import ttIcon from '../../assets/icon/TikTok.png'
 import RiotLogo from '../../assets/RiotLogoBlack.svg'
 import Image from 'next/image';
 import Link from 'next/link'
+import { Flex } from '../Container/Flex'
 
 const Footer: React.FC = () => {
   const menus = [
@@ -22,14 +23,18 @@ const Footer: React.FC = () => {
             src={RiotLogo}
             alt='RiotGear icon'
           />
-          <div className='flex gap-3'>
+          <Flex gap={3}>
             <Image src={fbIcon} alt='Facebook icon' />
             <Image src={xIcon} alt='Instagram icon' />
             <Image src={igIcon} alt='Instagram icon' />
             <Image src={ttIcon} alt='Instagram icon' />
-          </div>
+          </Flex>
         </figure>
-        <div className='flex flex-col md:flex-row items-center text-center md:justify-between text-base text-[#9FA0A2] mb-8'>
+        <Flex 
+          variant={'colToRow'} 
+          align={'iCenter'} 
+          clr={'grey'}
+          className='text-center md:justify-between text-base mb-8'>
           <span>
             &copy;2023 RIOTGEAR. All Right reserved
           </span>
@@ -40,7 +45,7 @@ const Footer: React.FC = () => {
               </li>
             )}
           </ul>
-        </div>
+        </Flex>
       </footer>
     </>
   );

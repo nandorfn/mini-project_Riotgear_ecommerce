@@ -1,17 +1,24 @@
 import Image from "next/image";
 import HeroImgPrimary from '../../assets/Content/HeroImgPrimary.png'
 import HeroImgSecondary from '../../assets/Content/HeroImgSecondary.png'
+import { Heading } from "../Container/Heading";
+import { Text } from "../Container/Text";
+import { heroContent } from "@/app/helpers/dataObject";
+import { Flex } from "../Container/Flex";
 
 const HeroContent: React.FC = () => {
     return (
         <>
           <article className="my-5 gap-4 hidden sm:block">
-            <h1 className="w-full lg:w-[28rem] text-5xl font-medium">
-            Unleash Your Street Style with Our New Collection
-            </h1>
-            <p className="w-full lg:w-[34rem] text-base text-[#9FA0A2]">Shop our Latest Collection and Discover the Hottest Streetwear Styles of the Season - Find Your Must-Have Pieces and Fresh Looks Now, Before They’re Gone!</p>
+            <Heading fs={'xl5'} className="w-full lg:w-[28rem]">
+              {heroContent.title}
+            </Heading>
+            <Text clr={'grey'} className="w-full lg:w-[34rem]">
+              {heroContent.desc}
+            </Text>
           </article>
-          <div className="flex gap-4 w-full justify-between">
+          
+          <Flex align={'between'} className="gap-3">
             <Image
               className="w-full md:w-1/2"
               src={HeroImgPrimary}
@@ -22,7 +29,7 @@ const HeroContent: React.FC = () => {
               src={HeroImgSecondary}
               alt="Event"
             />
-          </div>
+          </Flex>
         </>
     );
 };

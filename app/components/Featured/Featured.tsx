@@ -5,6 +5,7 @@ import jacketBg from '../../assets/Content/Jacket.png'
 import skateBg from '../../assets/Content/Skate.png'
 import shoesBg from '../../assets/Content/Shoes.png'
 import { getFeatured } from "@/app/utils/queryDb";
+import { Heading } from "../Container/Heading";
 
 const Featured = async () => {
   const products = await getFeatured();
@@ -24,7 +25,9 @@ const Featured = async () => {
         )}
       </section>
       <section className="mt-8">
-        <h1 className="text-3xl p-4 font-medium md:text-5xl">Upgrade Your Style with Our Streetwear Collection</h1>
+        <Heading fs={'xl3'} className="p-4 md:text-5xl">
+          Upgrade Your Style with Our Streetwear Collection
+        </Heading>
         <div className="p-4 gap-3 grid grid-cols-1 sm:grid-cols-2">
           <CategoryCard imgSrc={shirtBg} label="Top" />
           <CategoryCard imgSrc={jacketBg} label="Outwear" />

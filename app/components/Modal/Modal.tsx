@@ -7,6 +7,7 @@ import { TextArea } from "../Form/TextArea";
 import Input from "../Form/Input";
 import { Button } from '../Button/Button';
 import OptionInput from '../Form/Option';
+import { Flex } from '../Container/Flex';
 
 interface Props {
   handleInput: (e: React.SyntheticEvent) => void;
@@ -133,7 +134,7 @@ const Modal: React.FC<Props> = ({
                 />
               </label>
             </div>
-            <div className="flex flex-row w-full justify-between">
+            <Flex variant={'row'} align={'between'}>
               <Button
                 onClick={handleModal}
                 variant={'info'}
@@ -146,7 +147,7 @@ const Modal: React.FC<Props> = ({
                 size={'half'}
               >Submit
               </Button>
-            </div>
+            </Flex>
           </form>
         </div>
       </div>

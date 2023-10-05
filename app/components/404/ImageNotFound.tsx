@@ -1,12 +1,18 @@
-import { bebas_neue } from "@/app/utils/fonts";
+import { Flex } from "../Container/Flex";
 
 const ImageNotFound: React.FC = () => {
     return (
         <>
-          <div className={`${bebas_neue.className} text-6xl flex flex-col w-full h-[500px] justify-center items-center bg-base-100 border-accent border-2 rounded-xl`}>
+          <Flex 
+            variant={'col'} 
+            clr={'white'} 
+            align={'center'} 
+            rounded={'xl'} 
+            font={'neue'} 
+            className='text-6xl h-[500px] border-accent border-2'>
             <p>Sorry...</p>
             <h1>Image Not Found</h1>
-          </div>
+          </Flex>
         </>
     );
 };

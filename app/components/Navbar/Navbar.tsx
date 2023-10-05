@@ -3,16 +3,20 @@ import BrandLogo from '../../assets/RiotLogoBlack.svg'
 import MenuBtn from '../../assets/MenuIcon.svg'
 import Menus from './Menus';
 import Link from 'next/link';
+import { Flex } from '../Container/Flex';
 
 const Navbar: React.FC = () => {
 
   return (
     <>
         <nav className='md:bg-accent flex flex-row justify-between px-3 rounded-xl p-4'>
-
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-row justify-between">
+            
+            <Flex 
+              variant={'row'} 
+              align={'between'} 
+              className="drawer-content">
               {/* Page content here */}
               <Link className='cursor-pointer flex items-center' href="/">
                 <Image
@@ -35,7 +39,8 @@ const Navbar: React.FC = () => {
                   alt='Menu Icon'
                 />
               </label>
-            </div>
+            </Flex>
+            
             <div className="drawer-side z-50">
               <label htmlFor="my-drawer" className="drawer-overlay"></label>
               <ul className='menu w-80 pt-16 min-h-full bg-[#EBEBED] text-lg'>
@@ -47,6 +52,7 @@ const Navbar: React.FC = () => {
                 />
               </ul>
             </div>
+            
           </div>
         </nav>
     </>

@@ -1,16 +1,17 @@
 import wishlistIcon from '../../assets/icon/wishlist.svg'
 import Image from "next/image";
+import { Button } from './Button';
 
 const PurchaseBtn: React.FC = () => {
   return (
     <>
       <div className="flex w-full justify-between flex-wrap gap-3 sticky sm:absolute sm:bottom-0">
-        <button className={`btn btn-error capitalize w-[70%] text-white`}>Buy Now</button>
-        <button className="btn w-[26%]">
+        <Button variant={'red'} className='w-[70%]'>Buy Noy</Button>
+        <Button className="w-[26%]">
           <Image
             src={wishlistIcon}
             alt="Wishlist Icon" />
-        </button>
+        </Button>
       </div>
     </>
   );

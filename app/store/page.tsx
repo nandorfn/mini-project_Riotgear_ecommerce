@@ -1,4 +1,5 @@
 import CardContainer from "../components/Card/CardContainer";
+import { Flex } from "../components/Container/Flex";
 import MenuFilter from "../components/Menu/MenuFillter";
 import ScrollMenuContainer from "../components/Menu/ScrollMenuContainer";
 
@@ -12,8 +13,7 @@ const page = async ({
 
   return (
     <>
-
-      <div className="flex flex-row w-full md:p-4 gap-1">
+      <Flex variant={'row'} className="md:p-4 gap-1">
         <div className="w-[27.6%] h-screen hidden md:block">
           <MenuFilter />
         </div>
@@ -23,7 +23,7 @@ const page = async ({
             query={searchParams}
           />
         </div>
-      </div>
+      </Flex>
     </>
   );
 };

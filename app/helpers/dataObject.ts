@@ -4,6 +4,11 @@ export type FaqItem = {
   a: string;
 }
 
+export const heroContent = {
+  title: 'Unleash Your Street Style with Our New Collection',
+  desc: 'Shop our Latest Collection and Discover the Hottest Streetwear Styles of the Season - Find Your Must-Have Pieces and Fresh Looks Now, Before They’re Gone!'
+}
+
 export const about = [
 {
   content: 'Welcome to RIOTGEAR, where fashion meets rebellion in the heart of the urban landscape. Born from a passion for self-expression and a love for street culture, RIOTGEAR is more than just clothing; it&apos;s a statement of defiance and individuality. Our journey began on the gritty streets, and we&apos;ve since evolved into a global force, uniting skaters, artists, and rebels of all kinds under one banner.',

@@ -1,15 +1,14 @@
 import React from 'react';
-import { sizeChart, sizeType } from '../helpers/dataObject';
+import { categoryOption } from '../helpers/dataObject';
 
 interface Props {
-  data: sizeType[];
+  data: categoryOption[];
   renderItem: (item: any) => React.ReactNode;
 }
 
 const List: React.FC<Props> = ({ renderItem, data }) => {
-
   return (
-    <div>
+    <>
       <h4 className="font-medium mb-3">Size</h4>
       <ul className="flex gap-3 flex-wrap">
         {data?.map((item, index: number) => (
@@ -18,7 +17,7 @@ const List: React.FC<Props> = ({ renderItem, data }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 

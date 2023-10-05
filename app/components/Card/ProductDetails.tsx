@@ -2,6 +2,7 @@ import PurchaseBtn from "../Button/PurchaseBtn";
 import ColorChart from "../Filter/ColorChart";
 import SizeChart from "../List";
 import Select from "../Form/Select";
+import { Heading } from '@/app/components/Container/Heading'
 
 interface Props {
   name?: string | null;
@@ -13,8 +14,8 @@ const ProductDetails: React.FC<Props> = ({name, price}) => {
 
   return (
     <>
-      <h1 className=" text-4xl ">{name}</h1>
-      <h3 className=" text-2xl">{formattedPrice}</h3>
+      <Heading fs={'xl4'}>{name}</Heading>
+      <Heading fs={'xl2'}>{formattedPrice}</Heading>
       {/* <SizeChart />
       <ColorChart /> */}
       <Select />

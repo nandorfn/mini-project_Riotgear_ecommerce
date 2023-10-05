@@ -1,11 +1,12 @@
 import Image from "next/image";
 import HeroImgPrimary from '../../assets/Content/HeroImgPrimary.png'
 import HeroImgSecondary from '../../assets/Content/HeroImgSecondary.png'
+import { Flex } from "../Container/Flex";
 
 const HeroImg: React.FC = () => {
     return (
         <>
-          <div className="flex gap-4 w-full justify-between">
+          <Flex gap={4} align={'between'}>
             <Image
               className="w-full md:w-1/2"
               src={HeroImgPrimary}
@@ -16,7 +17,7 @@ const HeroImg: React.FC = () => {
               src={HeroImgSecondary}
               alt="Event"
             />
-          </div>
+          </Flex>
         </>
     );
 };

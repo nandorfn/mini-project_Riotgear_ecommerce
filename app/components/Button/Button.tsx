@@ -53,9 +53,4 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-const exported = {
-  Button,
-  buttonVariants,
-};
-
 export { Button, buttonVariants };

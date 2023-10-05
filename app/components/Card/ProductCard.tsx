@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import StarLogo from '../../assets/Star.svg'
+import { Flex } from '../Container/Flex';
+import { Heading } from '../Container/Heading';
+import { Text } from '../Container/Text';
 
 interface Product {
   productImg: string,
@@ -21,29 +24,38 @@ const ProductCard: React.FC<Product> = ({
     <>
       <Link href={`/catalog/${productId}`}>
         <div className="card w-fit min-h-full shadow-sm md:shadow-md bg-base-100 hover:bg-base-200 cursor-pointer">
+        
           <figure className='h-[60%]'>
-            <Image 
+            <Image
               className='w-full'
-              src={productImg} 
+              src={productImg}
               alt="Jacket"
               width={500}
               height={500}
-              />
+            />
           </figure>
-          <div className="flex flex-col gap-3 p-3 h-[40%]">
-            <h2 className="card-title items-start h-[3.6rem] text-lg text-base-300 overflow-hidden font-normal">{productName}</h2>
-            <div className='flex flex-col gap-3'>
-              <p className='font-medium text-base'>{`Rp${price}`}</p>
-              <div className='flex items-center gap-2'>
-                <Image
-                  className='w-6'
-                  src={StarLogo}
-                  alt='star logo'
-                />
-                <p className='text-zinc-500 text-sm'>4.0 (200 Reviews)</p>
-              </div>
-            </div>
-          </div>
+          
+          <Flex variant={'col'} gap={3} className="p-3 h-[40%]">
+            <Heading
+              fs={'lg'}
+              align={'start'}
+              clr={'base3'}
+              bold={'normal'}
+              className="card-title items-start h-[3.6rem] overflow-hidden">
+              {productName}
+            </Heading>
+            
+            <Flex
+              variant={'col'}
+              gap={3}>
+              <Text bold={'medium'}>{`Rp${price}`}</Text>
+              <Flex align={'iCenter'} gap={2}>
+                <Image className='w-6' src={StarLogo} alt='star logo'/>
+                <Text clr={'zinc5'} fs={'sm'}>4.0 (200 Reviews)</Text>
+              </Flex>
+            </Flex>
+            
+          </Flex>
         </div>
       </Link>
     </>
