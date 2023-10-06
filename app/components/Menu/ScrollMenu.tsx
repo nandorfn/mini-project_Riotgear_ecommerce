@@ -28,7 +28,7 @@ const ScrollMenu: React.FC = () => {
           <li className='inline-block' key={index}>
             <Link
               href={pathname === '/' ? `/store/${url}` : url}
-              className={`bg-base-200 py-2 px-4 hover:bg-neutral-content rounded-full ${activeCategory === item.label && 'border-2 bg-white'}`}>{item.label}
+              className={`bg-base-200 py-3 px-4 hover:bg-neutral-content rounded-full ${activeCategory === item.label && 'border-2 bg-white'}`}>{item.label}
             </Link>
           </li>
         )})}

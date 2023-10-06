@@ -4,11 +4,11 @@ import NavbarStore from "../components/Navbar/NavbarStore";
 const layout = ({children}: {children: React.ReactNode}) => {
   return (
     <>
-      <section className="max-w-6xl p-2 md:p-4 mx-auto">
+      <div className="max-w-7xl mx-auto">
         <NavbarStore />
         {children}
-        </section>
         <Footer />
+      </div>
     </>
   );
 };

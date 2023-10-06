@@ -42,11 +42,12 @@ const Heading: React.FC<HeadingProps> = ({
   align,
   clr,
   className,
+  bold,
   ...props
 }) => {
     return (
         <>
-          <h1 className={cn(headingVariants({fs, align, clr, className}))} {...props}></h1>
+          <h1 className={cn(headingVariants({fs, align, clr, bold, className}))} {...props}></h1>
         </>
     );
 };

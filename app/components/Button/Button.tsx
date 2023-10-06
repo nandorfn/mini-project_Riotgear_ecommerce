@@ -14,7 +14,19 @@ const buttonVariants = cva(
         info: 'btn-info capitalize',
         grey: 'btn-base-300',
         zinc: 'bg-[#D9D9D9]',
-        checked: 'bg-accent'
+        checked: 'bg-accent',
+        rounded: 'rounded-full btn-sm p-4'
+      },
+      clr: {
+        black: 'bg-black',
+        grey: 'bg-zinc-300',
+        white: 'bg-base-100',
+        brown: 'bg-amber-950',
+        red: 'bg-red',
+        green: 'bg-green-700',
+        blue: 'bg-blue-500',
+        yellow: 'bg-yellow-400',
+        orange: 'bg-orange-400',
       },
       size: {
         sm: 'btn-sm',
@@ -45,11 +57,12 @@ const Button: React.FC<ButtonProps> = ({
   className,
   variant,
   size,
+  clr,
   ...props
 }) => {
   return (
     <>
-      <button className={cn(buttonVariants({ variant, size, className }))} {...props} />
+      <button className={cn(buttonVariants({ variant, clr,  size, className }))} {...props} />
     </>
   );
 };

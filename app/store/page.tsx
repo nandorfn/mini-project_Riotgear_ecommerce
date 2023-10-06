@@ -11,6 +11,7 @@ const page = async ({
   searchParams: { [key: string]: string | string[] | undefined }
 }) => {
 
+
   return (
     <>
       <Flex variant={'row'} className="md:p-4 gap-1">
@@ -18,7 +19,9 @@ const page = async ({
           <MenuFilter />
         </div>
         <div className="w-full pe-3 mt-3 md:mt-0 md:w-[73.4%]">
-          <ScrollMenuContainer />
+          <div className="sticky top-12 py-4 z-50 bg-white">
+            <ScrollMenuContainer />
+          </div>
           <CardContainer
             query={searchParams}
           />
