@@ -1,61 +1,48 @@
-import { ProductData } from "@/app/utils/utils";
-import TableBody from "./TableBody";
-
-
-interface LabelProps {
-  dataProducts: ProductData[];
-  filteredData: ProductData[];
-  headTable: string[],
-  label?: string,
-  search?: string,
-  handleDelete: (id: string) => void;
-  handleEdit: (id: string) => void;
-  handleEditModal: () => void;
+export type TableProps = {
+  tableHead: string[];
+  label: string;
+  mapping: any;
+  columns: any;
 }
 
-const Table: React.FC<LabelProps> = ({
-  label,
-  headTable,
-  dataProducts,
-  handleDelete,
-  handleEdit,
-  handleEditModal,
-  filteredData,
-  search
-}) => {
+const Table = ({
+  tableHead,
+  mapping,
+  columns,
+  label
+}: TableProps) => {
 
   return (
     <>
-      <label className="font-medium text-xl">
-        {label}
-        <div className="overflow-x-auto p-1 mt-3">
-          <table className="table table-zebra bg-base-100">
-            <thead>
-              <tr>
-                {headTable?.map((head, index) =>
-                  <th key={index}>{head}</th>
-                )}
+      <div className="overflow-x-auto">
+        <h2 className="text-xl font-medium">{label}</h2>
+        <table className="table table-zebra">
+          {/* head */}
+          <thead>
+            <tr>
+              {tableHead?.map((head, index) =>
+                <th key={index}>
+                  {head}
+                </th>
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {mapping?.slice(0, 10).map((product: any, index: number) =>
+              <tr key={index}>
+                <th>{index + 1}</th>
+                {columns?.map((column: any, index: number) => (
+                    <td key={index}>
+                      {product[column.label]}
+                    </td>
+                ))}
               </tr>
-            </thead>
-            <tbody className="text-base font-normal">
-              {search === ""
-                ? <TableBody
-                  dataMapping={dataProducts}
-                  handleEdit={handleEdit}
-                  handleEditModal={handleEditModal}
-                  handleDelete={handleDelete}
-                />
-                : <TableBody
-                  dataMapping={filteredData}
-                  handleEdit={handleEdit}
-                  handleEditModal={handleEditModal}
-                  handleDelete={handleDelete}
-                />
-              }
-            </tbody>
-          </table>
-        </div>
-      </label>
+            )
+            }
+
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

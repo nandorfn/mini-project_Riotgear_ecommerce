@@ -7,6 +7,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        primary: 'btn-primary',
         default: 'btn-base-200 hover:bg-base-100',
         red: 'btn-error',
         success: 'btn-success capitalize',

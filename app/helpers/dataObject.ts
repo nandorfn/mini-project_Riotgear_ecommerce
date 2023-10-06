@@ -155,3 +155,12 @@ export const priceRange: checkboxOptionType[] = [
   {name: 'priceRanges', value: '600000-799000', label: 'Rp600.000 - Rp799.000'},
   {name: 'priceRanges', value: '800000-5000000', label: 'Rp800.000 +'}
 ]
+
+
+export const featuredTableHead = ['No', 'Product Name', 'Main Category', 'Sub Category', 'Views']
+export const columnFeaturedPrdouct = [
+  { label: "productName" },
+  { label: "productMainCategory"},
+  {label: "productSubCategory" },
+  { label: "viewsCount"},
+]

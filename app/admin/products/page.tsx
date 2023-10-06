@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import FormProduct from "./FormProduct";
 import FormEditProduct from "./FormEditProduct";
 import { Button } from "@/app/components/Button/Button";
+import TableBody from "@/app/components/Table/TableBody";
 
 const Page: React.FC = () => {
   const [dataProducts, setDataProducts] = useState<ProductData[]>([])
@@ -81,7 +82,7 @@ const Page: React.FC = () => {
     <>
       <section className="relative">
         <h2 className="text-2xl font-medium">List Products</h2>
-        <div className="flex flex-row w-2/4 items-center gap-3 my-4"> 
+        <div className="flex flex-row w-2/4 items-center gap-3 my-4">
           <Input
             name="Search"
             value={search}
@@ -97,16 +98,33 @@ const Page: React.FC = () => {
             variant={'success'} >Add Product
           </Button>
         </div>
-        <Table
-          dataProducts={dataProducts}
-          search={search}
-          filteredData={filteredData}
-          handleDelete={handleDelete}
-          handleEditModal={handleEditModal}
-          handleEdit={handleEdit}
-          label=""
-          headTable={headTableProduct}
-        />
+        <div className="overflow-x-auto p-1 mt-3">
+          <table className="table table-zebra bg-base-100">
+            <thead>
+              <tr>
+                {headTableProduct?.map((head, index) =>
+                  <th key={index}>{head}</th>
+                )}
+              </tr>
+            </thead>
+            <tbody className="text-base font-normal">
+              {search === ""
+                ? <TableBody
+                  dataMapping={dataProducts}
+                  handleEdit={handleEdit}
+                  handleEditModal={handleEditModal}
+                  handleDelete={handleDelete}
+                />
+                : <TableBody
+                  dataMapping={filteredData}
+                  handleEdit={handleEdit}
+                  handleEditModal={handleEditModal}
+                  handleDelete={handleDelete}
+                />
+              }
+            </tbody>
+          </table>
+        </div>
         {modal.editModal &&
           <FormEditProduct
             dataProducts={dataProducts}
