@@ -37,9 +37,7 @@ const FormProduct: React.FC<Props> = ({
       [name]: value
     })
   }
-  
-  console.log(form.productColor)
-  
+    
   const sendData = async () => {
     const id = uuidv4();
     const productStock = parseInt(form.productStock)
