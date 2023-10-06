@@ -55,7 +55,6 @@ const FormProduct: React.FC<Props> = ({
       productDesc: form.productDesc,
       productPrice: productPrice,
       featured: form.featured !== 1,
-
     })
     .then(response => {
       setDataProducts((prevState: ProductData[]) => [
