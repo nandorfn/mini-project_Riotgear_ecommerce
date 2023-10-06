@@ -30,6 +30,7 @@ const FormEditProduct: React.FC<Props> = ({
     productDesc: editedData?.productDesc ?? '',
     productPrice: editedData?.productPrice.toString() ?? '',
     featured: editedData?.featured ? 1 : 0,
+    reviews: editedData?.reviews
   });
   const handleInput = (e: React.SyntheticEvent) => {
     const { name, value } = (e.target as HTMLInputElement);
