@@ -61,7 +61,7 @@ const MenuFilter: React.FC = () => {
     <>
       <aside className="flex flex-col w-full bg-base-200 h-fit rounded-xl gap-3 p-3">
         <figure className="flex gap-3 justify-between">
-          <Flex gap={3} align={'iCenter'}>
+          <Flex className="gap-3" align={'iCenter'}>
             <Image src={filterIcon} alt="Filter icon" />
             <h1>Filter</h1>
           </Flex>

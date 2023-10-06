@@ -1,4 +1,3 @@
-'use client'
 import Image from 'next/image';
 import BrandLogo from '../../assets/RiotLogo.svg'
 import MenuBtn from '../../assets/MenuIcon.svg'
@@ -9,8 +8,6 @@ import Drawer from '../Drawer/Drawer';
 
 
 const NavbarStore: React.FC = () => {
-
-
   return (
     <>
       <header>

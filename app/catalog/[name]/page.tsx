@@ -28,7 +28,7 @@ const Page = async ({
         </div>
         <figure className="flex flex-col sm:flex-row w-full gap-6 px-4">
           <div className="w-full sm:w-4/6">
-            {product?.productImgLink
+            {!product?.productImgLink
               ? <ImageNotFound />
               : <Image
                 className='w-full rounded-xl'
