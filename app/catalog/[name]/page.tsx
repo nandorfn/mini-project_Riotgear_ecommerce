@@ -57,11 +57,7 @@ const Page = async ({
               content={product?.productDesc}
             />
           </div>
-          {product?.reviews
-            ? <ReviewWrap />
-            : null
-          }
-          
+            <ReviewWrap />          
         </section>
       </section>
     </>
