@@ -1,4 +1,4 @@
-import { checkboxOptionType } from "@/app/helpers/faqData";
+import { checkboxOptionType } from "@/app/helpers/dataObject";
 
 interface Props {
   data: checkboxOptionType[];

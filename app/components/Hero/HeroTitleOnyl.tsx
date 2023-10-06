@@ -1,5 +1,4 @@
 import { heroContent } from "@/app/helpers/dataObject";
-import { bebas_neue } from "@/app/utils/fonts";
 import { Heading } from "@/app/components/Container/Heading";
 
 const HeroTitleOnyl: React.FC = () => {
