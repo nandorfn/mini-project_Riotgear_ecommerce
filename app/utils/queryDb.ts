@@ -83,3 +83,16 @@ export const getPopularProducts = cache(async() => {
   
   return popularProducts;
 })
+
+export const checkUser = async (email: string, pass: string) => {
+  const user = await prisma.user.findMany({
+    where: {
+      email: email,
+    }
+  })
+  if (user) {
+    console.log(user)
+  }
+  
+  
+}
