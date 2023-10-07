@@ -23,12 +23,12 @@ const Footer: React.FC = () => {
             src={RiotLogo}
             alt='RiotGear icon'
           />
-          <Flex gap={3}>
+          <div className='flex gap-3'>
             <Image src={fbIcon} alt='Facebook icon' />
             <Image src={xIcon} alt='Instagram icon' />
             <Image src={igIcon} alt='Instagram icon' />
             <Image src={ttIcon} alt='Instagram icon' />
-          </Flex>
+          </div>
         </figure>
         <Flex 
           variant={'colToRow'} 
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
           <span>
             &copy;2023 RIOTGEAR. All Right reserved
           </span>
-          <ul className='flex flex-col md:flex-row md:gap-3'>
+          <ul className='flex flex-row flex-wrap justify-center gap-x-3'>
             {menus?.map((menu, index) =>
               <li key={index}>
                 <Link className=' hover:text-base-300' href={menu.link}>{menu.label}</Link>

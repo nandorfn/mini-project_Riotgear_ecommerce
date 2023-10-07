@@ -7,6 +7,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        login: 'disabled:bg-base-200 bg-black text-white',
         primary: 'btn-primary',
         default: 'btn-base-200 hover:bg-base-100',
         red: 'btn-error',
@@ -18,13 +19,13 @@ const buttonVariants = cva(
         rounded: 'rounded-full btn-sm p-4'
       },
       clr: {
-        black: 'bg-black',
+        black: 'bg-black text-white',
         grey: 'bg-zinc-300',
         white: 'bg-base-100',
         brown: 'bg-amber-950',
         red: 'bg-red',
         green: 'bg-green-700',
-        blue: 'bg-blue-500',
+        blue: 'bg-blue-500 text-white',
         yellow: 'bg-yellow-400',
         orange: 'bg-orange-400',
       },
