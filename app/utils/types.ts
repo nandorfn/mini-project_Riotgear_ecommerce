@@ -34,3 +34,8 @@ export const tokenSchema = z.object({
   exp: z.number(),
 })
 export type JwtSchema = z.infer<typeof tokenSchema>;
+
+export type userAvatar = {
+  username: string
+  icon: string
+}

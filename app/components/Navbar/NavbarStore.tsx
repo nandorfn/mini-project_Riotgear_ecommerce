@@ -5,9 +5,21 @@ import Menus from './Menus';
 import Link from 'next/link';
 import Avatar from '../Avatar';
 import Drawer from '../Drawer/Drawer';
+import { cookies } from 'next/headers';
+import { verifyAuth } from '@/app/utils/auth';
 
 
-const NavbarStore: React.FC = () => {
+const NavbarStore = async () => {
+  const cookieStore = cookies()
+  const token = cookieStore.get('token');
+  const user =
+  token &&
+    (await verifyAuth(token.value).catch((err) => {
+      console.log(err);
+    }))
+    
+  console.log(user)
+
   return (
     <>
       <header className='sticky top-0 z-40 bg-white'>
@@ -40,7 +52,10 @@ const NavbarStore: React.FC = () => {
                 />
               </label>
               <div className='hidden md:flex'>
-                <Avatar />
+                <Avatar 
+                  username={user?.username ?? ''}
+                  icon={""}
+                />
               </div>
             </div>
             <Drawer />

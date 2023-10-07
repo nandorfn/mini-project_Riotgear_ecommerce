@@ -1,7 +1,9 @@
 import Image from "next/image";
 import AvatarIcon from '../assets/Ellipse 1.png'
+import { userAvatar } from "../utils/types";
 
-const Avatar: React.FC = () => {
+
+const Avatar = ({username, icon}: userAvatar) => {
   return (
     <>
       <div className="flex-none z-50">
@@ -12,11 +14,11 @@ const Avatar: React.FC = () => {
                 <div className="avatar items-center gap-2">
                   <div className="w-8 rounded-full">
                     <Image
-                      src={AvatarIcon}
+                      src={icon || AvatarIcon}
                       alt="User Icon"
                     />
                   </div>
-                  <p className=" font-normal text-base">John Doe</p>
+                  <p className=" font-normal text-base">{username}</p>
                 </div>
               </summary>
               <ul className="p-2 bg-base-100 w-full">

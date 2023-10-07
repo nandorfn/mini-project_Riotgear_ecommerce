@@ -38,7 +38,7 @@ const ScrollMenuContainer: React.FC = () => {
                 />
               </button>
             </Flex>
-            <Flex clr={'base2'} rounded={'full'} className="md:ms-3 px-4 me-3 w-fit">
+            <Flex clr={'base2'} rounded={'full'} className="md:ms-3 my-[0.1rem] px-4 me-3 w-fit">
               {input &&
                 <input
                   className="me-2 rounded-full focus:outline-none ps-2 border-2"
