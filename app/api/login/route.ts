@@ -14,6 +14,11 @@ export const POST = async (req: Request) => {
     result.error.issues.forEach((issue) => {
       zodErrors = { ...zodErrors, [issue.path[0]]: issue.message }
     });
+
+    if (Object.keys(zodErrors).length > 0) {
+      return NextResponse.json({ errors: zodErrors }, { status: 400 });
+    }
+
   } else {
     const user = await prisma.user.findUnique({
       where: {
@@ -21,11 +26,23 @@ export const POST = async (req: Request) => {
       }
     })
     if (!user) {
-      zodErrors = { ...zodErrors, email: "User not found" };
+      return NextResponse.json({
+        errors: { email: "User not found" }
+      }, {
+        status: 404
+      });
     } else {
-      const checkPass = bcrypt.compareSync(result.data.password, user.password)
+      const checkPass = bcrypt.compareSync(
+        result.data.password,
+        user.password
+      )
+
       if (!checkPass) {
-        zodErrors = { ...zodErrors, password: "Invalid password" };
+        return NextResponse.json({
+          errors: { password: "Invalid password" }
+        }, {
+          status: 401
+        });
       } else {
         const token = jwt.sign({
           username: user.name,
@@ -39,9 +56,4 @@ export const POST = async (req: Request) => {
       }
     }
   }
-  return NextResponse.json(
-    Object.keys(zodErrors).length > 0
-      ? { errors: zodErrors }
-      : { success: true }
-  )
 }

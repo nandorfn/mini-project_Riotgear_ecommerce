@@ -26,29 +26,32 @@ const Page = () => {
   const onSubmit = async (data: TLoginSchema) => {
     axios.post('/api/login', data)
       .then(response => {
-        if (response.status === 200) {
-          console.log(response.data);
-        } else {
-          alert('Submitting form failed');
-        }
+        console.log(response.data);
       })
-      .catch(errors => {
-        if (errors.email) {
-          setError("email", {
-            type: "server",
-            message: errors.email,
-          });
-        } else if (errors.password) {
-          setError("password", {
-            type: "server",
-            message: errors.password,
-          });
+      .catch(error => {
+        if (error.response) {
+          const errors = error.response.data.errors;
+          if (errors.email) {
+            console.log(errors.email);
+            setError("email", {
+              type: "server",
+              message: errors.email,
+            });
+          } else if (errors.password) {
+            setError("password", {
+              type: "server",
+              message: errors.password,
+            });
+          } else {
+            alert("Something went wrong");
+          }
         } else {
-          alert("Something went wrong");
+          console.error("Something went wrong");
         }
-      })
+      });
     reset();
   };
+
 
   return (
     <>
@@ -97,8 +100,8 @@ const Page = () => {
           </Flex>
         </form>
         <Flex className="gap-1 mt-3">
-        <Text clr={'base3'}>Didn&apos;t have an account?</Text>
-        <Link className="font-medium" href={'/register'}>Register here!</Link>
+          <Text clr={'base3'}>Didn&apos;t have an account?</Text>
+          <Link className="font-medium" href={'/register'}>Register here!</Link>
         </Flex>
       </div>
     </>
