@@ -16,7 +16,7 @@ export const verifyAuth = async (token: string) => {
     
     return verified.payload as JwtSchema;
   } catch (e) {
-    throw new Error('Your token has expired');
+    throw new Error('Your token isnt valid');
   }
 }
 

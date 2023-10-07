@@ -62,3 +62,4 @@ export const createObject = (
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
