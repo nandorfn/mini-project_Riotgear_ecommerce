@@ -44,7 +44,6 @@ const FormProduct: React.FC<Props> = ({
     'Authorization': `Bearer ${token}`
   }
   
-    
   const sendData = async () => {
     const id = uuidv4();
     const productStock = parseInt(form.productStock)

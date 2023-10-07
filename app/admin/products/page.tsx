@@ -10,6 +10,7 @@ import FormProduct from "./FormProduct";
 import FormEditProduct from "./FormEditProduct";
 import { Button } from "@/app/components/Button/Button";
 import TableBody from "@/app/components/Table/TableBody";
+import { getCookie } from "cookies-next";
 
 const Page: React.FC = () => {
   const [dataProducts, setDataProducts] = useState<ProductData[]>([])
@@ -36,9 +37,17 @@ const Page: React.FC = () => {
         });
     }
   }, []);
+  
+  const token = getCookie('token');
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
 
   const handleDelete = (id: string) => {
-    axios.delete(`/api/products/${id}`)
+    axios.delete(`/api/products/${id}`, {
+      headers: headers
+    })
       .then(() => {
         const filteredProducts = [
           ...dataProducts.filter((product) =>
