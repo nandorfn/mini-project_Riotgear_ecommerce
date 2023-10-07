@@ -4,6 +4,7 @@ import { NextResponse } from "next/server"
 const prisma = new PrismaClient();
 let bcrypt = require('bcryptjs');
 import jwt from 'jsonwebtoken';
+import { cookies } from 'next/headers'
 
 export const POST = async (req: Request) => {
   const JWT_SECRET = process.env.JWT_SECRET_KEY;
@@ -50,9 +51,14 @@ export const POST = async (req: Request) => {
           role: user.role
         },
           JWT_SECRET!, {
-          expiresIn: '1h'
+          expiresIn: '24h'
         });
-        return NextResponse.json({ token }, { status: 200 });
+        cookies().set('token', token, { 
+          secure: process.env.NODE_ENV !== 'development', 
+          maxAge: 86400,
+          sameSite: 'strict'
+        })
+        return NextResponse.json({ status: 200 });
       }
     }
   }

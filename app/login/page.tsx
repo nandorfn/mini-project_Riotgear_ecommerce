@@ -8,9 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TLoginSchema, loginSchema } from "../utils/types";
 import { Text } from "../components/Container/Text";
-import { hashPass } from "../utils/utils";
-import { checkUser } from "../utils/queryDb";
-let bcrypt = require('bcryptjs');
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const {
@@ -23,10 +21,13 @@ const Page = () => {
     resolver: zodResolver(loginSchema)
   });
 
+  const router = useRouter()
   const onSubmit = async (data: TLoginSchema) => {
     axios.post('/api/login', data)
       .then(response => {
-        console.log(response.data);
+        if (response.data.status === 200) {
+          router.push('/')
+        }
       })
       .catch(error => {
         if (error.response) {
@@ -45,8 +46,6 @@ const Page = () => {
           } else {
             alert("Something went wrong");
           }
-        } else {
-          console.error("Something went wrong");
         }
       });
     reset();
