@@ -5,9 +5,9 @@ import { Button } from './Button';
 const PurchaseBtn: React.FC = () => {
   return (
     <>
-      <div className="flex w-full justify-between flex-wrap gap-3 sticky sm:absolute sm:bottom-0">
-        <Button variant={'red'} className='w-[70%]'>Buy Noy</Button>
-        <Button className="w-[26%]">
+      <div className="flex flex-row w-full justify-between gap-3 sticky sm:absolute sm:bottom-0">
+        <Button variant={'red'} className='md:w-[70%]'>Add to cart</Button>
+        <Button className="md:w-[26%]">
           <Image
             src={wishlistIcon}
             alt="Wishlist Icon" />

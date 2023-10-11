@@ -93,6 +93,15 @@ export const checkUser = async (email: string, pass: string) => {
   if (user) {
     console.log(user)
   }
+}
+
+export const getRecomendProduct = async (category: string) => {
+  const product = await prisma.product.findMany({
+    where: {
+      productSubCategory: category
+    },
+    take: 4
+  })
   
-  
+  return product;
 }

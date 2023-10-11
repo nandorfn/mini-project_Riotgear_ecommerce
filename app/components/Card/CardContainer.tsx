@@ -1,16 +1,15 @@
-import { getItem } from "@/app/utils/queryDb";
 import ProductCard from "./ProductCard";
+import { ProductData } from "@/app/utils/utils";
 
 export interface QueryProps {
-  query: {[key: string]: string | string[] | undefined;}
+  data: ProductData[];
 }
 
-const CardContainer: React.FC<QueryProps> = async ({ query }) => {
-  const products = await getItem( query );
+const CardContainer: React.FC<QueryProps> = async ({ data }) => {
     return (
         <>
-          <section className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 ms-3 mt-3">
-            {products?.map((product) =>
+          <section className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:mt-3">
+            {data?.map((product) =>
               <article key={product.id}>
                 <ProductCard 
                   productId={product.productId}

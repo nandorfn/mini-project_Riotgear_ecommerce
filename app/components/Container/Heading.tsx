@@ -7,8 +7,12 @@ const headingVariants = cva(
   'text-base',
   {
   variants: {
+    variant: {
+      pName: 'text-[2rem] font-medium lg:text-4xl',
+    },
     fs: {
       lg: 'text-lg',
+      xl: 'text-xl',
       xl2: 'text-2xl',
       xl3: 'text-3xl',
       xl4: 'text-4xl',
@@ -38,6 +42,7 @@ interface HeadingProps extends AllHTMLAttributes<HTMLHeadingElement>,
 VariantProps<typeof headingVariants> {}
 
 const Heading: React.FC<HeadingProps> = ({
+  variant,
   fs,
   align,
   clr,
@@ -47,7 +52,7 @@ const Heading: React.FC<HeadingProps> = ({
 }) => {
     return (
         <>
-          <h1 className={cn(headingVariants({fs, align, clr, bold, className}))} {...props}></h1>
+          <h1 className={cn(headingVariants({variant, fs, align, clr, bold, className}))} {...props}></h1>
         </>
     );
 };

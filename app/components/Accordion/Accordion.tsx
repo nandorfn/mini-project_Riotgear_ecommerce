@@ -8,7 +8,7 @@ const Accordion: React.FC<AccordionProps> = ({ label, content }) => {
     <>
       <div className="collapse bg-base-200">
         <input type="checkbox" />
-        <div className="collapse-title md:text-xl font-medium">
+        <div className="collapse-title text-base md:text-xl font-medium">
           {label}
         </div>
         <div className="collapse-content">

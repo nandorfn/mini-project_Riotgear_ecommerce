@@ -9,6 +9,7 @@ export const hashPass = (unHashPass: string) => {
 }
 
 export type ProductData = {
+  id: number;
   productId: string;
   productName: string;
   productMainCategory: string;

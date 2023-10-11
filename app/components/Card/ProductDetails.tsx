@@ -1,8 +1,7 @@
 import PurchaseBtn from "../Button/PurchaseBtn";
-import ColorChart from "../Filter/ColorChart";
 import { Heading } from '@/app/components/Container/Heading'
 import List from "../List";
-import { sizeChart } from "@/app/helpers/dataObject";
+import { quantityData, sizeChart } from "@/app/helpers/dataObject";
 import { Button } from "../Button/Button";
 import { Flex } from "../Container/Flex";
 
@@ -24,13 +23,12 @@ const ProductDetails: React.FC<Props> = ({
 
   return (
     <>
-      <Flex variant={'col'} align={'between'} className="h-[20%] text">
-        <Heading fs={'xl3'}>{name}</Heading>
+      <Flex align={'between'} className="min-h-[20%] text flex-col-reverse md:flex-col">
+        <Heading variant={'pName'}>{name}</Heading>
         <Heading fs={'xl2'} bold={'normal'}>{`Rp${formattedPrice}`}</Heading>
       </Flex>
-
       <div className="border-t"></div>
-
+      <div className="hidden md:flex flex-col gap-3">
       <h4 className="font-medium text-xl">Size</h4>
       <List
         data={sizeChart}
@@ -43,14 +41,19 @@ const ProductDetails: React.FC<Props> = ({
               defaultValue={sizes ?? ''}
               size={'sm'}
               font={'normal'}
-              variant={isSelected ? 'checked' : 'zinc'}>{label}
+              variant={isSelected ? 'checked' : 'size'}>{label}
             </Button>
           )
         }}
       />
-
-      {/* <Select /> */}
-      <PurchaseBtn />
+      <h4 className="font-medium text-xl">Quantity</h4>
+      <select className="px-4 py-2 rounded-md w-full max-w-[5.4rem]" name="selectQuantity">
+        {quantityData?.map((data) =>
+          <option key={data.id} value={data.value}>{data.label}</option>
+        )}
+      </select>
+        <PurchaseBtn />
+      </div>
     </>
   );
 };

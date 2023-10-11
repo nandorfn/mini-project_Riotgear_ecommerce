@@ -6,7 +6,9 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <div className="max-w-6xl mx-auto">
         <NavbarStore />
-        {children}
+        <div className="px-4 flex flex-col gap-[1.12rem]">
+          {children}
+        </div>
       </div>
 
       <Footer />

@@ -7,6 +7,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        size: 'bg-[#D9D9D9] text-[#3E3E3E] w-[2.5rem] text-[0.875rem]',
         login: 'disabled:bg-base-200 bg-black text-white',
         primary: 'btn-primary',
         default: 'btn-base-200 hover:bg-base-100',
@@ -15,7 +16,7 @@ const buttonVariants = cva(
         info: 'btn-info capitalize',
         grey: 'btn-base-300',
         zinc: 'bg-[#D9D9D9]',
-        checked: 'bg-accent',
+        checked: 'bg-accent w-[2.5rem]',
         rounded: 'rounded-full btn-sm p-4'
       },
       clr: {

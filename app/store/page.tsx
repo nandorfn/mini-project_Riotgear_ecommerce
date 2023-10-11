@@ -2,6 +2,7 @@ import CardContainer from "../components/Card/CardContainer";
 import { Flex } from "../components/Container/Flex";
 import MenuFilter from "../components/Menu/MenuFillter";
 import ScrollMenuContainer from "../components/Menu/ScrollMenuContainer";
+import { getItem } from "../utils/queryDb";
 
 const page = async ({
   params,
@@ -10,7 +11,7 @@ const page = async ({
   params: { slug: string }
   searchParams: { [key: string]: string | string[] | undefined }
 }) => {
-
+  const products = await getItem( searchParams );
 
   return (
     <>
@@ -23,7 +24,7 @@ const page = async ({
             <ScrollMenuContainer />
           </div>
           <CardContainer
-            query={searchParams}
+            data={products}
           />
         </div>
       </Flex>
