@@ -18,8 +18,6 @@ const NavbarStore = async () => {
       console.log(err);
     }))
     
-  console.log(user)
-
   return (
     <>
       <header className='sticky top-0 z-40 bg-white'>

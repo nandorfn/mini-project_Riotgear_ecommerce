@@ -3,7 +3,6 @@ import filterIcon from '../../assets/icon/list.svg'
 import { useState } from "react";
 import ScrollMenu from "./ScrollMenu";
 import { Flex } from "../Container/Flex";
-import { Button } from "../Button/Button";
 import MenuFilter from "./MenuFillter";
 import Image from 'next/image';
 
@@ -28,8 +27,8 @@ const ScrollMenuContainer: React.FC = () => {
       <section className="flex ">
         <div className="mx-auto overflow-x-hidden">
           <Flex variant={'row'} className="whitespace-nowrap">
-            <Flex align={'center'} className="max-w-[4em] ms-3 md:ms-0 md:hidden">
-              <button className='bg-base-200 p-2 px-4 rounded-xl' onClick={handleMenu}>
+            <Flex align={'center'} className="max-w-[4em] md:ms-0 md:hidden">
+              <button className='bg-base-200 p-[0.4rem] px-4 rounded-xl' onClick={handleMenu}>
                 <Image
                   src={filterIcon}
                   alt='filter icon'
@@ -38,7 +37,7 @@ const ScrollMenuContainer: React.FC = () => {
                 />
               </button>
             </Flex>
-            <Flex clr={'base2'} rounded={'full'} className="md:ms-3 my-[0.1rem] px-4 me-3 w-fit">
+            <Flex clr={'base2'} rounded={'full'} className="my-[0.1rem] px-4 me-3 w-fit">
               {input &&
                 <input
                   className="me-2 rounded-full focus:outline-none ps-2 border-2"

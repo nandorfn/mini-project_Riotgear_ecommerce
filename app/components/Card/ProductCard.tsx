@@ -23,7 +23,7 @@ const ProductCard: React.FC<Product> = ({
   return (
     <>
       <Link href={`/catalog/${productId}`}>
-        <div className="card w-fit min-h-full shadow-sm md:shadow-md bg-base-100 hover:bg-base-200 cursor-pointer">
+        <div className="card w-fit min-h-full shadow-sm bg-base-100 hover:bg-base-200 cursor-pointer">
         
           <figure className='h-[60%]'>
             <Image

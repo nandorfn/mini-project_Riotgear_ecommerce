@@ -59,7 +59,7 @@ const MenuFilter: React.FC = () => {
 
   return (
     <>
-      <aside className="flex flex-col w-full bg-base-200 h-fit rounded-r-xl md:rounded-xl gap-3 p-4 md:p-3">
+      <aside className="sticky bg-base-200 rounded-xl p-5">
         <figure className="flex gap-3 justify-between">
           <Flex className="gap-3" align={'iCenter'}>
             <Image src={filterIcon} alt="Filter icon" />
@@ -92,6 +92,8 @@ const MenuFilter: React.FC = () => {
           />
         </label>
         
+        <label className="font-medium">
+          Size
         <List
           data={sizeChart}
           renderItem={(size) => {
@@ -108,7 +110,8 @@ const MenuFilter: React.FC = () => {
               </Button>
             )
           }}
-        />
+          />
+          </label>
         <ColorChart
           value={color}
           handleInput={handleInput}
