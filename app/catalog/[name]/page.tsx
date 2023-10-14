@@ -7,6 +7,7 @@ import Link from "next/link";
 import ReviewWrap from "@/app/components/Review/ReviewWrap";
 import CardContainer from "@/app/components/Card/CardContainer";
 import FloatingNav from "@/app/components/Menu/FloatingNav";
+import { Heading } from "@/app/components/Container/Heading";
 
 const Page = async ({
   params: { name },
@@ -57,9 +58,9 @@ const Page = async ({
         />
       </div>
       <ReviewWrap />
-      <h3 className="md:mt-3 text-base font-medium md:text-xl">
+      <Heading variant={'five'}>
         Recomended Stuff
-      </h3>
+      </Heading>
       <div className="flex breadcrumbs gap-3">
         <CardContainer
           data={recommendProduct}

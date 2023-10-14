@@ -1,10 +1,9 @@
 import PurchaseBtn from "../Button/PurchaseBtn";
 import { Heading } from '@/app/components/Container/Heading'
 import List from "../List";
-import { quantityData, sizeChart } from "@/app/helpers/dataObject";
+import { sizeChart } from "@/app/helpers/dataObject";
 import { Button } from "../Button/Button";
 import { Flex } from "../Container/Flex";
-import CartModal from "../Modal/CartModal";
 
 interface Props {
   name?: string | null;
@@ -31,6 +30,7 @@ const ProductDetails: React.FC<Props> = ({
       <div className="hidden md:flex flex-col gap-3">
         <h4 className="font-medium text-xl">Size</h4>
         <List
+          name="sizeChartProduct"
           data={sizeChart}
           renderItem={(size) => {
             const { label, value } = size;
@@ -46,21 +46,9 @@ const ProductDetails: React.FC<Props> = ({
             )
           }}
         />
-        <h4 className="font-medium text-xl">Quantity</h4>
-        <select className="px-4 py-2 rounded-md w-full max-w-[5.4rem]" name="selectQuantity">
-          {quantityData?.map((data) =>
-            <option key={data.id} value={data.value}>{data.label}</option>
-          )}
-        </select>
         <PurchaseBtn />
       </div>
-      {/* <CartModal
-        title="1 ITEMS ADDED TO YOUR CART"
-        btnLeft="VIEW CHART"
-        btnRight="CONTINUE SHOPPING">
-        <Heading variant={'five'}>SUBTOTAL | </Heading>
-        <Heading variant={'five'} bold={'normal'}>1 item(s)</Heading>
-      </CartModal> */}
+
     </>
   );
 };

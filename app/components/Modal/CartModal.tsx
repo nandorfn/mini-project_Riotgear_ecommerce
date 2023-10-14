@@ -7,14 +7,18 @@ type ModalProps = {
   title: string,
   btnLeft: string,
   btnRight: string,
-  children: React.ReactNode
+  children: React.ReactNode,
+  modal: boolean,
+  setModal: (state: boolean) => void,
 }
 
 const CartModal = ({
   title,
   btnLeft,
   btnRight,
-  children
+  children,
+  modal,
+  setModal
 }: ModalProps) => {
   return (
     <>
@@ -26,7 +30,7 @@ const CartModal = ({
           </Flex>
           <Flex variant={'row'} className="gap-5 justify-between">
             <Button size={'half'} variant={'black'}>{btnLeft}</Button>
-            <Button size={'half'} variant={'white'}>{btnRight}</Button>
+            <Button onClick={() => setModal(!modal)} size={'half'} variant={'white'}>{btnRight}</Button>
           </Flex>
         </Flex>
       </Transparent>
