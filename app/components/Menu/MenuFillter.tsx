@@ -59,11 +59,11 @@ const MenuFilter: React.FC = () => {
 
   return (
     <>
-      <aside className="sticky bg-base-200 rounded-xl p-5">
+      <aside className="flex flex-col gap-5 bg-base-200 rounded-xl p-5">
         <figure className="flex gap-3 justify-between">
           <Flex className="gap-3" align={'iCenter'}>
             <Image src={filterIcon} alt="Filter icon" />
-            <h1>Filter</h1>
+            <h1 className="font-medium text-lg">Filter</h1>
           </Flex>
           {queryExist &&
             <Button 
@@ -82,7 +82,7 @@ const MenuFilter: React.FC = () => {
           optionValue={sortByOptions}
           handleInput={handleInput}
         />
-        <label>
+        <label className="font-medium">
           Gender
           <Checkbox
             value={gender}
@@ -116,7 +116,7 @@ const MenuFilter: React.FC = () => {
           value={color}
           handleInput={handleInput}
         />
-        <label>
+        <label className="font-medium">
           Price
           <Checkbox
             data={priceRange}
