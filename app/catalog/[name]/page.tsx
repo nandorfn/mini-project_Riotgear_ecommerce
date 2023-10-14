@@ -69,6 +69,7 @@ const Page = async ({
       <div className="fixed md:hidden bottom-0 start-0">
         <FloatingNav />
       </div>
+      
     </>
   );
 };

@@ -68,7 +68,7 @@ const MenuFilter: React.FC = () => {
           {queryExist &&
             <Button 
               onClick={deleteUrlState} 
-              variant={'zinc'} 
+              clr={'zinc'} 
               size={'sm'}
               font={'med'}>Clear Filter
             </Button>
@@ -104,7 +104,7 @@ const MenuFilter: React.FC = () => {
                 value={value}
                 size={'sm'}
                 font={'normal'}
-                variant={isSelected ? 'checked' : 'zinc'}>{label}
+                variant={isSelected ? 'checked' : 'sizeBtn'}>{label}
               </Button>
             )
           }}

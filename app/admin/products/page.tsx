@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import Input from "@/app/components/Form/Input";
-import Table from "@/app/components/Table/Table";
 import { headTableProduct } from "@/app/helpers/dataObject";
 import { ProductData } from "@/app/utils/utils";
 import axios from "axios";
@@ -100,11 +99,11 @@ const Page: React.FC = () => {
             placeholder="Find products"
           />
           <Button
-            variant={'info'} >Search Product
+            variant={'info'} size={'base'}>Search Product
           </Button>
           <Button
             onClick={handleAddModal}
-            variant={'success'} >Add Product
+            variant={'success'} size={'base'} >Add Product
           </Button>
         </div>
         <div className="overflow-x-auto p-1 mt-3">

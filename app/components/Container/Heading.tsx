@@ -9,6 +9,11 @@ const headingVariants = cva(
   variants: {
     variant: {
       pName: 'text-[2rem] font-medium lg:text-4xl',
+      first: 'text-[4rem]',
+      second: 'text-[3.2rem]',
+      third: 'text-[2.625rem]',
+      fourth: 'text-[2.25rem]',
+      five: 'text-[1.25rem]',
     },
     fs: {
       lg: 'text-lg',

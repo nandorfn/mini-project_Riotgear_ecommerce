@@ -7,16 +7,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        size: 'bg-[#D9D9D9] text-[#3E3E3E] w-[2.5rem] text-[0.875rem]',
+        black: 'bg-black text-white capitalize rounded-md',
+        white: 'bg-white text-black capitalize rounded-md border-2 border-black',
+        info: 'bg-blue-500 capitalize text-white hover:bg-blue-700',
+        success: 'btn-success capitalize text-white',
+        checked: 'bg-accent w-[2.5rem]',
+        sizeBtn: 'bg-[#D9D9D9] text-[#3E3E3E] w-[2.5rem] text-[0.875rem]',
+        red: 'btn-error',
+      // OLD
         login: 'disabled:bg-base-200 bg-black text-white',
         primary: 'btn-primary',
         default: 'btn-base-200 hover:bg-base-100',
-        red: 'btn-error',
-        success: 'btn-success capitalize',
-        info: 'btn-info capitalize',
-        grey: 'btn-base-300',
-        zinc: 'bg-[#D9D9D9]',
-        checked: 'bg-accent w-[2.5rem]',
         rounded: 'rounded-full btn-sm p-4'
       },
       clr: {
@@ -25,6 +26,7 @@ const buttonVariants = cva(
         white: 'bg-base-100',
         brown: 'bg-amber-950',
         red: 'bg-red',
+        zinc: 'bg-[#D9D9D9]',
         green: 'bg-green-700',
         blue: 'bg-blue-500 text-white',
         yellow: 'bg-yellow-400',
@@ -32,7 +34,7 @@ const buttonVariants = cva(
       },
       size: {
         sm: 'btn-sm',
-        base: 'btn-base',
+        base: 'w-36',
         lg: 'btn-lg',
         wide: 'btn-wide',
         full: 'w-full',
