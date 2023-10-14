@@ -12,7 +12,7 @@ const buttonVariants = cva(
         info: 'bg-blue-500 capitalize text-white hover:bg-blue-700',
         success: 'btn-success capitalize text-white',
         checked: 'bg-accent w-[2.5rem]',
-        sizeBtn: 'bg-[#D9D9D9] text-[#3E3E3E] w-[2.5rem] text-[0.875rem]',
+        sizeBtn: 'bg-[#D9D9D9] text-[#3E3E3E] border-0 w-[2.5rem] text-[0.875rem]',
         red: 'btn-error',
       // OLD
         login: 'disabled:bg-base-200 bg-black text-white',

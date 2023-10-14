@@ -77,7 +77,7 @@ const MenuFilter: React.FC = () => {
         <OptionInput
           name="sort"
           label="Sort By"
-          addClass="select-sm mt-3"
+          addClass="select-sm mt-2"
           value={sortBy}
           optionValue={sortByOptions}
           handleInput={handleInput}
@@ -88,13 +88,14 @@ const MenuFilter: React.FC = () => {
             value={gender}
             handleInput={handleInput}
             data={genderOption}
-            addClass="flex flex-col gap-2 mt-3"
+            addClass="flex flex-col gap-2 mt-2"
           />
         </label>
         
-        <label className="font-medium">
-          Size
+        <div className="flex flex-col gap-2">
+        <label htmlFor="sizeChart" className="font-medium ">Size</label>
         <List
+          name="sizeChart"
           data={sizeChart}
           renderItem={(size) => {
             const { label, value } = size;
@@ -111,7 +112,7 @@ const MenuFilter: React.FC = () => {
             )
           }}
           />
-          </label>
+          </div>
         <ColorChart
           value={color}
           handleInput={handleInput}
@@ -120,7 +121,7 @@ const MenuFilter: React.FC = () => {
           Price
           <Checkbox
             data={priceRange}
-            addClass="flex flex-col gap-2"
+            addClass="flex flex-col gap-2 mt-2"
             handleInput={handleInput}
             value={price}
           />

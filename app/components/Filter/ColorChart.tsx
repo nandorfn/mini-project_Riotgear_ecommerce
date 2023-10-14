@@ -18,7 +18,7 @@ const ColorChart: React.FC<Props> = ({ handleInput, value }) => {
   return (
     <>
       <div>
-        <label className="font-medium scroll-mb-3">Color
+        <label className="font-medium mb-3">Color
           <ul className="grid grid-cols-3 text-center">
             {color?.map((item, index) =>
               <li key={index}>
