@@ -95,10 +95,13 @@ export const checkUser = async (email: string, pass: string) => {
   }
 }
 
-export const getRecomendProduct = async (category: string) => {
+export const getRecomendProduct = async (category: string, existId: string) => {
   const product = await prisma.product.findMany({
     where: {
-      productSubCategory: category
+      productSubCategory: category,
+      NOT: {
+        productId: existId
+      }
     },
     take: 4
   })
@@ -129,5 +132,5 @@ export const getUserProductCart = async (userId: string) => {
     })
   };
     
-  return combinedData;
+  return combinedData.userCart;
 }

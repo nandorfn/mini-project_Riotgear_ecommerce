@@ -13,6 +13,7 @@ const headingVariants = cva(
       second: 'text-[3.2rem]',
       third: 'text-[2.625rem]',
       fourth: 'text-[2.25rem]',
+      fourthRwd: 'text-base md:text-[2.25rem]',
       five: 'text-[1.25rem]',
     },
     fs: {

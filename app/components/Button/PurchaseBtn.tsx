@@ -5,7 +5,6 @@ import { Button } from './Button';
 import { useState } from 'react';
 import CartModal from '../Modal/CartModal';
 import { Heading } from '../Container/Heading';
-import { quantityData } from '@/app/helpers/dataObject';
 import { postData } from '@/app/utils/api';
 
 interface PurchaseBtn {
@@ -18,21 +17,21 @@ const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id, stock }) => {
   const [modal, setModal] = useState(false);
   const [quantity, setQuantity] = useState('1');
   const data = {
-    userId: user.userId,
+    userId: user?.userId,
     productId: id,
     quantity
   }
   const query = `/api/user/${user.userId}/cart`
-
   const handlePostCart = async (e: React.SyntheticEvent) => {
     setModal(!modal)
     e.preventDefault();
     await postData(query, data)
   }
 
-  const options = []
+  const options = [];
   if (stock) {
-    for (let i = 0; i < stock; i++) {
+    const loopCount = Math.min(stock, 10);
+    for (let i = 0; i < loopCount; i++) {
       options.push(i + 1);
     }
   }
