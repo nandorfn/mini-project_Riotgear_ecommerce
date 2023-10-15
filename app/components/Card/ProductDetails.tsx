@@ -7,7 +7,6 @@ import { Flex } from "../Container/Flex";
 import { cookies } from "next/headers";
 import { verifyAuth } from "@/app/utils/auth";
 import { JwtSchema } from "@/app/utils/types";
-import Skeleton from "react-loading-skeleton";
 
 interface Props {
   name?: string | null;
@@ -15,13 +14,15 @@ interface Props {
   price?: number | null;
   sizes?: string | null;
   color?: string;
+  stock?: number;
 }
 
 const ProductDetails: React.FC<Props> = async ({
   name,
   price,
   sizes,
-  id
+  id,
+  stock
 }) => {
   const formattedPrice = price?.toLocaleString('id-ID')
   const cookieStore = cookies()
@@ -35,7 +36,7 @@ const ProductDetails: React.FC<Props> = async ({
   return (
     <>
       <Flex align={'between'} className="min-h-[20%] text flex-col-reverse md:flex-col">
-        <Heading variant={'pName'}>{name || <Skeleton />}</Heading>
+        <Heading variant={'pName'}>{name}</Heading>
         <Heading fs={'xl2'} bold={'normal'}>{`Rp${formattedPrice}`}</Heading>
       </Flex>
       <div className="border-t"></div>
@@ -61,6 +62,7 @@ const ProductDetails: React.FC<Props> = async ({
         <PurchaseBtn
           user={user}
           id={id}
+          stock={stock}
         />
       </div>
 

@@ -14,7 +14,7 @@ const Page = async ({
 }: {
   params: { name: string }
 }) => {
-  const product = await getProduct(name);
+  const product: any = await getProduct(name);
   const recommendProduct = await getRecomendProduct(product?.productSubCategory ?? '')
 
 
@@ -49,6 +49,7 @@ const Page = async ({
             sizes={product?.productSize}
             name={product?.productName}
             price={product?.productPrice}
+            stock={product?.productStock}
           />
         </article>
       </figure>

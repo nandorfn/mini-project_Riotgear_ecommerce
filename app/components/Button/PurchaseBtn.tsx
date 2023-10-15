@@ -11,9 +11,10 @@ import { postData } from '@/app/utils/api';
 interface PurchaseBtn {
   user: any
   id: string | null | undefined
+  stock: number | undefined
 }
 
-const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id }) => {
+const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id, stock }) => {
   const [modal, setModal] = useState(false);
   const [quantity, setQuantity] = useState('1');
   const data = {
@@ -29,15 +30,21 @@ const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id }) => {
     await postData(query, data)
   }
 
+  const options = []
+  if (stock) {
+    for (let i = 0; i < stock; i++) {
+      options.push(i + 1);
+    }
+  }
+
   return (
     <>
       <h4 className="font-medium text-xl">Quantity</h4>
       <select onChange={(e) => setQuantity(e.target.value)} className="px-4 py-2 rounded-md w-full max-w-[5.4rem]" name="selectQuantity">
-        {quantityData?.map((data) =>
-          <option key={data.id} value={data.value}>{data.label}</option>
+        {options?.map((data) =>
+          <option key={data} value={data}>{data}</option>
         )}
       </select>
-
       <div className="flex flex-row w-full justify-between gap-3 sticky sm:absolute sm:bottom-0">
         <Button onClick={handlePostCart} variant={'red'} className='md:w-[70%]'>Add to cart</Button>
         <Button className="md:w-[26%]">
