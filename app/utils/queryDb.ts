@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { cache } from 'react';
+import { cache, use } from 'react';
 export type { Product } from '@prisma/client'
 const prisma = new PrismaClient;
 
@@ -104,4 +104,30 @@ export const getRecomendProduct = async (category: string) => {
   })
   
   return product;
+}
+
+export const getUserProductCart = async (userId: string) => {
+  const userCart = await prisma.cart.findMany({
+    where: {
+      userId: userId
+    }
+  })
+  
+  const products: any[] = [];
+
+  for (const cartItem of userCart) {
+    const product = await getProduct(cartItem.productId);
+    products.push(product);
+  }
+  const combinedData = {
+    userCart: userCart.map(cartItem => {
+      const product = products.find(productItem => productItem.productId === cartItem.productId);
+      return {
+        ...cartItem,
+        productInfo: product
+      };
+    })
+  };
+  
+  return combinedData;
 }

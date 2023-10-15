@@ -6,10 +6,28 @@ import { useState } from 'react';
 import CartModal from '../Modal/CartModal';
 import { Heading } from '../Container/Heading';
 import { quantityData } from '@/app/helpers/dataObject';
+import { postData } from '@/app/utils/api';
 
-const PurchaseBtn: React.FC = () => {
+interface PurchaseBtn {
+  user: any
+  id: string | null | undefined
+}
+
+const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id }) => {
   const [modal, setModal] = useState(false);
   const [quantity, setQuantity] = useState('1');
+  const data = {
+    userId: user.userId,
+    productId: id,
+    quantity
+  }
+  const query = `/api/user/${user.userId}/cart`
+
+  const handlePostCart = async (e: React.SyntheticEvent) => {
+    setModal(!modal)
+    e.preventDefault();
+    await postData(query, data)
+  }
 
   return (
     <>
@@ -19,9 +37,9 @@ const PurchaseBtn: React.FC = () => {
           <option key={data.id} value={data.value}>{data.label}</option>
         )}
       </select>
-      
+
       <div className="flex flex-row w-full justify-between gap-3 sticky sm:absolute sm:bottom-0">
-        <Button onClick={() => setModal(!modal)} variant={'red'} className='md:w-[70%]'>Add to cart</Button>
+        <Button onClick={handlePostCart} variant={'red'} className='md:w-[70%]'>Add to cart</Button>
         <Button className="md:w-[26%]">
           <Image
             src={wishlistIcon}

@@ -22,7 +22,7 @@ const ProductCard: React.FC<Product> = ({
   const price = productPrice.toLocaleString('id-ID');
   return (
     <>
-      <Link href={`/catalog/${productId}`}>
+      <Link href={`/store/catalog/${productId}`}>
         <div className="card w-fit min-h-full shadow-sm bg-base-100 hover:bg-base-200 cursor-pointer">
         
           <figure className='h-[60%]'>

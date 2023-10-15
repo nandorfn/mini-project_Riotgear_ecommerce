@@ -14,10 +14,14 @@ export default function Home() {
         img={HeroImgDesktop}
       />
       <main className='max-w-6xl mx-auto'>
-        <ScrollMenuContainer />
+        <div className='ms-4'>
+          <ScrollMenuContainer />
+        </div>
         <Body />
       </main>
-      <Footer />
+      <div className='max-w-6xl mx-auto'>
+        <Footer />
+      </div>
     </>
   )
 }

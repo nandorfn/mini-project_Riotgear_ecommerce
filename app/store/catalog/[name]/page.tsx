@@ -20,6 +20,7 @@ const Page = async ({
 
   return (
     <>
+      <main className="px-3">
       <div className="text-base breadcrumbs">
         <ul>
           <li><Link href={'/'}>RIOTGEAR</Link></li>
@@ -43,6 +44,7 @@ const Page = async ({
         </div>
         <article className="md:w-2/6 sm:flex flex-col gap-3 relative">
           <ProductDetails
+            id={product?.productId}
             color={product?.productColor}
             sizes={product?.productSize}
             name={product?.productName}
@@ -70,6 +72,7 @@ const Page = async ({
       <div className="fixed md:hidden bottom-0 start-0">
         <FloatingNav />
       </div>
+      </main>
       
     </>
   );
