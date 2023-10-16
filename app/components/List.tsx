@@ -4,13 +4,13 @@ import { categoryOption } from '../helpers/dataObject';
 interface Props {
   data: categoryOption[];
   renderItem: (item: any) => React.ReactNode;
+  name: string;
 }
 
-const List: React.FC<Props> = ({ renderItem, data }) => {
+const List: React.FC<Props> = ({ renderItem, data, name }) => {
   return (
     <>
-      <h4 className="font-medium mb-3">Size</h4>
-      <ul className="flex gap-3 flex-wrap">
+      <ul id={name} className="flex gap-3 flex-wrap ">
         {data?.map((item, index: number) => (
           <li key={index}>
             {renderItem(item)}

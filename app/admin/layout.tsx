@@ -11,7 +11,10 @@ const LayoutAdmin = ({
       <SideBar>
         <div className=" justify-between hidden lg:flex">
           <h1 className="text-4xl">Dashboard Overview</h1>
-          <Avatar />
+          <Avatar 
+            username="User"
+            icon=""
+          />
         </div>
         {children}
       </SideBar>

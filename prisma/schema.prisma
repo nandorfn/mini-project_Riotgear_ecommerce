@@ -7,8 +7,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+  url = env("DATABASE_URL")
+  // directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Product {
@@ -29,18 +29,35 @@ model Product {
   updatedAt           DateTime @updatedAt
   featured            Boolean @default(false)
   reviews             Review[]
+  cart                Cart[]
 }
 
 model User {
   id                  Int      @id @default(autoincrement())
   userId              String    @unique
   name                String
+  email               String  @unique
   password            String
+  salt                String
   avatar              String
+  role                String  @default("user")
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
   reviews             Review[]
+  cart                Cart[]
 }
+
+model Cart {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  productId   String
+  quantity    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [userId])
+  product     Product  @relation(fields: [productId], references: [productId])
+}
+
 
 model Review {
   id                  Int      @id @default(autoincrement())

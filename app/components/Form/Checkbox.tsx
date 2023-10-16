@@ -18,7 +18,7 @@ const Checkbox: React.FC<Props> = ({
     <>
       <div className={`${addClass} form-control`}>
         {data?.map((item: any, index: number) =>
-          <label className="flex gap-3 cursor-pointer items-center" key={index} htmlFor={item.name}>
+          <label className="flex gap-3 cursor-pointer items-center font-normal" key={index} htmlFor={item.name}>
             <input
               className={`radio radio-sm ${item.name === 'gender' ? 'rounded-md' : ''}`}
               type="radio"

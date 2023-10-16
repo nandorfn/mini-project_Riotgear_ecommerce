@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { ProductData } from '@/app/utils/utils';
 import Modal from '@/app/components/Modal/Modal';
-interface Props {
+import { getCookie } from 'cookies-next';interface Props {
   setDataProducts: React.Dispatch<React.SetStateAction<any>>
   handleModal: () => void;
 }
@@ -37,7 +37,13 @@ const FormProduct: React.FC<Props> = ({
       [name]: value
     })
   }
-    
+  
+  const token = getCookie('token');
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
+  
   const sendData = async () => {
     const id = uuidv4();
     const productStock = parseInt(form.productStock)
@@ -55,7 +61,8 @@ const FormProduct: React.FC<Props> = ({
       productDesc: form.productDesc,
       productPrice: productPrice,
       featured: form.featured !== 1,
-
+    }, {
+      headers: headers
     })
     .then(response => {
       setDataProducts((prevState: ProductData[]) => [

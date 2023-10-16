@@ -2,6 +2,7 @@
 import Modal from "@/app/components/Modal/Modal";
 import { ProductData, productFormState } from "@/app/utils/utils";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 import { useState } from "react";
 
 interface Props {
@@ -30,7 +31,6 @@ const FormEditProduct: React.FC<Props> = ({
     productDesc: editedData?.productDesc ?? '',
     productPrice: editedData?.productPrice.toString() ?? '',
     featured: editedData?.featured ? 1 : 0,
-    reviews: editedData?.reviews
   });
   const handleInput = (e: React.SyntheticEvent) => {
     const { name, value } = (e.target as HTMLInputElement);
@@ -40,6 +40,12 @@ const FormEditProduct: React.FC<Props> = ({
     })
   }
 
+  const token = getCookie('token');
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
+
   const editData = async () => {
     const updatedProduct = {
       ...product,
@@ -47,7 +53,9 @@ const FormEditProduct: React.FC<Props> = ({
       productStock: parseInt(product.productStock),
       productPrice: parseFloat(product.productPrice),
     };
-    axios.patch(`/api/products/${editedData?.productId}`, updatedProduct)
+    axios.patch(`/api/products/${editedData?.productId}`, updatedProduct, {
+      headers: headers
+    })
       .then(response => {
         const indexData = dataProducts.findIndex((product) =>
           product.productId === response.data.productId

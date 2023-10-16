@@ -59,16 +59,16 @@ const MenuFilter: React.FC = () => {
 
   return (
     <>
-      <aside className="flex flex-col w-full bg-base-200 h-fit rounded-xl gap-3 p-3">
+      <aside className="flex flex-col gap-5 bg-base-200 rounded-xl p-5">
         <figure className="flex gap-3 justify-between">
           <Flex className="gap-3" align={'iCenter'}>
             <Image src={filterIcon} alt="Filter icon" />
-            <h1>Filter</h1>
+            <h1 className="font-medium text-lg">Filter</h1>
           </Flex>
           {queryExist &&
             <Button 
               onClick={deleteUrlState} 
-              variant={'zinc'} 
+              clr={'zinc'} 
               size={'sm'}
               font={'med'}>Clear Filter
             </Button>
@@ -77,22 +77,25 @@ const MenuFilter: React.FC = () => {
         <OptionInput
           name="sort"
           label="Sort By"
-          addClass="select-sm mt-3"
+          addClass="select-sm mt-2"
           value={sortBy}
           optionValue={sortByOptions}
           handleInput={handleInput}
         />
-        <label>
+        <label className="font-medium">
           Gender
           <Checkbox
             value={gender}
             handleInput={handleInput}
             data={genderOption}
-            addClass="flex flex-col gap-2 mt-3"
+            addClass="flex flex-col gap-2 mt-2"
           />
         </label>
         
+        <div className="flex flex-col gap-2">
+        <label htmlFor="sizeChart" className="font-medium ">Size</label>
         <List
+          name="sizeChart"
           data={sizeChart}
           renderItem={(size) => {
             const { label, value } = size;
@@ -104,20 +107,21 @@ const MenuFilter: React.FC = () => {
                 value={value}
                 size={'sm'}
                 font={'normal'}
-                variant={isSelected ? 'checked' : 'zinc'}>{label}
+                variant={isSelected ? 'checked' : 'sizeBtn'}>{label}
               </Button>
             )
           }}
-        />
+          />
+          </div>
         <ColorChart
           value={color}
           handleInput={handleInput}
         />
-        <label>
+        <label className="font-medium">
           Price
           <Checkbox
             data={priceRange}
-            addClass="flex flex-col gap-2"
+            addClass="flex flex-col gap-2 mt-2"
             handleInput={handleInput}
             value={price}
           />

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { cache } from 'react';
+import { cache, use } from 'react';
 export type { Product } from '@prisma/client'
 const prisma = new PrismaClient;
 
@@ -83,3 +83,54 @@ export const getPopularProducts = cache(async() => {
   
   return popularProducts;
 })
+
+export const checkUser = async (email: string, pass: string) => {
+  const user = await prisma.user.findMany({
+    where: {
+      email: email,
+    }
+  })
+  if (user) {
+    console.log(user)
+  }
+}
+
+export const getRecomendProduct = async (category: string, existId: string) => {
+  const product = await prisma.product.findMany({
+    where: {
+      productSubCategory: category,
+      NOT: {
+        productId: existId
+      }
+    },
+    take: 4
+  })
+  
+  return product;
+}
+
+export const getUserProductCart = async (userId: string) => {
+  const userCart = await prisma.cart.findMany({
+    where: {
+      userId: userId
+    }
+  })
+  
+  const products: any[] = [];
+
+  for (const cartItem of userCart) {
+    const product = await getProduct(cartItem.productId);
+    products.push(product);
+  }
+  const combinedData = {
+    userCart: userCart.map(cartItem => {
+      const product = products.find(productItem => productItem.productId === cartItem.productId);
+      return {
+        ...cartItem,
+        productInfo: product
+      };
+    })
+  };
+    
+  return combinedData.userCart;
+}

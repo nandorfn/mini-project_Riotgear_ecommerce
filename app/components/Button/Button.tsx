@@ -7,18 +7,34 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        black: 'bg-black text-white capitalize rounded-md',
+        white: 'bg-white text-black capitalize rounded-md border-2 border-black',
+        info: 'bg-blue-500 capitalize text-white hover:bg-blue-700',
+        success: 'btn-success capitalize text-white',
+        checked: 'bg-accent w-[2.5rem]',
+        sizeBtn: 'bg-[#D9D9D9] text-[#3E3E3E] border-0 w-[2.5rem] text-[0.875rem]',
+        red: 'btn-error',
+      // OLD
+        login: 'disabled:bg-base-200 bg-black text-white',
         primary: 'btn-primary',
         default: 'btn-base-200 hover:bg-base-100',
-        red: 'btn-error',
-        success: 'btn-success capitalize',
-        info: 'btn-info capitalize',
-        grey: 'btn-base-300',
+        rounded: 'rounded-full btn-sm p-4'
+      },
+      clr: {
+        black: 'bg-black text-white',
+        grey: 'bg-zinc-300',
+        white: 'bg-base-100',
+        brown: 'bg-amber-950',
+        red: 'bg-red',
         zinc: 'bg-[#D9D9D9]',
-        checked: 'bg-accent'
+        green: 'bg-green-700',
+        blue: 'bg-blue-500 text-white',
+        yellow: 'bg-yellow-400',
+        orange: 'bg-orange-400',
       },
       size: {
         sm: 'btn-sm',
-        base: 'btn-base',
+        base: 'w-36',
         lg: 'btn-lg',
         wide: 'btn-wide',
         full: 'w-full',
@@ -45,11 +61,12 @@ const Button: React.FC<ButtonProps> = ({
   className,
   variant,
   size,
+  clr,
   ...props
 }) => {
   return (
     <>
-      <button className={cn(buttonVariants({ variant, size, className }))} {...props} />
+      <button className={cn(buttonVariants({ variant, clr,  size, className }))} {...props} />
     </>
   );
 };

@@ -1,4 +1,3 @@
-import { bebas_neue } from "@/app/utils/fonts";
 import { cn } from "@/app/utils/utils";
 import { VariantProps, cva } from 'class-variance-authority';
 import { AllHTMLAttributes } from "react";

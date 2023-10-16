@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import Input from "@/app/components/Form/Input";
-import Table from "@/app/components/Table/Table";
 import { headTableProduct } from "@/app/helpers/dataObject";
 import { ProductData } from "@/app/utils/utils";
 import axios from "axios";
@@ -10,6 +9,7 @@ import FormProduct from "./FormProduct";
 import FormEditProduct from "./FormEditProduct";
 import { Button } from "@/app/components/Button/Button";
 import TableBody from "@/app/components/Table/TableBody";
+import { getCookie } from "cookies-next";
 
 const Page: React.FC = () => {
   const [dataProducts, setDataProducts] = useState<ProductData[]>([])
@@ -36,9 +36,17 @@ const Page: React.FC = () => {
         });
     }
   }, []);
+  
+  const token = getCookie('token');
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
 
   const handleDelete = (id: string) => {
-    axios.delete(`/api/products/${id}`)
+    axios.delete(`/api/products/${id}`, {
+      headers: headers
+    })
       .then(() => {
         const filteredProducts = [
           ...dataProducts.filter((product) =>
@@ -91,11 +99,11 @@ const Page: React.FC = () => {
             placeholder="Find products"
           />
           <Button
-            variant={'info'} >Search Product
+            variant={'info'} size={'base'}>Search Product
           </Button>
           <Button
             onClick={handleAddModal}
-            variant={'success'} >Add Product
+            variant={'success'} size={'base'} >Add Product
           </Button>
         </div>
         <div className="overflow-x-auto p-1 mt-3">
