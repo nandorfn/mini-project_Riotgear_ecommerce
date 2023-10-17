@@ -15,7 +15,7 @@ const NavbarStore = async () => {
 
   return (
     <>
-      <header className='sticky top-0 z-40 bg-white'>
+      <header className='z-40 bg-white'>
         <nav className='md:bg-base-200 flex flex-row justify-between px-2 rounded-xl mt-3 mx-3'>
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />

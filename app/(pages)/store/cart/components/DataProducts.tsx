@@ -38,7 +38,7 @@ const DataProducts: React.FC<ProductProps> = ({ products, user }) => {
   const router = useRouter();
   useEffect(() => {
     router.refresh();
-  }, [render])
+  }, [render, router])
 
   let subTotal = 0;
   products.forEach((product) => {
