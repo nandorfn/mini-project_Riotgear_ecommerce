@@ -1,17 +1,17 @@
 'use client'
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/app/components/Button/Button";
 import CartCard from "@/app/components/Card/CartCard";
 import OrderCard from "@/app/components/Card/OrderCard";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
-import Image from "next/image";
-import Link from "next/link";
 
-import couponIcon from '../../../assets/icon/coupon.svg'
-import arrowRight from '../../../assets/icon/arrow-right.svg'
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import couponIcon from '@/app/assets/icon/coupon.svg'
+import arrowRight from '@/app/assets/icon/arrow-right.svg'
 
 interface ProductProps {
   products: {

@@ -1,8 +1,8 @@
-import blogBanner from '../assets/Content/blog.png'
-import ArticleCard from '../components/Card/ArticleCard';
-import Hero from '../components/Hero/Hero';
-import HeroTitleOnyl from '../components/Hero/HeroTitleOnyl';
-import { bebas_neue } from '../utils/fonts';
+import { bebas_neue } from '@/app/utils/fonts';
+import blogBanner from '@/app/assets/Content/blog.png'
+import ArticleCard from '@/app/components/Card/ArticleCard';
+import Hero from '@/app/components/Hero/Hero';
+import HeroTitleOnyl from '@/app/components/Hero/HeroTitleOnyl';
 
 
 const page: React.FC = () => {

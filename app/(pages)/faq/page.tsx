@@ -1,6 +1,6 @@
-import { faq,  FaqItem } from '../helpers/dataObject'
-import Accordion from "../components/Accordion/Accordion";
-import { Heading } from "../components/Container/Heading";
+import { faq,  FaqItem } from '@/app/helpers/dataObject'
+import Accordion from "@/app/components/Accordion/Accordion";
+import { Heading } from "@/app/components/Container/Heading";
 
 const page: React.FC = () => {
   return (

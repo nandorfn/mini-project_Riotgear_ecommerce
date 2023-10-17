@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
+
 import ProductDetails from "@/app/components/Card/ProductDetails";
 import Accordion from "@/app/components/Accordion/Accordion";
 import { getProduct, getRecomendProduct } from "@/app/utils/queryDb";
 import ImageNotFound from "@/app/components/404/ImageNotFound";
-import Link from "next/link";
 import ReviewWrap from "@/app/components/Review/ReviewWrap";
 import CardContainer from "@/app/components/Card/CardContainer";
 import FloatingNav from "@/app/components/Menu/FloatingNav";

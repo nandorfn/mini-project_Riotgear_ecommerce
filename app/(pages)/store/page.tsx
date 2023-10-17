@@ -1,8 +1,8 @@
-import CardContainer from "../components/Card/CardContainer";
-import { Flex } from "../components/Container/Flex";
-import MenuFilter from "../components/Menu/MenuFillter";
-import ScrollMenuContainer from "../components/Menu/ScrollMenuContainer";
-import { getItem } from "../utils/queryDb";
+import CardContainer from "@/app/components/Card/CardContainer";
+import { Flex } from "@/app/components/Container/Flex";
+import MenuFilter from "@/app/components/Menu/MenuFillter";
+import ScrollMenuContainer from "@/app/components/Menu/ScrollMenuContainer";
+import { getItem } from "@/app/utils/queryDb";
 
 const page = async ({
   params,

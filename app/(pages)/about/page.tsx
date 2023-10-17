@@ -1,4 +1,4 @@
-import { about } from "../helpers/dataObject";
+import { about } from "@/app/helpers/dataObject";
 const page: React.FC = () => {
   return (
     <>

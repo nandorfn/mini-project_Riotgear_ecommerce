@@ -1,14 +1,14 @@
 'use client'
 import axios from "axios";
 import Link from "next/link";
-import { Button } from "../components/Button/Button";
-import { Flex } from "../components/Container/Flex";
-import { Heading } from "../components/Container/Heading";
+import { Button } from "@/app/components/Button/Button";
+import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TRegisterSchema, registerSchema } from "../utils/types";
-import { Text } from "../components/Container/Text";
-import { hashPass } from "../utils/utils";
+import { TRegisterSchema, registerSchema } from "@/app/utils/types";
+import { Text } from "@/app/components/Container/Text";
+import { hashPass } from "@/app/utils/utils";
 
 
 

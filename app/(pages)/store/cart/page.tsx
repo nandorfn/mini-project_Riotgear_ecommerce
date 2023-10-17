@@ -1,11 +1,10 @@
-import { Heading } from "@/app/components/Container/Heading";
-import { verifyAuth } from "@/app/utils/auth";
-import { getUserProductCart } from "@/app/utils/queryDb";
-import { JwtSchema } from "@/app/utils/types";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-
+import { JwtSchema } from "@/app/utils/types";
+import { Heading } from "@/app/components/Container/Heading";
+import { verifyAuth } from "@/app/utils/auth";
+import { getUserProductCart } from "@/app/utils/queryDb";
 import DataProducts from "./components/DataProducts";
 
 const Page: React.FC = async () => {

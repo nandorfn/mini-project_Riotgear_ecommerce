@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
-import { Flex } from "../components/Container/Flex";
-import MenuFilter from "../components/Menu/MenuFillter";
-import ScrollMenuContainer from "../components/Menu/ScrollMenuContainer";
+import { Flex } from "@/app/components/Container/Flex";
+import MenuFilter from "@/app/components/Menu/MenuFillter";
+import ScrollMenuContainer from "@/app/components/Menu/ScrollMenuContainer";
 import 'react-loading-skeleton/dist/skeleton.css'
 
 
@@ -43,7 +43,6 @@ export default function Loading() {
               </article>
             ))
             }
-
           </section>
         </div>
       </Flex>

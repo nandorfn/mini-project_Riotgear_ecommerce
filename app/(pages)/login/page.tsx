@@ -1,13 +1,13 @@
 'use client'
 import axios from "axios";
 import Link from "next/link";
-import { Button } from "../components/Button/Button";
-import { Flex } from "../components/Container/Flex";
-import { Heading } from "../components/Container/Heading";
+import { Button } from "@/app/components/Button/Button";
+import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TLoginSchema, loginSchema } from "../utils/types";
-import { Text } from "../components/Container/Text";
+import { TLoginSchema, loginSchema } from "@/app/utils/types";
+import { Text } from "@/app/components/Container/Text";
 import { useRouter } from "next/navigation";
 
 const Page = () => {

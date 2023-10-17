@@ -1,7 +1,8 @@
-import Footer from "../components/Footer/Footer";
-import aboutBanner from '../assets/Content/about.png'
-import Hero from "../components/Hero/Hero";
-import HeroTitleOnyl from "../components/Hero/HeroTitleOnyl";
+import Hero from "@/app/components/Hero/Hero";
+import HeroTitleOnyl from "@/app/components/Hero/HeroTitleOnyl";
+import aboutBanner from '@/app/assets/Content/about.png'
+import Footer from "@/app/components/Footer/Footer";
+
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
