@@ -3,11 +3,7 @@ import { verifyAuth } from "./app/utils/auth";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value;
-  const verifiedToken =
-    token &&
-    (await verifyAuth(token).catch((err) => {
-      console.log(err);
-    }))
+  const verifiedToken = token && (await verifyAuth(token))
     
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {
     if (req.nextUrl.pathname.startsWith('/admin')) {

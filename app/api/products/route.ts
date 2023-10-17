@@ -8,10 +8,7 @@ export const POST = async (req: Request) => {
   const headers = req.headers;
   const authorizationHeader = headers.get('authorization');
   const token = authorizationHeader?.split(' ')[1]
-  const verifiedToken = token &&
-    (await verifyAuth(token).catch((err) => {
-      console.log(err);
-    }))
+  const verifiedToken = token && (await verifyAuth(token))
 
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {
     return NextResponse.json(

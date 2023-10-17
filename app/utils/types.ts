@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const loginSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8,'Password must be at least 8 characters'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 export type TLoginSchema = z.infer<typeof loginSchema>;
 
@@ -17,13 +17,13 @@ export type TRegisterServerSchema = z.infer<typeof registerServerSchema>;
 export const registerSchema = z.object({
   name: z.string().min(1, 'Name cannot be empty'),
   email: z.string().email(),
-  password: z.string().min(8,'Password must be at least 8 characters'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
   confirmPassword: z.string(),
 })
-.refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords must match",
-  path: ["confirmPassword"],
-});
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
 export type TRegisterSchema = z.infer<typeof registerSchema>;
 
 export const tokenSchema = z.object({
@@ -39,3 +39,26 @@ export type userAvatar = {
   username: string
   icon: string
 }
+
+export type userJwtSchema = {
+  role: string;
+  username: string;
+  userId: string;
+  iat: number;
+  exp: number;
+}
+// Cart Pages
+export type cart = {
+  productInfo: any;
+  id: number;
+  userId: string;
+  productId: string;
+  quantity: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export type DataProductProps = {
+  products: cart[];
+  user: undefined | userJwtSchema;
+}
+

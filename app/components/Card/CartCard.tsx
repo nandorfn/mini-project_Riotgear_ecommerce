@@ -1,22 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import Image from "next/image";
 import { Heading } from "../Container/Heading";
 import { Text } from "../Container/Text";
 import closeIcon from '../../assets/icon/closeIcon.svg'
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Flex } from "../Container/Flex";
 import axios from "axios";
 import Transparent from "../Container/Transparent";
 import { usePrevious } from "@/app/utils/customHooks";
+import { deleteData } from "@/app/utils/api";
+import { cart, userJwtSchema } from "@/app/utils/types";
 
 interface CartCardProps {
-  data: any;
-  user: any;
+  data: cart;
+  user: undefined | userJwtSchema;
   render: boolean;
   setRender: (state: boolean) => void;
+  handleProduct: Dispatch<SetStateAction<cart[]>>;
 }
 
-const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render }) => {
+const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, handleProduct }) => {
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState({
     quantity: data.quantity,
@@ -37,28 +41,40 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render }) =>
     const { value, id } = e.target as HTMLSelectElement;
     setState({
       ...state,
-      quantity: value,
+      quantity: Number(value),
       dataId: id
     });
   }
   const prevQuantity = usePrevious(state.quantity);
+  const queryProduct = `/api/user/${user?.userId}/cart`
   useEffect(() => {
     if (prevQuantity !== state.quantity && state.dataId !== '') {
       setLoading(true);
-      axios.patch(`/api/user/${user.userId}/cart/${state.dataId}`, state.quantity)
+      axios.patch(`${queryProduct}/${state.dataId}`, state.quantity)
         .then((response) => {
           setState({
             ...state,
             quantity: response.data.quantity
           })
           setRender(!render)
-          setTimeout(() => {
-            setLoading(false);
-          }, 1000)
+          setLoading(false);
         })
-    }
-
+      }
+      
   }, [state.quantity]);
+
+  const handleDelete = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    const { id } = e.target as HTMLImageElement;
+    await deleteData(`${queryProduct}/${id}`)
+    .then((res) => {
+      console.log(res.data);
+      handleProduct(res.data)
+      setLoading(false);
+    })
+
+  }
 
   const options = [];
   if (productStock) {
@@ -77,11 +93,14 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render }) =>
         </Transparent>
 
         : <article className="flex flex-row relative gap-5">
-          <Image
-            className="absolute end-0 top-0"
-            width={20}
-            height={20}
-            src={closeIcon} alt="close icon" />
+          <button 
+            className="absolute end-0 top-0" onClick={handleDelete}>
+            <Image
+              id={idCart}
+              width={20}
+              height={20}
+              src={closeIcon} alt="close icon" />
+          </button>
           <figure className="w-1/3">
             <Image
               className="rounded-md md:rounded-lg"

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { DataProductProps, cart } from "@/app/utils/types";
 import { Button } from "@/app/components/Button/Button";
 import CartCard from "@/app/components/Card/CartCard";
 import OrderCard from "@/app/components/Card/OrderCard";
@@ -13,28 +14,13 @@ import { Heading } from "@/app/components/Container/Heading";
 import couponIcon from '@/app/assets/icon/coupon.svg'
 import arrowRight from '@/app/assets/icon/arrow-right.svg'
 
-interface ProductProps {
-  products: {
-    productInfo: any;
-    id: number;
-    userId: string;
-    productId: string;
-    quantity: number;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
-  user: void | {
-    role: string;
-    username: string;
-    userId: string;
-    iat: number;
-    exp: number;
-  }
-}
-
-const DataProducts: React.FC<ProductProps> = ({ products, user }) => {
+const DataProducts = ({
+  products,
+  user
+}: DataProductProps
+) => {
+  const [productCart, setProductCard] = useState<cart[]>(products);
   const [render, setRender] = useState(false);
-
   const router = useRouter();
   useEffect(() => {
     router.refresh();
@@ -52,8 +38,9 @@ const DataProducts: React.FC<ProductProps> = ({ products, user }) => {
     <>
       <Flex variant={'colToRow'} className="gap-10">
         <Flex variant={'col'} align={'between'} className="w-full md:w-2/3 gap-5">
-          {products?.map(data => (
+          {productCart?.map(data => (
             <CartCard
+              handleProduct={setProductCard}
               key={data.id}
               render={render}
               setRender={setRender}
@@ -67,7 +54,7 @@ const DataProducts: React.FC<ProductProps> = ({ products, user }) => {
           <OrderCard
             subTotal={subTotal}
             tax={tax}
-            length={products.length}
+            length={productCart.length}
           />
 
           <Flex align={'between'} className="border-y-2 py-2 justify-between cursor-pointer">

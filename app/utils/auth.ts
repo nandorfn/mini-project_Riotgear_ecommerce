@@ -12,22 +12,18 @@ export const getJwtSecretKey = () => {
 }
 
 export const verifyAuth = async (token: string) => {
-  try {
     const verified = await jwtVerify(token, new TextEncoder().encode(getJwtSecretKey()));
     
-    return verified.payload as JwtSchema;
-  } catch (e) {
-    throw new Error('Your token isnt valid');
+    if (!verified) {
+      throw new Error('Your token isnt valid');
+    } else {
+      return verified.payload as JwtSchema;
+    }
   }
-}
 export const checkUserLogin = async () => {
   const cookieStore = cookies()
   const token = cookieStore.get('token');
-  const user: JwtSchema | void =
-    token &&
-    (await verifyAuth(token.value).catch((err) => {
-      console.log(err);
-    }))
+  const user: JwtSchema | void = token && (await verifyAuth(token.value))
     
   return user;
 }

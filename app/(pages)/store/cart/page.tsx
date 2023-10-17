@@ -10,12 +10,7 @@ import DataProducts from "./components/DataProducts";
 const Page: React.FC = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get('token');
-  const user: JwtSchema | void =
-    token &&
-    (await verifyAuth(token.value).catch((err) => {
-      console.log(err);
-    }))
-
+  const user: JwtSchema | undefined  = token && (await verifyAuth(token.value))
   const productCart = await getUserProductCart(user?.userId ?? '');
 
   return (
