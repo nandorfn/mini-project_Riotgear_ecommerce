@@ -6,11 +6,14 @@ import { Heading } from "@/app/components/Container/Heading";
 import { verifyAuth } from "@/app/utils/auth";
 import { getUserProductCart } from "@/app/utils/queryDb";
 import DataProducts from "./components/DataProducts";
+import { Text } from "@/app/components/Container/Text";
+import { Button } from "@/app/components/Button/Button";
+import { Flex } from "@/app/components/Container/Flex";
 
 const Page: React.FC = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get('token');
-  const user: JwtSchema | undefined  = token && (await verifyAuth(token.value))
+  const user: JwtSchema | undefined = token && (await verifyAuth(token.value))
   const productCart = await getUserProductCart(user?.userId ?? '');
 
   return (
@@ -25,10 +28,19 @@ const Page: React.FC = async () => {
         </div>
 
         <Heading variant={'fourthRwd'} className=" mb-5 md:mb-10">SHOPPING CART</Heading>
-        <DataProducts
-          products={productCart}
-          user={user}
-        />
+        {productCart.length > 0
+          ? <DataProducts
+            products={productCart}
+            user={user}
+          />
+          : <Flex variant={'col'} align={'center'} className="h-[60vh] gap-5">
+            <Text fs={'xl'}>Your cart is currently empty.</Text>
+            <Link href={'/store'}>
+              <Button variant={'black'}>CONTINUE SHOPPING</Button>
+            </Link>
+          </Flex>
+
+        }
 
       </main>
     </>
