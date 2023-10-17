@@ -11,6 +11,7 @@ import Transparent from "../Container/Transparent";
 import { usePrevious } from "@/app/utils/customHooks";
 import { deleteData } from "@/app/utils/api";
 import { cart, userJwtSchema } from "@/app/utils/types";
+import CartModal from "../Modal/CartModal";
 
 interface CartCardProps {
   data: cart;
@@ -21,10 +22,11 @@ interface CartCardProps {
 }
 
 const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, handleProduct }) => {
-  const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState(false);
   const [state, setState] = useState({
     quantity: data.quantity,
-    dataId: ''
+    dataId: '',
+    loading: false,
   })
 
   const {
@@ -49,7 +51,10 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
   const queryProduct = `/api/user/${user?.userId}/cart`
   useEffect(() => {
     if (prevQuantity !== state.quantity && state.dataId !== '') {
-      setLoading(true);
+      setState({
+        ...state,
+        loading: true
+      })
       axios.patch(`${queryProduct}/${state.dataId}`, state.quantity)
         .then((response) => {
           setState({
@@ -57,22 +62,30 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
             quantity: response.data.quantity
           })
           setRender(!render)
-          setLoading(false);
+          setState({
+            ...state,
+            loading: false
+          })
         })
-      }
-      
+    }
+
   }, [state.quantity]);
 
   const handleDelete = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setState({
+      ...state,
+      loading: true
+    })
     const { id } = e.target as HTMLImageElement;
     await deleteData(`${queryProduct}/${id}`)
-    .then((res) => {
-      console.log(res.data);
-      handleProduct(res.data)
-      setLoading(false);
-    })
+      .then((res) => {
+        handleProduct(res.data)
+        setState({
+          ...state,
+          loading: false
+        })
+      })
 
   }
 
@@ -87,16 +100,15 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
 
   return (
     <>
-      {loading
+      {state.loading
         ? <Transparent>
           <span className="loading loading-spinner loading-lg"></span>
         </Transparent>
 
         : <article className="flex flex-row relative gap-5">
-          <button 
-            className="absolute end-0 top-0" onClick={handleDelete}>
+          <button
+            className="absolute end-0 top-0" onClick={() => setModal(true)}>
             <Image
-              id={idCart}
               width={20}
               height={20}
               src={closeIcon} alt="close icon" />
@@ -136,6 +148,19 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
             </Flex>
           </Flex>
         </article>
+      }
+      {modal &&
+        <CartModal
+          id={idCart}
+          setModal={setModal}
+          modal={modal}
+          action={handleDelete}
+          title="REMOVE ITEM"
+          btnLeft="REMOVE"
+          btnRight="CANCEL">
+          <Heading variant={'five'} bold={'normal'}>Are you sure you want to remove this item from your cart?</Heading>
+        </CartModal>
+
       }
     </>
   );
