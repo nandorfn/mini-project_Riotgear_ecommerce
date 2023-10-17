@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { cache, use } from 'react';
+import { cache } from 'react';
 export type { Product } from '@prisma/client'
 const prisma = new PrismaClient;
 
