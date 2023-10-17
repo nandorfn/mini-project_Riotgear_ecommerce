@@ -1,12 +1,14 @@
-import PurchaseBtn from "../Button/PurchaseBtn";
+import Link from "next/link";
+import { cookies } from "next/headers";
+
 import { Heading } from '@/app/components/Container/Heading'
-import List from "../List";
 import { sizeChart } from "@/app/helpers/dataObject";
 import { Button } from "../Button/Button";
 import { Flex } from "../Container/Flex";
-import { cookies } from "next/headers";
 import { verifyAuth } from "@/app/utils/auth";
 import { JwtSchema } from "@/app/utils/types";
+import PurchaseBtn from "../Button/PurchaseBtn";
+import List from "../List";
 
 interface Props {
   name?: string | null;
@@ -28,11 +30,11 @@ const ProductDetails: React.FC<Props> = async ({
   const cookieStore = cookies()
   const token = cookieStore.get('token');
   const user: JwtSchema | void =
-  token &&
+    token &&
     (await verifyAuth(token.value).catch((err) => {
       console.log(err);
     }))
-    
+
   return (
     <>
       <Flex align={'between'} className="min-h-[20%] text flex-col-reverse md:flex-col">
@@ -40,7 +42,7 @@ const ProductDetails: React.FC<Props> = async ({
         <Heading fs={'xl2'} bold={'normal'}>{`Rp${formattedPrice}`}</Heading>
       </Flex>
       <div className="border-t"></div>
-      <div className="hidden md:flex flex-col gap-3">
+      <div className="hidden md:flex flex-col justify-between gap-3">
         <h4 className="font-medium text-xl">Size</h4>
         <List
           name="sizeChartProduct"
@@ -59,11 +61,17 @@ const ProductDetails: React.FC<Props> = async ({
             )
           }}
         />
-        <PurchaseBtn
-          user={user}
-          id={id}
-          stock={stock}
-        />
+        
+        {!user
+          ? <Link href={'/login'}>
+              <Button variant={'red'} className="text-white" size={'full'}>LOGIN TO CHECKOUT</Button>
+            </Link>
+          : <PurchaseBtn
+            user={user}
+            id={id}
+            stock={stock}
+          />
+        }
       </div>
 
     </>

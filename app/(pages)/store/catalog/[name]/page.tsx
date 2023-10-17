@@ -9,6 +9,7 @@ import ReviewWrap from "@/app/components/Review/ReviewWrap";
 import CardContainer from "@/app/components/Card/CardContainer";
 import FloatingNav from "@/app/components/Menu/FloatingNav";
 import { Heading } from "@/app/components/Container/Heading";
+import { checkUserLogin } from "@/app/utils/auth";
 
 const Page = async ({
   params: { name },
@@ -16,8 +17,7 @@ const Page = async ({
   params: { name: string }
 }) => {
   const product: any = await getProduct(name);
-  const recommendProduct = await getRecomendProduct(product?.productSubCategory ?? '', name)
-
+  const recommendProduct = await getRecomendProduct(product?.productSubCategory ?? '', name);
 
   return (
     <>
@@ -74,7 +74,7 @@ const Page = async ({
             </div>
           </>
         }
-
+        
         <div className="fixed md:hidden bottom-0 start-0">
           <FloatingNav />
         </div>

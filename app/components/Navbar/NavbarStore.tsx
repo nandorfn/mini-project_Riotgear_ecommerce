@@ -5,21 +5,14 @@ import Menus from './Menus';
 import Link from 'next/link';
 import Avatar from '../Avatar';
 import Drawer from '../Drawer/Drawer';
-import { cookies } from 'next/headers';
-import { verifyAuth } from '@/app/utils/auth';
-import { JwtSchema } from '@/app/utils/types';
+import { checkUserLogin } from '@/app/utils/auth';
 import cart from '../../assets/icon/cart.svg'
+import { Button } from '../Button/Button';
 
 
 const NavbarStore = async () => {
-  const cookieStore = cookies()
-  const token = cookieStore.get('token');
-  const user: JwtSchema | void =
-  token &&
-    (await verifyAuth(token.value).catch((err) => {
-      console.log(err);
-    }))
-    
+  const userAccess = await checkUserLogin();
+
   return (
     <>
       <header className='sticky top-0 z-40 bg-white'>
@@ -53,20 +46,27 @@ const NavbarStore = async () => {
               </label>
               <div className='hidden md:flex md:gap-2 md:items-center'>
                 <Link className='pe-2' href={'/store/cart'}>
-                <Image 
-                  className='hover:w-6'
-                  src={cart}
-                  width={20}
-                  height={20}
-                  alt='cart icon'
-                />
+                  <Image
+                    className='hover:w-6'
+                    src={cart}
+                    width={20}
+                    height={20}
+                    alt='cart icon'
+                  />
                 </Link>
-                
-                <div className='border-s-2 h-8 border-[#D9D9D9]'></div>
-                <Avatar 
-                  username={user?.username ?? ''}
-                  icon={""}
-                />
+
+                <div className='border-s-2 h-8 border-[#D9D9D9]'>
+                </div>
+                {!userAccess
+                  ? <Link className="flex w-full mx-4" href={'/login'}>
+                    <Button
+                      variant={'info'}
+                      className="text-white"
+                      size={'sm'}>Login
+                    </Button>
+                  </Link>
+                  : <Avatar username={userAccess?.username ?? ''} icon={""} />
+                }
               </div>
             </div>
             <Drawer />
