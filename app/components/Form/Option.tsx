@@ -6,7 +6,7 @@ interface Props {
   name: string,
   value: any;
   addClass: string;
-  optionValue: categoryOption[];
+  optionValue?: any;
   handleInput: (e: React.SyntheticEvent) => void;
   error?: string;
 }

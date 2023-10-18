@@ -60,8 +60,6 @@ const OrderSummary: React.FC = async () => {
         </Link>
         <Button size={'half'} variant={'red'}>ORDER</Button>
       </Flex>
-      
-      
     </>
   );
 };

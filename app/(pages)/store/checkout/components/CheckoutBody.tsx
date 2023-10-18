@@ -11,9 +11,9 @@ const initialState = {
     name: '',
     phone: '',
     email: '',
-    country: '',
-    city: '',
-    district: '',
+    country: 'DEF',
+    city: 'DEF',
+    district: 'DEF',
     village: '',
     address: '',
     zip: '',
@@ -29,10 +29,10 @@ const CheckoutBody = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <>
-            <Flex className="gap-10">
-                <section className="flex flex-col w-1/2">
+            <Flex variant={'colToRow'} className="gap-10">
+                <section className="flex flex-col w-full md:w-1/2">
                     <Heading>BILLING DETAILS</Heading>
-                    <form>
+                    <form className="flex flex-col gap-3 md:gap-5 mt-5">
                         <label className="font-medium">
                             Name
                             <Input
@@ -108,7 +108,7 @@ const CheckoutBody = ({ children }: { children: React.ReactNode }) => {
                     </form>
 
                 </section>
-                <section className="flex flex-col gap-5 w-1/2">
+                <section className="flex flex-col gap-5 w-full md:w-1/2">
                     {children}
                 </section>
             </Flex>
