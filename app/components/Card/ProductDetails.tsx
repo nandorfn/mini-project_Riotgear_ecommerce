@@ -1,13 +1,11 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
+import { checkUserLogin } from "@/app/utils/auth";
+import { sizeChart } from "@/app/helpers/dataObject";
 
 import { Heading } from '@/app/components/Container/Heading'
-import { sizeChart } from "@/app/helpers/dataObject";
-import { Button } from "../Button/Button";
-import { Flex } from "../Container/Flex";
-import { verifyAuth } from "@/app/utils/auth";
-import { JwtSchema } from "@/app/utils/types";
-import PurchaseBtn from "../Button/PurchaseBtn";
+import { Button } from "@/app/components/Button/Button";
+import { Flex } from "@/app/components/Container/Flex";
+import PurchaseBtn from "@/app/components/Button/PurchaseBtn";
 import List from "../List";
 
 interface Props {
@@ -27,13 +25,7 @@ const ProductDetails: React.FC<Props> = async ({
   stock
 }) => {
   const formattedPrice = price?.toLocaleString('id-ID')
-  const cookieStore = cookies()
-  const token = cookieStore.get('token');
-  const user: JwtSchema | void =
-    token &&
-    (await verifyAuth(token.value).catch((err) => {
-      console.log(err);
-    }))
+  const user = await checkUserLogin();
 
   return (
     <>

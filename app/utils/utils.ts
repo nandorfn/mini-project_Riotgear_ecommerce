@@ -10,7 +10,7 @@ export const hashPass = (unHashPass: string) => {
 }
 
 export type ProductData = {
-  id: number;
+  id?: number;
   productId: string;
   productName: string;
   productMainCategory: string;
@@ -34,10 +34,10 @@ export type productFormState = {
   productSize: string;
   productGender: string;
   productColor: string;
-  productStock: string | number;
+  productStock: string;
   productDesc: string;
-  productPrice: string | number;
-  featured: number | boolean;
+  productPrice: string;
+  featured: number;
 }
 
 export const createObject = (
