@@ -1,57 +1,19 @@
 'use client'
-import axios from "axios";
 import Link from "next/link";
 import { Button } from "@/app/components/Button/Button";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { TLoginSchema, loginSchema } from "@/app/utils/types";
 import { Text } from "@/app/components/Container/Text";
-import { useRouter } from "next/navigation";
+import useLoginForm from "@/app/hooks/useLoginForm";
 
 const Page = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-    setError
-  } = useForm<TLoginSchema>({
-    resolver: zodResolver(loginSchema)
-  });
-
-  const router = useRouter()
-  const onSubmit = async (data: TLoginSchema) => {
-    axios.post('/api/login', data)
-      .then(response => {
-        if (response.data.status === 200) {
-          router.push('/')
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          const errors = error.response.data.errors;
-          if (errors.email) {
-            console.log(errors.email);
-            setError("email", {
-              type: "server",
-              message: errors.email,
-            });
-          } else if (errors.password) {
-            setError("password", {
-              type: "server",
-              message: errors.password,
-            });
-          } else {
-            alert("Something went wrong");
-          }
-        }
-      });
-    reset();
-  };
-
-
+    errors,
+    isSubmitting,
+    onSubmit
+  } = useLoginForm();
   return (
     <>
       <div className="mx-4">
