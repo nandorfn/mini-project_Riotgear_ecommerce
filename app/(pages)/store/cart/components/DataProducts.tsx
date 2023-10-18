@@ -14,7 +14,6 @@ import { Heading } from "@/app/components/Container/Heading";
 import couponIcon from '@/app/assets/icon/coupon.svg'
 import arrowRight from '@/app/assets/icon/arrow-right.svg'
 import { Text } from "@/app/components/Container/Text";
-import { orderSummary } from "@/app/utils/utils";
 
 const DataProducts = ({
   products,

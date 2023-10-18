@@ -1,3 +1,5 @@
+import { productFormState } from "../utils/utils";
+
 export type FaqItem = {
   id: number;
   q: string;
@@ -10,43 +12,43 @@ export const heroContent = {
 }
 
 export const about = [
-{
-  content: 'Welcome to RIOTGEAR, where fashion meets rebellion in the heart of the urban landscape. Born from a passion for self-expression and a love for street culture, RIOTGEAR is more than just clothing; it&apos;s a statement of defiance and individuality. Our journey began on the gritty streets, and we&apos;ve since evolved into a global force, uniting skaters, artists, and rebels of all kinds under one banner.',
-},
-{
-  content: 'At RIOTGEAR, we believe that fashion is a canvas for personal stories. Our designs are a fusion of raw energy and artistic expression, drawing inspiration from the pulse of the city and the spirit of subcultures. Each piece in our collection is crafted with precision and an unwavering commitment to quality. From graphic tees that speak volumes to comfortable yet stylish skatewear, RIOTGEAR is your armor of choice for conquering the concrete jungle.'
-},
-{
-  content: 'But RIOTGEAR is more than just a clothing brand; it&apos;s a community. We&apos;re a tribe of individuals who refuse to conform to the norm, who skate to the beat of their own drum, and who wear their rebellion proudly. Our mission is to empower you to be unapologetically yourself. Join us in this riotous journey, and let&apos;s make a mark on the world, one fearless step at a time.'
-}
+  {
+    content: 'Welcome to RIOTGEAR, where fashion meets rebellion in the heart of the urban landscape. Born from a passion for self-expression and a love for street culture, RIOTGEAR is more than just clothing; it&apos;s a statement of defiance and individuality. Our journey began on the gritty streets, and we&apos;ve since evolved into a global force, uniting skaters, artists, and rebels of all kinds under one banner.',
+  },
+  {
+    content: 'At RIOTGEAR, we believe that fashion is a canvas for personal stories. Our designs are a fusion of raw energy and artistic expression, drawing inspiration from the pulse of the city and the spirit of subcultures. Each piece in our collection is crafted with precision and an unwavering commitment to quality. From graphic tees that speak volumes to comfortable yet stylish skatewear, RIOTGEAR is your armor of choice for conquering the concrete jungle.'
+  },
+  {
+    content: 'But RIOTGEAR is more than just a clothing brand; it&apos;s a community. We&apos;re a tribe of individuals who refuse to conform to the norm, who skate to the beat of their own drum, and who wear their rebellion proudly. Our mission is to empower you to be unapologetically yourself. Join us in this riotous journey, and let&apos;s make a mark on the world, one fearless step at a time.'
+  }
 ]
 
 export const faq: FaqItem[] = [
-{
-  id: 1,
-  q: 'Is RIOTGEAR exclusively for skateboarders?',
-  a: 'Not at all! RIOTGEAR is designed for anyone who appreciates bold and stylish streetwear. While we draw inspiration from skateboard culture, our collections are suitable for individuals of all backgrounds looking to express themselves through clothing.'
-},
-{
-  id: 2,
-  q: 'How should I care for my RIOTGEAR clothing to keep it looking good?',
-  a: 'We recommend washing RIOTGEAR clothing in cold water and avoiding harsh bleach. Proper care will help maintain the quality of our garments. Be sure to also avoid excessive heat when drying.'
-},
-{
-  id:3,
-  q: 'How can I become a part of the RIOTGEAR community?',
-  a: 'You can join the RIOTGEAR community by following us on our social media platforms and participating in events, contests, and collaborations that we organize. We also welcome art or design contributions from our fans.'
-},
-{
-  id: 4,
-  q: 'Does RIOTGEAR have physical stores?',
-  a: 'Currently, RIOTGEAR is available exclusively online through our website. However, we regularly participate in pop-up events and collaborate with select stores worldwide.'
-},
-{
-  id: 5,
-  q: 'How can I contact the RIOTGEAR team for further inquiries?',
-  a: 'You can reach us through the "Contact Us" page on our website or by emailing us at [contact email address]. Our team is ready to answer any questions and provide the assistance you need.'
-}
+  {
+    id: 1,
+    q: 'Is RIOTGEAR exclusively for skateboarders?',
+    a: 'Not at all! RIOTGEAR is designed for anyone who appreciates bold and stylish streetwear. While we draw inspiration from skateboard culture, our collections are suitable for individuals of all backgrounds looking to express themselves through clothing.'
+  },
+  {
+    id: 2,
+    q: 'How should I care for my RIOTGEAR clothing to keep it looking good?',
+    a: 'We recommend washing RIOTGEAR clothing in cold water and avoiding harsh bleach. Proper care will help maintain the quality of our garments. Be sure to also avoid excessive heat when drying.'
+  },
+  {
+    id: 3,
+    q: 'How can I become a part of the RIOTGEAR community?',
+    a: 'You can join the RIOTGEAR community by following us on our social media platforms and participating in events, contests, and collaborations that we organize. We also welcome art or design contributions from our fans.'
+  },
+  {
+    id: 4,
+    q: 'Does RIOTGEAR have physical stores?',
+    a: 'Currently, RIOTGEAR is available exclusively online through our website. However, we regularly participate in pop-up events and collaborate with select stores worldwide.'
+  },
+  {
+    id: 5,
+    q: 'How can I contact the RIOTGEAR team for further inquiries?',
+    a: 'You can reach us through the "Contact Us" page on our website or by emailing us at [contact email address]. Our team is ready to answer any questions and provide the assistance you need.'
+  }
 ]
 
 export const headTableBlog = ['No', 'Article Title', 'Created At', 'Action']
@@ -90,9 +92,9 @@ export const genderCategory = [
   { id: 4, label: 'Unisex', value: 'unisex' },
 ];
 export const featuredOption = [
-  { id:1, label: 'Choose', value: 0 },
-  { id:2, label: 'Active', value: 1 },
-  { id:3, label: 'Inactive', value: 0 },
+  { id: 1, label: 'Choose', value: 0 },
+  { id: 2, label: 'Active', value: 1 },
+  { id: 3, label: 'Inactive', value: 0 },
 ]
 export const colorCategory = [
   { id: 1, label: 'Choose', value: '' },
@@ -165,23 +167,60 @@ export type checkboxOptionType = {
 }
 export const genderOption: checkboxOptionType[] = [
   { name: 'gender', value: 'male', label: 'Male' },
-  { name: 'gender', value: 'female', label: 'Female'},
-  { name: 'gender', value: 'unisex', label: 'Unisex'},
+  { name: 'gender', value: 'female', label: 'Female' },
+  { name: 'gender', value: 'unisex', label: 'Unisex' },
 ]
 export const priceRange: checkboxOptionType[] = [
-  {name: 'priceRanges', value: '0-100000', label: 'Under Rp99.000'},
-  {name: 'priceRanges', value: '100000-299000', label: 'Rp100.000 - Rp299.000'},
-  {name: 'priceRanges', value: '200000-399000', label: 'Rp200.000 - Rp399.000'},
-  {name: 'priceRanges', value: '400000-599000', label: 'Rp400.000 - Rp599.000'},
-  {name: 'priceRanges', value: '600000-799000', label: 'Rp600.000 - Rp799.000'},
-  {name: 'priceRanges', value: '800000-5000000', label: 'Rp800.000 +'}
+  { name: 'priceRanges', value: '0-100000', label: 'Under Rp99.000' },
+  { name: 'priceRanges', value: '100000-299000', label: 'Rp100.000 - Rp299.000' },
+  { name: 'priceRanges', value: '200000-399000', label: 'Rp200.000 - Rp399.000' },
+  { name: 'priceRanges', value: '400000-599000', label: 'Rp400.000 - Rp599.000' },
+  { name: 'priceRanges', value: '600000-799000', label: 'Rp600.000 - Rp799.000' },
+  { name: 'priceRanges', value: '800000-5000000', label: 'Rp800.000 +' }
 ]
 
 
 export const featuredTableHead = ['No', 'Product Name', 'Main Category', 'Sub Category', 'Views']
 export const columnFeaturedPrdouct = [
   { label: "productName" },
-  { label: "productMainCategory"},
-  {label: "productSubCategory" },
-  { label: "viewsCount"},
+  { label: "productMainCategory" },
+  { label: "productSubCategory" },
+  { label: "viewsCount" },
 ]
+
+export const defaultProductData = {
+  productName: '',
+  productMainCategory: '',
+  productSubCategory: '',
+  productImgLink: '',
+  productSize: '',
+  productColor: '',
+  productGender: '',
+  productStock: '',
+  productDesc: '',
+  productPrice: '',
+  featured: 0,
+};
+
+export const createProductData = (
+  form: productFormState,
+  id: string
+) => {
+  const productStock = parseInt(form.productStock);
+  const productPrice = parseFloat(form.productPrice);
+
+  return {
+    productId: id,
+    productName: form.productName,
+    productMainCategory: form.productMainCategory,
+    productSubCategory: form.productSubCategory,
+    productImgLink: form.productImgLink,
+    productSize: form.productSize,
+    productGender: form.productGender,
+    productColor: form.productColor,
+    productStock: productStock,
+    productDesc: form.productDesc,
+    productPrice: productPrice,
+    featured: form.featured !== 1,
+  };
+};

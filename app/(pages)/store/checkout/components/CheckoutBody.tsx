@@ -3,9 +3,8 @@ import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import Input from "@/app/components/Form/Input";
 import OptionInput from "@/app/components/Form/Option";
-import Select from "@/app/components/Form/Select";
 import { countryOption } from "@/app/helpers/dataObject";
-import { useState } from "react";
+import useForm from "@/app/hooks/useForm";
 
 const initialState = {
     name: '',
@@ -18,15 +17,7 @@ const initialState = {
 }
 
 const CheckoutBody = ({ children }: { children: React.ReactNode }) => {
-    const [form, setForm] = useState(initialState);
-
-    const handleInput = (e: React.SyntheticEvent) => {
-        const { name, value } = (e.target as HTMLInputElement);
-        setForm({
-            ...form,
-            [name]: value
-        })
-    }
+    const { form, handleInput } = useForm(initialState)
 
     return (
         <>

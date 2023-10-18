@@ -26,6 +26,7 @@ export type ProductData = {
 };
 
 export type productFormState = {
+  productId: string;
   productName: string;
   productMainCategory: string;
   productSubCategory: string;
@@ -33,10 +34,10 @@ export type productFormState = {
   productSize: string;
   productGender: string;
   productColor: string;
-  productStock: string;
+  productStock: string | number;
   productDesc: string;
-  productPrice: string;
-  featured: number;
+  productPrice: string | number;
+  featured: number | boolean;
 }
 
 export const createObject = (
