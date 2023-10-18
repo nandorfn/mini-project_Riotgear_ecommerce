@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getPopularProducts } from "../utils/queryDb";
+import { getPopularProducts } from "@/app/utils/queryDb";
 
 const page = async () => {
   const popularProducts = await getPopularProducts();

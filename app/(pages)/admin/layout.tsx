@@ -1,4 +1,4 @@
-import Avatar from "../components/Avatar";
+import Avatar from "@/app/components/Avatar";
 import SideBar from "./components/SideBar";
 
 const LayoutAdmin = ({
