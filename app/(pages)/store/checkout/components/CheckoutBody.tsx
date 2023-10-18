@@ -3,7 +3,8 @@ import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import Input from "@/app/components/Form/Input";
 import OptionInput from "@/app/components/Form/Option";
-import { countryOption } from "@/app/helpers/dataObject";
+import { TextArea } from "@/app/components/Form/TextArea";
+import useFetchLocation from "@/app/hooks/useFetchLocation";
 import useForm from "@/app/hooks/useForm";
 
 const initialState = {
@@ -12,12 +13,19 @@ const initialState = {
     email: '',
     country: '',
     city: '',
+    district: '',
+    village: '',
     address: '',
     zip: '',
 }
 
 const CheckoutBody = ({ children }: { children: React.ReactNode }) => {
-    const { form, handleInput } = useForm(initialState)
+    const { form, handleInput } = useForm(initialState);
+    const country = useFetchLocation('');
+    const cityQuery = form.country && `/${form?.country}/states`
+    const cities = useFetchLocation(cityQuery);
+    const districtQuery = form.city && `/${form?.country}/states/${form?.city}/cities`
+    const districts = useFetchLocation(districtQuery);
 
     return (
         <>
@@ -58,21 +66,47 @@ const CheckoutBody = ({ children }: { children: React.ReactNode }) => {
                         <OptionInput
                             label="Country"
                             name="country"
-                            addClass=" select-bordered mt-2"
-                            optionValue={countryOption}
+                            addClass=" select-bordered mt-2 capitalize"
+                            optionValue={country}
                             value={form.country}
                             handleInput={handleInput}
                         />
                         <OptionInput
-                            label="City"
+                            label="City / Regency"
                             name="city"
-                            addClass=" select-bordered mt-2"
-                            optionValue={countryOption}
+                            addClass=" select-bordered mt-2 capitalize"
+                            optionValue={cities}
                             value={form.city}
                             handleInput={handleInput}
                         />
+                        <OptionInput
+                            label="Subdistrict"
+                            name="district"
+                            addClass=" select-bordered mt-2 capitalize"
+                            optionValue={districts}
+                            value={form.district}
+                            handleInput={handleInput}
+                        />
+                        <label className="font-medium">
+                            Street Address
+                            <TextArea
+                                name="address"
+                                handleInput={handleInput}
+                                value={form.address}
+                            />
+                        </label>
+                        <label className="font-medium">
+                            Postcode / ZIP
+                            <Input
+                                name="zip"
+                                value={form.zip}
+                                type="text"
+                                placeholder="Postcode"
+                                handleInput={handleInput}
+                            />
+                        </label>
                     </form>
-                    
+
                 </section>
                 <section className="flex flex-col gap-5 w-1/2">
                     {children}

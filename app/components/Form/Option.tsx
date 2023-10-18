@@ -36,8 +36,8 @@ const OptionInput: React.FC<Props> = ({
             : ""}`
           }>
           {optionValue.map((option: any) => (
-            <option key={option.id} value={option.value}>
-              {option.label}
+            <option key={option?.id} value={option.value || option.iso2}>
+              {option.label || option.name}
             </option>
           ))}
         </select>

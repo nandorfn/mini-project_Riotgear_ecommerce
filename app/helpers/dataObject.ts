@@ -119,10 +119,6 @@ export const sortByOptions = [
 export const countryOption = [
   { id: 0, label: 'Choose', value: '' },
   { id: 1, label: 'Indonesia', value: 'Indonesia' },
-  { id: 2, label: 'Malaysia', value: 'Malaysia' },
-  { id: 3, label: 'Singapore', value: 'Singapore' },
-  { id: 4, label: 'Australy', value: 'Australy' },
-  { id: 5, label: 'Thailand', value: 'Thailand' },
 ];
 export const sizeCategory = [
   { id: 0, label: 'Choose', value: '' },
@@ -187,6 +183,7 @@ export const columnFeaturedPrdouct = [
   { label: "productSubCategory" },
   { label: "viewsCount" },
 ]
+
 
 export const defaultProductData = {
   productName: '',
