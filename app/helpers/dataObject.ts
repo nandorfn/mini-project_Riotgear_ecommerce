@@ -114,6 +114,14 @@ export const sortByOptions = [
   { id: 4, label: 'High to Low', value: '4' },
   { id: 5, label: 'Top Rated', value: '5' },
 ];
+export const countryOption = [
+  { id: 0, label: 'Choose', value: '' },
+  { id: 1, label: 'Indonesia', value: 'Indonesia' },
+  { id: 2, label: 'Malaysia', value: 'Malaysia' },
+  { id: 3, label: 'Singapore', value: 'Singapore' },
+  { id: 4, label: 'Australy', value: 'Australy' },
+  { id: 5, label: 'Thailand', value: 'Thailand' },
+];
 export const sizeCategory = [
   { id: 0, label: 'Choose', value: '' },
   { id: 1, label: 'S', value: 's' },
@@ -139,6 +147,11 @@ export const quantityData = [
   { id: 4, label: '4', value: 4 },
   { id: 5, label: '5', value: 5 },
   { id: 6, label: '6', value: 6 },
+];
+export const paymentOption = [
+  { id: 1, label: 'Debit / Credit Card', value: 'cc' },
+  { id: 2, label: 'Paypal', value: 'pp' },
+  { id: 3, label: 'Direct Bank Transfer', value: 'tf' },
 ];
 export type categoryOption = {
   id: number,

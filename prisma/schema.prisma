@@ -49,6 +49,7 @@ model User {
   reviews             Review[]
   cart                Cart[]
   order               Order[]
+  address             Address[]
 }
 
 model Cart {
@@ -80,6 +81,24 @@ model Order {
   updatedAt     DateTime    @updatedAt
   status        OrderStatus @default(Ordered)
   orderedItems  OrderItem[]
+  user          User        @relation(fields: [userId], references: [userId])
+  address       Address[]
+}
+
+model Address {
+  id            Int        @id @default(autoincrement())
+  userId        String
+  orderId       String
+  name          String
+  phone         String
+  email         String
+  country       String
+  city          String
+  address       String
+  zip           String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  order         Order       @relation(fields: [orderId], references: [orderId])
   user          User        @relation(fields: [userId], references: [userId])
 }
 

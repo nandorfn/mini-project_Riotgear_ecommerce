@@ -14,6 +14,7 @@ import { Heading } from "@/app/components/Container/Heading";
 import couponIcon from '@/app/assets/icon/coupon.svg'
 import arrowRight from '@/app/assets/icon/arrow-right.svg'
 import { Text } from "@/app/components/Container/Text";
+import { orderSummary } from "@/app/utils/utils";
 
 const DataProducts = ({
   products,
@@ -26,14 +27,13 @@ const DataProducts = ({
   useEffect(() => {
     router.refresh();
   }, [render, router])
-
+  
   let subTotal = 0;
   productCart.forEach((product) => {
     const total = product.quantity * product.productInfo.productPrice;
     subTotal += total;
   })
   let tax = subTotal * 11 / 100;
-
 
   return (
     <>
@@ -54,6 +54,9 @@ const DataProducts = ({
 
           <Flex variant={'col'} className="w-full md:w-1/3 gap-5">
             <OrderCard
+              style1="bg-accent py-5 px-3"
+              style2="px-2"
+              style3="px-2"
               subTotal={subTotal}
               tax={tax}
               length={productCart.length}
@@ -73,7 +76,9 @@ const DataProducts = ({
             </Flex>
 
             <Flex variant={'col'} className="gap-3">
-              <Button variant={'red'} size={'full'} className="text-white">CHECKOUT</Button>
+              <Link href={'/store/checkout'}>
+                <Button variant={'red'} size={'full'} className="text-white">CHECKOUT</Button>
+              </Link>
               <Link href={'/store'}>
                 <Button variant={'white'} size={'full'}>CONTINUE SHOPPING</Button>
               </Link>

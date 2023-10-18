@@ -27,7 +27,7 @@ const Input: React.FC<InputProps> = ({
         type={type}
         placeholder={placeholder}
         disabled={disabled}
-        className="input input-bordered flex w-full" />
+        className="input input-bordered flex w-full font-normal mt-2" />
     </>
   );
 };

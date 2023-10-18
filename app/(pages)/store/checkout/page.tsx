@@ -1,5 +1,7 @@
 import { Heading } from "@/app/components/Container/Heading";
 import Link from "next/link";
+import CheckoutBody from "./components/CheckoutBody";
+import OrderSummary from "./components/OrderSummary";
 
 const Page: React.FC = () => {
     return (
@@ -13,7 +15,10 @@ const Page: React.FC = () => {
           </ul>
         </div>
 
-        <Heading variant={'fourthRwd'} className=" mb-5 md:mb-10">SHOPPING CART</Heading>
+        <Heading variant={'fourthRwd'} className=" mb-5 md:mb-10">CHECKOUT</Heading>
+          <CheckoutBody>
+            <OrderSummary />  
+          </CheckoutBody>
       </main>
         </>
     );

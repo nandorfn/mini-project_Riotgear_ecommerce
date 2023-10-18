@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Flex } from "../Container/Flex";
 import axios from "axios";
 import Transparent from "../Container/Transparent";
-import { usePrevious } from "@/app/utils/customHooks";
+import { usePrevious } from "@/app/hooks/usePrevious";
 import { deleteData } from "@/app/utils/api";
 import { cart, userJwtSchema } from "@/app/utils/types";
 import CartModal from "../Modal/CartModal";
