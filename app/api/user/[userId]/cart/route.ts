@@ -12,15 +12,27 @@ export const POST = async (req: Request) => {
   })
 
   if (existingCart) {
-    const updatedCartItem = await prisma.cart.update({
+    const product = await prisma.product.findFirst({
       where: {
-        id: existingCart.id
-      },
-      data: {
-        quantity: existingCart.quantity + 1
+        productId: existingCart.productId
       }
     });
-    return NextResponse.json(updatedCartItem, { status: 200 });
+    
+    if (product) {
+      const newQuantity = Math.min(existingCart.quantity + 1, product.productStock);
+      const updatedCartItem = await prisma.cart.update({
+        where: {
+          id: existingCart.id
+        },
+        data: {
+          quantity: newQuantity
+        }
+      });
+      return NextResponse.json(updatedCartItem, { status: 200 });
+    } else {
+      return NextResponse.json({ error: "Product didn't exist!" }, { status: 404 });
+    }
+
   } else {
     const newCartItem = await prisma.cart.create({
       data: {

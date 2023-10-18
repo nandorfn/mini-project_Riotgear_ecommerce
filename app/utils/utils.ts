@@ -1,5 +1,6 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { cart } from "./types";
 let bcrypt = require('bcryptjs');
 
 export const hashPass = (unHashPass: string) => {
@@ -9,7 +10,7 @@ export const hashPass = (unHashPass: string) => {
 }
 
 export type ProductData = {
-  id: number;
+  id?: number;
   productId: string;
   productName: string;
   productMainCategory: string;
@@ -25,6 +26,7 @@ export type ProductData = {
 };
 
 export type productFormState = {
+  productId: string;
   productName: string;
   productMainCategory: string;
   productSubCategory: string;
@@ -62,4 +64,15 @@ export const createObject = (
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+export const orderSummary = (data: cart[]) => {
+  let subTotal = 0;
+  data.forEach((data) => {
+    const total = data.quantity * data.productInfo.productPrice;
+    subTotal += total;
+  })
+  let tax = subTotal * 11 / 100;
+  
+  return { subTotal, tax };
 }

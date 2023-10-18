@@ -1,9 +1,10 @@
 'use client'
 import Modal from "@/app/components/Modal/Modal";
-import { ProductData, productFormState } from "@/app/utils/utils";
+import { defaultProductData } from "@/app/helpers/dataObject";
+import useForm from "@/app/hooks/useForm";
+import { ProductData } from "@/app/utils/utils";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { useState } from "react";
 
 interface Props {
   dataProducts: ProductData[];
@@ -19,27 +20,14 @@ const FormEditProduct: React.FC<Props> = ({
   dataProducts
 }) => {
 
-  const [product, setProduct] = useState<productFormState>({
-    productName: editedData?.productName ?? '',
-    productMainCategory: editedData?.productMainCategory ?? '',
-    productSubCategory: editedData?.productSubCategory ?? '',
-    productImgLink: editedData?.productImgLink ?? '',
-    productSize: editedData?.productSize ?? '',
-    productColor: editedData?.productColor ?? '',
-    productGender: editedData?.productGender ?? '',
-    productStock: editedData?.productStock.toString() ?? '',
-    productDesc: editedData?.productDesc ?? '',
-    productPrice: editedData?.productPrice.toString() ?? '',
-    featured: editedData?.featured ? 1 : 0,
-  });
-  const handleInput = (e: React.SyntheticEvent) => {
-    const { name, value } = (e.target as HTMLInputElement);
-    setProduct({
-      ...product,
-      [name]: value
-    })
-  }
-
+  const initialProductData = {
+    ...defaultProductData,
+    ...(editedData ?? {}),
+    productStock: (editedData?.productStock) ? editedData.productStock.toString() : '',
+    productPrice: (editedData?.productPrice) ? editedData.productPrice.toString() : '',
+    featured: (editedData?.featured) ? 1 : 0,
+  };  
+  const {form, handleInput } = useForm(initialProductData)
   const token = getCookie('token');
   const headers = {
     'Content-Type': 'application/json',
@@ -48,10 +36,10 @@ const FormEditProduct: React.FC<Props> = ({
 
   const editData = async () => {
     const updatedProduct = {
-      ...product,
-      featured: product.featured !== 1,
-      productStock: parseInt(product.productStock),
-      productPrice: parseFloat(product.productPrice),
+      ...form,
+      featured: form.featured !== 1,
+      productStock: parseInt(form.productStock),
+      productPrice: parseFloat(form.productPrice),
     };
     axios.patch(`/api/products/${editedData?.productId}`, updatedProduct, {
       headers: headers
@@ -85,7 +73,7 @@ const FormEditProduct: React.FC<Props> = ({
         handleInput={handleInput}
         handleModal={handleModal}
         handleSubmit={handleSubmit}
-        form={product}
+        form={form}
         label={"Edit Product"}
       />
     </>

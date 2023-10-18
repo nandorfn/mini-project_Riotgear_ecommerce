@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
 const CardContainer = async ({ data }: { data: ProductData[] }) => {
   return (
     <>
-      <section className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-5 md:mt-3 overflow-y-scroll">
+      <section className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-5 overflow-y-scroll">
         {data.length > 0 ? data?.map((product) =>
           <article key={product.id}>
             <ProductCard

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import CartModal from '../Modal/CartModal';
 import { Heading } from '../Container/Heading';
 import { postData } from '@/app/utils/api';
+import { useRouter } from 'next/navigation';
 
 interface PurchaseBtn {
   user: any
@@ -21,7 +22,7 @@ const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id, stock }) => {
     productId: id,
     quantity
   }
-  const query = `/api/user/${user.userId}/cart`
+  const query = `/api/user/${user?.userId}/cart`
   const handlePostCart = async (e: React.SyntheticEvent) => {
     setModal(!modal)
     e.preventDefault();
@@ -34,6 +35,11 @@ const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id, stock }) => {
     for (let i = 0; i < loopCount; i++) {
       options.push(i + 1);
     }
+  }
+  
+  const router = useRouter();
+  const handleNavigate = () => {
+    router.push('/store/cart')
   }
 
   return (
@@ -59,6 +65,7 @@ const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id, stock }) => {
           modal={modal}
           title="1 ITEMS ADDED TO YOUR CART"
           btnLeft="VIEW CHART"
+          action={handleNavigate}
           btnRight="CONTINUE SHOPPING">
           <Heading variant={'five'}>SUBTOTAL | </Heading>
           <Heading variant={'five'} bold={'normal'}>{`${quantity} item(s)`}</Heading>

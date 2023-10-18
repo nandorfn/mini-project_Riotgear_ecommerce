@@ -13,7 +13,7 @@ const buttonVariants = cva(
         success: 'btn-success capitalize text-white',
         checked: 'bg-accent w-[2.5rem]',
         sizeBtn: 'bg-[#D9D9D9] text-[#3E3E3E] border-0 w-[2.5rem] text-[0.875rem]',
-        red: 'btn-error',
+        red: 'btn-error text-white hover:bg-red-700',
       // OLD
         login: 'disabled:bg-base-200 bg-black text-white',
         primary: 'btn-primary',
@@ -25,7 +25,7 @@ const buttonVariants = cva(
         grey: 'bg-zinc-300',
         white: 'bg-base-100',
         brown: 'bg-amber-950',
-        red: 'bg-red',
+        red: 'bg-red text-white',
         zinc: 'bg-[#D9D9D9]',
         green: 'bg-green-700',
         blue: 'bg-blue-500 text-white',

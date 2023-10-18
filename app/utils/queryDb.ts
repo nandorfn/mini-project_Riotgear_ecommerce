@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { cache, use } from 'react';
+import { cache } from 'react';
 export type { Product } from '@prisma/client'
 const prisma = new PrismaClient;
 
@@ -109,7 +109,7 @@ export const getRecomendProduct = async (category: string, existId: string) => {
   return product;
 }
 
-export const getUserProductCart = async (userId: string) => {
+export const getUserProductCart = cache(async(userId: string) => {
   const userCart = await prisma.cart.findMany({
     where: {
       userId: userId
@@ -117,7 +117,6 @@ export const getUserProductCart = async (userId: string) => {
   })
   
   const products: any[] = [];
-
   for (const cartItem of userCart) {
     const product = await getProduct(cartItem.productId);
     products.push(product);
@@ -131,6 +130,5 @@ export const getUserProductCart = async (userId: string) => {
       };
     })
   };
-    
   return combinedData.userCart;
-}
+})

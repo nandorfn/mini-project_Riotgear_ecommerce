@@ -2,15 +2,16 @@ import { Button } from "../Button/Button";
 import { Flex } from "../Container/Flex";
 import { Heading } from "../Container/Heading";
 import Transparent from "../Container/Transparent";
-import { useRouter } from "next/navigation";
 
 type ModalProps = {
+  id?: string;
   title: string,
   btnLeft: string,
   btnRight: string,
   children: React.ReactNode,
   modal: boolean,
   setModal: (state: boolean) => void,
+  action: any,
 }
 
 const CartModal = ({
@@ -19,13 +20,10 @@ const CartModal = ({
   btnRight,
   children,
   modal,
-  setModal
+  setModal,
+  action,
+  id
 }: ModalProps) => {
-  const router = useRouter();
-  const handleNavigate = () => {
-    router.push('/store/cart')
-  }
-
   return (
     <>
       <Transparent>
@@ -35,7 +33,7 @@ const CartModal = ({
             {children}
           </Flex>
           <Flex variant={'row'} className="gap-5 justify-between">
-              <Button onClick={handleNavigate} size={'half'} variant={'black'}>{btnLeft}</Button>
+              <Button id={id} onClick={action} size={'half'} variant={'black'}>{btnLeft}</Button>
             <Button onClick={() => setModal(!modal)} size={'half'} variant={'white'}>{btnRight}</Button>
           </Flex>
         </Flex>

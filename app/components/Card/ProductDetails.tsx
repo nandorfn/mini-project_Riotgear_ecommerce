@@ -1,12 +1,12 @@
-import PurchaseBtn from "../Button/PurchaseBtn";
-import { Heading } from '@/app/components/Container/Heading'
-import List from "../List";
+import Link from "next/link";
+import { checkUserLogin } from "@/app/utils/auth";
 import { sizeChart } from "@/app/helpers/dataObject";
-import { Button } from "../Button/Button";
-import { Flex } from "../Container/Flex";
-import { cookies } from "next/headers";
-import { verifyAuth } from "@/app/utils/auth";
-import { JwtSchema } from "@/app/utils/types";
+
+import { Heading } from '@/app/components/Container/Heading'
+import { Button } from "@/app/components/Button/Button";
+import { Flex } from "@/app/components/Container/Flex";
+import PurchaseBtn from "@/app/components/Button/PurchaseBtn";
+import List from "../List";
 
 interface Props {
   name?: string | null;
@@ -25,14 +25,8 @@ const ProductDetails: React.FC<Props> = async ({
   stock
 }) => {
   const formattedPrice = price?.toLocaleString('id-ID')
-  const cookieStore = cookies()
-  const token = cookieStore.get('token');
-  const user: JwtSchema | void =
-  token &&
-    (await verifyAuth(token.value).catch((err) => {
-      console.log(err);
-    }))
-    
+  const user = await checkUserLogin();
+
   return (
     <>
       <Flex align={'between'} className="min-h-[20%] text flex-col-reverse md:flex-col">
@@ -40,7 +34,7 @@ const ProductDetails: React.FC<Props> = async ({
         <Heading fs={'xl2'} bold={'normal'}>{`Rp${formattedPrice}`}</Heading>
       </Flex>
       <div className="border-t"></div>
-      <div className="hidden md:flex flex-col gap-3">
+      <div className="hidden md:flex flex-col justify-between gap-3">
         <h4 className="font-medium text-xl">Size</h4>
         <List
           name="sizeChartProduct"
@@ -59,11 +53,17 @@ const ProductDetails: React.FC<Props> = async ({
             )
           }}
         />
-        <PurchaseBtn
-          user={user}
-          id={id}
-          stock={stock}
-        />
+        
+        {!user
+          ? <Link href={'/login'}>
+              <Button variant={'red'} className="text-white" size={'full'}>LOGIN TO CHECKOUT</Button>
+            </Link>
+          : <PurchaseBtn
+            user={user}
+            id={id}
+            stock={stock}
+          />
+        }
       </div>
 
     </>
