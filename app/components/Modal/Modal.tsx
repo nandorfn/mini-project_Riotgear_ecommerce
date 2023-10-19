@@ -3,7 +3,7 @@ import './Modal.css'
 import { colorCategory, featuredOption, genderCategory, mainCategory, sizeCategory, subCategory } from '@/app/helpers/dataObject';
 import { productFormState } from '@/app/utils/utils';
 
-import { TextArea } from "../Form/TextArea";
+import { Textarea } from "../Form/Textarea";
 import Input from "../Form/Input";
 import { Button } from '../Button/Button';
 import OptionInput from '../Form/Option';
@@ -105,13 +105,13 @@ const Modal: React.FC<Props> = ({
                 error=''
               />
             </div>
-            <TextArea
-              name={'productDesc'}
-              label="Product Description"
-              value={form.productDesc}
-              handleInput={handleInput}
-              error=""
-            />
+            <label>
+            Product Description
+              <Textarea
+                name={'productDesc'}
+                value={form.productDesc}
+              />
+            </label>
             <div className='grid grid-cols-2 gap-4'>
               <label>
                 Product Stock

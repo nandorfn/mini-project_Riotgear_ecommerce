@@ -1,11 +1,6 @@
-interface Props {
-  name: string;
-  error: string;
-}
-
-const ErrorMsg: React.FC<Props> = ({name, error}) => {
+const ErrorMsg = ({error}: {error: any }) => {
   return (
-    <p id={`error-${name}`} className="text-danger">{error}</p>
+    <span className="text-red-500 font-normal">{error}</span>
   )
 }
 

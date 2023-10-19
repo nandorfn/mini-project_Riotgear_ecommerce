@@ -1,26 +1,34 @@
 'use client'
+import { Button } from "@/app/components/Button/Button";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
-import Input from "@/app/components/Form/Input";
-import OptionInput from "@/app/components/Form/Option";
-import { TextArea } from "@/app/components/Form/TextArea";
+import { Text } from "@/app/components/Container/Text";
+import ErrorMsg from "@/app/components/ErrorMsg";
+import { Select } from "@/app/components/Form/Select";
+import { Textarea } from "@/app/components/Form/Textarea";
+import { paymentOption } from "@/app/helpers/dataObject";
+import useAddressForm from "@/app/hooks/useAddressForm";
 import useFetchLocation from "@/app/hooks/useFetchLocation";
-import useForm from "@/app/hooks/useForm";
+import Link from "next/link";
+import { useRef } from "react";
+import { Controller } from "react-hook-form";
 
-const initialState = {
-    name: '',
-    phone: '',
-    email: '',
-    country: 'DEF',
-    city: 'DEF',
-    district: 'DEF',
-    village: '',
-    address: '',
-    zip: '',
+type CheckoutBodyProps = {
+    children: React.ReactNode;
+    userId: string;
 }
 
-const CheckoutBody = ({ children }: { children: React.ReactNode }) => {
-    const { form, handleInput } = useForm(initialState);
+const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
+    const {
+        register,
+        handleSubmit,
+        errors,
+        isSubmitting,
+        onSubmit,
+        watch,
+        control
+    } = useAddressForm(userId);
+    const form = watch();
     const country = useFetchLocation('');
     const cityQuery = form.country && `/${form?.country}/states`
     const cities = useFetchLocation(cityQuery);
@@ -29,82 +37,157 @@ const CheckoutBody = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <>
-            <Flex variant={'colToRow'} className="gap-10">
+            <Flex variant={'colToRowReverse'} className="gap-10">
                 <section className="flex flex-col w-full md:w-1/2">
                     <Heading>BILLING DETAILS</Heading>
-                    <form className="flex flex-col gap-3 md:gap-5 mt-5">
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 md:gap-5 mt-5">
+
                         <label className="font-medium">
                             Name
-                            <Input
-                                name="name"
-                                value={form.name}
+                            <input
+                                {...register("name")}
                                 type="text"
-                                placeholder="Input your name"
-                                handleInput={handleInput}
+                                placeholder="Your name"
+                                className="input input-bordered w-full font-normal mt-3 mb-2"
                             />
+                            {errors.name && <ErrorMsg error={errors.name.message} />}
                         </label>
                         <label className="font-medium">
                             Phone
-                            <Input
-                                name="phone"
-                                value={form.phone}
+                            <input
+                                {...register("phone")}
                                 type="text"
                                 placeholder="Input your phone number"
-                                handleInput={handleInput}
+                                className="input input-bordered w-full font-normal mt-3"
                             />
+                            {errors.phone && <ErrorMsg error={errors.phone.message} />}
                         </label>
                         <label className="font-medium">
                             Email
-                            <Input
-                                name="email"
-                                value={form.email}
+                            <input
+                                {...register("email")}
                                 type="email"
                                 placeholder="Input your email"
-                                handleInput={handleInput}
+                                className="input input-bordered w-full font-normal mt-3"
                             />
+                            {errors.email && <ErrorMsg error={errors.email.message} />}
                         </label>
-                        <OptionInput
-                            label="Country"
-                            name="country"
-                            addClass=" select-bordered mt-2 capitalize"
-                            optionValue={country}
-                            value={form.country}
-                            handleInput={handleInput}
-                        />
-                        <OptionInput
-                            label="City / Regency"
-                            name="city"
-                            addClass=" select-bordered mt-2 capitalize"
-                            optionValue={cities}
-                            value={form.city}
-                            handleInput={handleInput}
-                        />
-                        <OptionInput
-                            label="Subdistrict"
-                            name="district"
-                            addClass=" select-bordered mt-2 capitalize"
-                            optionValue={districts}
-                            value={form.district}
-                            handleInput={handleInput}
-                        />
-                        <label className="font-medium">
+
+                        <label className="flex flex-col font-medium">
+                            Country
+                            <Controller
+                                render={({ field }) => (
+                                    <Select
+                                        {...field}
+                                        data={country}
+                                        variant={'border'}
+                                        className="mt-3"
+                                    />
+                                )}
+                                name="country"
+                                control={control}
+                                defaultValue="AF"
+                            />
+                            {errors.country && <ErrorMsg error={errors.country.message} />}
+                        </label>
+
+                        <label className="flex flex-col font-medium ">
+                            City
+                            <Controller
+                                name="city"
+                                control={control}
+                                defaultValue="GHA"
+                                render={({ field }) => (
+                                    <Select
+                                        {...field}
+                                        data={cities}
+                                        variant={'border'}
+                                        className="mt-3"
+                                    />
+                                )}
+                            />
+                            {errors.city && <ErrorMsg error={errors.city.message} />}
+                        </label>
+                        
+                        <label className="flex flex-col font-medium ">
+                            District
+                            <Controller
+                                name="district"
+                                control={control}
+                                defaultValue="Ghazni"
+                                render={({ field }) => (
+                                    <Select
+                                        {...field}
+                                        data={districts}
+                                        variant={'border'}
+                                        className="mt-3"
+                                    />
+                                )}
+                            />
+                            {errors.district && <ErrorMsg error={errors.district.message} />}
+                        </label>
+
+                        <label className="font-medium flex flex-col">
                             Street Address
-                            <TextArea
+                            <Controller
                                 name="address"
-                                handleInput={handleInput}
-                                value={form.address}
+                                control={control}
+                                render={({ field }) => (
+                                    <Textarea
+                                        {...field}
+                                        variant={'border'}
+                                        size={'standard'}
+                                        className="mt-3"
+                                    />
+                                )}
                             />
+                            {errors.address && <ErrorMsg error={errors.address.message} />}
                         </label>
+
                         <label className="font-medium">
                             Postcode / ZIP
-                            <Input
+                            <input
+                                {...register("zip")}
                                 name="zip"
-                                value={form.zip}
                                 type="text"
                                 placeholder="Postcode"
-                                handleInput={handleInput}
+                                className="input input-bordered w-full font-normal mt-3"
                             />
+                            {errors.zip && <ErrorMsg error={errors.zip.message} />}
                         </label>
+
+                        <Flex className="mt-2" variant={'col'}>
+                            <Heading className="border-t-2 flex w-full pt-5">PAYMENT METHOD</Heading>
+                            <Flex variant={'col'} className="gap-[10px] mt-5">
+                                {paymentOption.map((option) => (
+                                    <div key={option.id} className="flex flex-row gap-3 bg-base-200 p-3 rounded-lg items-center">
+                                        <input
+                                            {...register("paymentMethod")}
+                                            type="radio"
+                                            value={option.value }
+                                            className="radio radio-sm rounded-md"
+                                        />
+                                        <Text>{option.label}</Text>
+                                    </div>
+                                ))
+                                }
+                            </Flex>
+                            {errors.paymentMethod && <ErrorMsg error={errors.paymentMethod.message} />}
+                        </Flex>
+
+                        <Flex variant={'row'} className="gap-5">
+                            <Link className="flex w-[48.5%]" href={'/store'}>
+                                <Button size={'full'} variant={'white'}>BACK TO STORE</Button>
+                            </Link>
+                            <Button
+                                size={'half'}
+                                variant={'red'}
+                                type="submit"
+                                disabled={isSubmitting}
+                            >
+                                ORDER
+                            </Button>
+                        </Flex>
                     </form>
 
                 </section>

@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+);
+
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8, 'Password must be at least 8 characters'),
@@ -25,6 +29,19 @@ export const registerSchema = z.object({
     path: ["confirmPassword"],
   });
 export type TRegisterSchema = z.infer<typeof registerSchema>;
+
+export const userAddressSchema = z.object({
+  name: z.string().min(1, 'Name cannot be empty'),
+  phone: z.string().refine((str) => phoneRegex.test(str), {message: "Please enter a valid phone number" }),
+  email: z.string().email({message: "Please enter a valid email address" }),  
+  country: z.string(),
+  city: z.string(),
+  district: z.string(),
+  address: z.string().min(2, 'Please input a valid street address'),
+  zip: z.string().min(2, 'Postal code cannot be empty'),
+  paymentMethod: z.any().refine((str) => str !== null, {message: 'Please choose a payment method'} ),
+})
+export type TUserAddressSchema = z.infer<typeof userAddressSchema>
 
 export const tokenSchema = z.object({
   username: z.string(),
