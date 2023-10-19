@@ -1,7 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { Address, Cart, PrismaClient } from '@prisma/client';
 import { cache } from 'react';
 export type { Product } from '@prisma/client'
 const prisma = new PrismaClient;
+import { z } from 'zod';
+import { userAddressSchema } from "@/app/utils/types";
+
 
 export const revalidate = 3600
 
@@ -10,12 +13,12 @@ export const getFeatured = async () => {
     where: {
       featured: true
     }
-  
+
   })
   return productFeatured;
 }
 
-export const getItem = cache(async(filters: any) => {
+export const getItem = cache(async (filters: any) => {
   const priceRanges = filters.priceRanges
     ? filters.priceRanges.split('-').map((price: any) => parseInt(price))
     : undefined;
@@ -73,14 +76,14 @@ export const getProduct = cache(async (id: string) => {
   return product;
 });
 
-export const getPopularProducts = cache(async() => {
+export const getPopularProducts = cache(async () => {
   const popularProducts = await prisma.product.findMany({
     orderBy: {
       viewsCount: 'desc'
     },
     take: 10
   })
-  
+
   return popularProducts;
 })
 
@@ -105,17 +108,17 @@ export const getRecomendProduct = async (category: string, existId: string) => {
     },
     take: 4
   })
-  
+
   return product;
 }
 
-export const getUserProductCart = cache(async(userId: string) => {
+export const getUserProductCart = cache(async (userId: string) => {
   const userCart = await prisma.cart.findMany({
     where: {
       userId: userId
     }
   })
-  
+
   const products: any[] = [];
   for (const cartItem of userCart) {
     const product = await getProduct(cartItem.productId);
@@ -132,3 +135,104 @@ export const getUserProductCart = cache(async(userId: string) => {
   };
   return combinedData.userCart;
 })
+
+type selectCart = Pick<Cart, 'productId' | 'quantity'>;
+export const createOrderItem = async (productCart: selectCart[], orderId: string) => {
+  const createdOrderItems = [];
+
+  for (const product of productCart) {
+    const createdOrderItem = await prisma.orderItem.create({
+      data: {
+        orderId,
+        productId: product.productId,
+        quantity: product.quantity
+      }
+    });
+
+    createdOrderItems.push(createdOrderItem);
+  }
+
+  return createdOrderItems;
+}
+
+export const createUserAddress = async (form: any, userId: string, orderId: string) => {
+  const { data } = form;
+  console.log(data);
+  if (data) {
+    const saveAddress = await prisma.address.create({
+      data: {
+        userId,
+        orderId,
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        country: data.country,
+        city: data.city,
+        district: data.district,
+        address: data.address,
+        zip: data.zip
+      }
+    });
+    return !!saveAddress;
+  }
+  return true;
+}
+
+async function checkStockOrReduceStock(userId: string, operation: 'check' | 'reduce') {
+  const productCart = await prisma.cart.findMany({
+    where: {
+      userId
+    },
+    select: {
+      id: true,
+      productId: true,
+      quantity: true,
+    }
+  });
+
+  for (const product of productCart) {
+    const productStored = await prisma.product.findFirst({
+      where: {
+        productId: product.productId
+      }
+    });
+
+    if (!productStored) {
+      return false;
+    }
+
+    if (operation === 'check' && product.quantity > productStored.productStock) {
+      return false;
+    } else if (operation === 'reduce') {
+      if (product.quantity > productStored.productStock) {
+        return false;
+      } else if (product.quantity < productStored.productStock) {
+        // Kurangi jumlah stok produk
+        await prisma.product.update({
+          where: {
+            productId: product.productId
+          },
+          data: {
+            productStock: productStored.productStock - product.quantity
+          }
+        });
+
+        // Hapus item dari keranjang
+        await prisma.cart.deleteMany({
+          where: {
+            productId: product.productId
+          }
+        });
+      }
+    }
+  }
+  return true;
+}
+
+export const checkStock = async (userId: string) => {
+  return checkStockOrReduceStock(userId, 'check');
+}
+
+export const reduceProductStock = async (userId: string) => {
+  return checkStockOrReduceStock(userId, 'reduce');
+}

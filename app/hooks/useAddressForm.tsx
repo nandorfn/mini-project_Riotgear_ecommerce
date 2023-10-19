@@ -9,7 +9,7 @@ const useAddressForm = (userId: string) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting},
+    formState: { errors, isSubmitting },
     reset,
     setError,
     watch,
@@ -17,15 +17,17 @@ const useAddressForm = (userId: string) => {
   } = useForm<TUserAddressSchema>({
     resolver: zodResolver(userAddressSchema)
   });
-  
+
   const onSubmit = async (data: TUserAddressSchema) => {
-    axios.post(`/api/user/${userId}/cart`)
-    .then((res) => 
-      console.log(res.data)
-    )
-    .catch((err) => {
-      console.log(err)
-    }) 
+    axios.post(`/api/user/${userId}/order`, data)
+      .then((res) => {
+        console.log(res.data)
+        console.log(res)
+      }
+      )
+      .catch((err) => {
+        console.log(err)
+      })
     reset();
   }
   return {
@@ -36,7 +38,7 @@ const useAddressForm = (userId: string) => {
     onSubmit,
     watch,
     control
-  } 
+  }
 }
 
 export default useAddressForm;
