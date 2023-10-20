@@ -21,7 +21,7 @@ const page = async ({
           <div className="py-2 md:py-4 z-30 bg-white sticky top-0">
             <ScrollMenuContainer />
           </div>
-          <div className=" bg-white h-screen overflow-y-scroll" style={{height: 'calc(100vh - 2rem)'}}>
+          <div className=" bg-white h-screen pb-52 overflow-y-scroll" style={{height: 'calc(100vh - 2rem)'}}>
             <CardContainer
               data={products}
             />

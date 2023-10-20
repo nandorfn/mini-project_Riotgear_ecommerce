@@ -21,10 +21,10 @@ export default function Loading() {
           <div className="sticky top-12 md:top-16 py-2 md:py-4 z-30 bg-white">
             <ScrollMenuContainer />
           </div>
-          <section className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-5 md:mt-3 overflow-y-scroll">
+          <section className="grid  grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-5 md:mt-3 overflow-y-scroll">
             {data.map((item) => (
               <article key={item}>
-                <div className="card w-52 h-64 shadow-sm bg-zinc-100">
+                <div className="card w-[98%] h-64 shadow-sm bg-zinc-100">
                   <figure className='h-[60%]'>
                     <Skeleton height={160} containerClassName="flex-1" />
                   </figure>

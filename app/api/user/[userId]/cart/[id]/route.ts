@@ -1,9 +1,10 @@
 import { verifyAuth } from "@/app/utils/auth";
 import { getUserProductCart } from "@/app/utils/queryDb";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
 
-export const PATCH = async (req: Request, { params }: { params: { id: string } }) => {
+export const PATCH = async (req: NextRequest, { params }: { params: { id: string, userId: string } }) => {
+  const { userId } = params;
   const headers = req.headers;
   const authorizationHeader = headers.get('cookie');
   const token = authorizationHeader?.split('=')[1]
@@ -15,7 +16,7 @@ export const PATCH = async (req: Request, { params }: { params: { id: string } }
     );
   } else {
     const quantity = await req.json();
-    const newProductQuantity = await prisma.cart.update({
+    await prisma.cart.update({
       where: {
         id: Number(params.id),
       },
@@ -24,6 +25,7 @@ export const PATCH = async (req: Request, { params }: { params: { id: string } }
       }
     })
 
+    const newProductQuantity = await getUserProductCart(userId);
     return NextResponse.json(newProductQuantity, { status: 200 });
   }
 }

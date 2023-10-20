@@ -15,7 +15,9 @@ const Accordion: React.FC<AccordionProps> = ({ label, content }) => {
         <div className="collapse-title px-0 text-base md:text-xl font-medium flex justify-between">
           <Heading variant={'five'}>{label}</Heading>
           <Image 
-            className='me-4'
+            className='me-4 '
+            width={20}
+            height={20}
             src={arrowDown}
             alt="arrow down"
           />

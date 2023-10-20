@@ -9,7 +9,7 @@ const textVariants = cva(
     fs: {
       sm: 'text-sm',
       lg: 'text-lg',
-      xl: 'text-4xl'
+      xl: 'text-2xl md:text-4xl'
     },
     align: {
       center: 'text-center',

@@ -110,7 +110,7 @@ export const getRecomendProduct = async (category: string, existId: string) => {
   return product;
 }
 
-export const getUserProductCart = cache(async (userId: string) => {
+export const getUserProductCart = async (userId: string) => {
   const userCart = await prisma.cart.findMany({
     where: {
       userId: userId
@@ -132,7 +132,7 @@ export const getUserProductCart = cache(async (userId: string) => {
     })
   };
   return combinedData.userCart;
-})
+}
 
 type selectCart = Pick<Cart, 'productId' | 'quantity'>;
 export const createOrderItem = async (productCart: selectCart[], orderId: string) => {

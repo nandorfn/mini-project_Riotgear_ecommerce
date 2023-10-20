@@ -24,7 +24,7 @@ const Page = async ({
   return (
     <>
       <main className="px-3">
-        <div className="text-base breadcrumbs">
+        <div className="text-base text-base-300 breadcrumbs">
           <ul>
             <li><Link href={'/'}>RIOTGEAR</Link></li>
             <li><Link href={'/store'}>Store</Link></li>

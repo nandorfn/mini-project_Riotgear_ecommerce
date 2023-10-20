@@ -1,8 +1,7 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { DataProductProps, cart } from "@/app/utils/types";
 import { Button } from "@/app/components/Button/Button";
@@ -21,12 +20,6 @@ const DataProducts = ({
 }: DataProductProps
 ) => {
   const [productCart, setProductCard] = useState<cart[]>(products);
-  const [render, setRender] = useState(false);
-  const router = useRouter();
-  useEffect(() => {
-    router.refresh();
-  }, [render, router])
-  
   let subTotal = 0;
   productCart.forEach((product) => {
     const total = product.quantity * product.productInfo.productPrice;
@@ -43,8 +36,6 @@ const DataProducts = ({
               <CartCard
                 handleProduct={setProductCard}
                 key={data.id}
-                render={render}
-                setRender={setRender}
                 user={user}
                 data={data} />
             ))
