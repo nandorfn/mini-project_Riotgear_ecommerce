@@ -1,10 +1,7 @@
-import { Address, Cart, PrismaClient } from '@prisma/client';
+import { Cart, PrismaClient } from '@prisma/client';
 import { cache } from 'react';
 export type { Product } from '@prisma/client'
 const prisma = new PrismaClient;
-import { z } from 'zod';
-import { userAddressSchema } from "@/app/utils/types";
-
 
 export const revalidate = 3600
 
@@ -217,7 +214,6 @@ async function checkStockOrReduceStock(userId: string, operation: 'check' | 'red
           }
         });
 
-        // Hapus item dari keranjang
         await prisma.cart.deleteMany({
           where: {
             productId: product.productId
