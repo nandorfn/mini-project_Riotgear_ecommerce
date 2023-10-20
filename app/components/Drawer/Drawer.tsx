@@ -12,9 +12,7 @@ const Drawer: React.FC = () => {
             menuFor='store'
           />
           <li>
-          <Link className="hover:font-medium" href={'/'}>{'Cart'}</Link>
-          <Link className="hover:font-medium" href={'/'}>{'Wishlist'}</Link>
-          <Link className="hover:font-medium" href={'/'}>{'Account'}</Link>
+          <Link className="hover:font-medium" href={'/store/cart'}>{'Cart'}</Link>
         </li>
         </ul>
       </div>

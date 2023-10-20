@@ -24,7 +24,7 @@ const ScrollMenuContainer: React.FC = () => {
 
   return (
     <>
-      <section className="flex ">
+      <section className="flex relative">
         <div className="mx-auto overflow-x-hidden">
           <Flex variant={'row'} className="whitespace-nowrap">
             <Flex align={'center'} className="max-w-[4em] md:ms-0 md:hidden">

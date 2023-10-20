@@ -24,15 +24,18 @@ const ScrollMenu: React.FC = () => {
       <ul className="flex gap-3 text-sm breadcrumbs relative ">
         {subCategory?.slice(1).map((item, index) => {
           const url = pathname + '?' + createQueryString('category', item.value)
-        return (
-          <li className='inline-block' key={index}>
-            <Link
-              href={pathname === '/' ? `/store/${url}` : url}
-              className={`bg-base-200 py-2 px-4 hover:bg-neutral-content rounded-full ${activeCategory === item.label && 'border-2 bg-white'}`}>{item.label}
-            </Link>
-          </li>
-        )})}
+          return (
+            <li className='inline-block' key={index}>
+              <Link
+                href={pathname === '/' ? `/store/${url}` : url}
+                className={`bg-base-200 py-2 px-4 hover:bg-neutral-content rounded-full ${activeCategory === item.label && 'border-2 bg-white'}`}>{item.label}
+              </Link>
+            </li>
+          )
+        })}
       </ul>
+      <div className='absolute h-full w-40 bg-gradient-to-l from-white end-0 top-0 hidden md:block'></div>
+
 
     </>
   );

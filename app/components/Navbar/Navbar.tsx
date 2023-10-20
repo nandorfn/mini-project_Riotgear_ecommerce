@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
               <label htmlFor="my-drawer" className="drawer-overlay"></label>
               <ul className='menu w-80 pt-16 min-h-full bg-[#EBEBED] text-lg'>
                 <li>
-                  <Link className="hover:font-medium" href={'/'}>{'Store'}</Link>
+                  <Link className="hover:font-medium" href={'/store'}>{'Store'}</Link>
                 </li>
                 <Menus
                   menuFor='landing-page'
