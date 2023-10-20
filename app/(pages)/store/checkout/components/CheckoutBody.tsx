@@ -10,8 +10,9 @@ import { paymentOption } from "@/app/helpers/dataObject";
 import useAddressForm from "@/app/hooks/useAddressForm";
 import useFetchLocation from "@/app/hooks/useFetchLocation";
 import Link from "next/link";
-import { useRef } from "react";
 import { Controller } from "react-hook-form";
+import bankIcon from '@/app/assets/icon/bank.svg'
+import Image from "next/image";
 
 type CheckoutBodyProps = {
     children: React.ReactNode;
@@ -86,7 +87,7 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
                                 )}
                                 name="country"
                                 control={control}
-                                defaultValue="AF"
+                                defaultValue=""
                             />
                             {errors.country && <ErrorMsg error={errors.country.message} />}
                         </label>
@@ -96,7 +97,7 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
                             <Controller
                                 name="city"
                                 control={control}
-                                defaultValue="GHA"
+                                defaultValue=""
                                 render={({ field }) => (
                                     <Select
                                         {...field}
@@ -108,13 +109,13 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
                             />
                             {errors.city && <ErrorMsg error={errors.city.message} />}
                         </label>
-                        
+
                         <label className="flex flex-col font-medium ">
                             District
                             <Controller
                                 name="district"
                                 control={control}
-                                defaultValue="Ghazni"
+                                defaultValue=""
                                 render={({ field }) => (
                                     <Select
                                         {...field}
@@ -160,14 +161,17 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
                             <Heading className="border-t-2 flex w-full pt-5">PAYMENT METHOD</Heading>
                             <Flex variant={'col'} className="gap-[10px] mt-5">
                                 {paymentOption.map((option) => (
-                                    <div key={option.id} className="flex flex-row gap-3 bg-base-200 p-3 rounded-lg items-center">
-                                        <input
-                                            {...register("paymentMethod")}
-                                            type="radio"
-                                            value={option.value }
-                                            className="radio radio-sm rounded-md"
-                                        />
+                                    <div key={option.id} className="flex flex-row bg-base-200 p-3 rounded-lg items-center justify-between">
+                                        <Flex variant={'row'} className="gap-3">
+                                            <input
+                                                {...register("paymentMethod")}
+                                                type="radio"
+                                                value={option.value}
+                                                className="radio radio-sm rounded-md"
+                                            />
                                         <Text>{option.label}</Text>
+                                        </Flex>
+                                        <Image src={bankIcon} alt="bank icon" />
                                     </div>
                                 ))
                                 }

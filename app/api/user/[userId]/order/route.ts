@@ -1,11 +1,10 @@
 import { verifyAuth } from "@/app/utils/auth";
 import { checkStock, createOrderItem, createUserAddress, reduceProductStock } from "@/app/utils/queryDb";
 import { userAddressSchema } from "@/app/utils/types";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
+import prisma from "@/app/lib/prisma";
 
-const prisma = new PrismaClient();
 export const POST = async (req: Request, { params }: {
   params: { userId: string }
 }) => {
@@ -28,7 +27,7 @@ export const POST = async (req: Request, { params }: {
       });
       return NextResponse.json({ errors: zodErrors }, { status: 400 });
     } else if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 200 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 400 });
     } else {
       const hasSufficientStock = await checkStock(userId);
       if (!hasSufficientStock) {

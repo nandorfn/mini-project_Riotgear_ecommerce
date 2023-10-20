@@ -147,8 +147,6 @@ export const quantityData = [
   { id: 6, label: '6', value: 6 },
 ];
 export const paymentOption = [
-  { id: 1, label: 'Debit / Credit Card', value: 'cc' },
-  { id: 2, label: 'Paypal', value: 'pp' },
   { id: 3, label: 'Direct Bank Transfer', value: 'tf' },
 ];
 export type categoryOption = {

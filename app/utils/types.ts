@@ -1,8 +1,6 @@
 import { z } from "zod";
 
-const phoneRegex = new RegExp(
-  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
-);
+const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 
 export const loginSchema = z.object({
   email: z.string().email(),
@@ -34,9 +32,9 @@ export const userAddressSchema = z.object({
   name: z.string().min(1, 'Name cannot be empty'),
   phone: z.string().refine((str) => phoneRegex.test(str), {message: "Please enter a valid phone number" }),
   email: z.string().email({message: "Please enter a valid email address" }),  
-  country: z.string(),
-  city: z.string(),
-  district: z.string(),
+  country: z.string().min(2, 'Please select a country'),
+  city: z.string().min(2, 'Please select a city'),
+  district: z.string().min(1, 'Please select a district'),
   address: z.string().min(2, 'Please input a valid street address'),
   zip: z.string().min(2, 'Postal code cannot be empty'),
   paymentMethod: z.any().refine((str) => str !== null, {message: 'Please choose a payment method'} ),

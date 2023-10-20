@@ -2,7 +2,7 @@ import { cn } from '@/app/utils/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { forwardRef, SelectHTMLAttributes, useRef } from 'react';
 const selectVariants = cva(
-  'input form-control font-normal',
+  'input font-normal',
   {
     variants: {
       variant: {
