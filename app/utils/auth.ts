@@ -27,4 +27,3 @@ export const checkUserLogin = async () => {
     
   return user;
 }
-

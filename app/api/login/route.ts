@@ -50,11 +50,11 @@ export const POST = async (req: Request) => {
           role: user.role
         },
           JWT_SECRET!, {
-          expiresIn: '24h'
+          expiresIn: '30d'
         });
         cookies().set('token', token, { 
           secure: process.env.NODE_ENV !== 'development', 
-          maxAge: 86400,
+          maxAge: 2592000,
           sameSite: 'strict'
         })
         return NextResponse.json({ status: 200 });

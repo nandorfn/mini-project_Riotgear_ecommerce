@@ -3,8 +3,10 @@ import { TLoginSchema, loginSchema } from "../utils/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useState } from "react";
 
 const useLoginForm = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -17,10 +19,12 @@ const useLoginForm = () => {
 
   const router = useRouter()
   const onSubmit = async (data: TLoginSchema) => {
+    setLoading(true);
     axios.post('/api/login', data)
       .then(response => {
         if (response.data.status === 200) {
-          router.push('/')
+          setLoading(false);
+          router.refresh()
         }
       })
       .catch(error => {
@@ -46,6 +50,7 @@ const useLoginForm = () => {
   };
 
   return {
+    loading,
     register,
     handleSubmit,
     errors,
