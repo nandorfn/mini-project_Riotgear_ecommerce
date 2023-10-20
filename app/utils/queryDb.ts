@@ -232,3 +232,70 @@ export const checkStock = async (userId: string) => {
 export const reduceProductStock = async (userId: string) => {
   return checkStockOrReduceStock(userId, 'reduce');
 }
+
+export const getOrderProducts = cache(async () => {
+  const allOrder = await prisma.order.findMany();
+
+  const allData = await Promise.all(
+    allOrder.map(async (order) => {
+      const orderItems = await prisma.orderItem.findMany({
+        where: {
+          orderId: order.orderId,
+        },
+        select: {
+          productId: true,
+          quantity: true,
+        }
+      });
+
+      const address = await prisma.address.findFirst({
+        where: {
+          orderId: order.orderId,
+        },
+        select: {
+          name: true,
+          country: true,
+          city: true,
+          district: true,
+          address: true,
+          zip: true,
+        }
+      });
+      
+      const validOrderItems = Array.isArray(orderItems) ? orderItems : [];
+      const orderData = {
+        ...order,
+        orderItems: validOrderItems,
+        address,
+      };
+
+      const products = await Promise.all(
+        orderItems.map(async (item) => {
+          const product = await prisma.product.findFirst({
+            where: {
+              productId: item.productId,
+            },
+            select: {
+              productName: true,
+              productImgLink: true,
+              productSize: true,
+              productColor: true,
+              productPrice: true,
+            }
+          });
+          return product;
+        })
+      );
+      
+      orderData.orderItems = orderItems.map((item, index) => ({
+        productId: item.productId,
+        quantity: item.quantity,
+        product: products[index],
+      }));
+
+      return orderData;
+    })
+  );
+  return allData;
+});
+

@@ -21,7 +21,6 @@ export const POST = async (req: Request, { params }: {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   } else {
     const result = userAddressSchema.safeParse(body);
-    console.log(result);
     if (!result.success) {
       let zodErrors = {};
       result.error.issues.forEach((issue) => {

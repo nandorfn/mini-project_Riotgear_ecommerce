@@ -3,6 +3,7 @@ import OrderCard from "./components/OrderCard";
 import { Flex } from "@/app/components/Container/Flex";
 import { Button } from "@/app/components/Button/Button";
 import Link from "next/link";
+import { getOrderProducts } from "@/app/utils/queryDb";
 
 const Page = async ({
   searchParams,
@@ -10,39 +11,50 @@ const Page = async ({
   searchParams: { [key: string]: string | string[] | undefined }
 }) => {
 
-  console.log(searchParams.status);
-    return (
-        <>
-          <Heading fs={'xl2'}>Order List</Heading>
-          <Flex align={'iCenter'} className="my-5 gap-3 breadcrumbs">
-            <Heading variant={'five'}>Status</Heading>
-            <Link href="?status=all-order">
-              <Button variant={'link'}>All Orders</Button>
-            </Link>
-            <Link href={'?status=ordered'}>
-              <Button variant={'link'}>Ordered</Button>
-            </Link>
-            <Link href={'?status=in-progress'}>
-              <Button variant={'link'}>In Progress</Button>
-            </Link>
-            <Link href={'?status=shipped'}>
-              <Button variant={'link'}>Shipped</Button>
-            </Link>
-            <Link href={'?status=delivered'}>
-              <Button variant={'link'}>Delivered</Button>
-            </Link>
-            <Link href={'?status=cancelled'}>
-              <Button variant={'link'}>Cancelled</Button>
-            </Link>
-            <Link href={'?status=completed'}>
-              <Button variant={'link'}>Completed</Button>
-            </Link>
-          </Flex>
-          <div className="px-4 lg:px-0">
-            <OrderCard />
-          </div>
-        </>
-    );
+  const allOrder = await getOrderProducts()
+  console.log(allOrder);
+  let filteredOrders = allOrder;
+  if (searchParams.status) {
+    filteredOrders = allOrder.filter((order) => order.status === searchParams.status);
+  }
+
+  const statusOptions = [
+    { value: '', label: 'All Orders' },
+    { value: 'Ordered', label: 'Ordered' },
+    { value: 'InProgress', label: 'In Progress' },
+    { value: 'Shipped', label: 'Shipped' },
+    { value: 'Delivered', label: 'Delivered' },
+    { value: 'Cancelled', label: 'Cancelled' },
+    { value: 'Completed', label: 'Completed' },
+  ];
+  return (
+    <>
+      <Heading fs={'xl2'}>Order List</Heading>
+      <Flex align={'iCenter'} className="my-5 gap-3 breadcrumbs">
+        <Heading variant={'five'}>Status</Heading>
+        {statusOptions.map((option) => (
+          <Link href={`?status=${option.value}`} key={option.value}>
+            <Button
+              variant={'link'}
+              className={searchParams.status === option.value ? 'border-success text-success' : ''}
+            >
+              {option.label}
+            </Button>
+          </Link>
+        ))}
+      </Flex>
+      <ul className="px-4 lg:px-0 flex flex-col gap-5">
+        {filteredOrders?.map((order) => (
+          <li key={order.id}>
+            <OrderCard
+              order={order}
+            />
+          </li>
+        ))
+        }
+      </ul>
+    </>
+  );
 };
 
 export default Page;
