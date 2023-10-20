@@ -1,7 +1,8 @@
-import { Cart, PrismaClient } from '@prisma/client';
+import { Cart } from '@prisma/client';
 import { cache } from 'react';
 export type { Product } from '@prisma/client'
-const prisma = new PrismaClient;
+import prisma from '../lib/prisma';
+
 
 export const revalidate = 3600
 

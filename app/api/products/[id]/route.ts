@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import type { Product } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
 import { verifyAuth } from "@/app/utils/auth";
-const prisma = new PrismaClient();
+import prisma from "@/app/lib/prisma";
 
 export const DELETE = async (
   req: Request,

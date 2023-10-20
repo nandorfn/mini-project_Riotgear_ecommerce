@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import type { Product } from "@prisma/client";
 import { verifyAuth } from "@/app/utils/auth";
-const prisma = new PrismaClient();
+import prisma from "@/app/lib/prisma";
 
 export const POST = async (req: Request) => {
   const headers = req.headers;

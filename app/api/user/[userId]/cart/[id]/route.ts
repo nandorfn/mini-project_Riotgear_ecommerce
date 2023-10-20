@@ -1,8 +1,7 @@
 import { verifyAuth } from "@/app/utils/auth";
 import { getUserProductCart } from "@/app/utils/queryDb";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-const prisma = new PrismaClient();
+import prisma from "@/app/lib/prisma";
 
 export const PATCH = async (req: Request, { params }: { params: { id: string } }) => {
   const headers = req.headers;
