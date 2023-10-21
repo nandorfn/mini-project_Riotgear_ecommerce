@@ -73,6 +73,12 @@ export const orderSummary = (data: cart[]) => {
     subTotal += total;
   })
   let tax = subTotal * 11 / 100;
-  
+
   return { subTotal, tax };
+}
+
+export const generateUniqueCode = (): number => {
+  const randomNumber = Math.floor(Math.random() * 1000) + 1;
+
+  return randomNumber;
 }

@@ -4,11 +4,10 @@ import Link from "next/link";
 const ListMenu: React.FC = () => {
   const menus = [
     { label: 'Dashboard', Link: '/admin/' },
-    { label: 'Landing Page', Link: '/admin/landing-page' },
     { label: 'Order List', Link: '/admin/order-list' },
     { label: 'Products', Link: '/admin/products' },
     { label: 'Blog', Link: '/admin/blog' },
-    { label: 'Settings', Link: '/admin/settings' },
+    { label: 'Setting', Link: '/admin/setting' },
   ]
 
   return (

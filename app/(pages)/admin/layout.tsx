@@ -1,5 +1,6 @@
 import Avatar from "@/app/components/Avatar";
 import SideBar from "./components/SideBar";
+import { Flex } from "@/app/components/Container/Flex";
 
 const LayoutAdmin = ({
   children,
@@ -16,7 +17,9 @@ const LayoutAdmin = ({
             icon=""
           />
         </div>
-        {children}
+        <Flex variant={'col'} className="gap-10 mb-8">
+          {children}
+        </Flex>
       </SideBar>
     </>
   );

@@ -60,7 +60,7 @@ export const POST = async (req: Request, { params }: {
         
           if (orderItem && orderAddress) {
             await reduceProductStock(userId);
-            return NextResponse.json({ status: 201 });
+            return NextResponse.json( order, { status: 201 });
           } else {
             await prisma.address.deleteMany({
               where: {

@@ -24,11 +24,12 @@ const useAddressForm = (userId: string) => {
   const onSubmit = async (data: TUserAddressSchema) => {
     axios.post(`/api/user/${userId}/order`, data)
       .then((res) => {
-        if (res.data.status === 201) {
-          router.push('/store/payment');
-        } else {
-          throw new Error(res.data.error)
-        }
+          if (res.status === 201) {
+            router.push(`/store/payment?orderId=${res.data.orderId}`);
+          } else {
+            throw new Error(res.data.error)
+          }
+          console.log(res)
       }
       )
       .catch(err => {

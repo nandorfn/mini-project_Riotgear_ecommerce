@@ -12,7 +12,6 @@ const Page = async ({
 }) => {
 
   const allOrder = await getOrderProducts()
-  console.log(allOrder);
   let filteredOrders = allOrder;
   if (searchParams.status) {
     filteredOrders = allOrder.filter((order) => order.status === searchParams.status);

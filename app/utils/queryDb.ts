@@ -2,6 +2,7 @@ import { Cart } from '@prisma/client';
 import { cache } from 'react';
 export type { Product } from '@prisma/client'
 import prisma from '../lib/prisma';
+import { generateUniqueCode } from './utils';
 
 
 export const revalidate = 3600
@@ -299,4 +300,49 @@ export const getOrderProducts = cache(async () => {
   );
   return allData;
 });
+
+export const getUserCurrentOrder = cache(async (orderId: any) => {
+  const order = await prisma.order.findFirst({
+    where: {
+      orderId: orderId,
+      status: 'Ordered'
+    }
+  })
+
+  if (order) {
+    const orderItems = await prisma.orderItem.findMany({
+      where: {
+        orderId: order.orderId,
+      }
+    })
+
+    const orderItemsWithProducts = [];    
+    for (const item of orderItems) {
+      const product = await prisma.product.findUnique({
+        where: {
+          productId: item.productId
+        },
+        select: {
+          productName: true,
+          productPrice: true,
+        }
+      });
+      
+      const combinedObject = {
+        ...item,
+        ...product,
+        paymentMethod: order.paymentMethod,
+      };
+
+      orderItemsWithProducts.push(combinedObject);
+    }
+
+    console.log(orderItemsWithProducts);
+    console.log(order);
+    
+    return orderItemsWithProducts;
+  }
+  return null;
+});
+
 

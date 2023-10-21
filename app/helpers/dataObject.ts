@@ -138,6 +138,10 @@ export const sizeChart = [
   { id: 5, label: 'XXL', value: 'xxl' },
   { id: 6, label: '3XL', value: '3xl' },
 ];
+export const navLink = [
+  { id: 1, label: 'RIOTGEAR', value: '/' },
+  { id: 2, label: 'Store', value: '/store' },
+];
 export const quantityData = [
   { id: 1, label: '1', value: 1 },
   { id: 2, label: '2', value: 2 },

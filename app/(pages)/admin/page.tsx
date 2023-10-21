@@ -1,8 +1,11 @@
 import Image from "next/image";
-import { getPopularProducts } from "@/app/utils/queryDb";
+import { getFeatured, getPopularProducts } from "@/app/utils/queryDb";
+import Table from "@/app/components/Table/Table";
+import { columnFeaturedPrdouct, featuredTableHead } from "@/app/helpers/dataObject";
 
 const page = async () => {
   const popularProducts = await getPopularProducts();
+  const featuredProducts = await getFeatured();
 
   return (
     <>
@@ -35,6 +38,14 @@ const page = async () => {
 
           </tbody>
         </table>
+      </div>
+      <div className="flex flex-col gap-8">
+        <Table 
+          label={'Featured Products'}
+          tableHead={featuredTableHead}
+          mapping={featuredProducts}
+          columns={columnFeaturedPrdouct}
+        />
       </div>
     </>
   );

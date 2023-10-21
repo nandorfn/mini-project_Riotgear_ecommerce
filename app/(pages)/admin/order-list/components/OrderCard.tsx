@@ -73,13 +73,15 @@ const OrderCard = ({ order }: order) => {
             </div>
           </div>
 
+          <div className="divider lg:divider-horizontal"></div> 
 
           <Flex variant={'col'} className="px-3">
             <Heading>Billing Address</Heading>
             <p>John Doe</p>
             <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
           </Flex>
-          <Flex variant={'col'} className="gap-3">
+          <div className="divider lg:divider-horizontal"></div> 
+          <Flex variant={'col'} className="gap-3 w-[50%]">
             <Heading>Subtotal</Heading>
             <p className=" text-error text-xl font-medium">Rp100.856.000</p>
             <Flex className="justify-end">
