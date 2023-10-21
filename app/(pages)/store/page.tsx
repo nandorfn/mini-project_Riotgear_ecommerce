@@ -17,7 +17,7 @@ const page = async ({
         <div className="w-[27.6%] h-screen mt-5 hidden md:block overflow-hidden">
           <MenuFilter />
         </div>
-        <div className="w-full px-3 md:px-0 mt-3 md:mt-0 md:w-[73.4%]">
+        <div className="w-full px-3 md:px-0 mt-3 md:mt-0 md:w-[73.4%] relative">
           <div className="py-2 md:py-4 z-30 bg-white sticky top-0">
             <ScrollMenuContainer />
           </div>

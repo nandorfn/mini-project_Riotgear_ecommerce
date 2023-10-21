@@ -16,7 +16,10 @@ const ScrollMenuContainer: React.FC = () => {
 
   const handleClick = () => {
     setInput(!input);
-    router.push(`?search=${search}`);
+    if (search !== '') {
+      router.push(`?search=${search}`);
+      setSearch('');
+    }
   }
   const handleMenu = () => {
     setMenu(!menu);

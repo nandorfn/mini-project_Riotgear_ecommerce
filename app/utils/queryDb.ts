@@ -38,11 +38,12 @@ export const getItem = cache(async (filters: any) => {
     };
   }
   
-  console.log(filters);
-
   const items = await prisma.product.findMany({
     where: {
-      productName: filters.search || undefined,
+      productName: {
+        contains: filters.search,
+        mode: 'insensitive',
+      },
       productSubCategory: filters.category || undefined,
       productGender: filters.gender || undefined,
       productSize: filters.size || undefined,

@@ -16,7 +16,7 @@ const CardContainer = async ({ data }: { data: ProductData[] }) => {
             />
           </article>
         )
-          : <Text fs={'lg'} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">Sorry, the product you are looking for does not exist!</Text>
+          : <Text fs={'xl'} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">Sorry, the product you are looking for does not exist!</Text>
         }
       </section>
     </>
