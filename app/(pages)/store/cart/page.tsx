@@ -12,7 +12,6 @@ const Page: React.FC = async () => {
   const token = cookieStore.get('token');
   const user: JwtSchema | undefined = token && (await verifyAuth(token.value))
   const productCart = await getUserProductCart(user?.userId ?? '');
-
   return (
     <>
       <main className="px-3">

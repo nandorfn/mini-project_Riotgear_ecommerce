@@ -79,6 +79,6 @@ export const orderSummary = (data: cart[]) => {
 
 export const generateUniqueCode = (): number => {
   const randomNumber = Math.floor(Math.random() * 1000) + 1;
-
+  console.log(randomNumber)
   return randomNumber;
 }

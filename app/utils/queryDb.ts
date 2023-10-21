@@ -332,6 +332,7 @@ export const getUserCurrentOrder = cache(async (orderId: any) => {
         ...item,
         ...product,
         paymentMethod: order.paymentMethod,
+        uniqueCode: order.id
       };
 
       orderItemsWithProducts.push(combinedObject);

@@ -3,6 +3,7 @@ import { TUserAddressSchema, userAddressSchema } from "../utils/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
 
@@ -18,18 +19,19 @@ const useAddressForm = (userId: string) => {
   } = useForm<TUserAddressSchema>({
     resolver: zodResolver(userAddressSchema)
   });
-
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const onSubmit = async (data: TUserAddressSchema) => {
+    setLoading(true);
     axios.post(`/api/user/${userId}/order`, data)
       .then((res) => {
           if (res.status === 201) {
+            setLoading(false);
             router.push(`/store/payment?orderId=${res.data.orderId}`);
           } else {
             throw new Error(res.data.error)
           }
-          console.log(res)
       }
       )
       .catch(err => {
@@ -83,6 +85,9 @@ const useAddressForm = (userId: string) => {
           alert("Something went wrong")
         )
       })
+      .finally(() => {
+        setLoading(false);
+      })
     reset();
   }
   return {
@@ -92,7 +97,8 @@ const useAddressForm = (userId: string) => {
     isSubmitting,
     onSubmit,
     watch,
-    control
+    control,
+    loading
   }
 }
 

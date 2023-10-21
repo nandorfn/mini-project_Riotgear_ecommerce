@@ -33,14 +33,15 @@ export const POST = async (req: Request, { params }: {
       if (!hasSufficientStock) {
         return NextResponse.json({ error: 'Product stock is less than user request' }, { status: 400 });
       } else {
-      
+        
         const order = await prisma.order.create({
           data: {
             orderId: uuid,
             userId: params.userId,
-            paymentMethod: result.data.paymentMethod
+            paymentMethod: result.data.paymentMethod,
           }
         });
+        console.log(order)
       
         if (!order) {
           return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

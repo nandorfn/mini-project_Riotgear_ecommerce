@@ -5,11 +5,14 @@ import { checkUserLogin } from "@/app/utils/auth";
 import { getUserProductCart } from "@/app/utils/queryDb";
 import { orderSummary } from "@/app/utils/utils";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 const OrderSummary: React.FC = async () => {
   const user = await checkUserLogin();
   const productCart = await getUserProductCart(user?.userId ?? '');
   let { subTotal, tax } = orderSummary(productCart);
+  
+  if (productCart.length === 0) redirect('/store')
 
   return (
     <>
