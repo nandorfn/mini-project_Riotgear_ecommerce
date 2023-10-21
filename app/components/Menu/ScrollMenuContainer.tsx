@@ -5,7 +5,7 @@ import ScrollMenu from "./ScrollMenu";
 import { Flex } from "../Container/Flex";
 import MenuFilter from "./MenuFillter";
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import closeIcon from '@/app/assets/icon/closeIcon.svg'
 
 const ScrollMenuContainer: React.FC = () => {
@@ -16,10 +16,12 @@ const ScrollMenuContainer: React.FC = () => {
 
   const handleClick = () => {
     setInput(!input);
+    router.push(`?search=${search}`);
   }
   const handleMenu = () => {
     setMenu(!menu);
   }
+  const router = useRouter()
   const handleSearch = (e: React.SyntheticEvent) => {
     const { value } = e.target as HTMLInputElement;
     setSearch(value);

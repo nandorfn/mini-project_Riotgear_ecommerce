@@ -2,8 +2,6 @@ import { Cart } from '@prisma/client';
 import { cache } from 'react';
 export type { Product } from '@prisma/client'
 import prisma from '../lib/prisma';
-import { generateUniqueCode } from './utils';
-
 
 export const revalidate = 3600
 
@@ -39,9 +37,12 @@ export const getItem = cache(async (filters: any) => {
       },
     };
   }
+  
+  console.log(filters);
 
   const items = await prisma.product.findMany({
     where: {
+      productName: filters.search || undefined,
       productSubCategory: filters.category || undefined,
       productGender: filters.gender || undefined,
       productSize: filters.size || undefined,
