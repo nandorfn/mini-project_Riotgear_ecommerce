@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.2",
     "next": "^13.5.4",
     "react": "latest",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "latest",
     "react-hook-form": "^7.47.0",
     "react-loading-skeleton": "^3.3.1",

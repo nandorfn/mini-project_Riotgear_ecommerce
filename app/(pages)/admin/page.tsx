@@ -4,6 +4,7 @@ import Progress from "@/app/components/Chart/Progress";
 import Image from "next/image";
 import { Heading } from "@/app/components/Container/Heading";
 import ListCard from "@/app/components/Card/ListCard";
+import LineChart from "@/app/components/Chart/LineChart";
 
 const page = async () => {
   const popularProducts = await getPopularProducts();
@@ -47,6 +48,8 @@ const page = async () => {
             <Heading variant={'five'}>Popular Category</Heading>
             <Progress data={scaledData} />
           </Flex>
+          
+          <LineChart sourceData={analytics.monthly} />
         </Flex>
         <Flex variant={'col'} className=" gap-2 bg-zinc-100 rounded-xl shadow-sm p-5">
           <Heading variant={'five'} className="mb-2">Featured Products</Heading>
