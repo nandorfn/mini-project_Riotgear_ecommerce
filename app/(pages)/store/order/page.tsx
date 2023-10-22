@@ -9,12 +9,21 @@ import { getUserOrder } from "@/app/utils/queryDb";
 import Link from "next/link";
 import InfoStatus from "../../../components/Container/InfoStatus";
 import OrderStatus from "./components/OrderStatus";
+import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
 
 
-const Page: React.FC = async () => {
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) => {
   const user = await checkUserLogin();
   const allOrder = await getUserOrder(user?.userId);
-    
+  let filteredOrders = allOrder;
+  if (searchParams.status && allOrder) {
+    filteredOrders = allOrder.filter((order) => order.status === searchParams.status);
+  }
+
   return (
     <>
       <main className="px-3 min-h-[74vh]">
@@ -24,10 +33,16 @@ const Page: React.FC = async () => {
             <li><Link href={'/store'}>Store</Link></li>
           </ul>
         </div>
+        <Heading variant={'fourthRwd'} className="md:mb-10">YOUR ORDER</Heading>
+        <Flex align={'iCenter'} className="my-5 mb-10 gap-3">
+          <Heading variant={'five'}>Status</Heading>
+          <StatusOrderWrapper
+            status={searchParams.status}
+          />
+        </Flex>
 
-        <Heading variant={'fourthRwd'} className="mb-5 md:mb-10">YOUR ORDER</Heading>
-        {allOrder
-          ? allOrder.map((order, index) => {
+        {filteredOrders
+          ? filteredOrders.map((order, index) => {
             const inv = order.orderId.toUpperCase().split('-')
             const date = order.createdAt.toLocaleDateString('en-US', {
               day: '2-digit',
@@ -41,7 +56,7 @@ const Page: React.FC = async () => {
                 subTotal += total;
               }
             })
-            
+
             return (
               <Flex variant={'col'} className="shadow-md rounded-lg mb-5 relative" key={index}>
                 <Flex align={'iCenter'} className="justify-between pt-2 px-5">
@@ -49,26 +64,26 @@ const Page: React.FC = async () => {
                     <p className="text-success font-medium">{`INV/${inv}`}</p>
                     <p>{date}</p>
                   </Flex>
-                  <InfoStatus status={order.status}/>
+                  <InfoStatus status={order.status} />
                 </Flex>
                 <Colapse>
                   {order.orderItem.map((item, index: number) => (
                     <div key={item.id}>
                       {index === 0 && (
-                          <HistoryOrderCard
-                            isAdmin={false}
-                            img={item.productImgLink}
-                            name={item.productName}
-                            quantity={item.quantity}
-                            price={item.productPrice}
-                            total={subTotal}
-                          >
-                            {order.orderItem.length > 1 &&
-                              <p className="text-success">
-                                {`Check ${order.orderItem.length - 1} other products`}
-                              </p>
-                            }
-                          </HistoryOrderCard>
+                        <HistoryOrderCard
+                          isAdmin={false}
+                          img={item.productImgLink}
+                          name={item.productName}
+                          quantity={item.quantity}
+                          price={item.productPrice}
+                          total={subTotal}
+                        >
+                          {order.orderItem.length > 1 &&
+                            <p className="text-success">
+                              {`Check ${order.orderItem.length - 1} other products`}
+                            </p>
+                          }
+                        </HistoryOrderCard>
                       )}
                     </div>
                   ))}
@@ -88,7 +103,7 @@ const Page: React.FC = async () => {
 
                   ))}
                 </Colapse>
-                <OrderStatus 
+                <OrderStatus
                   order={order}
                 />
               </Flex>
