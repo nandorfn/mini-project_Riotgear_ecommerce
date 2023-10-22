@@ -5,8 +5,8 @@ import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { checkSubtotal } from "@/app/utils/utils";
 import axios from "axios";
-import StatusBtn from "./StatusBtn";
-import InfoStatus from "./InfoStatus";
+import StatusBtn from "../../../../components/Button/StatusBtn";
+import InfoStatus from "../../../../components/Container/InfoStatus";
 import { useState } from "react";
 type order = {
   orderItem: any

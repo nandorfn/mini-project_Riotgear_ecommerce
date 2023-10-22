@@ -7,6 +7,8 @@ import { Text } from "@/app/components/Container/Text";
 import { checkUserLogin } from "@/app/utils/auth";
 import { getUserOrder } from "@/app/utils/queryDb";
 import Link from "next/link";
+import InfoStatus from "../../../components/Container/InfoStatus";
+import OrderStatus from "./components/OrderStatus";
 
 
 const Page: React.FC = async () => {
@@ -47,7 +49,7 @@ const Page: React.FC = async () => {
                     <p className="text-success font-medium">{`INV/${inv}`}</p>
                     <p>{date}</p>
                   </Flex>
-                  <Text variant={'status'} bold={'medium'}>{order.status}</Text>
+                  <InfoStatus status={order.status}/>
                 </Flex>
                 <Colapse>
                   {order.orderItem.map((item, index: number) => (
@@ -86,9 +88,9 @@ const Page: React.FC = async () => {
 
                   ))}
                 </Colapse>
-                <Link className="absolute z-30 end-5 bottom-5" href={`/store/payment?orderId=${order.orderId}`}>
-                  <Button >View Transaction Details</Button>
-                </Link>
+                <OrderStatus 
+                  order={order}
+                />
               </Flex>
             )
           })

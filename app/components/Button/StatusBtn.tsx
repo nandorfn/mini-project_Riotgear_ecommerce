@@ -37,6 +37,13 @@ const StatusBtn = ({ status, handleUpdateStatus }: Props) => {
         </Button>
       );
       break;
+    case 'Delivered':
+      buttonContent = (
+        <Button value={'Completed'} onClick={handleUpdateStatus} variant={'success'} size="sm" >
+          Mark as Completed
+        </Button>
+      );
+      break;
   }
 
   return (

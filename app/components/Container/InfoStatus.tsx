@@ -15,9 +15,17 @@ const statusStyles: StatusStyles = {
     className: "bg-green-200 text-green-700 w-fit px-4 font-medium rounded-md",
     text: "Shipped",
   },
+  Delivered: {
+    className: "bg-blue-200 text-blue-700 w-fit px-4 font-medium rounded-md",
+    text: "Delivered",
+  },
   Cancelled: {
-    className: "bg-red-200 text-red-700 w-fit px-4 font-medium rounded-md",
+    className: "bg-red-200 py-1 text-red-700 w-fit px-4 font-medium rounded-md",
     text: "Cancelled",
+  },
+  Completed: {
+    className: "bg-green-200 py-1 text-green-700 w-fit px-4 font-medium rounded-md",
+    text: "Completed",
   },
 };
 

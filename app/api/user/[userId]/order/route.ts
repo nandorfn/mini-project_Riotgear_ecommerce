@@ -100,37 +100,37 @@ export const PATCH = async (req: Request) => {
   const result = updateOrderStatus.safeParse(body);
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
-  let zodErrors = {};
 
+  // Validasi dengan Zod
   if (!result.success) {
+    let zodErrors = {};
     result.error.issues.forEach((issue) => {
       zodErrors = { ...zodErrors, [issue.path[0]]: issue.message }
     });
     return NextResponse.json(zodErrors, { status: 401 });
   }
 
-  if (!verifiedToken && !body) {
+  // Cek otorisasi
+  if (!verifiedToken) {
     return NextResponse.json('Unauthorized', { status: 401 });
-  } else if (verifiedToken && verifiedToken.role !== 'admin') {
-    const order = await prisma.order.update({
-      where: {
-        orderId: result.data.orderId,
-      },
-      data: {
-        status: 'Delivered',
-      }
-    })
-    return NextResponse.json(order, { status: 200 });
-  } else {
-    const order = await prisma.order.update({
-      where: {
-        orderId: result.data.orderId,
-      },
-      data: {
-        status: result.data.status,
-      }
-    })
-    return NextResponse.json(order, { status: 200 });
   }
 
-}
+  let orderStatus: OrderStatus = 'Delivered';
+  if (verifiedToken.role === 'admin') {
+    orderStatus = result.data.status;
+  }
+
+  try {
+    const order = await prisma.order.update({
+      where: {
+        orderId: result.data.orderId,
+      },
+      data: {
+        status: orderStatus,
+      },
+    });
+    return NextResponse.json(order, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+};

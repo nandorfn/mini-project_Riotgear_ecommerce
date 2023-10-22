@@ -10,7 +10,7 @@ const buttonVariants = cva(
         black: 'bg-black text-white capitalize rounded-md',
         white: 'bg-white text-black capitalize rounded-md border-2 border-black',
         info: 'bg-blue-500 capitalize text-white hover:bg-blue-700',
-        success: 'btn-success capitalize text-white',
+        success: 'btn-success capitalize text-white hover:bg-emerald-600',
         checked: 'bg-accent w-[2.5rem]',
         sizeBtn: 'bg-[#D9D9D9] text-[#3E3E3E] border-0 w-[2.5rem] text-[0.875rem]',
         red: 'btn-error text-white hover:bg-red-700',
