@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LogoAdmin from '@/app/assets/icon/AdminLogo.svg';
+import LogoAdmin from '@/app/assets/icon/logoAdminWhite.svg';
 import RiotLogo from '@/app/assets/icon/RiotLogo.svg';
 import MenuIcon from '@/app/assets/icon/MenuIcon.svg';
 import ListMenu from "./ListMenu";
@@ -24,7 +24,7 @@ const SideBar = ({
             />
             <label htmlFor="my-drawer-2" className="drawer-button lg:hidden">
               <Image
-                className=" cursor-pointer"
+                className="cursor-pointer"
                 src={MenuIcon}
                 alt="Menu Icon"
               />
@@ -37,13 +37,15 @@ const SideBar = ({
         <aside className="drawer-side   ">
           <label htmlFor="my-drawer-2" className="drawer-overlay">
           </label>
-          <div className="menu w-80 p-4 min-h-full bg-[#EBEBED]">
+          <div className="menu w-80 p-4 min-h-full bg-black">
             <Image
               className="ms-4 mb-8"
               src={LogoAdmin}
               alt="Logo Brand"
             />
-            <ListMenu />
+            <div className="text-white">
+              <ListMenu />
+            </div>
           </div>
         </aside>
       </div>

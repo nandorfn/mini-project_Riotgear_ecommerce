@@ -447,9 +447,12 @@ export const getPopularProductCategory = async () => {
     select: {
       productSubCategory: true,
       viewsCount: true,
+    },
+    orderBy: {
+      productSubCategory: 'desc',
     }
   })
-
+  
   const viewsCountByCategory: { productSubCategory: string; viewsCount: number }[] = [];
   products.forEach((item) => {
     const { productSubCategory, viewsCount } = item;
@@ -461,8 +464,9 @@ export const getPopularProductCategory = async () => {
       viewsCountByCategory.push({ productSubCategory, viewsCount });
     }
   });
+  const sortedData = viewsCountByCategory.sort((a, b) => b.viewsCount - a.viewsCount);
   
-  return viewsCountByCategory;
+  return sortedData;
 }
 
 export const getAnalyticsData = async () => {

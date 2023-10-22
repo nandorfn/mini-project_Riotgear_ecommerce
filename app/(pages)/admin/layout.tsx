@@ -10,7 +10,7 @@ const LayoutAdmin = ({
   return (
     <>
       <SideBar>
-        <div className=" justify-between hidden lg:flex">
+        <div className="justify-between hidden lg:flex">
           <h1 className="text-4xl">Dashboard Overview</h1>
           <Avatar 
             username="User"

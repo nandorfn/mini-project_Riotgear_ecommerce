@@ -210,6 +210,7 @@ export const defaultProductData = {
   featured: 0,
 };
 
+
 export const createProductData = (
   form: productFormState,
   id: string

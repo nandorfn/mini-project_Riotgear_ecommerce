@@ -1,22 +1,37 @@
 import Image from "next/image";
-import { getAnalyticsData, getFeatured, getIncomeSales, getPopularProducts } from "@/app/utils/queryDb";
+import { getAnalyticsData, getFeatured, getPopularProducts } from "@/app/utils/queryDb";
 import Table from "@/app/components/Table/Table";
 import { columnFeaturedPrdouct, featuredTableHead } from "@/app/helpers/dataObject";
 import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
+import Progress from "@/app/components/Chart/Progress";
 
 const page = async () => {
   const popularProducts = await getPopularProducts();
   const featuredProducts = await getFeatured();
-  const analytics = await getAnalyticsData();
-  console.log(analytics);
+  const analytics = await getAnalyticsData();  
+  const maxValue = Math.max(...analytics.popularCategory.map(item => item.viewsCount));
+  
+  const scaledData = analytics.popularCategory.map(item => ({
+    productSubCategory: item.productSubCategory,
+    viewsCount: item.viewsCount,
+    scaledViewsCount: (item.viewsCount / maxValue) * 100
+  }));
+  
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-10">
+      <div className="grid grid-cols-4 gap-10">
+      <Flex variant={'col'} className="shadow-sm p-5 bg-zinc-100  h-fit rounded-xl gap-3">
+        <Heading variant={'five'}>Popular Category</Heading>
+        <Progress 
+          data={scaledData}
+        />
+      </Flex>
         
       
       
-        <Flex variant={'col'} className="bg-base-200 gap-2 p-5 rounded-xl">
+        {/* <Flex variant={'col'} className="bg-base-200 gap-2 p-5 rounded-xl">
           <h2 className="text-xl font-medium">Popular Products</h2>
         {popularProducts?.slice(0, 10).map((product, index) =>
         <>
@@ -43,7 +58,7 @@ const page = async () => {
           mapping={featuredProducts}
           columns={columnFeaturedPrdouct}
         />
-      </div>
+      </div> */}
       </div>
     </>
   );
