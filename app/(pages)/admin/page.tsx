@@ -18,8 +18,8 @@ const page = async () => {
 
   return (
     <>
-      <Heading fs={'xl2'}>Dashboard</Heading>
-      <div className="grid px-4 md:px-0 grid-cols-1 md:grid-cols-2 gap-10">
+      <Heading fs={'xl2'} className="px-4 lg:px-0">Dashboard</Heading>
+      <div className="grid px-4 lg:px-0 grid-cols-1 lg:grid-cols-2 gap-10">
         <Flex variant={'col'} className=" gap-2 bg-zinc-100 rounded-xl shadow-sm p-5">
           <Heading variant={'five'} className="mb-2">Popular Products</Heading>
           <ListCard data={popularProducts} />

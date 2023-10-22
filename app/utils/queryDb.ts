@@ -250,10 +250,8 @@ export const getOrderProducts = cache(async () => {
           productId: true,
           quantity: true,
         },
-        orderBy: {
-          createdAt: 'desc'
-        }
       });
+      
 
       const address = await prisma.address.findFirst({
         where: {
@@ -303,6 +301,7 @@ export const getOrderProducts = cache(async () => {
       return orderData;
     })
   );
+  
   return allData;
 });
 

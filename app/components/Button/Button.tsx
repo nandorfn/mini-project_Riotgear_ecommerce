@@ -14,7 +14,7 @@ const buttonVariants = cva(
         checked: 'bg-accent w-[2.5rem]',
         sizeBtn: 'bg-[#D9D9D9] text-[#3E3E3E] border-0 w-[2.5rem] text-[0.875rem]',
         red: 'btn-error text-white hover:bg-red-700',
-        link: 'bg-none border rounded-full px-6 shadow-sm bg-base-100 hover:bg-success hover:border-none ',
+        link: 'btn-sm px-6 bg-none border rounded-full shadow-sm bg-base-100 hover:bg-success hover:border-none whitespace-nowrap ',
       // OLD
         login: 'disabled:bg-base-200 bg-black text-white',
         primary: 'btn-primary',

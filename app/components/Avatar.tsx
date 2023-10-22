@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import AvatarIcon from '@/app/assets/Content/Ellipse 1.png'
+import avatar from "@/app/assets/icon/user.png";
 import { userAvatar } from "@/app/utils/types";
 import { getData } from "../utils/api";
 import { useState } from "react";
@@ -37,7 +37,7 @@ const Avatar = ({ username, icon }: userAvatar) => {
                   <div className="avatar items-center gap-2">
                     <div className="w-8 rounded-full">
                       <Image
-                        src={icon || AvatarIcon}
+                        src={avatar}
                         alt="User Icon"
                       />
                     </div>

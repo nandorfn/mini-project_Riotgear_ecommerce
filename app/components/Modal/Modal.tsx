@@ -8,6 +8,7 @@ import Input from "../Form/Input";
 import { Button } from '../Button/Button';
 import OptionInput from '../Form/Option';
 import { Flex } from '../Container/Flex';
+import { Heading } from '../Container/Heading';
 
 interface Props {
   handleInput: (e: React.SyntheticEvent) => void;
@@ -28,8 +29,8 @@ const Modal: React.FC<Props> = ({
       <div className="inset-0 bg-opacity-50 bg-black bgModal">
         <div className="modalWrapper">
           <form className="form__add-product bg-base-200">
-            <h4>{label}</h4>
-            <label>
+            <Heading variant={'five'}>{label}</Heading>
+            <label className='font-medium'>
             Product Name
             <Input
               name={'productName'}
@@ -39,7 +40,7 @@ const Modal: React.FC<Props> = ({
               placeholder="Product Name"
             />
             </label>
-            <label>
+            <label className='font-medium'>
               Product Image
             <Input
               name={'productImgLink'}
@@ -105,15 +106,16 @@ const Modal: React.FC<Props> = ({
                 error=''
               />
             </div>
-            <label>
+            <label className='flex flex-col font-medium'>
             Product Description
               <Textarea
+                size={'standard'}
                 name={'productDesc'}
                 value={form.productDesc}
               />
             </label>
             <div className='grid grid-cols-2 gap-4'>
-              <label>
+              <label className='font-medium'>
                 Product Stock
                 <Input
                   name={'productStock'}
@@ -123,7 +125,7 @@ const Modal: React.FC<Props> = ({
                   placeholder="Product Stock"
                 />
               </label>
-              <label>
+              <label className='font-medium'>
                 Product Price
                 <Input
                   name={'productPrice'}

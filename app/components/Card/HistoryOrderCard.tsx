@@ -26,7 +26,7 @@ const HistoryOrderCard = ({
     <>
       <Flex className="gap-3">
         <Image
-          className="rounded-md"
+          className="rounded-md hidden md:block"
           src={img ?? ''}
           width={100}
           height={100}

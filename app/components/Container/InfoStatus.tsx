@@ -4,27 +4,27 @@ type StatusStyles = Record<string, { className: string; text: string }>;
 
 const statusStyles: StatusStyles = {
   Ordered: {
-    className: "bg-base-100 px-4 font-medium rounded-md",
+    className: "bg-base-100 ",
     text: "Ordered",
   },
   InProgress: {
-    className: "bg-yellow-200 text-warning w-fit px-4 font-medium rounded-md",
+    className: "bg-yellow-200 text-warning ",
     text: "In Progress",
   },
   Shipped: {
-    className: "bg-green-200 text-green-700 w-fit px-4 font-medium rounded-md",
+    className: "bg-green-200 text-green-700 ",
     text: "Shipped",
   },
   Delivered: {
-    className: "bg-blue-200 text-blue-700 w-fit px-4 font-medium rounded-md",
+    className: "bg-blue-200 text-blue-700 ",
     text: "Delivered",
   },
   Cancelled: {
-    className: "bg-red-200 py-1 text-red-700 w-fit px-4 font-medium rounded-md",
+    className: "bg-red-200 text-red-700 ",
     text: "Cancelled",
   },
   Completed: {
-    className: "bg-green-200 py-1 text-green-700 w-fit px-4 font-medium rounded-md",
+    className: "bg-green-200 text-green-700 ",
     text: "Completed",
   },
 };
@@ -34,7 +34,7 @@ const InfoStatus = ({ status }: { status: string }) => {
 
   return (
     <Flex className="w-full justify-end">
-      <p className={style.className}>{style.text}</p>
+      <p className={` px-2 md:px-4 md:font-medium rounded-md ${style.className}`}>{style.text}</p>
     </Flex>
   );
 };

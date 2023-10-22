@@ -11,22 +11,27 @@ const Page = async ({
 }) => {
 
   const allOrder = await getOrderProducts()
-  let filteredOrders = allOrder;
+  const sortedData = allOrder.sort((a, b) => (b.id) - (a.id));
+  let filteredOrders = sortedData;
   if (searchParams.status) {
-    filteredOrders = allOrder.filter((order) => order.status === searchParams.status);
+    filteredOrders = sortedData.filter((order) => order.status === searchParams.status);
   }
-
+  
   return (
     <>
-      <Heading fs={'xl2'}>Order List</Heading>
-      <Flex align={'iCenter'} className="gap-3">
-        <Heading variant={'five'}>Status</Heading>
-        <StatusOrderWrapper 
-          status={searchParams.status}
-        />
+      <Heading fs={'xl2'} className="mx-4">Order List</Heading>
+      <Flex align={'iCenter'} className="px-4 lg:px-0 gap-3">
+      <Heading variant={'five'}>Status</Heading>
+      <div className=" stats">
+        <Flex align={'iCenter'} className="gap-3 breadcrumbs">
+          <StatusOrderWrapper
+            status={searchParams.status}
+          />
+        </Flex>
+      </div>
       </Flex>
       <ul className="px-4 lg:px-0 flex flex-col gap-5">
-        {filteredOrders?.map((order) => (
+        {filteredOrders?.map((order, index) => (
           <li key={order.id}>
             <OrderCard
               orderItem={order}

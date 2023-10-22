@@ -47,7 +47,7 @@ const StatusBtn = ({ status, handleUpdateStatus }: Props) => {
   }
 
   return (
-    <Flex className="absolute z-10 gap-5 bottom-0 justify-end">
+    <Flex className="gap-3 justify-end">
       {buttonContent}
     </Flex>
   );

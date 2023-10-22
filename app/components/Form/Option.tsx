@@ -41,9 +41,6 @@ const OptionInput: React.FC<Props> = ({
             </option>
           ))}
         </select>
-        {error &&
-          <ErrorMsg name={name} error={error}/>
-        }
         </label>
     </>
   );

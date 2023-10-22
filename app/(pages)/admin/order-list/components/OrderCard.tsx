@@ -20,9 +20,6 @@ const OrderCard = ({ orderItem }: order) => {
     month: 'long',
     year: 'numeric'
   });
-  
-  console.log(order);
-
   const handleUpdateStatus = async (e: React.SyntheticEvent) => {
     let { value } = e.target as HTMLButtonElement
     e.preventDefault();
@@ -31,27 +28,29 @@ const OrderCard = ({ orderItem }: order) => {
       status: value
     }
     await axios.patch(`/api/user/${order.userId}/order`, data)
-    .then((res) => {
-      if (res.status === 200) {
-        setOrder({
-          ...order,
-          status: res.data.status
-        })
-      }
-    })
+      .then((res) => {
+        if (res.status === 200) {
+          setOrder({
+            ...order,
+            status: res.data.status
+          })
+        }
+      })
   }
   return (
     <>
-      <Flex variant={'col'} className=" border-[1px] rounded-xl shadow-sm gap-3 pb-4">
+      <Flex variant={'col'} className="border-[1px] rounded-xl shadow-sm gap-3 pb-4">
         <Flex className="gap-3 border-b py-2 px-4 rounded-t-xl bg-base-200">
-          <Flex variant={'row'} className="gap-3">
-            <p className="font-medium text-success">{order.id}</p>
-            <p className="font-medium">{`(${order.address.name})`}</p>
-            <p className="text-base-300">{date}</p>
+          <Flex variant={'row'} align={'iCenter'} className="gap-3 w-3/4">
+            <p className="md:font-medium text-success">{order.id}</p>
+            <p className="md:font-medium line-clamp-1">{`${order.address.name}`}</p>
+            <p className="text-base-300 text-xs md:text-base">{date}</p>
           </Flex>
-          <InfoStatus
-            status={order.status}
-          />
+          <div className="w-1/4">
+            <InfoStatus
+              status={order.status}
+            />
+          </div>
         </Flex>
         <Flex className="bg-base-100 gap-3 pe-4">
           <Collapse>
@@ -90,23 +89,23 @@ const OrderCard = ({ orderItem }: order) => {
             ))}
           </Collapse>
           <div className="divider lg:divider-horizontal"></div>
-          <Flex>
-            <Flex variant={'col'} className="px-3">
+          <Flex variant={'colToRow'}>
+            <Flex variant={'col'} className="md:px-3">
               <Heading>Billing Address</Heading>
               <p>{order.address.name}</p>
               <div>
                 <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
               </div>
             </Flex>
-            <div className="divider lg:divider-horizontal"></div>
-            <Flex variant={'col'} className="gap-3 w-[50%] relative">
+            <div className="divider hidden md:block lg:divider-horizontal"></div>
+            <Flex variant={'col'} className="gap-3 md:w-[50%] relative">
               <Heading>Subtotal</Heading>
-              <p className=" text-error text-xl font-medium">{`Rp${subTotal.toLocaleString('ID-id')}`}</p>
-                <StatusBtn 
-                  status={order.status}
-                  handleUpdateStatus={handleUpdateStatus}
-                />
-              </Flex>
+              <p className="text-error md:text-xl font-medium">{`Rp${subTotal.toLocaleString('ID-id')}`}</p>
+              <StatusBtn
+                status={order.status}
+                handleUpdateStatus={handleUpdateStatus}
+              />
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
