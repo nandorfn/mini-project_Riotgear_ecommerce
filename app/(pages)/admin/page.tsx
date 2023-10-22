@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getAnalyticsData, getFeatured, getPopularProducts } from "@/app/utils/queryDb";
 import Table from "@/app/components/Table/Table";
 import { columnFeaturedPrdouct, featuredTableHead } from "@/app/helpers/dataObject";
