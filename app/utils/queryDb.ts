@@ -471,10 +471,12 @@ export const getPopularProductCategory = async () => {
 
 export const getAnalyticsData = async () => {
   const income = await getIncomeSales();
-  const popularCategory = await getPopularProductCategory()
+  const popularCategory = await getPopularProductCategory();
+  const user = await prisma.user.count();
 
   return {
     ...income,
+    totalUser: user,
     popularCategory,
   };
 }
