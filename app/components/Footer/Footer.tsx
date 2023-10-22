@@ -22,6 +22,8 @@ const Footer: React.FC = () => {
           <Image
             src={RiotLogo}
             alt='RiotGear icon'
+            width={100}
+            height={100}
           />
           <div className='flex gap-3'>
             <Image src={fbIcon} alt='Facebook icon' />

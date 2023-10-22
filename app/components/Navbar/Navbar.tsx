@@ -22,6 +22,8 @@ const Navbar: React.FC = () => {
                 <Image
                   src={BrandLogo}
                   alt='Brand Logo'
+                  width={80}
+                  height={80}
                 />
               </Link>
               <ul className='hidden md:flex flex-row gap-4 pe-3'>

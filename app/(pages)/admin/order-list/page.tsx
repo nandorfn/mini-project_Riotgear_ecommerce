@@ -4,6 +4,7 @@ import { Flex } from "@/app/components/Container/Flex";
 import { Button } from "@/app/components/Button/Button";
 import Link from "next/link";
 import { getOrderProducts } from "@/app/utils/queryDb";
+import { statusOptions } from "@/app/helpers/dataObject";
 
 const Page = async ({
   searchParams,
@@ -17,15 +18,6 @@ const Page = async ({
     filteredOrders = allOrder.filter((order) => order.status === searchParams.status);
   }
 
-  const statusOptions = [
-    { value: '', label: 'All Orders' },
-    { value: 'Ordered', label: 'Ordered' },
-    { value: 'InProgress', label: 'In Progress' },
-    { value: 'Shipped', label: 'Shipped' },
-    { value: 'Delivered', label: 'Delivered' },
-    { value: 'Cancelled', label: 'Cancelled' },
-    { value: 'Completed', label: 'Completed' },
-  ];
   return (
     <>
       <Heading fs={'xl2'}>Order List</Heading>

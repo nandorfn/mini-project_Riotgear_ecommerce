@@ -186,6 +186,15 @@ export const columnFeaturedPrdouct = [
   { label: "viewsCount" },
 ]
 
+export const statusOptions = [
+  { value: '', label: 'All Orders' },
+  { value: 'Ordered', label: 'Ordered' },
+  { value: 'InProgress', label: 'In Progress' },
+  { value: 'Shipped', label: 'Shipped' },
+  { value: 'Delivered', label: 'Delivered' },
+  { value: 'Cancelled', label: 'Cancelled' },
+  { value: 'Completed', label: 'Completed' },
+];
 
 export const defaultProductData = {
   productName: '',

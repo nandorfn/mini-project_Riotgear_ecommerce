@@ -1,5 +1,4 @@
 import { z } from "zod";
-
 const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 
 export const loginSchema = z.object({
@@ -90,3 +89,10 @@ export type order = {
   paymentMethod?: string
 }
 
+const OrderStatus = z.enum([
+  "Ordered", "InProgress", "Shipped", "Delivered", "Cancelled", "InReturn", "Completed"
+]);
+export const updateOrderStatus = z.object({
+  orderId: z.string(),
+  status: OrderStatus
+});

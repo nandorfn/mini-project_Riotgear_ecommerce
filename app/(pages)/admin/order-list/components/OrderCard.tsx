@@ -5,6 +5,7 @@ import Collapse from "@/app/components/Container/Colapse";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { checkSubtotal } from "@/app/utils/utils";
+import axios from "axios";
 type order = {
   order: any
 }
@@ -15,7 +16,17 @@ const OrderCard = ({ order }: order) => {
     day: '2-digit',
     month: 'long',
     year: 'numeric'
-  }) 
+  });
+
+  const handleUpdateStatus = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const data = {
+      orderId: order.orderId,
+      status: 'InProgress'
+    }
+    await axios.patch(`/api/user/${order.userId}/order`, data)
+    .then((res) => console.log(res))
+  }
   return (
     <>
       <Flex variant={'col'} className=" border-[1px] rounded-xl shadow-sm gap-3 pb-4">
@@ -53,30 +64,32 @@ const OrderCard = ({ order }: order) => {
               <Flex key={index} className="gap-3 ms-1">
                 {index > 0 && (
                   <HistoryOrderCard
-                  isAdmin={true}
-                  name={item.productName}
-                  quantity={item.quantity}
-                  price={item.productPrice}
-                  img={order.orderItems[index].productImgLink}
-                />
+                    isAdmin={true}
+                    name={item.productName}
+                    quantity={item.quantity}
+                    price={item.productPrice}
+                    img={order.orderItems[index].productImgLink}
+                  />
                 )}
               </Flex>
             ))}
           </Collapse>
           <div className="divider lg:divider-horizontal"></div>
-          <Flex variant={'col'} className="px-3">
-            <Heading>Billing Address</Heading>
-            <p>{order.address.name}</p>
-            <div>
-              <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
-            </div>
-          </Flex>
-          <div className="divider lg:divider-horizontal"></div>
-          <Flex variant={'col'} className="gap-3 w-[50%]">
-            <Heading>Subtotal</Heading>
-            <p className=" text-error text-xl font-medium">{`Rp${subTotal.toLocaleString('ID-id')}`}</p>
-            <Flex className="justify-end">
-              <Button size={'sm'}>Confirm Order</Button>
+          <Flex>
+            <Flex variant={'col'} className="px-3">
+              <Heading>Billing Address</Heading>
+              <p>{order.address.name}</p>
+              <div>
+                <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
+              </div>
+            </Flex>
+            <div className="divider lg:divider-horizontal"></div>
+            <Flex variant={'col'} className="gap-3 w-[50%] relative">
+              <Heading>Subtotal</Heading>
+              <p className=" text-error text-xl font-medium">{`Rp${subTotal.toLocaleString('ID-id')}`}</p>
+              <Flex className="absolute z-10 bottom-0 justify-end">
+                <Button onClick={handleUpdateStatus} size={'sm'}>Confirm Order</Button>
+              </Flex>
             </Flex>
           </Flex>
         </Flex>
