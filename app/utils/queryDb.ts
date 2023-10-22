@@ -37,7 +37,7 @@ export const getItem = cache(async (filters: any) => {
       },
     };
   }
-  
+
   const items = await prisma.product.findMany({
     where: {
       productName: {
@@ -250,7 +250,7 @@ export const getOrderProducts = cache(async () => {
           productId: true,
           quantity: true,
         },
-        orderBy : {
+        orderBy: {
           createdAt: 'desc'
         }
       });
@@ -268,7 +268,7 @@ export const getOrderProducts = cache(async () => {
           zip: true,
         }
       });
-      
+
       const validOrderItems = Array.isArray(orderItems) ? orderItems : [];
       const orderData = {
         ...order,
@@ -293,7 +293,7 @@ export const getOrderProducts = cache(async () => {
           return product;
         })
       );
-      
+
       orderData.orderItems = orderItems.map((item, index) => ({
         productId: item.productId,
         quantity: item.quantity,
@@ -348,7 +348,7 @@ export const getUserOrder = cache(async (userId: string | undefined) => {
         userId: userId,
       }
     });
-  
+
     if (allOrder) {
       const allUserOrder = []
       for (const order of allOrder) {
@@ -359,10 +359,10 @@ export const getUserOrder = cache(async (userId: string | undefined) => {
         }
         allUserOrder.push(combinedData);
       }
-      
+
       return allUserOrder;
     }
-  
+
     return null;
   }
 });
@@ -387,6 +387,7 @@ export const getUserCurrentOrder = cache(async (orderId: any) => {
   return null;
 });
 
+
 export const getIncomeSales = async () => {
   const completedOrders = await prisma.order.findMany({
     where: {
@@ -394,8 +395,12 @@ export const getIncomeSales = async () => {
     }
   });
 
-  let income = 0;
-  let productSell = 0;
+  const incomeData = {
+    daily: {} as Record<string, number>,
+    monthly: {} as Record<string, number>,
+    totalIncome: 0,
+    totalProductSell: 0,
+  };
 
   for (const order of completedOrders) {
     const orderItems = await prisma.orderItem.findMany({
@@ -411,13 +416,62 @@ export const getIncomeSales = async () => {
         }
       });
 
-      if (product?.productPrice ) {
-        income += item.quantity * product.productPrice;
-        productSell += item.quantity
+      if (product?.productPrice) {
+        const itemIncome = item.quantity * product.productPrice;
+        incomeData.totalIncome += itemIncome;
+        incomeData.totalProductSell += item.quantity;
+
+        const orderDate = order.createdAt.toISOString().split('T')[0];
+        if (incomeData.daily[orderDate]) {
+          incomeData.daily[orderDate] += itemIncome;
+        } else {
+          incomeData.daily[orderDate] = itemIncome;
+        }
+
+        const orderMonth = order.createdAt.toISOString().split('-').slice(0, 2).join('-');
+        if (incomeData.monthly[orderMonth]) {
+          incomeData.monthly[orderMonth] += itemIncome;
+        } else {
+          incomeData.monthly[orderMonth] = itemIncome;
+        }
       }
     }
   }
 
-  console.log('Total Income:', income, 'Total Amount:', productSell);
+  return incomeData;
+}
+
+
+export const getPopularProductCategory = async () => {
+  const products = await prisma.product.findMany({
+    select: {
+      productSubCategory: true,
+      viewsCount: true,
+    }
+  })
+
+  const viewsCountByCategory: { productSubCategory: string; viewsCount: number }[] = [];
+  products.forEach((item) => {
+    const { productSubCategory, viewsCount } = item;
+    const existingCategory = viewsCountByCategory.find((category) => category.productSubCategory === productSubCategory);
+  
+    if (existingCategory) {
+      existingCategory.viewsCount += viewsCount;
+    } else {
+      viewsCountByCategory.push({ productSubCategory, viewsCount });
+    }
+  });
+  
+  return viewsCountByCategory;
+}
+
+export const getAnalyticsData = async () => {
+  const income = await getIncomeSales();
+  const popularCategory = await getPopularProductCategory()
+
+  return {
+    ...income,
+    popularCategory,
+  };
 }
 

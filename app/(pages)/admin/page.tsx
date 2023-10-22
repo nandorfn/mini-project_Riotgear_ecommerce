@@ -1,52 +1,49 @@
 import Image from "next/image";
-import { getFeatured, getIncomeSales, getPopularProducts } from "@/app/utils/queryDb";
+import { getAnalyticsData, getFeatured, getIncomeSales, getPopularProducts } from "@/app/utils/queryDb";
 import Table from "@/app/components/Table/Table";
 import { columnFeaturedPrdouct, featuredTableHead } from "@/app/helpers/dataObject";
+import { Flex } from "@/app/components/Container/Flex";
 
 const page = async () => {
   const popularProducts = await getPopularProducts();
   const featuredProducts = await getFeatured();
-  const revenue = await getIncomeSales();
+  const analytics = await getAnalyticsData();
+  console.log(analytics);
 
   return (
     <>
-      <div className="overflow-x-auto">
-        <h2 className="text-xl font-medium">Popular Products</h2>
-        <table className="table table-zebra">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Views count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {popularProducts?.slice(0, 10).map((product, index) =>
-              <tr key={product.id}>
-                <th>{index + 1}</th>
-                <td>
-                  <Image src={product.productImgLink} width={40} height={40} alt="Image Product"/>
-                </td>
-                <td>{product.productName}</td>
-                <td>{product.productSubCategory}</td>
-                <td>{product.viewsCount}</td>
-              </tr>
-            )
-            }
-
-          </tbody>
-        </table>
-      </div>
+      <div className="grid grid-cols-2 gap-10">
+        
+      
+      
+        <Flex variant={'col'} className="bg-base-200 gap-2 p-5 rounded-xl">
+          <h2 className="text-xl font-medium">Popular Products</h2>
+        {popularProducts?.slice(0, 10).map((product, index) =>
+        <>
+          <div className="divider my-0"></div>
+          <Flex className="justify-between"  key={product.id}>
+            <figure>
+              <Image src={product.productImgLink} width={40} height={40} alt="Image Product" />
+            </figure>
+            <Flex variant={'col'} className="w-2/3">
+              <p className="font-medium">{product.productName}</p>
+              <p>{`Rp${product.productPrice.toLocaleString('ID-id')}`}</p>
+            </Flex>
+            <p>{`${product.viewsCount} Views`}</p>
+          </Flex>
+        </>
+          
+        )
+        }
+        </Flex>
       <div className="flex flex-col gap-8">
-        <Table 
+        <Table
           label={'Featured Products'}
           tableHead={featuredTableHead}
           mapping={featuredProducts}
           columns={columnFeaturedPrdouct}
         />
+      </div>
       </div>
     </>
   );
