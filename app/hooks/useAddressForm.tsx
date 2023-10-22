@@ -5,8 +5,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
-
 const useAddressForm = (userId: string) => {
   const {
     register,
@@ -24,7 +22,7 @@ const useAddressForm = (userId: string) => {
 
   const onSubmit = async (data: TUserAddressSchema) => {
     setLoading(true);
-    axios.post(`/api/user/${userId}/order`, data)
+    axios.post(`/api/order`, data)
       .then((res) => {
           if (res.status === 201) {
             setLoading(false);
@@ -35,51 +33,51 @@ const useAddressForm = (userId: string) => {
       }
       )
       .catch(err => {
-        console.log(err);
-        if (err.name) {
+        const error = err.response.data.errors;
+        if (error.name) {
           setError("name", {
             type: "server",
-            message: err.name
+            message: error.name
           });
-        } else if (err.phone) {
+        } else if (error.phone) {
           setError("phone", {
             type: "server",
-            message: err.phone,
+            message: error.phone,
           });
-        } else if (err.email) {
+        } else if (error.email) {
           setError("email", {
             type: "server",
-            message: err.email,
+            message: error.email,
           });
-        } else if (err.country) {
+        } else if (error.country) {
           setError("country", {
             type: "server",
-            message: err.country,
+            message: error.country,
           });
-        } else if (err.city) {
+        } else if (error.city) {
           setError("city", {
             type: "server",
-            message: err.city,
+            message: error.city,
           });
-        } else if (err.district) {
+        } else if (error.district) {
           setError("district", {
             type: "server",
-            message: err.district,
+            message: error.district,
           });
-        } else if (err.address) {
+        } else if (error.address) {
           setError("address", {
             type: "server",
-            message: err.address,
+            message: error.address,
           });
-        } else if (err.zip) {
+        } else if (error.zip) {
           setError("zip", {
             type: "server",
-            message: err.zip,
+            message: error.zip,
           });
-        } else if (err.paymentMethod) {
+        } else if (error.paymentMethod) {
           setError("paymentMethod", {
             type: "server",
-            message: err.paymentMethod,
+            message: error.paymentMethod,
           });
         } else (
           alert("Something went wrong")

@@ -6,29 +6,26 @@ import { v4 as uuidv4 } from 'uuid';
 import prisma from "@/app/lib/prisma";
 import type { OrderStatus } from "@prisma/client";
 
-export const POST = async (req: Request, { params }: {
-  params: { userId: string }
-}) => {
-  const userId = params.userId;
+export const POST = async (req: Request) => {
   const uuid = uuidv4();
-  const body = await req.json();
   const token = req.headers.get('cookie')?.split('=')[1];
+  const body = await req.json();
   const verifiedToken = token && (await verifyAuth(token));
 
   if (!verifiedToken) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   } else {
     const result = userAddressSchema.safeParse(body);
+    console.log(result);
     if (!result.success) {
       let zodErrors = {};
       result.error.issues.forEach((issue) => {
         zodErrors = { ...zodErrors, [issue.path[0]]: issue.message }
+        console.log(zodErrors);
       });
       return NextResponse.json({ errors: zodErrors }, { status: 400 });
-    } else if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 400 });
     } else {
-      const hasSufficientStock = await checkStock(userId);
+      const hasSufficientStock = await checkStock(verifiedToken.userId);
       if (!hasSufficientStock) {
         return NextResponse.json({ error: 'Product stock is less than user request' }, { status: 400 });
       } else {
@@ -36,18 +33,17 @@ export const POST = async (req: Request, { params }: {
         const order = await prisma.order.create({
           data: {
             orderId: uuid,
-            userId: params.userId,
+            userId: verifiedToken.userId,
             paymentMethod: result.data.paymentMethod,
           }
         });
-        console.log(order)
 
         if (!order) {
           return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
         } else {
           const productCart = await prisma.cart.findMany({
             where: {
-              userId: userId
+              userId: verifiedToken.userId
             },
             select: {
               productId: true,
@@ -56,10 +52,10 @@ export const POST = async (req: Request, { params }: {
           });
 
           const orderItem = await createOrderItem(productCart, order.orderId);
-          const orderAddress = await createUserAddress(result, userId, order.orderId);
+          const orderAddress = await createUserAddress(result, verifiedToken.userId, order.orderId);
 
           if (orderItem && orderAddress) {
-            await reduceProductStock(userId);
+            await reduceProductStock(verifiedToken.userId);
             return NextResponse.json(order, { status: 201 });
           } else {
             await prisma.address.deleteMany({
@@ -112,7 +108,7 @@ export const PATCH = async (req: Request) => {
 
   // Cek otorisasi
   if (!verifiedToken) {
-    return NextResponse.json('Unauthorized', { status: 401 });
+    return NextResponse.json({error:'Unauthorized'}, { status: 401 });
   }
 
   let orderStatus: OrderStatus = 'Delivered';

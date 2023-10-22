@@ -13,7 +13,7 @@ const OrderStatus = ({order}: {order: any}) => {
       orderId: order.orderId,
       status: 'Delivered'
     }
-    await axios.patch(`/api/user/${order.userId}/order`, data)
+    await axios.patch(`/api/order`, data)
     .then((res) => {
       setOrderItem({
         ...order,

@@ -11,7 +11,7 @@ const useAddCart = ({user, id, stock}: PurchaseBtn) => {
     productId: id,
     quantity
   }
-  const query = `/api/user/${user?.userId}/cart`
+  const query = `/api/cart`
   const handlePostCart = async (e: React.SyntheticEvent) => {
     setModal(!modal)
     e.preventDefault();
