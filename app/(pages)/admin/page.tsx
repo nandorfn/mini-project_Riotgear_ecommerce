@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { getFeatured, getPopularProducts } from "@/app/utils/queryDb";
+import { getFeatured, getIncomeSales, getPopularProducts } from "@/app/utils/queryDb";
 import Table from "@/app/components/Table/Table";
 import { columnFeaturedPrdouct, featuredTableHead } from "@/app/helpers/dataObject";
 
 const page = async () => {
   const popularProducts = await getPopularProducts();
   const featuredProducts = await getFeatured();
+  const revenue = await getIncomeSales();
 
   return (
     <>

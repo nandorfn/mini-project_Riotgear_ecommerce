@@ -249,6 +249,9 @@ export const getOrderProducts = cache(async () => {
         select: {
           productId: true,
           quantity: true,
+        },
+        orderBy : {
+          createdAt: 'desc'
         }
       });
 
@@ -383,4 +386,38 @@ export const getUserCurrentOrder = cache(async (orderId: any) => {
 
   return null;
 });
+
+export const getIncomeSales = async () => {
+  const completedOrders = await prisma.order.findMany({
+    where: {
+      status: 'Completed'
+    }
+  });
+
+  let income = 0;
+  let productSell = 0;
+
+  for (const order of completedOrders) {
+    const orderItems = await prisma.orderItem.findMany({
+      where: {
+        orderId: order.orderId
+      }
+    });
+
+    for (const item of orderItems) {
+      const product = await prisma.product.findFirst({
+        where: {
+          productId: item.productId
+        }
+      });
+
+      if (product?.productPrice ) {
+        income += item.quantity * product.productPrice;
+        productSell += item.quantity
+      }
+    }
+  }
+
+  console.log('Total Income:', income, 'Total Amount:', productSell);
+}
 
