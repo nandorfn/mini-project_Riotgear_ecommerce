@@ -5,6 +5,7 @@ import { checkSubtotal } from "@/app/utils/utils";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { Text } from "@/app/components/Container/Text";
+import { redirect } from "next/navigation";
 
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
@@ -12,6 +13,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
     const order = await getUserCurrentOrder(searchParams.orderId);
     let { subTotal } = checkSubtotal(order);
     let orderStatus = order?.map((item) => item.status);
+    if (!searchParams.orderId) redirect('/store')
     return (
         <>
             <main className="px-3 md:h-[74vh]">
