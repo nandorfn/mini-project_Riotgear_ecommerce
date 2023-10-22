@@ -38,7 +38,7 @@ const Page = async ({
         {filteredOrders?.map((order) => (
           <li key={order.id}>
             <OrderCard
-              order={order}
+              orderItem={order}
             />
           </li>
         ))

@@ -101,18 +101,28 @@ export const PATCH = async (req: Request) => {
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
   let zodErrors = {};
-  
-  if (!result.success){
+
+  if (!result.success) {
     result.error.issues.forEach((issue) => {
-      zodErrors = {...zodErrors, [issue.path[0]]: issue.message}
-    }); 
-    return NextResponse.json( zodErrors ,{ status: 401 });
+      zodErrors = { ...zodErrors, [issue.path[0]]: issue.message }
+    });
+    return NextResponse.json(zodErrors, { status: 401 });
   }
 
-  if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin' && !body)) {
-    return NextResponse.json('Unauthorized',{ status: 401 });
+  if (!verifiedToken && !body) {
+    return NextResponse.json('Unauthorized', { status: 401 });
+  } else if (verifiedToken && verifiedToken.role !== 'admin') {
+    const order = await prisma.order.update({
+      where: {
+        orderId: result.data.orderId,
+      },
+      data: {
+        status: 'Delivered',
+      }
+    })
+    return NextResponse.json(order, { status: 200 });
   } else {
-    await prisma.order.update({
+    const order = await prisma.order.update({
       where: {
         orderId: result.data.orderId,
       },
@@ -120,7 +130,7 @@ export const PATCH = async (req: Request) => {
         status: result.data.status,
       }
     })
-    return NextResponse.json({ status: 200 });
+    return NextResponse.json(order, { status: 200 });
   }
 
 }

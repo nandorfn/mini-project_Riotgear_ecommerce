@@ -1,31 +1,44 @@
 'use client'
-import { Button } from "@/app/components/Button/Button";
 import HistoryOrderCard from "@/app/components/Card/HistoryOrderCard";
 import Collapse from "@/app/components/Container/Colapse";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { checkSubtotal } from "@/app/utils/utils";
 import axios from "axios";
+import StatusBtn from "./StatusBtn";
+import InfoStatus from "./InfoStatus";
+import { useState } from "react";
 type order = {
-  order: any
+  orderItem: any
 }
 
-const OrderCard = ({ order }: order) => {
+const OrderCard = ({ orderItem }: order) => {
+  const [order, setOrder] = useState(orderItem);
   let { subTotal } = checkSubtotal(order.orderItems);
   let date = order.createdAt.toLocaleDateString('en-US', {
     day: '2-digit',
     month: 'long',
     year: 'numeric'
   });
+  
+  console.log(order);
 
   const handleUpdateStatus = async (e: React.SyntheticEvent) => {
+    let { value } = e.target as HTMLButtonElement
     e.preventDefault();
     const data = {
       orderId: order.orderId,
-      status: 'InProgress'
+      status: value
     }
     await axios.patch(`/api/user/${order.userId}/order`, data)
-    .then((res) => console.log(res))
+    .then((res) => {
+      if (res.status === 200) {
+        setOrder({
+          ...order,
+          status: res.data.status
+        })
+      }
+    })
   }
   return (
     <>
@@ -36,7 +49,9 @@ const OrderCard = ({ order }: order) => {
             <p className="font-medium">{`(${order.address.name})`}</p>
             <p className="text-base-300">{date}</p>
           </Flex>
-          <p className=" text-warning px-4 font-medium bg-yellow-200 rounded-md">{order.status}</p>
+          <InfoStatus
+            status={order.status}
+          />
         </Flex>
         <Flex className="bg-base-100 gap-3 pe-4">
           <Collapse>
@@ -87,10 +102,11 @@ const OrderCard = ({ order }: order) => {
             <Flex variant={'col'} className="gap-3 w-[50%] relative">
               <Heading>Subtotal</Heading>
               <p className=" text-error text-xl font-medium">{`Rp${subTotal.toLocaleString('ID-id')}`}</p>
-              <Flex className="absolute z-10 bottom-0 justify-end">
-                <Button onClick={handleUpdateStatus} size={'sm'}>Confirm Order</Button>
+                <StatusBtn 
+                  status={order.status}
+                  handleUpdateStatus={handleUpdateStatus}
+                />
               </Flex>
-            </Flex>
           </Flex>
         </Flex>
       </Flex>
