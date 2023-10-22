@@ -11,7 +11,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
     const date = new Date().toLocaleDateString('en-US', { day: '2-digit', month: "long", year: "numeric" });
     const order = await getUserCurrentOrder(searchParams.orderId);
     let { subTotal } = checkSubtotal(order);
-
+    let orderStatus = order?.map((item) => item.status);
     return (
         <>
             <main className="px-3 md:h-[74vh]">
@@ -25,9 +25,11 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
                 </div>
 
                 <Flex variant={'col'}>
-                    <Heading variant={'fourthRwd'} className="mt-3">Payment Details</Heading>
-                    <p className="italic my-5 text-xs md:text-base text-base-300">Thank you. Your order has been received. If you didn&apos;t complete the payment 24 hours from now, your order will be cancelled.</p>
-                    <Flex variant={'colToRow'} className="p-4 md:px-4 md:py-2 bg-base-200 rounded-md md:justify-between">
+                    <Heading variant={'fourthRwd'} className="mt-3 mb-5">Payment Details</Heading>
+                    {orderStatus && orderStatus[0] === 'Ordered' &&
+                        <p className="italictext-xs md:text-base text-base-300">Thank you. Your order has been received. If you didn&apos;t complete the payment 24 hours from now, your order will be cancelled.</p>
+                    }
+                    <Flex variant={'colToRow'} className="p-4 mt-5 md:px-4 md:py-2 bg-base-200 rounded-md md:justify-between">
                         <Text fs={'lg'} className="md:w-1/5">{`Order Number: 12345`}</Text>
                         <div className="divider divider-horizontal"></div>
                         <Text fs={'lg'} className="md:w-1/5">{`Date: ${date}`}</Text>

@@ -1,5 +1,4 @@
 import { categoryOption } from "@/app/helpers/dataObject";
-import ErrorMsg from "../ErrorMsg";
 
 interface Props {
   label: string,

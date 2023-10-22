@@ -307,6 +307,12 @@ export const getOrderProducts = cache(async () => {
 
 
 const getOrderItemsWithProducts = async (order: any) => {
+  const orderData = await prisma.order.findFirst({
+    where: {
+      orderId: order.orderId,
+    }
+  })
+
   const orderItems = await prisma.orderItem.findMany({
     where: {
       orderId: order.orderId,
@@ -330,6 +336,8 @@ const getOrderItemsWithProducts = async (order: any) => {
       ...item,
       ...product,
       paymentMethod: order.paymentMethod,
+      status: orderData?.status,
+      orderDate: orderData?.createdAt
     };
 
     orderItemsWithProducts.push(combinedObject);
@@ -370,16 +378,11 @@ export const getUserCurrentOrder = cache(async (orderId: any) => {
   const order = await prisma.order.findFirst({
     where: {
       orderId: orderId,
-      status: 'Ordered'
     }
   });
 
   if (order) {
     const orderItemsWithProducts = await getOrderItemsWithProducts(order);
-
-    console.log(orderItemsWithProducts);
-    console.log(order);
-
     return orderItemsWithProducts;
   }
 
