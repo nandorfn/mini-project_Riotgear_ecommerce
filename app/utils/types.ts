@@ -77,3 +77,16 @@ export type DataProductProps = {
   user: undefined | userJwtSchema;
 }
 
+export type order = {
+  id?: number,
+  orderId?: string,
+  productId?: string,
+  quantity?: number,
+  createdAt?: Date,
+  updatedAt?:  Date,
+  productName?: string,
+  productPrice?: number,
+  productImgLink?: string,
+  paymentMethod?: string
+}
+

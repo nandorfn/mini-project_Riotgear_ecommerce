@@ -1,7 +1,7 @@
 import Image from "next/image";
-import LogoAdmin from '@/app/assets/AdminLogo.svg';
-import RiotLogo from '@/app/assets/RiotLogo.svg';
-import MenuIcon from '@/app/assets/MenuIcon.svg';
+import LogoAdmin from '@/app/assets/icon/AdminLogo.svg';
+import RiotLogo from '@/app/assets/icon/RiotLogo.svg';
+import MenuIcon from '@/app/assets/icon/MenuIcon.svg';
 import ListMenu from "./ListMenu";
 
 

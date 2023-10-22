@@ -2,7 +2,7 @@ import fbIcon from '../../assets/icon/Facebook.svg'
 import igIcon from '../../assets/icon/Instagram.png'
 import xIcon from '../../assets/icon/TwitterX.png'
 import ttIcon from '../../assets/icon/TikTok.png'
-import RiotLogo from '../../assets/RiotLogoBlack.svg'
+import RiotLogo from '../../assets/icon/RiotLogoBlack.svg'
 import Image from 'next/image';
 import Link from 'next/link'
 import { Flex } from '../Container/Flex'

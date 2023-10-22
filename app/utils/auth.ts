@@ -23,7 +23,7 @@ export const verifyAuth = async (token: string) => {
 export const checkUserLogin = async () => {
   const cookieStore = cookies()
   const token = cookieStore.get('token');
-  const user: JwtSchema | void = token && (await verifyAuth(token.value))
+  const user: JwtSchema | undefined  = token && (await verifyAuth(token.value))
     
   return user;
 }

@@ -303,49 +303,84 @@ export const getOrderProducts = cache(async () => {
   return allData;
 });
 
+
+const getOrderItemsWithProducts = async (order: any) => {
+  const orderItems = await prisma.orderItem.findMany({
+    where: {
+      orderId: order.orderId,
+    }
+  });
+
+  const orderItemsWithProducts = [];
+  for (const item of orderItems) {
+    const product = await prisma.product.findUnique({
+      where: {
+        productId: item.productId
+      },
+      select: {
+        productName: true,
+        productPrice: true,
+        productImgLink: true,
+      }
+    });
+
+    const combinedObject = {
+      ...item,
+      ...product,
+      paymentMethod: order.paymentMethod,
+    };
+
+    orderItemsWithProducts.push(combinedObject);
+  }
+
+  return orderItemsWithProducts;
+};
+
+export const getUserOrder = cache(async (userId: string | undefined) => {
+  if (!userId) {
+    return null;
+  } else {
+    const allOrder = await prisma.order.findMany({
+      where: {
+        userId: userId,
+      }
+    });
+  
+    if (allOrder) {
+      const allUserOrder = []
+      for (const order of allOrder) {
+        const orderItemsWithProducts = await getOrderItemsWithProducts(order);
+        const combinedData = {
+          ...order,
+          orderItem: orderItemsWithProducts
+        }
+        allUserOrder.push(combinedData);
+      }
+      
+      return allUserOrder;
+    }
+  
+    return null;
+  }
+});
+
 export const getUserCurrentOrder = cache(async (orderId: any) => {
   const order = await prisma.order.findFirst({
     where: {
       orderId: orderId,
       status: 'Ordered'
     }
-  })
+  });
 
   if (order) {
-    const orderItems = await prisma.orderItem.findMany({
-      where: {
-        orderId: order.orderId,
-      }
-    })
-
-    const orderItemsWithProducts = [];    
-    for (const item of orderItems) {
-      const product = await prisma.product.findUnique({
-        where: {
-          productId: item.productId
-        },
-        select: {
-          productName: true,
-          productPrice: true,
-        }
-      });
-      
-      const combinedObject = {
-        ...item,
-        ...product,
-        paymentMethod: order.paymentMethod,
-        uniqueCode: order.id
-      };
-
-      orderItemsWithProducts.push(combinedObject);
-    }
+    const orderItemsWithProducts = await getOrderItemsWithProducts(order);
 
     console.log(orderItemsWithProducts);
     console.log(order);
-    
+
     return orderItemsWithProducts;
   }
+
   return null;
 });
-
 

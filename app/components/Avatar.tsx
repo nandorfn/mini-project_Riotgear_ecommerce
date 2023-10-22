@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
-import AvatarIcon from '../assets/Ellipse 1.png'
-import { userAvatar } from "../utils/types";
+import AvatarIcon from '@/app/assets/Content/Ellipse 1.png'
+import { userAvatar } from "@/app/utils/types";
 import { getData } from "../utils/api";
 import { useState } from "react";
 import Transparent from "./Container/Transparent";

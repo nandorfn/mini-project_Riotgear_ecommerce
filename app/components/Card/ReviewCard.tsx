@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import avatar from '../../assets/Ellipse 1.png'
+import avatar from '@/app/assets/Content/Ellipse 1.png'
 
 const ReviewCard: React.FC = () => {
   return (

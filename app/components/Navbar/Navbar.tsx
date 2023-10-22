@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import BrandLogo from '../../assets/RiotLogoBlack.svg'
-import MenuBtn from '../../assets/MenuIcon.svg'
+import BrandLogo from '@/app/assets/icon/RiotLogoBlack.svg'
+import MenuBtn from '@/app/assets/icon/MenuIcon.svg'
 import Menus from './Menus';
 import Link from 'next/link';
 import { Flex } from '../Container/Flex';

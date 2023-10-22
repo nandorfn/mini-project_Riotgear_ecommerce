@@ -1,24 +1,16 @@
+import Link from "next/link";
+import { getUserCurrentOrder } from "@/app/utils/queryDb";
+import { checkSubtotal } from "@/app/utils/utils";
+
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { Text } from "@/app/components/Container/Text";
-import { checkUserLogin } from "@/app/utils/auth";
-import { getUserCurrentOrder, getUserProductCart } from "@/app/utils/queryDb";
-import { orderSummary } from "@/app/utils/utils";
-import Link from "next/link";
 
 
-const Page = async ({
-    searchParams,
-  }: {
-    searchParams: { [key: string]: string | string[] | undefined }
-  }) => {
-    console.log(searchParams);
+const Page = async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
+    const date = new Date().toLocaleDateString('en-US', { day: '2-digit', month: "long", year: "numeric" });
     const order = await getUserCurrentOrder(searchParams.orderId);
-    console.log(order);
-    const user = await checkUserLogin();
-    const productCart = await getUserProductCart(user?.userId ?? '');
-    const date = new Date()
-    let { subTotal } = orderSummary(productCart);
+    let { subTotal } = checkSubtotal(order);
 
     return (
         <>
@@ -38,9 +30,9 @@ const Page = async ({
                     <Flex variant={'colToRow'} className="p-4 md:px-4 md:py-2 bg-base-200 rounded-md md:justify-between">
                         <Text fs={'lg'} className="md:w-1/5">{`Order Number: 12345`}</Text>
                         <div className="divider divider-horizontal"></div>
-                        <Text fs={'lg'} className="md:w-1/5">{`Date: ${date.toLocaleDateString('en-US', { day:'2-digit', month: "long", year:"numeric"})}`}</Text>
+                        <Text fs={'lg'} className="md:w-1/5">{`Date: ${date}`}</Text>
                         <div className="divider divider-horizontal"></div>
-                        <Text fs={'lg'} className="md:w-1/5">{`Total: ${subTotal.toLocaleString('ID-id')}`}</Text>
+                        <Text fs={'lg'} className="md:w-1/5">{`Total: ${`Rp${(subTotal || 0).toLocaleString('ID-id')}`}`}</Text>
                         <div className="divider divider-horizontal"></div>
                         <Text fs={'lg'} className="md:w-2/5">{`Payment Method: Direct Bank Transfer`}</Text>
                     </Flex>
@@ -51,7 +43,7 @@ const Page = async ({
                         <div className="divider divider-horizontal"></div>
                         <Text fs={'lg'} className="md:w-[44.2%]">{`Account Number: 142-077-0845`}</Text>
                         <div className="divider divider-horizontal"></div>
-                        <Text fs={'lg'} className="md:w-2/5">{`Account Name: RIOTGEAR`}</Text>
+                        <Text fs={'lg'} className="md:w-[40%]">{`Account Name: RIOTGEAR`}</Text>
                     </Flex>
                     <div className="divider divider-horizontal"></div>
                 </Flex>
@@ -69,18 +61,17 @@ const Page = async ({
                         <tbody>
                             <tr>
                                 <td>Name</td>
-                                <tr className="flex flex-col">
-                                {productCart?.map((item) => (
-                                    <td key={item.id}>
-                                        {item.productInfo.productName}
-                                    </td>
-                                ))
-                                }
-                                </tr>
+                                <td className="flex flex-col">
+                                    {order?.map((item) => (
+                                        <p key={item.id}>
+                                            {item.productName}
+                                        </p>
+                                    ))}
+                                </td>
                             </tr>
                             <tr>
                                 <td>Subtotal</td>
-                                <td>{subTotal}</td>
+                                <td>{subTotal || 0}</td>
                             </tr>
                             <tr>
                                 <td>Shipping</td>
@@ -92,9 +83,10 @@ const Page = async ({
                             </tr>
                             <tr>
                                 <td>Total</td>
-                                <td>{`Rp${subTotal.toLocaleString('ID-id')}`}</td>
+                                <td>{`Rp${(subTotal || 0).toLocaleString('ID-id')}`}</td>
                             </tr>
                         </tbody>
+
                     </table>
                 </div>
             </main>
