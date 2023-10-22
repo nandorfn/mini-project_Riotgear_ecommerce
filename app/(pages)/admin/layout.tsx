@@ -17,7 +17,7 @@ const LayoutAdmin = ({
             icon=""
           />
         </div>
-        <Flex variant={'col'} className="gap-10 mb-8">
+        <Flex variant={'col'} className="gap-5 mb-8">
           {children}
         </Flex>
       </SideBar>

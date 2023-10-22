@@ -294,7 +294,7 @@ export const getOrderProducts = cache(async () => {
       orderData.orderItems = orderItems.map((item, index) => ({
         productId: item.productId,
         quantity: item.quantity,
-        product: products[index],
+        ...products[index],
       }));
 
       return orderData;

@@ -4,6 +4,7 @@ import { Heading } from "../Container/Heading";
 import { Text } from "../Container/Text";
 
 type Props = {
+  isAdmin: boolean;
   img?: string;
   name?: string;
   quantity: number;
@@ -14,6 +15,7 @@ type Props = {
 
 const HistoryOrderCard = ({
   img,
+  isAdmin,
   name,
   quantity,
   children,
@@ -38,11 +40,15 @@ const HistoryOrderCard = ({
           </div>
           {children}
         </Flex>
-        <div className="divider divider-horizontal"></div>
-        <Flex variant={'col'}>
-          <Heading>Total</Heading>
-          <Text fs={'lg'} bold={'medium'} className="text-error">{`Rp${total}`}</Text>
-        </Flex>
+        {!isAdmin &&
+          <>
+            <div className="divider divider-horizontal"></div>
+            <Flex variant={'col'}>
+              <Heading>Total</Heading>
+              <Text fs={'lg'} bold={'medium'} className="text-error">{`Rp${total}`}</Text>
+            </Flex>
+          </>
+        }
       </Flex>
     </>
   );

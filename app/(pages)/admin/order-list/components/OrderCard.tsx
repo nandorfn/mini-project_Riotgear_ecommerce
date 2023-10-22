@@ -1,12 +1,21 @@
+'use client'
 import { Button } from "@/app/components/Button/Button";
+import HistoryOrderCard from "@/app/components/Card/HistoryOrderCard";
+import Collapse from "@/app/components/Container/Colapse";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
-import Image from "next/image";
+import { checkSubtotal } from "@/app/utils/utils";
 type order = {
   order: any
 }
 
 const OrderCard = ({ order }: order) => {
+  let { subTotal } = checkSubtotal(order.orderItems);
+  let date = order.createdAt.toLocaleDateString('en-US', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  }) 
   return (
     <>
       <Flex variant={'col'} className=" border-[1px] rounded-xl shadow-sm gap-3 pb-4">
@@ -14,76 +23,58 @@ const OrderCard = ({ order }: order) => {
           <Flex variant={'row'} className="gap-3">
             <p className="font-medium text-success">{order.id}</p>
             <p className="font-medium">{`(${order.address.name})`}</p>
-            <p className="text-base-300">{order.createdAt.toLocaleDateString()}</p>
+            <p className="text-base-300">{date}</p>
           </Flex>
           <p className=" text-warning px-4 font-medium bg-yellow-200 rounded-md">{order.status}</p>
         </Flex>
-        <Flex className="bg-base-100 gap-3 px-4">
+        <Flex className="bg-base-100 gap-3 pe-4">
+          <Collapse>
+            {order.orderItems.map((item: any, index: number) => (
+              <Flex key={index} className="gap-3">
+                {index === 0 && (
+                  <>
+                    <HistoryOrderCard
+                      isAdmin={true}
+                      name={item.productName}
+                      quantity={item.quantity}
+                      price={item.productPrice}
+                      img={order.orderItems[index].productImgLink}
+                    >
+                      {order.orderItems.length > 1 &&
+                        <p className="text-success">{`Check ${order.orderItems.length - 1} other products`}</p>
+                      }
+                    </HistoryOrderCard>
+                  </>
+                )}
+              </Flex>
 
-
-
-          <div className="collapse bg-base-200 rounded-none">
-            <input type="checkbox" className="peer" />
-            <div className="collapse-title p-0 bg-base-100">
-              {order.orderItems.map((item: any, index: number) => (
-                <Flex key={index} className="gap-3">
-                  {index === 0 && (
-                    <>
-                      <Image
-                        src={order.orderItems[index].product.productImgLink}
-                        width={100}
-                        height={100}
-                        alt="Products Image"
-                      />
-                      <Flex variant={'col'}>
-                        <Heading>{item.product.productName}</Heading>
-                        <p>{item.quantity}</p>
-                        {order.orderItems.length > 1 &&
-                          <p className="text-success">{`Check ${order.orderItems.length - 1} other products`}</p>
-                        }
-                      </Flex>
-                    </>
-                  )}
-                </Flex>
-
-              ))}
-
-            </div>
-            <div className="collapse-content rounded-none p-0 bg-base-100 flex flex-col gap-4">
-
-              {order.orderItems.map((item: any, index: number) => (
-                <Flex key={index} className="gap-3">
-                  {index > 0 && (
-                    <>
-                      <Image
-                        src={order.orderItems[index].product.productImgLink}
-                        width={100}
-                        height={100}
-                        alt="Products Image"
-                      />
-                      <Flex variant={'col'}>
-                        <Heading>{item.product.productName}</Heading>
-                        <p>{item.quantity}</p>
-                      </Flex>
-                    </>
-                  )}
-                </Flex>
-
-              ))}
-            </div>
-          </div>
-
-          <div className="divider lg:divider-horizontal"></div> 
-
+            ))}
+            {order.orderItems.map((item: any, index: number) => (
+              <Flex key={index} className="gap-3 ms-1">
+                {index > 0 && (
+                  <HistoryOrderCard
+                  isAdmin={true}
+                  name={item.productName}
+                  quantity={item.quantity}
+                  price={item.productPrice}
+                  img={order.orderItems[index].productImgLink}
+                />
+                )}
+              </Flex>
+            ))}
+          </Collapse>
+          <div className="divider lg:divider-horizontal"></div>
           <Flex variant={'col'} className="px-3">
             <Heading>Billing Address</Heading>
-            <p>John Doe</p>
-            <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
+            <p>{order.address.name}</p>
+            <div>
+              <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
+            </div>
           </Flex>
-          <div className="divider lg:divider-horizontal"></div> 
+          <div className="divider lg:divider-horizontal"></div>
           <Flex variant={'col'} className="gap-3 w-[50%]">
             <Heading>Subtotal</Heading>
-            <p className=" text-error text-xl font-medium">Rp100.856.000</p>
+            <p className=" text-error text-xl font-medium">{`Rp${subTotal.toLocaleString('ID-id')}`}</p>
             <Flex className="justify-end">
               <Button size={'sm'}>Confirm Order</Button>
             </Flex>

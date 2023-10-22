@@ -29,7 +29,7 @@ const Page = async ({
   return (
     <>
       <Heading fs={'xl2'}>Order List</Heading>
-      <Flex align={'iCenter'} className="my-5 gap-3 breadcrumbs">
+      <Flex align={'iCenter'} className="gap-3">
         <Heading variant={'five'}>Status</Heading>
         {statusOptions.map((option) => (
           <Link href={`?status=${option.value}`} key={option.value}>

@@ -4,7 +4,7 @@ import Link from "next/link";
 const ListMenu: React.FC = () => {
   const menus = [
     { label: 'Dashboard', Link: '/admin/' },
-    { label: 'Order List', Link: '/admin/order-list' },
+    { label: 'Order List', Link: '/admin/order-list?status=' },
     { label: 'Products', Link: '/admin/products' },
     { label: 'Blog', Link: '/admin/blog' },
     { label: 'Setting', Link: '/admin/setting' },
