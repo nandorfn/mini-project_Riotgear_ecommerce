@@ -18,7 +18,7 @@ const ListCard = ({data}: {data: any}) => {
               <Heading>{item.productName}</Heading>
               <p className="text-base-300">{`Rp${item.productPrice.toLocaleString('ID-id')}`}</p>
             </div>
-            <p>{`${item.viewsCount} views`}</p>
+            <p className="text-error bg-red-200 px-3 rounded-full font-medium">{`${item.viewsCount} views`}</p>
           </Flex>
         </Flex>
       ))

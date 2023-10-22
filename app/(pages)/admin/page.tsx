@@ -1,7 +1,6 @@
 import { getAnalyticsData, getFeatured, getPopularProducts } from "@/app/utils/queryDb";
 import { Flex } from "@/app/components/Container/Flex";
 import Progress from "@/app/components/Chart/Progress";
-import Image from "next/image";
 import { Heading } from "@/app/components/Container/Heading";
 import ListCard from "@/app/components/Card/ListCard";
 import LineChart from "@/app/components/Chart/LineChart";
@@ -11,8 +10,6 @@ const page = async () => {
   const featuredProducts = await getFeatured();
   const analytics = await getAnalyticsData();
   const maxValue = Math.max(...analytics.popularCategory.map(item => item.viewsCount));
-  console.log(analytics)
-
   const scaledData = analytics.popularCategory.map(item => ({
     productSubCategory: item.productSubCategory,
     viewsCount: item.viewsCount,
@@ -21,7 +18,8 @@ const page = async () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-10">
+      <Heading fs={'xl2'}>Dashboard</Heading>
+      <div className="grid px-4 md:px-0 grid-cols-1 md:grid-cols-2 gap-10">
         <Flex variant={'col'} className=" gap-2 bg-zinc-100 rounded-xl shadow-sm p-5">
           <Heading variant={'five'} className="mb-2">Popular Products</Heading>
           <ListCard data={popularProducts} />
@@ -48,8 +46,11 @@ const page = async () => {
             <Heading variant={'five'}>Popular Category</Heading>
             <Progress data={scaledData} />
           </Flex>
-          
-          <LineChart sourceData={analytics.monthly} />
+          <Flex variant={'col'} className="gap-2 bg-zinc-100 h-fit p-5 rounded-xl">
+            <Heading variant={'five'}>Daily Income In A Month</Heading>
+            <LineChart sourceData={analytics.daily} />
+          </Flex>
+
         </Flex>
         <Flex variant={'col'} className=" gap-2 bg-zinc-100 rounded-xl shadow-sm p-5">
           <Heading variant={'five'} className="mb-2">Featured Products</Heading>

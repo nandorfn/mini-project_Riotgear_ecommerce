@@ -82,7 +82,7 @@ export const getPopularProducts = cache(async () => {
     orderBy: {
       viewsCount: 'desc'
     },
-    take: 10
+    take: 13
   })
 
   return popularProducts;
@@ -392,7 +392,8 @@ export const getIncomeSales = async () => {
   const completedOrders = await prisma.order.findMany({
     where: {
       status: 'Completed'
-    }
+    },
+    take: 30
   });
 
   const incomeData = {
