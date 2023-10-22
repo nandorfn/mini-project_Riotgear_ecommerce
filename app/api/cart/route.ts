@@ -29,7 +29,7 @@ export const POST = async (req: Request) => {
       });
       return NextResponse.json(updatedCartItem, { status: 200 });
     } else {
-      return NextResponse.json({ error: "Product didn't exist!" }, { status: 404 });
+      return NextResponse.json({ errors: "Product doesn't exist!" }, { status: 404 });
     }
 
   } else {

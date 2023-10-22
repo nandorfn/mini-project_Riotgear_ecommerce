@@ -80,7 +80,7 @@ const useAddressForm = (userId: string) => {
             message: error.paymentMethod,
           });
         } else (
-          alert("Something went wrong")
+          alert(errors)
         )
       })
       .finally(() => {

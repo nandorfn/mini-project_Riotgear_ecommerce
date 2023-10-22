@@ -31,7 +31,6 @@ const useLoginForm = () => {
         if (error.response) {
           const errors = error.response.data.errors;
           if (errors.email) {
-            console.log(errors.email);
             setError("email", {
               type: "server",
               message: errors.email,
@@ -45,7 +44,10 @@ const useLoginForm = () => {
             alert("Something went wrong");
           }
         }
-      });
+      })
+      .finally(() => {
+        setLoading(false);
+      })
     reset();
   };
 

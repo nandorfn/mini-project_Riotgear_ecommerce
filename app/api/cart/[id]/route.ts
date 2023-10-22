@@ -5,9 +5,10 @@ import prisma from "@/app/lib/prisma";
 
 export const PATCH = async (req: NextRequest, { params }: { params: { id: string } }) => {
   const token = req.headers.get('cookie')?.split('=')[1];
-  const verifiedToken = token && (await verifyAuth(token));  
+  const verifiedToken = token && (await verifyAuth(token));
+  
   if (!verifiedToken) {
-    return NextResponse.json({error: 'Unauthorized'}, { status: 401 });
+    return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   } else {
     const quantity = await req.json();
     await prisma.cart.update({
@@ -24,11 +25,12 @@ export const PATCH = async (req: NextRequest, { params }: { params: { id: string
   }
 }
 
-export const DELETE = async (req: Request, { params }: { params: { id: string} }) => {
+export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token))
+  
   if (!verifiedToken) {
-    return NextResponse.json({error: 'Unauthorized'}, { status: 401 });
+    return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   } else {
     const deleteCart = await prisma.cart.delete({
       where: {
@@ -37,7 +39,7 @@ export const DELETE = async (req: Request, { params }: { params: { id: string} }
     });
 
     if (!deleteCart) {
-      return NextResponse.json({error: 'Bad Request'}, { status: 400 });
+      return NextResponse.json({ errors: 'Bad Request' }, { status: 400 });
     } else {
       let updateCart = await getUserProductCart(verifiedToken.userId);
       return NextResponse.json(updateCart, { status: 200 });

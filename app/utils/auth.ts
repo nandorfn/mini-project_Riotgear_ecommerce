@@ -15,7 +15,7 @@ export const verifyAuth = async (token: string) => {
     const verified = await jwtVerify(token, new TextEncoder().encode(getJwtSecretKey()));
     
     if (!verified) {
-      throw new Error('Your token isnt valid');
+      return undefined;
     } else {
       return verified.payload as JwtSchema;
     }
