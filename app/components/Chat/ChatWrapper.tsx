@@ -43,7 +43,6 @@ const ChatWrapper: React.FC = () => {
     if (form.command) {
       axios.post('/api/openai', json)
         .then(res => {
-          console.log(res.data);
           setMessages([
             ...messages,
             { text: form.command, isBot: false },
@@ -54,7 +53,7 @@ const ChatWrapper: React.FC = () => {
           console.error('Kesalahan:', error);
         })
         .finally(() =>{ 
-        setLoading(false)
+          setLoading(false)
         });
     }
   };
@@ -66,13 +65,16 @@ const ChatWrapper: React.FC = () => {
         <Image src={chatIcon} width={50} alt='Chat Icon' />
       </Button>
       {modal &&
-        <ChatAI
-          data={messages}
-          loading={loading}
-          handleInput={handleInput}
-          handleSubmit={onSubmit}
-          setModal={setModal}
-        />
+        <div className='relative'>
+          <ChatAI
+            command={form.command}
+            data={messages}
+            loading={loading}
+            handleInput={handleInput}
+            handleSubmit={onSubmit}
+            setModal={setModal}
+          />
+        </div>
       }
     </>
   );
