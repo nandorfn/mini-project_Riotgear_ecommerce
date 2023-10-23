@@ -6,8 +6,9 @@ import { Heading } from "@/app/components/Container/Heading";
 import { checkSubtotal } from "@/app/utils/utils";
 import axios from "axios";
 import StatusBtn from "../../../../components/Button/StatusBtn";
-import InfoStatus from "../../../../components/Container/InfoStatus";
+
 import { useState } from "react";
+import { InfoStatus } from "@/app/components/Container/InfoStatus";
 type order = {
   orderItem: any
 }

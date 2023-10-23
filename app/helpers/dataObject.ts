@@ -231,3 +231,32 @@ export const createProductData = (form: productFormState) => {
     featured: form.featured !== 1,
   };
 };
+
+type StatusStyles = Record<string, { className: string; text: string }>;
+
+export const statusStyles: StatusStyles = {
+  Ordered: {
+    className: "bg-base-100 ",
+    text: "Ordered",
+  },
+  InProgress: {
+    className: "bg-yellow-200 text-warning ",
+    text: "In Progress",
+  },
+  Shipped: {
+    className: "bg-green-200 text-green-700 ",
+    text: "Shipped",
+  },
+  Delivered: {
+    className: "bg-blue-200 text-blue-700 ",
+    text: "Delivered",
+  },
+  Cancelled: {
+    className: "bg-red-200 text-red-700 ",
+    text: "Cancelled",
+  },
+  Completed: {
+    className: "bg-green-200 text-green-700 ",
+    text: "Completed",
+  },
+};

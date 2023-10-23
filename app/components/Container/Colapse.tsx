@@ -4,7 +4,7 @@ type Props = {
 
 const Collapse = ({ children }: Props) => {
     return (
-      <div className="collapse">
+      <div className="collapse rounded-none">
         <input type="checkbox" className="peer" />
         <div className="collapse-title pt-0 px-5 rounded-none">
           {children[0]}

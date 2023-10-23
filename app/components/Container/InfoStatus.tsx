@@ -1,42 +1,39 @@
+import { cn } from "@/app/utils/utils";
+import { VariantProps, cva } from 'class-variance-authority';
+import { HTMLAttributes } from "react";
 import { Flex } from "@/app/components/Container/Flex";
+import { statusStyles } from "@/app/helpers/dataObject";
 
-type StatusStyles = Record<string, { className: string; text: string }>;
+const infoStatusVariants = cva(
+  'justify-end',
+  {
+    variants: {
+      variant: {
+        rwd: 'w-fit text-xs font-medium rounded-sm md:text-base',
+        
+      }
+    }
+  }
+)
+interface InfoStatusProps extends HTMLAttributes<HTMLDivElement>,
+VariantProps<typeof infoStatusVariants>
+{
+  status: string;
+}
 
-const statusStyles: StatusStyles = {
-  Ordered: {
-    className: "bg-base-100 ",
-    text: "Ordered",
-  },
-  InProgress: {
-    className: "bg-yellow-200 text-warning ",
-    text: "In Progress",
-  },
-  Shipped: {
-    className: "bg-green-200 text-green-700 ",
-    text: "Shipped",
-  },
-  Delivered: {
-    className: "bg-blue-200 text-blue-700 ",
-    text: "Delivered",
-  },
-  Cancelled: {
-    className: "bg-red-200 text-red-700 ",
-    text: "Cancelled",
-  },
-  Completed: {
-    className: "bg-green-200 text-green-700 ",
-    text: "Completed",
-  },
-};
-
-const InfoStatus = ({ status }: { status: string }) => {
+const InfoStatus: React.FC<InfoStatusProps> = ({
+  status,
+  className,
+  variant,
+  ...props
+}) => {
   const style = statusStyles[status] || {};
 
   return (
-    <Flex className="w-full justify-end">
-      <p className={` px-2 md:px-4 md:font-medium rounded-md ${style.className}`}>{style.text}</p>
+    <Flex className={cn(infoStatusVariants({variant, className}))} {...props}>
+      <p className={`px-2 py-[0.6rem] md:py-0 md:px-4 md:font-medium rounded-md ${style.className}`}>{style.text}</p>
     </Flex>
   );
 };
 
-export default InfoStatus;
+export { InfoStatus , infoStatusVariants};

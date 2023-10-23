@@ -7,9 +7,10 @@ import { Text } from "@/app/components/Container/Text";
 import { checkUserLogin } from "@/app/utils/auth";
 import { getUserOrder } from "@/app/utils/queryDb";
 import Link from "next/link";
-import InfoStatus from "../../../components/Container/InfoStatus";
 import OrderStatus from "./components/OrderStatus";
 import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
+import { InfoStatus } from "@/app/components/Container/InfoStatus";
+import CollapseDetails from "./components/CollapseDetails";
 
 
 const Page = async ({
@@ -33,17 +34,21 @@ const Page = async ({
             <li><Link href={'/store'}>Store</Link></li>
           </ul>
         </div>
-        <Heading variant={'fourthRwd'} className="md:mb-10">YOUR ORDER</Heading>
-        <Flex align={'iCenter'} className="my-5 mb-10 gap-3">
+        <Heading variant={'fourthRwd'} className="md:mb-6">YOUR ORDER</Heading>
+        <Flex align={'iCenter'} className=" lg:px-0 my-4 gap-3">
           <Heading variant={'five'}>Status</Heading>
-          <StatusOrderWrapper
-            status={searchParams.status}
-          />
+          <div className=" stats">
+            <Flex align={'iCenter'} className="gap-3 breadcrumbs">
+              <StatusOrderWrapper
+                status={searchParams.status}
+              />
+            </Flex>
+          </div>
         </Flex>
 
         {filteredOrders
           ? filteredOrders.map((order, index) => {
-            const inv = order.orderId.toUpperCase().split('-')
+            const inv = order.orderId.toUpperCase().split('-').join('').replace(/,/g, '');
             const date = order.createdAt.toLocaleDateString('en-US', {
               day: '2-digit',
               month: 'long',
@@ -59,12 +64,16 @@ const Page = async ({
 
             return (
               <Flex variant={'col'} className="shadow-md rounded-lg mb-5 relative" key={index}>
-                <Flex align={'iCenter'} className="justify-between pt-2 px-5">
-                  <Flex variant={'row'} className="gap-5">
-                    <p className="text-success font-medium">{`INV/${inv}`}</p>
-                    <p>{date}</p>
+                <Flex align={'iCenter'} className="justify-between pt-2 px-5 mb-2">
+                  <Flex variant={'colToRow'} className="md:gap-5 w-4/5">
+                    <p className="text-success text-sm md:text-base font-medium truncate pe-3 md:pe-0">{`INV/${inv}`}</p>
+                    <p className="text-xs md:text-base text-base-300">{date}</p>
                   </Flex>
-                  <InfoStatus status={order.status} />
+                  <InfoStatus
+                    variant={'rwd'}
+                    className="w-auto"
+                    status={order.status}
+                  />
                 </Flex>
                 <Colapse>
                   {order.orderItem.map((item, index: number) => (
@@ -77,12 +86,15 @@ const Page = async ({
                           quantity={item.quantity}
                           price={item.productPrice}
                           total={subTotal}
+                          collapse={<CollapseDetails data={order.orderItem} />}
                         >
-                          {order.orderItem.length > 1 &&
-                            <p className="text-success">
-                              {`Check ${order.orderItem.length - 1} other products`}
-                            </p>
-                          }
+                          <>
+                            <div className="divider divider-horizontal"></div>
+                            <Flex variant={'col'}>
+                              <Heading className="text-base md:text-lg">Total</Heading>
+                              <Text bold={'medium'} className="text-error text-base md:text-lg">{`Rp${subTotal?.toLocaleString('ID-id')}`}</Text>
+                            </Flex>
+                          </>
                         </HistoryOrderCard>
                       )}
                     </div>
