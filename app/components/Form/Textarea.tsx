@@ -11,7 +11,8 @@ const textAreaVariants = cva(
         ghost: 'textarea-ghost',
       },
       size: {
-        standard: 'w-full h-100'
+        standard: 'w-full h-100',
+        wide: 'w-full',
       }
     }
   }
@@ -23,6 +24,7 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>,
 const Textarea: React.FC<TextAreaProps> = forwardRef(({
   variant,
   className,
+  size,
   ...props
 }, ref) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -34,6 +36,7 @@ const Textarea: React.FC<TextAreaProps> = forwardRef(({
         ref={textareaRef}
         className={cn(textAreaVariants({
           variant,
+          size,
           className
         }))}
         {...props}
