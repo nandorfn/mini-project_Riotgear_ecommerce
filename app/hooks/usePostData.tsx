@@ -1,22 +1,14 @@
 import axios from "axios";
-import { getCookie } from "cookies-next";
-import { ProductData } from "../utils/utils";
+import { ProductData } from "@/app/utils/types";
 
 type usePostDataProps = {
   setData: React.Dispatch<React.SetStateAction<ProductData[]>>;
 }
 
 const usePostData = ({ setData }: usePostDataProps) => {
-  const token = getCookie('token');
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  }
 
   const sendData = async (data: ProductData) => {
-    await axios.post("/api/products", data, {
-      headers: headers
-    })
+    await axios.post("/api/products", data)
       .then(response => {
         setData((prevState: ProductData[]) => [
           ...prevState,

@@ -1,4 +1,4 @@
-import { ProductData } from "@/app/utils/utils";
+import { ProductData } from "@/app/utils/types";
 import { Text } from "../Container/Text";
 import ProductCard from "./ProductCard";
 
@@ -9,7 +9,7 @@ const CardContainer = async ({ data }: { data: ProductData[] }) => {
         {data.length > 0 ? data?.map((product) =>
           <article key={product.id}>
             <ProductCard
-              productId={product.productId}
+              productId={product.productId ?? ''}
               productImg={product.productImgLink}
               productName={product.productName}
               productPrice={product.productPrice}

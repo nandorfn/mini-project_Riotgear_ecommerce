@@ -1,4 +1,5 @@
-import { faq,  FaqItem } from '@/app/helpers/dataObject'
+import { FaqItem } from '@/app/utils/types';
+import { faq } from '@/app/helpers/dataObject';
 import Accordion from "@/app/components/Accordion/Accordion";
 import { Heading } from "@/app/components/Container/Heading";
 

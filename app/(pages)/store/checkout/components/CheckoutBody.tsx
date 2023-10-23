@@ -1,4 +1,11 @@
 'use client'
+import Image from "next/image";
+import Link from "next/link";
+import { Controller } from "react-hook-form";
+
+import useAddressForm from "@/app/hooks/useAddressForm";
+import useFetchLocation from "@/app/hooks/useFetchLocation";
+import { paymentOption } from "@/app/helpers/dataObject";
 import { Button } from "@/app/components/Button/Button";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
@@ -6,14 +13,8 @@ import { Text } from "@/app/components/Container/Text";
 import ErrorMsg from "@/app/components/ErrorMsg";
 import { Select } from "@/app/components/Form/Select";
 import { Textarea } from "@/app/components/Form/Textarea";
-import { paymentOption } from "@/app/helpers/dataObject";
-import useAddressForm from "@/app/hooks/useAddressForm";
-import useFetchLocation from "@/app/hooks/useFetchLocation";
-import Link from "next/link";
-import { Controller } from "react-hook-form";
-import bankIcon from '@/app/assets/icon/bank.svg'
-import Image from "next/image";
 import Transparent from "@/app/components/Container/Transparent";
+import bankIcon from '@/app/assets/icon/bank.svg'
 
 type CheckoutBodyProps = {
     children: React.ReactNode;

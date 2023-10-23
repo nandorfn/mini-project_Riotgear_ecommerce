@@ -19,7 +19,7 @@ const Page = async ({
   
   return (
     <>
-      <Heading fs={'xl2'} className="mx-4">Order List</Heading>
+      <Heading fs={'xl2'} className="mx-4 lg:mx-0">Order List</Heading>
       <Flex align={'iCenter'} className="px-4 lg:px-0 gap-3">
       <Heading variant={'five'}>Status</Heading>
       <div className=" stats">

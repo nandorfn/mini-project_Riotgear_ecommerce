@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const useForm = (initialState: any) => {
   const [form, setForm] = useState(initialState);
+  const [loading, setLoading] = useState(false);
 
   const handleInput = (e: React.SyntheticEvent) => {
       const { name, value } = (e.target as HTMLInputElement);
@@ -14,7 +15,9 @@ const useForm = (initialState: any) => {
   return {
     form,
     handleInput,
-    setForm
+    setForm,
+    setLoading,
+    loading
   }
 }
 

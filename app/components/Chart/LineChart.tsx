@@ -20,7 +20,6 @@ ChartJS.register(
 
   
 const LineChart = ({sourceData}: {sourceData: any}) => {
-  console.log(sourceData)
   const fakeChartData = {
     '2023-10-01': 1000000,
     '2023-10-02': 1200000,

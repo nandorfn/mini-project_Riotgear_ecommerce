@@ -9,59 +9,6 @@ export const hashPass = (unHashPass: string) => {
   return { salt, hashedPassword }
 }
 
-export type ProductData = {
-  id?: number;
-  productId: string;
-  productName: string;
-  productMainCategory: string;
-  productSubCategory: string;
-  productImgLink: string;
-  productSize: string;
-  productGender: string;
-  productColor: string;
-  productStock: number;
-  productDesc: string;
-  productPrice: number;
-  featured: number | boolean;
-};
-
-export type productFormState = {
-  productId: string;
-  productName: string;
-  productMainCategory: string;
-  productSubCategory: string;
-  productImgLink: string;
-  productSize: string;
-  productGender: string;
-  productColor: string;
-  productStock: string;
-  productDesc: string;
-  productPrice: string;
-  featured: number;
-}
-
-export const createObject = (
-  productId: string,
-  productName: string,
-  productMainCategory: string,
-  productSubCategory: string,
-  productImgLink: string,
-  productStock: number,
-  productDesc: string,
-  productPrice: number
-) => {
-  return {
-    productId,
-    productName,
-    productMainCategory,
-    productSubCategory,
-    productImgLink,
-    productStock,
-    productDesc,
-    productPrice,
-  };
-};
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -81,7 +28,7 @@ export const checkSubtotal = (data: order[] | null) => {
     let subTotal = 0;
     
     data.forEach((order) => {
-      if (order && order.quantity && order.productPrice) {
+      if (order?.quantity && order.productPrice) {
         const total = order.quantity * order.productPrice;
         subTotal += total;
       }
@@ -98,6 +45,5 @@ export const checkSubtotal = (data: order[] | null) => {
 
 export const generateUniqueCode = (): number => {
   const randomNumber = Math.floor(Math.random() * 1000) + 1;
-  console.log(randomNumber)
   return randomNumber;
 }

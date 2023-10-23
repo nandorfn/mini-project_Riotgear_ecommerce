@@ -1,10 +1,4 @@
-import { productFormState } from "../utils/utils";
-
-export type FaqItem = {
-  id: number;
-  q: string;
-  a: string;
-}
+import { FaqItem, productFormState } from "../utils/types";
 
 export const heroContent = {
   title: 'Unleash Your Street Style with Our New Collection',
@@ -52,7 +46,7 @@ export const faq: FaqItem[] = [
 ]
 
 export const headTableBlog = ['No', 'Article Title', 'Created At', 'Action']
-export const headTableProduct = ['No', 'Product Name', 'Main Category', 'Sub Category', 'Size', 'Color', 'Stock', 'Price', 'Action']
+export const headTableProduct = ['No', 'Product Name', 'Main Category', 'Sub Category', 'Color', 'Size', 'Stock', 'Price', 'Action']
 
 
 export type category = {
@@ -65,24 +59,41 @@ export const mainCategory = [
   { id: 3, label: 'Outwear', value: 'outwear' },
   { id: 4, label: 'Bottom', value: 'bottom' },
   { id: 5, label: 'Accessories', value: 'accessories' },
+  { id: 6, label: 'Shoes', value: 'shoes' },
 ];
 export const subCategory = [
-  { id: 1, label: 'Choose', value: '' },
-  { id: 2, label: 'T-Shirt', value: 't-shirt' },
-  { id: 3, label: 'Shirt', value: 'shirt' },
-  { id: 4, label: 'Oversize T-Shirt', value: 'oversize' },
-  { id: 5, label: 'Jacket', value: 'jacket' },
-  { id: 6, label: 'Sweater', value: 'sweater' },
-  { id: 7, label: 'Jeans', value: 'jeans' },
-  { id: 8, label: 'Ripped Jeans', value: 'ripped-jeans' },
-  { id: 9, label: 'Ankle Pants', value: 'ankle-pants' },
-  { id: 10, label: 'Skate Shoes', value: 'skate-shoes' },
-  { id: 11, label: 'Sneaker', value: 'sneaker' },
-  { id: 12, label: 'Running Shoes', value: 'running-shoes' },
-  { id: 13, label: 'Blazzer', value: 'blazzer' },
-  { id: 14, label: 'Chino', value: 'chino' },
-  { id: 15, label: 'Wide Pants', value: 'wide-pants' },
-  { id: 15, label: 'Casual Pants', value: 'casual-pants' },
+  { id: 0, type: '', label: 'Choose', value: '' },
+  { id: 1, type: 'top', label: 'Choose', value: '' },
+  // Top
+  { id: 2, type:'top', label: 'T-Shirt', value: 't-shirt' },
+  { id: 3, type:'top', label: 'Shirt', value: 'shirt' },
+  { id: 4, type:'top', label: 'Oversize T-Shirt', value: 'oversize' },
+  // Outwear
+  { id: 5, type: 'outwear', label: 'Choose', value: '' },
+  { id: 6, type:'outwear', label: 'Jacket', value: 'jacket' },
+  { id: 7, type:'outwear', label: 'Sweater', value: 'sweater' },
+  { id: 8, type:'outwear', label: 'Blazzer', value: 'blazzer' },
+  // Bottom
+  { id: 9, type: 'bottom', label: 'Choose', value: '' },
+  { id: 10, type: 'bottom', label: 'Jeans', value: 'jeans' },
+  { id: 11, type: 'bottom', label: 'Ripped Jeans', value: 'ripped-jeans' },
+  { id: 12, type: 'bottom', label: 'Ankle Pants', value: 'ankle-pants' },
+  { id: 13, type: 'bottom', label: 'Chino', value: 'chino' },
+  { id: 14, type: 'bottom', label: 'Wide Pants', value: 'wide-pants' },
+  { id: 15, type: 'bottom', label: 'Casual Pants', value: 'casual-pants' },
+  // Sneaker
+  { id: 16, type: 'shoes', label: 'Choose', value: '' },
+  { id: 17, type:'shoes', label: 'Skate Shoes', value: 'skate-shoes' },
+  { id: 18, type:'shoes', label: 'Sneaker', value: 'sneaker' },
+  { id: 19, type:'shoes', label: 'Running Shoes', value: 'running-shoes' },
+  // Accessories
+  { id: 20, type: 'accessories', label: 'Choose', value: '' },
+  { id: 21, type: 'accessories', label: 'Bags', value: 'bags' },
+  { id: 22, type: 'accessories', label: 'Scarves', value: 'scarves' },
+  { id: 23, type: 'accessories', label: 'Gloves', value: 'gloves' },
+  { id: 24, type: 'accessories', label: 'Hats', value: 'hats' },
+  { id: 25, type: 'accessories', label: 'Belts', value: 'belt' },
+  
 ];
 
 export const genderCategory = [
@@ -115,10 +126,6 @@ export const sortByOptions = [
   { id: 3, label: 'Low to High', value: '3' },
   { id: 4, label: 'High to Low', value: '4' },
   { id: 5, label: 'Top Rated', value: '5' },
-];
-export const countryOption = [
-  { id: 0, label: 'Choose', value: '' },
-  { id: 1, label: 'Indonesia', value: 'Indonesia' },
 ];
 export const sizeCategory = [
   { id: 0, label: 'Choose', value: '' },
@@ -211,15 +218,11 @@ export const defaultProductData = {
 };
 
 
-export const createProductData = (
-  form: productFormState,
-  id: string
-) => {
+export const createProductData = (form: productFormState) => {
   const productStock = parseInt(form.productStock);
   const productPrice = parseFloat(form.productPrice);
 
   return {
-    productId: id,
     productName: form.productName,
     productMainCategory: form.productMainCategory,
     productSubCategory: form.productSubCategory,

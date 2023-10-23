@@ -96,3 +96,40 @@ export const updateOrderStatus = z.object({
   orderId: z.string(),
   status: OrderStatus
 });
+
+export type ProductData = {
+  id?: number;
+  productId?: string;
+  productName: string;
+  productMainCategory: string;
+  productSubCategory: string;
+  productImgLink: string;
+  productSize: string;
+  productGender: string;
+  productColor: string;
+  productStock: number;
+  productDesc: string;
+  productPrice: number;
+  featured: number | boolean;
+};
+
+export type productFormState = {
+  productId: string;
+  productName: string;
+  productMainCategory: string;
+  productSubCategory: string;
+  productImgLink: string;
+  productSize: string;
+  productGender: string;
+  productColor: string;
+  productStock: string;
+  productDesc: string;
+  productPrice: string;
+  featured: number;
+};
+
+export type FaqItem = {
+  id: number;
+  q: string;
+  a: string;
+};

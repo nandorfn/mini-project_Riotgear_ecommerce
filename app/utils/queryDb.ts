@@ -88,17 +88,6 @@ export const getPopularProducts = cache(async () => {
   return popularProducts;
 })
 
-export const checkUser = async (email: string, pass: string) => {
-  const user = await prisma.user.findMany({
-    where: {
-      email: email,
-    }
-  })
-  if (user) {
-    console.log(user)
-  }
-}
-
 export const getRecomendProduct = async (category: string, existId: string) => {
   const product = await prisma.product.findMany({
     where: {
@@ -158,7 +147,6 @@ export const createOrderItem = async (productCart: selectCart[], orderId: string
 
 export const createUserAddress = async (form: any, userId: string, orderId: string) => {
   const { data } = form;
-  console.log(data);
   if (data) {
     const saveAddress = await prisma.address.create({
       data: {

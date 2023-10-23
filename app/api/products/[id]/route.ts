@@ -3,20 +3,12 @@ import type { Product } from "@prisma/client";
 import { verifyAuth } from "@/app/utils/auth";
 import prisma from "@/app/lib/prisma";
 
-export const DELETE = async (
-  req: Request,
-  { params }: {
-    params: { id: string }
-  }) => {
-  const headers = req.headers;
-  const authorizationHeader = headers.get('authorization');
-  const token = authorizationHeader?.split(' ')[1]
-  const verifiedToken = token && (await verifyAuth(token))
+export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
+  const token = req.headers.get('cookie')?.split('=')[1];
+  const verifiedToken = token && (await verifyAuth(token));
+
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {
-    return NextResponse.json(
-      'Unauthorized',
-      { status: 401 }
-    );
+    return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   } else {
     const product = await prisma.product.delete({
       where: {
@@ -27,23 +19,14 @@ export const DELETE = async (
   }
 }
 
-export const PATCH = async (
-  req: Request,
-  { params }: {
-    params: { id: string }
-  }) => {
-  const headers = req.headers;
-  const authorizationHeader = headers.get('authorization');
-  const token = authorizationHeader?.split(' ')[1]
-  const verifiedToken = token &&
-    (await verifyAuth(token).catch((err) => {
-      console.log(err);
-    }))
+export const PATCH = async (req: Request, { params }: {
+  params: { id: string }
+}) => {
+  const token = req.headers.get('cookie')?.split('=')[1];
+  const verifiedToken = token && (await verifyAuth(token));
+
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {
-    return NextResponse.json(
-      'Unauthorized',
-      { status: 401 }
-    );
+    return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   } else {
     const body: Product = await req.json();
     const product = await prisma.product.update({

@@ -1,25 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
-import Image from "next/image";
-import { Heading } from "../Container/Heading";
-import { Text } from "../Container/Text";
-import closeIcon from '../../assets/icon/closeIcon.svg'
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Flex } from "../Container/Flex";
 import axios from "axios";
-import Transparent from "../Container/Transparent";
+import Image from "next/image";
 import { usePrevious } from "@/app/hooks/usePrevious";
 import { deleteData } from "@/app/utils/api";
-import { cart, userJwtSchema } from "@/app/utils/types";
-import CartModal from "../Modal/CartModal";
+import { cart } from "@/app/utils/types";
+import { Heading } from "@/app/components/Container/Heading";
+import { Text } from "@/app/components/Container/Text";
+import closeIcon from '@/app/components/assets/icon/closeIcon.svg'
+import { Flex } from "@/app/components/Container/Flex";
+import Transparent from "@/app/components/Container/Transparent";
+import CartModal from "@/app/components/Modal/CartModal";
 
 interface CartCardProps {
   data: cart;
-  user: undefined | userJwtSchema;
   handleProduct: Dispatch<SetStateAction<cart[]>>;
 }
 
-  const CartCard: React.FC<CartCardProps> = ({ data, user, handleProduct }) => {
+  const CartCard: React.FC<CartCardProps> = ({ data, handleProduct }) => {
   const [modal, setModal] = useState(false);
   const [state, setState] = useState({
     quantity: data.quantity,

@@ -2,9 +2,8 @@
 import Modal from "@/app/components/Modal/Modal";
 import { defaultProductData } from "@/app/helpers/dataObject";
 import useForm from "@/app/hooks/useForm";
-import { ProductData } from "@/app/utils/utils";
+import { ProductData } from "@/app/utils/types";
 import axios from "axios";
-import { getCookie } from "cookies-next";
 
 interface Props {
   dataProducts: ProductData[];
@@ -19,7 +18,6 @@ const FormEditProduct: React.FC<Props> = ({
   setDataProducts,
   dataProducts
 }) => {
-
   const initialProductData = {
     ...defaultProductData,
     ...(editedData ?? {}),
@@ -27,23 +25,17 @@ const FormEditProduct: React.FC<Props> = ({
     productPrice: (editedData?.productPrice) ? editedData.productPrice.toString() : '',
     featured: (editedData?.featured) ? 1 : 0,
   };  
-  const {form, handleInput } = useForm(initialProductData)
-  const token = getCookie('token');
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  }
-
+  
+  const {form, handleInput } = useForm(initialProductData);  
+  
   const editData = async () => {
     const updatedProduct = {
       ...form,
-      featured: form.featured !== 1,
+      featured: Number(form.featured) === 1,
       productStock: parseInt(form.productStock),
       productPrice: parseFloat(form.productPrice),
     };
-    axios.patch(`/api/products/${editedData?.productId}`, updatedProduct, {
-      headers: headers
-    })
+    axios.patch(`/api/products/${editedData?.productId}`, updatedProduct)
       .then(response => {
         const indexData = dataProducts.findIndex((product) =>
           product.productId === response.data.productId
