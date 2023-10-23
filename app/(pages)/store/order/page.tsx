@@ -46,8 +46,15 @@ const Page = async ({
           </div>
         </Flex>
 
-        {filteredOrders
-          ? filteredOrders.map((order, index) => {
+        {filteredOrders?.length === 0
+          ? <Flex variant={'col'} align={'center'} className="h-[60vh] gap-5">
+              <Text fs={'xl'}>Your Have No Purchase History.</Text>
+              <Link href={'/store'}>
+                <Button variant={'black'}>CONTINUE SHOPPING</Button>
+              </Link>
+            </Flex>
+
+          : filteredOrders?.map((order, index) => {
             const inv = order.orderId.toUpperCase().split('-').join('').replace(/,/g, '');
             const date = order.createdAt.toLocaleDateString('en-US', {
               day: '2-digit',
@@ -121,12 +128,7 @@ const Page = async ({
               </Flex>
             )
           })
-          : <Flex variant={'col'} align={'center'} className="h-[60vh] gap-5">
-            <Text fs={'xl'}>Your Have No Purchase History.</Text>
-            <Link href={'/store'}>
-              <Button variant={'black'}>CONTINUE SHOPPING</Button>
-            </Link>
-          </Flex>
+
         }
       </main>
     </>

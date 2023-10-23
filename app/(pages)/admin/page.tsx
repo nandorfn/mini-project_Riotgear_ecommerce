@@ -13,7 +13,7 @@ const page = async () => {
   const scaledData = analytics.popularCategory.map(item => ({
     productSubCategory: item.productSubCategory,
     viewsCount: item.viewsCount,
-    scaledViewsCount: (item.viewsCount / maxValue) * 100
+    scaledViewsCount: (item.viewsCount / maxValue) * 90
   }));
 
   return (

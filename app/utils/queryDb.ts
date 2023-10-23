@@ -89,10 +89,13 @@ export const getProduct = cache(async (id: string) => {
 
 export const getPopularProducts = cache(async () => {
   const popularProducts = await prisma.product.findMany({
+    where: {
+      viewsCount: { not: 0}
+    },
     orderBy: {
       viewsCount: 'desc'
     },
-    take: 13
+    take: 14
   })
 
   return popularProducts;
@@ -465,8 +468,7 @@ export const getPopularProductCategory = async () => {
       viewsCountByCategory.push({ productSubCategory, viewsCount });
     }
   });
-  const sortedData = viewsCountByCategory.sort((a, b) => b.viewsCount - a.viewsCount);
-  
+  const sortedData = viewsCountByCategory.sort((a, b) => b.viewsCount - a.viewsCount).slice(0, 5);  
   return sortedData;
 }
 
