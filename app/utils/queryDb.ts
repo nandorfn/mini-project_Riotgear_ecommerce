@@ -101,6 +101,20 @@ export const getPopularProducts = cache(async () => {
   return popularProducts;
 })
 
+export const getBlogArticles = cache(async () => {
+  return await prisma.article.findMany({
+    take: 10,
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      author: true,
+      createdAt: true,
+      thumbnail: true
+    }
+  })
+})
+
 export const getRecomendProduct = async (category: string, existId: string) => {
   const product = await prisma.product.findMany({
     where: {

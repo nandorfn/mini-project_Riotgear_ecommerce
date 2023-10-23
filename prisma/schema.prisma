@@ -51,6 +51,7 @@ model User {
   cart                Cart[]
   order               Order[]
   address             Address[]
+  article             Article[]
 }
 
 model Cart {
@@ -129,6 +130,18 @@ model Review {
   order               Order @relation(fields: [orderId], references: [orderId])
   user                User     @relation(fields: [userId], references: [userId])
   product             Product  @relation(fields: [productId], references: [productId])
+}
+
+model Article {
+  id                  Int @id @default(autoincrement())
+  title               String
+  content             String
+  author              String
+  userId              String
+  thumbnail           String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  user                User     @relation(fields: [userId], references: [userId])
 }
 
 

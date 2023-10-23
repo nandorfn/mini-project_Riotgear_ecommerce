@@ -49,6 +49,13 @@ export const tokenSchema = z.object({
 })
 export type JwtSchema = z.infer<typeof tokenSchema>;
 
+export const articleSchema = z.object({
+  title: z.string().min(8, 'Title must be at least 8 characters'),
+  content: z.string().min(8, 'Content must be at least 8 characters'),
+  thumbnail: z.string().min(8, 'Img Link must be at least 8 characters'),
+});
+export type TArticleSchema = z.infer<typeof articleSchema>;
+
 export type userAvatar = {
   username: string
   icon: string

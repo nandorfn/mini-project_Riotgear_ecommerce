@@ -1,23 +1,27 @@
-import { bebas_neue } from '@/app/utils/fonts';
-import blogThumbnail from '../../assets/Content/Skate.png'
+'use client'
+import Markdown from 'marked-react';
 import Image from 'next/image';
 
+type Props = {
+  data: any,
+}
 
-
-const ArticleCard: React.FC = () => {
+const ArticleCard: React.FC<Props> = ({data}) => {
   return (
     <>
       <article className='flex border-b-2 pb-3'>
-        <figure className='w-[30%]'>
+        <figure className='w-[20%] relative'>
           <Image
-            src={blogThumbnail}
+            src={data.thumbnail}
+            fill={true}
             alt='Thumbnail'
           />
         </figure>
-        <div className='w-[70%] p-3'>
-          <h3 className={`text-3xl ${bebas_neue.className}`}>The Evolution of Streetwear: From Subculture to Mainstream</h3>
-          <p>Learn how streetwear has evolved from a subculture movement into a global fashion trend influencing today&apos;s clothing industry. We&apos;ll delve into the journey of streetwear and its impact on everyday fashion.
-          </p>
+        <div className='w-[80%] ps-5 truncate'>
+          <h3 className={`text-3xl line-clamp-1`}>{data.title}</h3>
+          <div className=' line-clamp-3'>
+            <Markdown>{data.content}</Markdown>
+          </div>
         </div>
       </article>
     </>
