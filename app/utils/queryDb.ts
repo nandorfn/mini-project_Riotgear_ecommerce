@@ -64,6 +64,12 @@ export const getProduct = cache(async (id: string) => {
       productId: id,
     },
   });
+  
+  const review = await prisma.review.findMany({
+    where: {
+      productId: product?.productId
+    }
+  });
   if (product) {
     await prisma.product.update({
       where: {
@@ -74,7 +80,11 @@ export const getProduct = cache(async (id: string) => {
       },
     });
   }
-  return product;
+  const combinedData = {
+    ...product,
+    ...review
+  }
+  return combinedData;
 });
 
 export const getPopularProducts = cache(async () => {

@@ -6,10 +6,10 @@ import Accordion from "@/app/components/Accordion/Accordion";
 import { getProduct, getRecomendProduct } from "@/app/utils/queryDb";
 import ImageNotFound from "@/app/components/404/ImageNotFound";
 import ReviewWrap from "@/app/components/Review/ReviewWrap";
-import CardContainer from "@/app/components/Card/CardContainer";
 import FloatingNav from "@/app/components/Menu/FloatingNav";
 import { Heading } from "@/app/components/Container/Heading";
 import { checkUserLogin } from "@/app/utils/auth";
+import { CardContainer } from "@/app/components/Card/CardContainer";
 
 const Page = async ({
   params: { name },
@@ -66,11 +66,12 @@ const Page = async ({
         <ReviewWrap />
         {recommendProduct.length > 0 &&
           <>
-            <Heading variant={'five'}>
+            <Heading className="md:my-3" variant={'five'}>
               Recomended Stuff
             </Heading>
             <div className="flex breadcrumbs gap-3">
               <CardContainer
+                variant={'display'}
                 data={recommendProduct}
               />
             </div>

@@ -1,4 +1,4 @@
-import CardContainer from "@/app/components/Card/CardContainer";
+import { CardContainer } from "@/app/components/Card/CardContainer";
 import { Flex } from "@/app/components/Container/Flex";
 import MenuFilter from "@/app/components/Menu/MenuFillter";
 import ScrollMenuContainer from "@/app/components/Menu/ScrollMenuContainer";

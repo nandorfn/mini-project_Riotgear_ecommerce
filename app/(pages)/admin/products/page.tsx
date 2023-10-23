@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
-import Input from "@/app/components/Form/Input";
-import { headTableProduct } from "@/app/helpers/dataObject";
-import { ProductData } from "@/app/utils/types";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { ProductData } from "@/app/utils/types";
+import { headTableProduct } from "@/app/helpers/dataObject";
 import FormProduct from "./FormProduct";
 import FormEditProduct from "./FormEditProduct";
+import Input from "@/app/components/Form/Input";
 import { Button } from "@/app/components/Button/Button";
 import TableBody from "@/app/components/Table/TableBody";
 import Transparent from "@/app/components/Container/Transparent";

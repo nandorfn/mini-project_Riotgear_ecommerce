@@ -1,6 +1,6 @@
 import { ProductData } from '@/app/utils/types';
-import deleteIcon from '@/app/components/assets/icon/delete.svg'
-import editIcon from '@/app/components/assets/icon/edit.svg'
+import deleteIcon from '@/app/assets/icon/delete.svg'
+import editIcon from '@/app/assets/icon/edit.svg'
 import Image from "next/image";
 
 interface Props {

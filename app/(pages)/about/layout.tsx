@@ -12,7 +12,9 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           img={aboutBanner}
         />
         {children}
-        <Footer />
+        <Footer
+          className="max-w-6xl"
+        />
 
     </>
   );
