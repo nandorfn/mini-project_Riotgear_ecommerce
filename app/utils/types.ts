@@ -1,4 +1,5 @@
 import { z } from "zod";
+const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 
 export const loginSchema = z.object({
   email: z.string().email(),
@@ -26,6 +27,19 @@ export const registerSchema = z.object({
   });
 export type TRegisterSchema = z.infer<typeof registerSchema>;
 
+export const userAddressSchema = z.object({
+  name: z.string().min(1, 'Name cannot be empty'),
+  phone: z.string().refine((str) => phoneRegex.test(str), {message: "Please enter a valid phone number" }),
+  email: z.string().email({message: "Please enter a valid email address" }),  
+  country: z.string().min(2, 'Please select a country'),
+  city: z.string().min(2, 'Please select a city'),
+  district: z.string().min(1, 'Please select a district'),
+  address: z.string().min(2, 'Please input a valid street address'),
+  zip: z.string().min(2, 'Postal code cannot be empty'),
+  paymentMethod: z.any().refine((str) => str !== null, {message: 'Please choose a payment method'} ),
+})
+export type TUserAddressSchema = z.infer<typeof userAddressSchema>
+
 export const tokenSchema = z.object({
   username: z.string(),
   userId: z.string(),
@@ -34,6 +48,13 @@ export const tokenSchema = z.object({
   exp: z.number(),
 })
 export type JwtSchema = z.infer<typeof tokenSchema>;
+
+export const articleSchema = z.object({
+  title: z.string().min(8, 'Title must be at least 8 characters'),
+  content: z.string().min(8, 'Content must be at least 8 characters'),
+  thumbnail: z.string().min(8, 'Img Link must be at least 8 characters'),
+});
+export type TArticleSchema = z.infer<typeof articleSchema>;
 
 export type userAvatar = {
   username: string
@@ -62,3 +83,70 @@ export type DataProductProps = {
   user: undefined | userJwtSchema;
 }
 
+export type order = {
+  id?: number,
+  orderId?: string,
+  productId?: string,
+  quantity?: number,
+  createdAt?: Date,
+  updatedAt?:  Date,
+  productName?: string,
+  productPrice?: number,
+  productImgLink?: string,
+  paymentMethod?: string
+}
+
+const OrderStatus = z.enum([
+  "Ordered", "InProgress", "Shipped", "Delivered", "Cancelled", "InReturn", "Completed"
+]);
+export const updateOrderStatus = z.object({
+  orderId: z.string(),
+  status: OrderStatus
+});
+
+export type ProductData = {
+  id?: number;
+  productId?: string;
+  productName: string;
+  productMainCategory: string;
+  productSubCategory: string;
+  productImgLink: string;
+  productSize: string;
+  productGender: string;
+  productColor: string;
+  productStock: number;
+  productDesc: string;
+  productPrice: number;
+  featured: number | boolean;
+};
+export type ArticleModel = {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  userId: string;
+  thumbnail: string;
+  viewsCount: number;
+  createdAt: Date;  
+};
+
+export type productFormState = {
+  productId: string;
+  productName: string;
+  productMainCategory: string;
+  productSubCategory: string;
+  productImgLink: string;
+  productSize: string;
+  productGender: string;
+  productColor: string;
+  productStock: string;
+  productDesc: string;
+  productPrice: string;
+  featured: number;
+};
+
+export type FaqItem = {
+  id: number;
+  q: string;
+  a: string;
+};

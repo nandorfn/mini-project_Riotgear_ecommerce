@@ -6,7 +6,6 @@ interface Props {
 const Menus: React.FC<Props> = ({ menuFor }) => {
   const menus = [
     {id:2, label: 'About', link: '/about' },
-    {id:3, label: 'Collections', link: '/collection' },
     {id:4, label: 'Blog', link: '/blog' },
     {id:5, label: 'FAQ', link: '/faq' },
   ]

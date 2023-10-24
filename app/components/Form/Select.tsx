@@ -1,20 +1,50 @@
+import { cn } from '@/app/utils/utils';
+import { VariantProps, cva } from 'class-variance-authority';
+import React, { forwardRef, SelectHTMLAttributes, useRef } from 'react';
+const selectVariants = cva(
+  'input font-normal',
+  {
+    variants: {
+      variant: {
+        border: 'select-bordered',
+        ghost: 'select-ghost',
+      },
+      wide: {
+        full: 'w-full'
+      }
+    },
 
-const Select: React.FC = () => {
+  }
+)
+
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>,
+  VariantProps<typeof selectVariants> {
+  data: any;
+}
+
+const Select: React.FC<SelectProps> = forwardRef(({
+  variant,
+  data,
+  className,
+  wide,
+  ...props
+}, ref) => {
+  const selectRef = useRef<HTMLSelectElement>(null);
   return (
     <>
-      <label className="flex flex-col font-medium">
-        Quantity
-        <select className="select bg-base-200 select-sm w-24 mt-3 max-w-xs">
-          <option disabled selected> </option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </label>
+      <select
+        ref={selectRef}
+        aria-label="Default select example"
+        className={cn(selectVariants({ variant, wide, className }))} {...props}>
+        {data.length > 0 && data?.map((option: any) => (
+          <option key={option?.id} value={option.value || option.iso2}>
+            {option.label || option.name}
+          </option>
+        ))}
+      </select>
     </>
   );
-};
+});
 
-export default Select;
+Select.displayName = 'Select'
+export { Select, selectVariants };

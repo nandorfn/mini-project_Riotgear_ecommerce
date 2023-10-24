@@ -2,12 +2,16 @@ import fbIcon from '../../assets/icon/Facebook.svg'
 import igIcon from '../../assets/icon/Instagram.png'
 import xIcon from '../../assets/icon/TwitterX.png'
 import ttIcon from '../../assets/icon/TikTok.png'
-import RiotLogo from '../../assets/RiotLogoBlack.svg'
+import RiotLogo from '../../assets/icon/RiotLogoBlack.svg'
 import Image from 'next/image';
 import Link from 'next/link'
 import { Flex } from '../Container/Flex'
+import { HTMLAttributes } from 'react'
+import { cn } from '@/app/utils/utils'
 
-const Footer: React.FC = () => {
+interface FooterProps extends HTMLAttributes<HTMLElement>{}
+
+const Footer: React.FC<FooterProps> = ({className, ...props}) => {
   const menus = [
     { label: 'Terms of Service', link: '/tos' },
     { label: 'Privacy Policy', link: '/privacy-policy' },
@@ -17,11 +21,13 @@ const Footer: React.FC = () => {
 
   return (
     <>
-      <footer className='px-4 mx-auto'>
+      <footer className={cn(className, 'px-4 mx-auto')} {...props}>
         <figure className='flex justify-between pt-4 border-t-2 mt-20 mb-3'>
           <Image
             src={RiotLogo}
             alt='RiotGear icon'
+            width={100}
+            height={100}
           />
           <div className='flex gap-3'>
             <Image src={fbIcon} alt='Facebook icon' />

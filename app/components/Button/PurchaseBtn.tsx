@@ -2,45 +2,25 @@
 import wishlistIcon from '../../assets/icon/wishlist.svg'
 import Image from "next/image";
 import { Button } from './Button';
-import { useState } from 'react';
 import CartModal from '../Modal/CartModal';
 import { Heading } from '../Container/Heading';
-import { postData } from '@/app/utils/api';
-import { useRouter } from 'next/navigation';
+import useAddCart from '@/app/hooks/useAddCart';
 
-interface PurchaseBtn {
-  user: any
-  id: string | null | undefined
+export type PurchaseBtn = {
+  user?: any
+  id?: string | null
   stock: number | undefined
 }
 
-const PurchaseBtn: React.FC<PurchaseBtn> = ({ user, id, stock }) => {
-  const [modal, setModal] = useState(false);
-  const [quantity, setQuantity] = useState('1');
-  const data = {
-    userId: user?.userId,
-    productId: id,
-    quantity
-  }
-  const query = `/api/user/${user?.userId}/cart`
-  const handlePostCart = async (e: React.SyntheticEvent) => {
-    setModal(!modal)
-    e.preventDefault();
-    await postData(query, data)
-  }
-
-  const options = [];
-  if (stock) {
-    const loopCount = Math.min(stock, 10);
-    for (let i = 0; i < loopCount; i++) {
-      options.push(i + 1);
-    }
-  }
-  
-  const router = useRouter();
-  const handleNavigate = () => {
-    router.push('/store/cart')
-  }
+const PurchaseBtn = ({ user, id, stock }: PurchaseBtn) => {
+  const {
+    quantity,
+    setQuantity,
+    options,
+    handlePostCart,
+    modal,
+    setModal,
+    handleNavigate } = useAddCart({ user, id, stock })
 
   return (
     <>

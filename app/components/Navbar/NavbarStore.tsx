@@ -1,13 +1,14 @@
 import Image from 'next/image';
-import BrandLogo from '../../assets/RiotLogo.svg'
-import MenuBtn from '../../assets/MenuIcon.svg'
-import Menus from './Menus';
 import Link from 'next/link';
-import Avatar from '../Avatar';
-import Drawer from '../Drawer/Drawer';
+import BrandLogo from '@/app/assets/icon/RiotLogo.svg'
+import MenuBtn from '@/app/assets/icon/MenuIcon.svg'
+import cart from '@/app/assets/icon/cart.svg'
+import Avatar from '@/app/components/Avatar';
+import archive from '@/app/assets/icon/archive.svg'
+import Drawer from '@/app/components/Drawer/Drawer';
+import { Button } from '@/app/components/Button/Button';
 import { checkUserLogin } from '@/app/utils/auth';
-import cart from '../../assets/icon/cart.svg'
-import { Button } from '../Button/Button';
+import Menus from './Menus';
 
 
 const NavbarStore = async () => {
@@ -45,6 +46,15 @@ const NavbarStore = async () => {
                 />
               </label>
               <div className='hidden md:flex md:gap-2 md:items-center'>
+                <Link className='pe-2' href={'/store/order'}>
+                  <Image
+                    className='hover:w-6'
+                    src={archive}
+                    width={25}
+                    height={25}
+                    alt='cart icon'
+                  />
+                </Link>
                 <Link className='pe-2' href={'/store/cart'}>
                   <Image
                     className='hover:w-6'

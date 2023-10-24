@@ -1,12 +1,11 @@
 import { categoryOption } from "@/app/helpers/dataObject";
-import ErrorMsg from "../ErrorMsg";
 
 interface Props {
   label: string,
   name: string,
   value: any;
   addClass: string;
-  optionValue?: any;
+  optionValue: categoryOption[];
   handleInput: (e: React.SyntheticEvent) => void;
   error?: string;
 }
@@ -36,14 +35,11 @@ const OptionInput: React.FC<Props> = ({
             : ""}`
           }>
           {optionValue.map((option: any) => (
-            <option key={option?.id} value={option.value || option.iso2}>
-              {option.label || option.name}
+            <option key={option.id} value={option.value}>
+              {option.label}
             </option>
           ))}
         </select>
-        {error &&
-          <ErrorMsg name={name} error={error}/>
-        }
         </label>
     </>
   );

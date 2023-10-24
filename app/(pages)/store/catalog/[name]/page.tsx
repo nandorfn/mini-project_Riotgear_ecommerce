@@ -6,9 +6,10 @@ import Accordion from "@/app/components/Accordion/Accordion";
 import { getProduct, getRecomendProduct } from "@/app/utils/queryDb";
 import ImageNotFound from "@/app/components/404/ImageNotFound";
 import ReviewWrap from "@/app/components/Review/ReviewWrap";
-import CardContainer from "@/app/components/Card/CardContainer";
 import FloatingNav from "@/app/components/Menu/FloatingNav";
 import { Heading } from "@/app/components/Container/Heading";
+import { checkUserLogin } from "@/app/utils/auth";
+import { CardContainer } from "@/app/components/Card/CardContainer";
 
 const Page = async ({
   params: { name },
@@ -17,11 +18,13 @@ const Page = async ({
 }) => {
   const product: any = await getProduct(name);
   const recommendProduct = await getRecomendProduct(product?.productSubCategory ?? '', name);
+  const user = await checkUserLogin();
+
 
   return (
     <>
       <main className="px-3">
-        <div className="text-base breadcrumbs">
+        <div className="text-base text-base-300 breadcrumbs">
           <ul>
             <li><Link href={'/'}>RIOTGEAR</Link></li>
             <li><Link href={'/store'}>Store</Link></li>
@@ -63,11 +66,12 @@ const Page = async ({
         <ReviewWrap />
         {recommendProduct.length > 0 &&
           <>
-            <Heading variant={'five'}>
+            <Heading className="md:my-3" variant={'five'}>
               Recomended Stuff
             </Heading>
             <div className="flex breadcrumbs gap-3">
               <CardContainer
+                variant={'display'}
                 data={recommendProduct}
               />
             </div>
@@ -75,7 +79,11 @@ const Page = async ({
         }
         
         <div className="fixed md:hidden bottom-0 start-0">
-          <FloatingNav />
+          <FloatingNav
+            user={user}
+            stock={product?.productStock}
+            id={product?.productId}
+          />
         </div>
       </main>
 

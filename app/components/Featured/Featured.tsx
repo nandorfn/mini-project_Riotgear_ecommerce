@@ -11,7 +11,7 @@ const Featured = async () => {
   const products = await getFeatured();
   return (
     <>
-      <section className="p-4 gap-4 mt-4  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+      <section className="p-4 gap-4  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
         {products?.map((product) =>
           <article className="" key={product.id}>
             <ProductCard

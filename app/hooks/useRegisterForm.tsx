@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import { TRegisterSchema, registerSchema } from "../utils/types";
 import axios from "axios";
 import { hashPass } from "../utils/utils";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const useRegisterForm = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -14,8 +17,11 @@ const useRegisterForm = () => {
   } = useForm<TRegisterSchema>({
     resolver: zodResolver(registerSchema)
   });
+  
+  const router = useRouter();
 
   const onSubmit = async (data: TRegisterSchema) => {
+    setLoading(true);
     const { salt, hashedPassword } = hashPass(data.password);
     const newData = {
       name: data.name,
@@ -26,8 +32,10 @@ const useRegisterForm = () => {
     axios.post('/api/register', newData)
       .then(response => {
         if (response.status === 200) {
-          console.log(response.data);
+          setLoading(false);
+          router.push('/login')
         } else {
+          setLoading(false);
           alert('Submitting form failed');
         }
       })
@@ -56,6 +64,7 @@ const useRegisterForm = () => {
   }
   return {
     register,
+    loading,
     handleSubmit,
     errors,
     isSubmitting,

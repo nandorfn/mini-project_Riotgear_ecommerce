@@ -6,10 +6,13 @@ const textVariants = cva(
   'text-base',
   {
   variants: {
+    variant: {
+      status: ' rounded-md p-2 text-warning bg-yellow-200',
+    },
     fs: {
       sm: 'text-sm',
       lg: 'text-lg',
-      xl: 'text-4xl'
+      xl: 'text-2xl md:text-4xl'
     },
     align: {
       center: 'text-center',
@@ -34,14 +37,16 @@ VariantProps<typeof textVariants> {}
 
 const Text: React.FC<HeadingProps> = ({
   fs,
+  variant,
   align,
   clr,
   className,
+  bold,
   ...props
 }) => {
     return (
         <>
-          <p className={cn(textVariants({fs, align, clr, className}))} {...props}></p>
+          <p className={cn(textVariants({variant, fs, align, clr, bold, className}))} {...props}></p>
         </>
     );
 };

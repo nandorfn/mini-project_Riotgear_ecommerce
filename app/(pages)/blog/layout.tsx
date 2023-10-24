@@ -5,7 +5,9 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {children}
-      <Footer />
+      <Footer
+        className="max-w-6xl"
+      />
     </>
   );
 };

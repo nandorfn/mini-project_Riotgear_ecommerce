@@ -3,9 +3,13 @@ import blogBanner from '@/app/assets/Content/blog.png'
 import ArticleCard from '@/app/components/Card/ArticleCard';
 import Hero from '@/app/components/Hero/Hero';
 import HeroTitleOnyl from '@/app/components/Hero/HeroTitleOnyl';
+import { getBlogArticles } from '@/app/utils/queryDb';
+import Link from 'next/link';
 
 
-const page: React.FC = () => {
+const page = async () => {
+    const articles = await getBlogArticles();
+    
     return (
         <>
             <section className="max-w-6xl mx-auto">
@@ -15,11 +19,14 @@ const page: React.FC = () => {
                 />
                 <h2 className={`text-center text-4xl font-medium mb ${bebas_neue.className}`}>BLOG</h2>
                 <section className='flex flex-col gap-3 p-4'>
-                    <ArticleCard />
-                    <ArticleCard />
-                    <ArticleCard />
-                    <ArticleCard />
-                    <ArticleCard />
+                    {articles?.map(item => (
+                    
+                    <Link href={`/blog/article?id=${item.id}`} key={item.id}>
+                        <ArticleCard data={item} />
+                    </Link>
+                    ))
+                    
+                    }
                 </section>
             </section>
         </>

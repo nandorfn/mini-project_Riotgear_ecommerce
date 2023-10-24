@@ -13,7 +13,7 @@ export default function Loading() {
 
   return (
     <>
-           <main className="px-3">
+      <main className="px-3">
         <div className="text-base text-base-300 breadcrumbs">
           <ul>
             <li><Link href={'/'}>RIOTGEAR</Link></li>
@@ -26,9 +26,9 @@ export default function Loading() {
         <Flex variant={'colToRow'} className="gap-10">
           <Flex variant={'col'} align={'between'} className="w-full md:w-2/3 gap-5">
             {data?.map(item => (
-              <article key={item} className="flex flex-row relative h-fit">
-                <div className="w-1/3">
-                  <Skeleton height={190} width={253} containerClassName="flex-1" />
+              <article key={item} className="flex gap-3 flex-row relative h-fit">
+                <div className="w-1/3 h-[150px] md:h-[190px]">
+                  <Skeleton height="100%" width="100%" containerClassName="flex-1" />
                 </div>
                 <Flex variant={'col'} align={'between'} className="w-2/3 ">
                   <Flex variant={'col'}>
@@ -37,12 +37,8 @@ export default function Loading() {
                   </Flex>
 
                   <Flex variant={'col'}>
-                    <Skeleton height={20} width={200} />
+                    <Skeleton height={20} count={2} width={200} />
                     <Skeleton height={20} width={150} />
-                    <Flex align={'between'} variant={'row'}>
-                      <Skeleton height={26} width={150} />
-                      <Skeleton height={26} width={150} />
-                    </Flex>
                   </Flex>
                 </Flex>
               </article>

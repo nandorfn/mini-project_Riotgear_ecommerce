@@ -33,7 +33,7 @@ const ProductDetails: React.FC<Props> = async ({
         <Heading variant={'pName'}>{name}</Heading>
         <Heading fs={'xl2'} bold={'normal'}>{`Rp${formattedPrice}`}</Heading>
       </Flex>
-      <div className="border-t"></div>
+      <div className="border-t mt-4 md:mt-0"></div>
       <div className="hidden md:flex flex-col justify-between gap-3">
         <h4 className="font-medium text-xl">Size</h4>
         <List

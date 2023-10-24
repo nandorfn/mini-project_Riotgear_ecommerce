@@ -15,7 +15,7 @@ export const verifyAuth = async (token: string) => {
     const verified = await jwtVerify(token, new TextEncoder().encode(getJwtSecretKey()));
     
     if (!verified) {
-      throw new Error('Your token isnt valid');
+      return undefined;
     } else {
       return verified.payload as JwtSchema;
     }
@@ -23,8 +23,7 @@ export const verifyAuth = async (token: string) => {
 export const checkUserLogin = async () => {
   const cookieStore = cookies()
   const token = cookieStore.get('token');
-  const user: JwtSchema | void = token && (await verifyAuth(token.value))
+  const user: JwtSchema | undefined  = token && (await verifyAuth(token.value))
     
   return user;
 }
-

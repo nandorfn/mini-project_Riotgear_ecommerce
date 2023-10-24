@@ -1,13 +1,14 @@
 'use client'
 import './Modal.css'
 import { colorCategory, featuredOption, genderCategory, mainCategory, sizeCategory, subCategory } from '@/app/helpers/dataObject';
-import { productFormState } from '@/app/utils/utils';
+import { productFormState } from '@/app/utils/types';
 
-import { TextArea } from "../Form/TextArea";
+import { Textarea } from "../Form/Textarea";
 import Input from "../Form/Input";
 import { Button } from '../Button/Button';
 import OptionInput from '../Form/Option';
 import { Flex } from '../Container/Flex';
+import { Heading } from '../Container/Heading';
 
 interface Props {
   handleInput: (e: React.SyntheticEvent) => void;
@@ -23,31 +24,32 @@ const Modal: React.FC<Props> = ({
   form,
   label
 }) => {
+  const filteredSubCategoryOptions = subCategory.filter(subcategory => subcategory.type === form.productMainCategory);
   return (
     <>
       <div className="inset-0 bg-opacity-50 bg-black bgModal">
         <div className="modalWrapper">
           <form className="form__add-product bg-base-200">
-            <h4>{label}</h4>
-            <label>
-            Product Name
-            <Input
-              name={'productName'}
-              value={form.productName}
-              type={'text'}
-              handleInput={handleInput}
-              placeholder="Product Name"
-            />
+            <Heading variant={'five'}>{label}</Heading>
+            <label className='font-medium'>
+              Product Name
+              <Input
+                name={'productName'}
+                value={form.productName}
+                type={'text'}
+                handleInput={handleInput}
+                placeholder="Product Name"
+              />
             </label>
-            <label>
+            <label className='font-medium'>
               Product Image
-            <Input
-              name={'productImgLink'}
-              value={form.productImgLink}
-              type={'text'}
-              handleInput={handleInput}
-              placeholder="Link image product"
-            />
+              <Input
+                name={'productImgLink'}
+                value={form.productImgLink}
+                type={'text'}
+                handleInput={handleInput}
+                placeholder="Link image product"
+              />
             </label>
             <div className='grid grid-cols-2 sm:grid-cols-3 gap-3'>
               <OptionInput
@@ -64,7 +66,7 @@ const Modal: React.FC<Props> = ({
                 name='productSubCategory'
                 addClass="select-sm mt-3"
                 value={form.productSubCategory}
-                optionValue={subCategory}
+                optionValue={filteredSubCategoryOptions}
                 handleInput={handleInput}
                 error=''
               />
@@ -105,15 +107,17 @@ const Modal: React.FC<Props> = ({
                 error=''
               />
             </div>
-            <TextArea
-              name={'productDesc'}
-              label="Product Description"
-              value={form.productDesc}
-              handleInput={handleInput}
-              error=""
-            />
+            <label className='flex flex-col font-medium'>
+              Product Description
+              <Textarea
+                onChange={handleInput}
+                size={'standard'}
+                name={'productDesc'}
+                value={form.productDesc}
+              />
+            </label>
             <div className='grid grid-cols-2 gap-4'>
-              <label>
+              <label className='font-medium'>
                 Product Stock
                 <Input
                   name={'productStock'}
@@ -123,7 +127,7 @@ const Modal: React.FC<Props> = ({
                   placeholder="Product Stock"
                 />
               </label>
-              <label>
+              <label className='font-medium'>
                 Product Price
                 <Input
                   name={'productPrice'}

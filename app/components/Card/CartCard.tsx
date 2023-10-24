@@ -1,27 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
-import Image from "next/image";
-import { Heading } from "../Container/Heading";
-import { Text } from "../Container/Text";
-import closeIcon from '../../assets/icon/closeIcon.svg'
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Flex } from "../Container/Flex";
 import axios from "axios";
-import Transparent from "../Container/Transparent";
+import Image from "next/image";
 import { usePrevious } from "@/app/hooks/usePrevious";
 import { deleteData } from "@/app/utils/api";
-import { cart, userJwtSchema } from "@/app/utils/types";
-import CartModal from "../Modal/CartModal";
+import { cart } from "@/app/utils/types";
+import { Heading } from "@/app/components/Container/Heading";
+import { Text } from "@/app/components/Container/Text";
+import { Flex } from "@/app/components/Container/Flex";
+import Transparent from "@/app/components/Container/Transparent";
+import CartModal from "@/app/components/Modal/CartModal";
+import closeIcon from '@/app/assets/icon/closeIcon.svg'
 
 interface CartCardProps {
   data: cart;
-  user: undefined | userJwtSchema;
-  render: boolean;
-  setRender: (state: boolean) => void;
   handleProduct: Dispatch<SetStateAction<cart[]>>;
 }
 
-const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, handleProduct }) => {
+  const CartCard: React.FC<CartCardProps> = ({ data, handleProduct }) => {
   const [modal, setModal] = useState(false);
   const [state, setState] = useState({
     quantity: data.quantity,
@@ -47,8 +44,9 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
       dataId: id
     });
   }
+  
   const prevQuantity = usePrevious(state.quantity);
-  const queryProduct = `/api/user/${user?.userId}/cart`
+  const queryProduct = `/api/cart`
   useEffect(() => {
     if (prevQuantity !== state.quantity && state.dataId !== '') {
       setState({
@@ -57,11 +55,7 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
       })
       axios.patch(`${queryProduct}/${state.dataId}`, state.quantity)
         .then((response) => {
-          setState({
-            ...state,
-            quantity: response.data.quantity
-          })
-          setRender(!render)
+          handleProduct(response.data)
           setState({
             ...state,
             loading: false
@@ -73,11 +67,11 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
 
   const handleDelete = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const { id } = e.target as HTMLImageElement;
     setState({
       ...state,
       loading: true
     })
-    const { id } = e.target as HTMLImageElement;
     await deleteData(`${queryProduct}/${id}`)
       .then((res) => {
         handleProduct(res.data)
@@ -120,14 +114,14 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
               height={190}
               src={productImgLink} alt="product image" />
           </figure>
-          <Flex variant={'col'} align={'between'} className="w-2/3 max-w-md">
-            <Flex variant={'col'} className="gap-3">
-              <Heading>{productName}</Heading>
+          <Flex variant={'col'} align={'between'} className="w-2/3 max-w-md pe-4">
+            <Flex variant={'col'} className="md:gap-3">
+              <Heading className="line-clamp-2">{productName}</Heading>
               <Text className="capitalize">{`Color: ${productColor}`}</Text>
               <Text className="uppercase">{`Size: ${productSize}`}</Text>
             </Flex>
 
-            <Flex variant={'col'} className="gap-3">
+            <Flex variant={'col'} className="md:gap-3">
               <Heading>{`Rp${productPrice.toLocaleString('ID-id')}`}</Heading>
               <label className="flex flex-col">
                 Quantity
@@ -135,7 +129,7 @@ const CartCard: React.FC<CartCardProps> = ({ data, user, setRender, render, hand
                   value={state.quantity}
                   id={idCart}
                   onChange={(e) => handleQuantity(e)}
-                  className="px-4 py-2 rounded-md w-full max-w-[5.4rem] mt-3"
+                  className="px-4 py-2 rounded-md w-full max-w-[5.4rem] md:mt-3"
                   name="selectQuantity">
                   {options?.map((data) =>
                     <option

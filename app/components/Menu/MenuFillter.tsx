@@ -23,7 +23,7 @@ const MenuFilter: React.FC = () => {
   const gender = searchParams.get('gender')
   const sizes = searchParams.get('size')
 
-  const paramsToCheck = ['sort', 'priceRanges', 'color', 'gender', 'size', 'category'];
+  const paramsToCheck = ['sort', 'priceRanges', 'color', 'gender', 'size', 'category', 'search'];
   const hasQueryString = paramsToCheck.some(param => searchParams.get(param) !== null);
   const [queryExist, setQueryExist] = useState(hasQueryString)
   

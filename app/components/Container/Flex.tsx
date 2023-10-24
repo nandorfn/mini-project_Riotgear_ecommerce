@@ -10,7 +10,8 @@ const FlexVariants = cva(
       variant: {
         col: 'flex-col',
         row: 'flex-row',
-        colToRow: 'flex-col md:flex-row'
+        colToRow: 'flex-col md:flex-row',
+        colToRowReverse: 'flex-col-reverse md:flex-row'
       },
       clr: {
         white: 'bg-base-100',

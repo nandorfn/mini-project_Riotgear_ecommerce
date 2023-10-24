@@ -1,25 +1,22 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-import type { Product } from "@prisma/client";
 import { verifyAuth } from "@/app/utils/auth";
-const prisma = new PrismaClient();
+import { v4 as uuidv4 } from 'uuid';
+import prisma from "@/app/lib/prisma";
+import type { Product } from "@prisma/client";
+
 
 export const POST = async (req: Request) => {
-  const headers = req.headers;
-  const authorizationHeader = headers.get('authorization');
-  const token = authorizationHeader?.split(' ')[1]
+  const uuid = uuidv4();
+  const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token))
 
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {
-    return NextResponse.json(
-      'Unauthorized',
-      { status: 401 }
-    );
+    return NextResponse.json({errors: 'Unauthorized'},{ status: 401 });
   } else {
     const body: Product = await req.json();
     const product = await prisma.product.create({
       data: {
-        productId: body.productId,
+        productId: uuid,
         productName: body.productName,
         productMainCategory: body.productMainCategory,
         productSubCategory: body.productSubCategory,

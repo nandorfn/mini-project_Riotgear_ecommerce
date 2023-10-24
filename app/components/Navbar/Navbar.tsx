@@ -1,15 +1,19 @@
 import Image from 'next/image';
-import BrandLogo from '../../assets/RiotLogoBlack.svg'
-import MenuBtn from '../../assets/MenuIcon.svg'
+import BrandLogo from '@/app/assets/icon/RiotLogoBlack.svg'
+import MenuBtn from '@/app/assets/icon/MenuIcon.svg'
 import Menus from './Menus';
 import Link from 'next/link';
 import { Flex } from '../Container/Flex';
+import { HTMLAttributes } from 'react';
+import { cn } from '@/app/utils/utils';
 
-const Navbar: React.FC = () => {
+interface NavbarProps extends HTMLAttributes<HTMLElement>{}
+
+const Navbar: React.FC<NavbarProps> = ({className, ...props}) => {
 
   return (
     <>
-        <nav className='md:bg-accent flex flex-row justify-between px-3 rounded-xl p-4'>
+        <nav className={cn('md:bg-accent flex flex-row justify-between px-3 rounded-xl p-4', className)} {...props}>
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             
@@ -22,6 +26,8 @@ const Navbar: React.FC = () => {
                 <Image
                   src={BrandLogo}
                   alt='Brand Logo'
+                  width={80}
+                  height={80}
                 />
               </Link>
               <ul className='hidden md:flex flex-row gap-4 pe-3'>
@@ -45,7 +51,7 @@ const Navbar: React.FC = () => {
               <label htmlFor="my-drawer" className="drawer-overlay"></label>
               <ul className='menu w-80 pt-16 min-h-full bg-[#EBEBED] text-lg'>
                 <li>
-                  <Link className="hover:font-medium" href={'/'}>{'Store'}</Link>
+                  <Link className="hover:font-medium" href={'/store'}>{'Store'}</Link>
                 </li>
                 <Menus
                   menuFor='landing-page'

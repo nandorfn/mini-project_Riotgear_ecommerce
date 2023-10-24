@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import StarLogo from '../../assets/Star.svg'
+import StarLogo from '../../assets/icon/Star.svg'
 import { Flex } from '../Container/Flex';
 import { Heading } from '../Container/Heading';
 import { Text } from '../Container/Text';

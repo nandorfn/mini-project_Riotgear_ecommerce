@@ -1,9 +1,8 @@
 import { registerServerSchema } from "@/app/utils/types";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
 import type { User } from '@prisma/client'
-const prisma = new PrismaClient();
+import prisma from "@/app/lib/prisma";
 
 export const POST = async (req: Request) => {
   const body: User = await req.json();

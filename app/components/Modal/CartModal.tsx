@@ -27,7 +27,7 @@ const CartModal = ({
   return (
     <>
       <Transparent>
-        <Flex variant={'col'} className="bg-white w-[39rem] p-5 rounded-lg gap-5">
+        <Flex variant={'col'} className="bg-white w-[39rem] p-5 rounded-lg gap-5 mx-10 md:mx-0">
           <Heading variant={'five'}>{title}</Heading>
           <Flex className="gap-1">
             {children}
