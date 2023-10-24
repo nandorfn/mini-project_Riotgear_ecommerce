@@ -4,12 +4,16 @@ import MenuBtn from '@/app/assets/icon/MenuIcon.svg'
 import Menus from './Menus';
 import Link from 'next/link';
 import { Flex } from '../Container/Flex';
+import { HTMLAttributes } from 'react';
+import { cn } from '@/app/utils/utils';
 
-const Navbar: React.FC = () => {
+interface NavbarProps extends HTMLAttributes<HTMLElement>{}
+
+const Navbar: React.FC<NavbarProps> = ({className, ...props}) => {
 
   return (
     <>
-        <nav className='md:bg-accent flex flex-row justify-between px-3 rounded-xl p-4'>
+        <nav className={cn('md:bg-accent flex flex-row justify-between px-3 rounded-xl p-4', className)} {...props}>
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             

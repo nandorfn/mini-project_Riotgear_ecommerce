@@ -87,7 +87,6 @@ const Page = async ({
                     <div key={item.id}>
                       {index === 0 && (
                         <HistoryOrderCard
-                          isAdmin={false}
                           img={item.productImgLink}
                           name={item.productName}
                           quantity={item.quantity}
@@ -110,7 +109,6 @@ const Page = async ({
                     <div className="ms-1" key={item.id}>
                       {index > 0 && (
                         <HistoryOrderCard
-                          isAdmin={false}
                           img={item.productImgLink}
                           name={item.productName}
                           quantity={item.quantity}

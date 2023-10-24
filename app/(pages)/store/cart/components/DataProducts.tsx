@@ -36,7 +36,6 @@ const DataProducts = ({
               <CartCard
                 handleProduct={setProductCard}
                 key={data.id}
-                user={user}
                 data={data} />
             ))
             }

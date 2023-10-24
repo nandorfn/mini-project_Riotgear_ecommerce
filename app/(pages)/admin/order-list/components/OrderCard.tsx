@@ -9,6 +9,7 @@ import StatusBtn from "../../../../components/Button/StatusBtn";
 
 import { useState } from "react";
 import { InfoStatus } from "@/app/components/Container/InfoStatus";
+import CollapseDetails from "@/app/(pages)/store/order/components/CollapseDetails";
 type order = {
   orderItem: any
 }
@@ -41,11 +42,13 @@ const OrderCard = ({ orderItem }: order) => {
   return (
     <>
       <Flex variant={'col'} className="border-[1px] rounded-xl shadow-sm gap-3 pb-4">
-        <Flex className="gap-3 border-b py-2 px-4 rounded-t-xl bg-base-200">
+        <Flex className="gap-3 border-b py-2 px-5 rounded-t-xl bg-base-200">
           <Flex variant={'row'} align={'iCenter'} className="gap-3 w-3/4">
             <p className="md:font-medium text-success">{order.id}</p>
-            <p className="md:font-medium line-clamp-1">{`${order.address.name}`}</p>
-            <p className="text-base-300 text-xs md:text-base">{date}</p>
+            <Flex variant={'colToRow'} className="md:gap-3">
+              <p className="md:font-medium line-clamp-1">{`Roqman Firnando`}</p>
+              <p className="text-base-300 text-sm md:text-base">{date}</p>
+            </Flex>
           </Flex>
           <div className="w-1/4">
             <InfoStatus
@@ -53,7 +56,8 @@ const OrderCard = ({ orderItem }: order) => {
             />
           </div>
         </Flex>
-        <Flex className="bg-base-100 gap-3 pe-4">
+        
+        <Flex variant={'colToRow'} className="bg-base-100 md:pe-4">
           <Collapse>
             {order.orderItems.map((item: any, index: number) => (
               <Flex key={index} className="gap-3">
@@ -65,18 +69,14 @@ const OrderCard = ({ orderItem }: order) => {
                       quantity={item.quantity}
                       price={item.productPrice}
                       img={order.orderItems[index].productImgLink}
-                    >
-                      {order.orderItems.length > 1 &&
-                        <p className="text-success">{`Check ${order.orderItems.length - 1} other products`}</p>
-                      }
-                    </HistoryOrderCard>
+                      collapseAdmin={<CollapseDetails data={order.orderItems} />} />
                   </>
                 )}
               </Flex>
 
             ))}
             {order.orderItems.map((item: any, index: number) => (
-              <Flex key={index} className="gap-3 ms-1">
+              <Flex key={index} className="gap-3 ms-1 -mt-4 md:mt-0">
                 {index > 0 && (
                   <HistoryOrderCard
                     isAdmin={true}
@@ -89,11 +89,10 @@ const OrderCard = ({ orderItem }: order) => {
               </Flex>
             ))}
           </Collapse>
-          <div className="divider lg:divider-horizontal"></div>
-          <Flex variant={'colToRow'}>
-            <Flex variant={'col'} className="md:px-3">
+          <Flex variant={'colToRow'} className="px-5 -mt-10 md:mt-0 md:px-0">
+            <Flex variant={'col'}>
               <Heading>Billing Address</Heading>
-              <p>{order.address.name}</p>
+              <p>{'Nando'}</p>
               <div>
                 <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
               </div>

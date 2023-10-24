@@ -5,7 +5,6 @@ const ListMenu = () => {
     { label: 'Order List', Link: '/admin/order-list?status=' },
     { label: 'Products', Link: '/admin/products' },
     { label: 'Blog', Link: '/admin/blog' },
-    { label: 'Setting', Link: '/admin/setting' },
   ]
 
   return (

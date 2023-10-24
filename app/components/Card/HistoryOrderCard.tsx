@@ -3,7 +3,6 @@ import { Flex } from "../Container/Flex";
 import { Heading } from "../Container/Heading";
 
 type Props = {
-  isAdmin: boolean;
   img?: string;
   name?: string;
   quantity: number;
@@ -11,6 +10,8 @@ type Props = {
   price?: number;
   total?: number;
   collapse?: any;
+  collapseAdmin?: any;
+  isAdmin?: boolean;
 }
 
 const HistoryOrderCard = ({
@@ -19,6 +20,8 @@ const HistoryOrderCard = ({
   quantity,
   children,
   price,
+  collapseAdmin,
+  isAdmin,
   collapse }: Props
 ) => {
   return (
@@ -31,17 +34,20 @@ const HistoryOrderCard = ({
             width={100}
             height={100}
             alt="Product Image"
-          />
+            />
           <Flex variant={'col'}>
             <Heading className="line-clamp-2">{name}</Heading>
             <p className="text-base-300">{`Quantity: ${quantity}`}</p>
             <p className="text-base-300">{`Rp${price?.toLocaleString('ID-id')}`}</p>
+            {collapseAdmin}
           </Flex>
         </Flex>
         <div className="hiddedn md:divider md:divider-horizontal"></div>
+        {!isAdmin &&         
         <div className="h-1/2 w-1/3">
           {children}
         </div>
+        }
       </Flex>
       {collapse}
     </>

@@ -119,6 +119,16 @@ export type ProductData = {
   productPrice: number;
   featured: number | boolean;
 };
+export type ArticleModel = {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  userId: string;
+  thumbnail: string;
+  viewsCount: number;
+  createdAt: Date;  
+};
 
 export type productFormState = {
   productId: string;

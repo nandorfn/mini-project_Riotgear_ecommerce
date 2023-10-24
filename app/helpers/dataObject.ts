@@ -45,8 +45,8 @@ export const faq: FaqItem[] = [
   }
 ]
 
-export const headTableBlog = ['No', 'Article Title', 'Created At', 'Action']
 export const headTableProduct = ['No', 'Product Name', 'Main Category', 'Sub Category', 'Color', 'Size', 'Stock', 'Price', 'Action']
+export const headTableArticle = ['No', 'Title', 'Author', 'Total Views']
 
 
 export type category = {

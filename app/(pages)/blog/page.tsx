@@ -4,9 +4,10 @@ import ArticleCard from '@/app/components/Card/ArticleCard';
 import Hero from '@/app/components/Hero/Hero';
 import HeroTitleOnyl from '@/app/components/Hero/HeroTitleOnyl';
 import { getBlogArticles } from '@/app/utils/queryDb';
+import Link from 'next/link';
 
 
-const page: React.FC = async () => {
+const page = async () => {
     const articles = await getBlogArticles();
     
     return (
@@ -19,9 +20,10 @@ const page: React.FC = async () => {
                 <h2 className={`text-center text-4xl font-medium mb ${bebas_neue.className}`}>BLOG</h2>
                 <section className='flex flex-col gap-3 p-4'>
                     {articles?.map(item => (
-                    <article key={item.id}>
+                    
+                    <Link href={`/blog/article?id=${item.id}`} key={item.id}>
                         <ArticleCard data={item} />
-                    </article>
+                    </Link>
                     ))
                     
                     }

@@ -9,7 +9,8 @@ export const getFeatured = async () => {
   const productFeatured = await prisma.product.findMany({
     where: {
       featured: true
-    }
+    },
+    take: 12,
 
   })
   return productFeatured;
@@ -102,15 +103,22 @@ export const getPopularProducts = cache(async () => {
 })
 
 export const getBlogArticles = cache(async () => {
-  return await prisma.article.findMany({
-    take: 10,
+  return await prisma.article.findMany()
+})
+
+export const getArticle = cache(async (filter: any) => {
+  return await prisma.article.findFirst({
+    where: {
+      id: Number(filter.id),
+    },
     select: {
       id: true,
       title: true,
       content: true,
       author: true,
       createdAt: true,
-      thumbnail: true
+      thumbnail: true,
+      viewsCount: true,
     }
   })
 })

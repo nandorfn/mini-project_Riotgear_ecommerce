@@ -2,6 +2,7 @@ import { verifyAuth } from "@/app/utils/auth";
 import { articleSchema } from "@/app/utils/types";
 import { NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
+import { getBlogArticles } from "@/app/utils/queryDb";
 
 export const POST = async (req: Request) => {
   const body = await req.json();
@@ -27,9 +28,14 @@ export const POST = async (req: Request) => {
         author: verifiedToken.username,
         title: result.data.title,
         content: result.data.content,
-        thumbnail: result.data.thumbnail
+        thumbnail: result.data.thumbnail,
     }
   })
     
   return NextResponse.json(article, { status: 201})
+}
+
+export const GET = async () => {
+  const articles = await getBlogArticles();
+  return NextResponse.json(articles, { status: 200})
 }
