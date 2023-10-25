@@ -16,8 +16,6 @@ const OrderStatus = ({ order }: { order: any }) => {
     modal: false
   })
 
-  console.log(orderItem);
-
   const handleConfirmOrder = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const data = {

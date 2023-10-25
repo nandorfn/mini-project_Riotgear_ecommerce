@@ -289,6 +289,8 @@ export const getOrderProducts = cache(async () => {
           zip: true,
         }
       });
+      
+      
 
       const validOrderItems = Array.isArray(orderItems) ? orderItems : [];
       const orderData = {

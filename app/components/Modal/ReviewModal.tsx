@@ -8,6 +8,7 @@ import { Button } from "../Button/Button";
 import { Textarea } from "../Form/Textarea";
 import closeIcon from '@/app/assets/icon/closeIcon.svg'
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type RewiewProps = {
   data: any,
@@ -30,16 +31,16 @@ const ReviewModal = ({ data, itemId, setState, modal }: RewiewProps) => {
     const updatedData = sentData.map((item) =>
       item.id === id ? { ...item, rating: newRating } : item
     );
-    
+
     setSentData(updatedData);
   };
 
   const handleRatingText = (e: React.SyntheticEvent) => {
     let { name, value } = e.target as HTMLTextAreaElement;
     const updatedData = sentData.map((item) =>
-    item.id === name ? { ...item, review: value } : item
-  );
-  setSentData(updatedData);
+      item.id === name ? { ...item, review: value } : item
+    );
+    setSentData(updatedData);
 
   }
   const closeModal = () => {
@@ -49,6 +50,8 @@ const ReviewModal = ({ data, itemId, setState, modal }: RewiewProps) => {
     }))
   }
 
+  const router = useRouter();
+
   const submitReview = async (e: React.SyntheticEvent) => {
     try {
       setLoading(true);
@@ -56,7 +59,7 @@ const ReviewModal = ({ data, itemId, setState, modal }: RewiewProps) => {
         orderId: data.orderId,
         orderItems: sentData
       };
-      await axios.post(`/api/review/${data.orderId}`, newRating)      
+      await axios.post(`/api/review/${data.orderId}`, newRating)
     } catch (error) {
       console.log(error);
     } finally {
@@ -64,7 +67,7 @@ const ReviewModal = ({ data, itemId, setState, modal }: RewiewProps) => {
       setLoading(false);
     }
   };
-  
+
 
   useEffect(() => {
     const initialData = matchingOrderItem.map((item: any) => ({
@@ -120,17 +123,17 @@ const ReviewModal = ({ data, itemId, setState, modal }: RewiewProps) => {
             </li>
           ))}
         </ul>
-        
-        <Button 
-          disabled={loading} 
-          onClick={submitReview} 
-          variant={'success'} 
+
+        <Button
+          disabled={loading}
+          onClick={submitReview}
+          variant={'success'}
           size={'full'}
           className=" disabled:opacity-50">
-        {loading 
-        ? <span className="loading loading-spinner"></span>
-        : 'Submit'
-        }
+          {loading
+            ? <span className="loading loading-spinner"></span>
+            : 'Submit'
+          }
         </Button>
 
       </Flex>
