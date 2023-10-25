@@ -15,7 +15,7 @@ export const POST = async (req: Request) => {
 
   // Check user token
   if (!verifiedToken) {
-    return NextResponse.json({ erros: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   }
 
   // Check schema validation

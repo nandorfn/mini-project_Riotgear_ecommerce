@@ -3,7 +3,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes } from 'react';
 
 const buttonVariants = cva(
-  'btn w-fit ',
+  'btn w-fit disabled:opacity-50',
   {
     variants: {
       variant: {

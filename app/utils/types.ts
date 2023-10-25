@@ -40,6 +40,23 @@ export const userAddressSchema = z.object({
 })
 export type TUserAddressSchema = z.infer<typeof userAddressSchema>
 
+
+export const productForm = z.object({
+  productName: z.string().min(4, 'Product Name at least 4 characters'),
+  productMainCategory: z.string().min(2, 'Please select product main category'),
+  productSubCategory: z.string().min(2, 'Please select product sub category'),
+  productImgLink: z.string().min(10, 'Image Link at least 10 characters'),
+  productSize: z.string().min(1, 'Please select product size'),
+  productGender: z.string().min(1, 'Please select product gender'),
+  productColor: z.string().min(1, 'Please select product color'),
+  productStock: z.number().min(1, 'Please input product stock'),
+  productDesc: z.string(),
+  productPrice: z.number().min(1, 'Please input product price'),
+  featured: z.boolean()
+  
+})
+export type TProductForm = z.infer<typeof productForm>
+
 export const tokenSchema = z.object({
   username: z.string(),
   userId: z.string(),

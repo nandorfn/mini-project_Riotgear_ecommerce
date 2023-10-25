@@ -1,6 +1,13 @@
 'use client'
 import './Modal.css'
-import { colorCategory, featuredOption, genderCategory, mainCategory, sizeCategory, subCategory } from '@/app/helpers/dataObject';
+import {
+  colorCategory,
+  featuredOption,
+  genderCategory,
+  mainCategory,
+  sizeCategory,
+  subCategoryOption
+} from '@/app/helpers/dataObject';
 import { productFormState } from '@/app/utils/types';
 
 import { Textarea } from "../Form/Textarea";
@@ -13,18 +20,20 @@ import { Heading } from '../Container/Heading';
 interface Props {
   handleInput: (e: React.SyntheticEvent) => void;
   handleModal: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (e: React.SyntheticEvent) => void;
   form: productFormState;
   label: string;
+  loading?: boolean;
 }
 const Modal: React.FC<Props> = ({
   handleInput,
   handleModal,
   handleSubmit,
   form,
-  label
+  label,
+  loading,
 }) => {
-  const filteredSubCategoryOptions = subCategory.filter(subcategory => subcategory.type === form.productMainCategory);
+  const filteredSubCategoryOptions = subCategoryOption.filter(subcategory => subcategory.type === form.productMainCategory);
   return (
     <>
       <div className="inset-0 bg-opacity-50 bg-black bgModal">
@@ -39,6 +48,7 @@ const Modal: React.FC<Props> = ({
                 type={'text'}
                 handleInput={handleInput}
                 placeholder="Product Name"
+                required
               />
             </label>
             <label className='font-medium'>
@@ -49,6 +59,7 @@ const Modal: React.FC<Props> = ({
                 type={'text'}
                 handleInput={handleInput}
                 placeholder="Link image product"
+                required
               />
             </label>
             <div className='grid grid-cols-2 sm:grid-cols-3 gap-3'>
@@ -140,16 +151,22 @@ const Modal: React.FC<Props> = ({
             </div>
             <Flex variant={'row'} align={'between'}>
               <Button
+                disabled={loading}
                 onClick={handleModal}
                 variant={'info'}
                 size={'half'}
-              >Cancel
+              >CANCEL
               </Button>
               <Button
+                disabled={loading}
                 onClick={handleSubmit}
                 variant={'success'}
                 size={'half'}
-              >Submit
+              >
+                {loading
+                  ? <span className="loading loading-spinner"></span>
+                  : 'SUBMIT'
+                }
               </Button>
             </Flex>
           </form>

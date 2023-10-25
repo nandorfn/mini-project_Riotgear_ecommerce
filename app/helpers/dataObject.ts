@@ -90,6 +90,41 @@ export const subCategory = [
   { id: 25, type: 'accessories', label: 'Belts', value: 'belt' },
   
 ];
+export const subCategoryOption = [
+  { id: 0, type: '', label: 'Choose', value: '' },
+  // Top
+  { id: 1, type: 'top', label: 'Choose', value: '' },
+  { id: 2, type:'top', label: 'T-Shirt', value: 't-shirt' },
+  { id: 3, type:'top', label: 'Shirt', value: 'shirt' },
+  { id: 4, type:'top', label: 'Oversize T-Shirt', value: 'oversize' },
+  // Outwear
+  
+  { id: 5, type:'outwear', label: 'Choose', value: '' },
+  { id: 6, type:'outwear', label: 'Jacket', value: 'jacket' },
+  { id: 7, type:'outwear', label: 'Sweater', value: 'sweater' },
+  { id: 8, type:'outwear', label: 'Blazzer', value: 'blazzer' },
+  // Bottom
+  { id: 9, type:'bottom', label: 'Choose', value: '' },
+  { id: 10, type: 'bottom', label: 'Jeans', value: 'jeans' },
+  { id: 11, type: 'bottom', label: 'Ripped Jeans', value: 'ripped-jeans' },
+  { id: 12, type: 'bottom', label: 'Ankle Pants', value: 'ankle-pants' },
+  { id: 13, type: 'bottom', label: 'Chino', value: 'chino' },
+  { id: 14, type: 'bottom', label: 'Wide Pants', value: 'wide-pants' },
+  { id: 15, type: 'bottom', label: 'Casual Pants', value: 'casual-pants' },
+  // Sneaker
+  { id: 6, type:'shoes', label: 'Choose', value: '' },
+  { id: 17, type:'shoes', label: 'Skate Shoes', value: 'skate-shoes' },
+  { id: 18, type:'shoes', label: 'Sneaker', value: 'sneaker' },
+  { id: 19, type:'shoes', label: 'Running Shoes', value: 'running-shoes' },
+  // Accessories
+  { id: 20, type:'accessories', label: 'Choose', value: '' },
+  { id: 21, type: 'accessories', label: 'Bags', value: 'bags' },
+  { id: 22, type: 'accessories', label: 'Scarves', value: 'scarves' },
+  { id: 23, type: 'accessories', label: 'Gloves', value: 'gloves' },
+  { id: 24, type: 'accessories', label: 'Hats', value: 'hats' },
+  { id: 25, type: 'accessories', label: 'Belts', value: 'belt' },
+  
+];
 
 export const genderCategory = [
   { id: 1, label: 'Choose', value: '' },

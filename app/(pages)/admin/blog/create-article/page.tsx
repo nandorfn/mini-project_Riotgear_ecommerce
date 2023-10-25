@@ -45,7 +45,9 @@ const Page: React.FC = () => {
                     alert('Something went wrong')
                 }
             })
-            .finally(() => { setLoading(false) })
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     return (
