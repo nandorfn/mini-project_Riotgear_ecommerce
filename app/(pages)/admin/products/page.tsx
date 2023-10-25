@@ -10,7 +10,8 @@ import Input from "@/app/components/Form/Input";
 import { Button } from "@/app/components/Button/Button";
 import TableBody from "@/app/components/Table/TableBody";
 import { headTableProduct } from "@/app/helpers/dataObject";
-import Transparent from "@/app/components/Container/Transparent";
+import { Transparent } from "@/app/components/Container/Transparent";
+
 
 const Page: React.FC = () => {
   const [dataProducts, setDataProducts] = useState<ProductData[]>([])

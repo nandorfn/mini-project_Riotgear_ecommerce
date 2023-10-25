@@ -5,7 +5,8 @@ import { Button } from "@/app/components/Button/Button";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { Text } from "@/app/components/Container/Text";
-import Transparent from "@/app/components/Container/Transparent";
+import { Transparent } from "@/app/components/Container/Transparent";
+
 
 const Page = () => {
   const {

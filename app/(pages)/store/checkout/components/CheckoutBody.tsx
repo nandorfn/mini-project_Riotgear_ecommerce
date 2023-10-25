@@ -13,8 +13,8 @@ import { Text } from "@/app/components/Container/Text";
 import ErrorMsg from "@/app/components/ErrorMsg";
 import { Select } from "@/app/components/Form/Select";
 import { Textarea } from "@/app/components/Form/Textarea";
-import Transparent from "@/app/components/Container/Transparent";
 import bankIcon from '@/app/assets/icon/bank.svg'
+import { Transparent } from "@/app/components/Container/Transparent";
 
 type CheckoutBodyProps = {
     children: React.ReactNode;
@@ -26,7 +26,6 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
         register,
         handleSubmit,
         errors,
-        isSubmitting,
         onSubmit,
         watch,
         control,
@@ -191,12 +190,17 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
                                     <Button size={'full'} variant={'white'}>BACK TO STORE</Button>
                                 </Link>
                                 <Button
+                                    className="disabled:opacity-50"
                                     size={'half'}
                                     variant={'red'}
                                     type="submit"
-                                    disabled={isSubmitting}
+                                    disabled={loading}
                                 >
-                                    ORDER
+                                    {loading
+                                        ? <span className="loading loading-spinner"></span>
+                                        : 'ORDER'
+
+                                    }
                                 </Button>
                             </Flex>
                         </form>

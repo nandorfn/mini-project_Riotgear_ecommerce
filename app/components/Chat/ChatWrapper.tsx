@@ -61,7 +61,7 @@ const ChatWrapper: React.FC = () => {
 
   return (
     <>
-      <Button onClick={() => setModal(!modal)} className='fixed btn-ghost z-50 bottom-10 end-10'>
+      <Button onClick={() => setModal(!modal)} className='fixed btn-ghost z-[49] bottom-8 end-4 md:bottom-10 md:end-10'>
         <Image src={chatIcon} width={50} alt='Chat Icon' />
       </Button>
       {modal &&

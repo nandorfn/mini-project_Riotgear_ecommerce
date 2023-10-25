@@ -9,7 +9,7 @@ const useAddressForm = (userId: string) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitted },
     reset,
     setError,
     watch,
@@ -92,7 +92,7 @@ const useAddressForm = (userId: string) => {
     register,
     handleSubmit,
     errors,
-    isSubmitting,
+    isSubmitted,
     onSubmit,
     watch,
     control,

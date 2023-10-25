@@ -9,9 +9,9 @@ import { cart } from "@/app/utils/types";
 import { Heading } from "@/app/components/Container/Heading";
 import { Text } from "@/app/components/Container/Text";
 import { Flex } from "@/app/components/Container/Flex";
-import Transparent from "@/app/components/Container/Transparent";
 import CartModal from "@/app/components/Modal/CartModal";
 import closeIcon from '@/app/assets/icon/closeIcon.svg'
+import { Transparent } from "../Container/Transparent";
 
 interface CartCardProps {
   data: cart;

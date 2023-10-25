@@ -1,7 +1,7 @@
 import { Button } from "../Button/Button";
 import { Flex } from "../Container/Flex";
 import { Heading } from "../Container/Heading";
-import Transparent from "../Container/Transparent";
+import { Transparent } from "../Container/Transparent";
 
 type ModalProps = {
   id?: string;

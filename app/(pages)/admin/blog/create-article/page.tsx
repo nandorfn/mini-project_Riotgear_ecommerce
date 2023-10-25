@@ -11,7 +11,8 @@ import { Flex } from "@/app/components/Container/Flex";
 import { Button } from "@/app/components/Button/Button";
 import Input from "@/app/components/Form/Input";
 import useForm from "@/app/hooks/useForm";
-import Transparent from "@/app/components/Container/Transparent";
+import { Transparent } from "@/app/components/Container/Transparent";
+
 
 const MDEditor = dynamic(
     () => import("@uiw/react-md-editor"),
