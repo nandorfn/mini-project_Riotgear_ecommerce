@@ -17,7 +17,7 @@ const NavbarStore = async () => {
   return (
     <>
       <header className='z-40 bg-white'>
-        <nav className='md:bg-base-200 flex flex-row justify-between px-2 rounded-xl mt-3 mx-3'>
+        <nav className='md:bg-base-200 flex flex-row justify-between px-2 py-2 rounded-xl mt-3 mx-3'>
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-row items-center justify-between">
@@ -47,22 +47,24 @@ const NavbarStore = async () => {
               </label>
               <div className='hidden md:flex md:gap-2 md:items-center'>
                 <Link className='pe-2' href={'/store/order'}>
+                <figure className='w-8 h-8 relative'>
                   <Image
                     className='hover:w-6'
                     src={archive}
-                    width={25}
-                    height={25}
+                    fill={true}
                     alt='cart icon'
                   />
+                </figure>
                 </Link>
                 <Link className='pe-2' href={'/store/cart'}>
+                <figure className='w-6 h-6 relative'>
                   <Image
                     className='hover:w-6'
                     src={cart}
-                    width={20}
-                    height={20}
+                    fill={true}
                     alt='cart icon'
                   />
+                </figure>
                 </Link>
 
                 <div className='border-s-2 h-8 border-[#D9D9D9]'>

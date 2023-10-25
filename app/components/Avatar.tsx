@@ -30,7 +30,7 @@ const Avatar = ({ username, icon }: userAvatar) => {
         </Transparent>
 
         : <div className="flex-none z-50">
-          <ul className="menu menu-horizontal">
+          <ul className="menu py-0 menu-horizontal">
             <li>
               <details className="p-0">
                 <summary className="py-2 px-4">
