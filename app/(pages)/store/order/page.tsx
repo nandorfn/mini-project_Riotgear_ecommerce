@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/app/components/Button/Button";
 import HistoryOrderCard from "@/app/components/Card/HistoryOrderCard";
 import Colapse from "@/app/components/Container/Colapse";
 import { Flex } from "@/app/components/Container/Flex";
@@ -11,6 +10,7 @@ import OrderStatus from "./components/OrderStatus";
 import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
 import { InfoStatus } from "@/app/components/Container/InfoStatus";
 import CollapseDetails from "./components/CollapseDetails";
+import WrongCondition from "@/app/components/404/WrongCondition";
 
 
 const Page = async ({
@@ -45,14 +45,25 @@ const Page = async ({
             </Flex>
           </div>
         </Flex>
+        {!user &&
+          <WrongCondition
+            text={'You must be logged in, to view order history'}
+            link={'/login'}
+            labelBtn={'LOGIN'} />
+        }
+        {allOrder?.length === 0 &&
+          <WrongCondition
+            text={'Your Have No Purchase History.'}
+            link={'/store'}
+            labelBtn={'CONTINUE SHOPPING'} />
+        }
+        
 
         {filteredOrders?.length === 0
-          ? <Flex variant={'col'} align={'center'} className="h-[60vh] gap-5">
-              <Text fs={'xl'}>Your Have No Purchase History.</Text>
-              <Link href={'/store'}>
-                <Button variant={'black'}>CONTINUE SHOPPING</Button>
-              </Link>
-            </Flex>
+          ? <WrongCondition
+          text={'Your Have No Orders At This Status.'}
+          link={'/store'}
+          labelBtn={'CONTINUE SHOPPING'} />
 
           : filteredOrders?.map((order, index) => {
             const inv = order.orderId.toUpperCase().split('-').join('').replace(/,/g, '');
@@ -68,7 +79,7 @@ const Page = async ({
                 subTotal += total;
               }
             })
-             
+
 
             return (
               <Flex variant={'col'} className="shadow-md rounded-lg mb-5 relative" key={index}>

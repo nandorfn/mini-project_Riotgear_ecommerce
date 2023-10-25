@@ -17,7 +17,7 @@ const Progress = ({data}: {data: ProgressProps}) => {
           <Flex variant={'col'} key={index}>
             <Flex variant={'row'} align={'between'}>
               <Heading className="capitalize">{data.productSubCategory}</Heading>
-              <p className={`${textColor[index]}`}>{data.viewsCount}</p>
+              <p className={`${textColor[index]}`}>{`${data.viewsCount} views`}</p>
             </Flex>
             <progress className={`progress ${progressColor[index]}`} value={data.scaledViewsCount} max="100"></progress>
           </Flex>
