@@ -7,7 +7,6 @@ export const POST = async (req: Request) => {
   const body = await req.json();
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
-  console.log(body);
   
   if (!verifiedToken) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
