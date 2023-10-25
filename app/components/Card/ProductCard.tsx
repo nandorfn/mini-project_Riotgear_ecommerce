@@ -10,21 +10,22 @@ interface Product {
   productId: string,
   productName: string,
   productPrice: number,
+  reviews?: any,
 }
 
 const ProductCard: React.FC<Product> = ({
   productImg,
   productId,
   productName,
-  productPrice
-
+  productPrice,
+  reviews,
 }) => {
   const price = productPrice.toLocaleString('id-ID');
+  const { averageRating = 0, totalReviews = 0 } = reviews || {};
   return (
     <>
       <Link href={`/store/catalog/${productId}`}>
         <div className="card w-fit min-h-full shadow-sm bg-base-100 hover:bg-base-200 cursor-pointer">
-        
           <figure className='h-[60%]'>
             <Image
               className='w-full'
@@ -34,7 +35,7 @@ const ProductCard: React.FC<Product> = ({
               height={500}
             />
           </figure>
-          
+
           <Flex variant={'col'} gap={3} className="p-3 h-[40%]">
             <Heading
               fs={'lg'}
@@ -44,17 +45,21 @@ const ProductCard: React.FC<Product> = ({
               className="card-title items-start h-[3.6rem] overflow-hidden">
               {productName}
             </Heading>
-            
+
             <Flex
               variant={'col'}
               gap={3}>
               <Text bold={'medium'}>{`Rp${price}`}</Text>
-              <Flex align={'iCenter'} gap={2}>
-                <Image className='w-6' src={StarLogo} alt='star logo'/>
-                <Text clr={'zinc5'} fs={'sm'}>4.0 (200 Reviews)</Text>
-              </Flex>
+              {totalReviews !== 0 &&
+                <Flex align={'iCenter'} gap={2}>
+                  <Image className='w-6' src={StarLogo} alt='star logo' />
+                  <Text clr={'zinc5'} fs={'sm'}>
+                    {`${averageRating} (${totalReviews} Reviews)`}
+                  </Text>
+                </Flex>
+              }
             </Flex>
-            
+
           </Flex>
         </div>
       </Link>

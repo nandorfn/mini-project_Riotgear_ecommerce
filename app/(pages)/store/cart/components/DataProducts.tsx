@@ -14,11 +14,7 @@ import couponIcon from '@/app/assets/icon/coupon.svg'
 import arrowRight from '@/app/assets/icon/arrow-right.svg'
 import { Text } from "@/app/components/Container/Text";
 
-const DataProducts = ({
-  products,
-  user
-}: DataProductProps
-) => {
+const DataProducts = ({ products }: DataProductProps) => {
   const [productCart, setProductCard] = useState<cart[]>(products);
   let subTotal = 0;
   productCart.forEach((product) => {

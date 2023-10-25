@@ -1,9 +1,9 @@
-import { getAnalyticsData, getFeatured, getPopularProducts } from "@/app/utils/queryDb";
 import { Flex } from "@/app/components/Container/Flex";
 import Progress from "@/app/components/Chart/Progress";
 import { Heading } from "@/app/components/Container/Heading";
 import ListCard from "@/app/components/Card/ListCard";
 import LineChart from "@/app/components/Chart/LineChart";
+import { getAnalyticsData, getFeatured, getPopularProducts } from "@/app/utils/queryDb";
 
 const page = async () => {
   const popularProducts = await getPopularProducts();

@@ -1,9 +1,10 @@
 'use client'
-import { Button } from "@/app/components/Button/Button";
-import { headTableArticle } from "@/app/helpers/dataObject";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
+import { Button } from "@/app/components/Button/Button";
+import { headTableArticle } from "@/app/helpers/dataObject";
 
 const Page = () => {
     const [articles, setArticles] = useState<any>([])

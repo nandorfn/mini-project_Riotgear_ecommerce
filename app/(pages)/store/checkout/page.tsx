@@ -1,5 +1,5 @@
-import { Heading } from "@/app/components/Container/Heading";
 import Link from "next/link";
+import { Heading } from "@/app/components/Container/Heading";
 import CheckoutBody from "./components/CheckoutBody";
 import OrderSummary from "./components/OrderSummary";
 import { checkUserLogin } from "@/app/utils/auth";

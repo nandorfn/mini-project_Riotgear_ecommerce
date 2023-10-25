@@ -39,6 +39,17 @@ const OrderCard = ({ orderItem }: order) => {
         }
       })
   }
+
+  const {
+    name,
+    country,
+    city,
+    district,
+    address,
+    zip
+  } = order.address;
+
+  const billAddress = `${address}, ${district}, ${city}, ${country}, ${zip}`;
   return (
     <>
       <Flex variant={'col'} className="border-[1px] rounded-xl shadow-sm gap-3 pb-4">
@@ -56,7 +67,7 @@ const OrderCard = ({ orderItem }: order) => {
             />
           </div>
         </Flex>
-        
+
         <Flex variant={'colToRow'} className="bg-base-100 md:pe-4">
           <Collapse>
             {order.orderItems.map((item: any, index: number) => (
@@ -92,10 +103,8 @@ const OrderCard = ({ orderItem }: order) => {
           <Flex variant={'colToRow'} className="px-5 -mt-10 md:mt-0 md:px-0">
             <Flex variant={'col'}>
               <Heading>Billing Address</Heading>
-              <p>{'Nando'}</p>
-              <div>
-                <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
-              </div>
+              <p>{name}</p>
+              <p>{billAddress}</p>
             </Flex>
             <div className="divider hidden md:block lg:divider-horizontal"></div>
             <Flex variant={'col'} className="gap-3 md:w-[50%] relative">

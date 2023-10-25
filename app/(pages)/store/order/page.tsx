@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/app/components/Button/Button";
 import HistoryOrderCard from "@/app/components/Card/HistoryOrderCard";
 import Colapse from "@/app/components/Container/Colapse";
@@ -6,7 +7,6 @@ import { Heading } from "@/app/components/Container/Heading";
 import { Text } from "@/app/components/Container/Text";
 import { checkUserLogin } from "@/app/utils/auth";
 import { getUserOrder } from "@/app/utils/queryDb";
-import Link from "next/link";
 import OrderStatus from "./components/OrderStatus";
 import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
 import { InfoStatus } from "@/app/components/Container/InfoStatus";
@@ -68,6 +68,7 @@ const Page = async ({
                 subTotal += total;
               }
             })
+             
 
             return (
               <Flex variant={'col'} className="shadow-md rounded-lg mb-5 relative" key={index}>
