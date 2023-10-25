@@ -34,7 +34,6 @@ variant,
 ...props
 }) => {
 
-console.log(data);
   return (
     <>
       <section className={cn(cardContainerVariants({variant, className}))} {...props}>
