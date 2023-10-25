@@ -1,7 +1,7 @@
-import { getArticle } from "@/app/utils/queryDb";
-import MdBody from "./MdBody";
 import { redirect } from "next/navigation";
+import { getArticle } from "@/app/utils/queryDb";
 import Navbar from "@/app/components/Navbar/Navbar";
+import MdBody from "./MdBody";
 
 const page = async ({
   searchParams,

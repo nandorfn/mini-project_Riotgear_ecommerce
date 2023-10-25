@@ -1,11 +1,11 @@
+import Image from "next/image";
+import { redirect } from "next/navigation";
 import OrderCard from "@/app/components/Card/OrderCard";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { checkUserLogin } from "@/app/utils/auth";
 import { getUserProductCart } from "@/app/utils/queryDb";
 import { orderSummary } from "@/app/utils/utils";
-import Image from "next/image";
-import { redirect } from "next/navigation";
 
 const OrderSummary: React.FC = async () => {
   const user = await checkUserLogin();

@@ -1,5 +1,6 @@
 import { Heading } from "@/app/components/Container/Heading";
 import { about } from "@/app/helpers/dataObject";
+
 const page: React.FC = () => {
   return (
     <>

@@ -1,9 +1,9 @@
 'use client'
-import Modal from '@/app/components/Modal/Modal';
-import useForm from "@/app/hooks/useForm";
-import { createProductData, defaultProductData } from "@/app/helpers/dataObject";
-import usePostData from '@/app/hooks/usePostData';
 import { ProductData } from '@/app/utils/types';
+import useForm from "@/app/hooks/useForm";
+import usePostData from '@/app/hooks/usePostData';
+import Modal from '@/app/components/Modal/Modal';
+import { createProductData, defaultProductData } from "@/app/helpers/dataObject";
 interface Props {
   setDataProducts: React.Dispatch<React.SetStateAction<ProductData[]>>;
   handleModal: () => void;

@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import { bebas_neue } from '@/app/utils/fonts';
+
 import blogBanner from '@/app/assets/Content/blog.png'
+import { getBlogArticles } from '@/app/utils/queryDb';
 import ArticleCard from '@/app/components/Card/ArticleCard';
 import Hero from '@/app/components/Hero/Hero';
 import HeroTitleOnyl from '@/app/components/Hero/HeroTitleOnyl';
-import { getBlogArticles } from '@/app/utils/queryDb';
-import Link from 'next/link';
 
 
 const page = async () => {
