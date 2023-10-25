@@ -9,11 +9,15 @@ import { redirect } from "next/navigation";
 
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
-    const date = new Date().toLocaleDateString('en-US', { day: '2-digit', month: "long", year: "numeric" });
     const order = await getUserCurrentOrder(searchParams.orderId);
     let { subTotal } = checkSubtotal(order);
+    
+    if (!searchParams.orderId || !order) {
+        redirect('/store')
+    } 
+    const orderDate = order[0].orderDate ?? new Date;
+    const date = orderDate.toLocaleDateString('en-US', { day: '2-digit', month: "long", year: "numeric" });
     let orderStatus = order?.map((item) => item.status);
-    if (!searchParams.orderId) redirect('/store')
     return (
         <>
             <main className="px-3 md:h-[74vh]">
@@ -32,7 +36,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
                         <p className="italictext-xs md:text-base text-base-300">Thank you. Your order has been received. If you didn&apos;t complete the payment 24 hours from now, your order will be cancelled.</p>
                     }
                     <Flex variant={'colToRow'} className="p-4 mt-5 md:px-4 md:py-2 bg-base-200 rounded-md md:justify-between">
-                        <Text fs={'lg'} className="md:w-1/5">{`Order Number: 12345`}</Text>
+                        <Text fs={'lg'} className="md:w-1/5">{`Order Number: ${order[0].id }`}</Text>
                         <div className="divider divider-horizontal"></div>
                         <Text fs={'lg'} className="md:w-1/5">{`Date: ${date}`}</Text>
                         <div className="divider divider-horizontal"></div>
@@ -75,11 +79,11 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
                             </tr>
                             <tr>
                                 <td>Subtotal</td>
-                                <td>{subTotal || 0}</td>
+                                <td>{`Rp${(subTotal || 0).toLocaleString('ID-id')}`}</td>
                             </tr>
                             <tr>
                                 <td>Shipping</td>
-                                <td>JNT</td>
+                                <td>RIOT Express</td>
                             </tr>
                             <tr>
                                 <td>Payment Method</td>

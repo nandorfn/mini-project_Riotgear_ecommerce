@@ -109,7 +109,6 @@ export const getProduct = cache(async (id: string) => {
     ...product,
     reviews: review
   }
-  console.log(combinedData)
   return combinedData;
 });
 
