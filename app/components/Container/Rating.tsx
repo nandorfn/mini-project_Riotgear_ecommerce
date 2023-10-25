@@ -1,3 +1,5 @@
+import React, { Dispatch, useState } from 'react';
+
 type RatingChangeCallback = (itemId: string, newRating: number) => void;
 type RatingProps = {
   itemId: string,

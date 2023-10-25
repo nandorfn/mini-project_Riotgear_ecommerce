@@ -118,6 +118,7 @@ export type ProductData = {
   productDesc: string;
   productPrice: number;
   featured: number | boolean;
+  reviews?: any;
 };
 export type ArticleModel = {
   id: number;

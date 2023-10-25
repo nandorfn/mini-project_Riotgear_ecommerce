@@ -20,7 +20,6 @@ const Page = async ({
   const recommendProduct = await getRecomendProduct(product?.productSubCategory ?? '', name);
   const user = await checkUserLogin();
 
-
   return (
     <>
       <main className="px-3">
@@ -63,7 +62,9 @@ const Page = async ({
             content={product?.productDesc}
           />
         </div>
-        <ReviewWrap />
+        <ReviewWrap
+          reviews={product.reviews}
+        />
         {recommendProduct.length > 0 &&
           <>
             <Heading className="md:my-3" variant={'five'}>

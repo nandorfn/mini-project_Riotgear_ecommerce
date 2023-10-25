@@ -33,6 +33,8 @@ className,
 variant,
 ...props
 }) => {
+
+console.log(data);
   return (
     <>
       <section className={cn(cardContainerVariants({variant, className}))} {...props}>
@@ -43,6 +45,7 @@ variant,
               productImg={product.productImgLink}
               productName={product.productName}
               productPrice={product.productPrice}
+              reviews={product.reviews}
             />
           </article>
         )

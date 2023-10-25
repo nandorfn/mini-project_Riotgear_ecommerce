@@ -56,7 +56,31 @@ export const getItem = cache(async (filters: any) => {
     },
     orderBy: sortOptions,
   });
-  return items;
+
+  const productsWithReviews = await Promise.all(
+    items.map(async (product) => {
+      const reviews = await prisma.review.findMany({
+        where: {
+          productId: product.productId,
+        },
+        select: {
+          rating: true,
+        },
+      });
+
+      const totalRatings = reviews.reduce((total, review) => total + review.rating, 0);
+      const averageRating = reviews.length > 0 ? totalRatings / reviews.length : 0;
+
+      return {
+        ...product,
+        reviews: {
+          averageRating,
+          totalReviews: reviews.length
+        }
+      };
+    })
+  );
+  return productsWithReviews;
 });
 
 export const getProduct = cache(async (id: string) => {
@@ -65,7 +89,7 @@ export const getProduct = cache(async (id: string) => {
       productId: id,
     },
   });
-  
+
   const review = await prisma.review.findMany({
     where: {
       productId: product?.productId
@@ -83,15 +107,16 @@ export const getProduct = cache(async (id: string) => {
   }
   const combinedData = {
     ...product,
-    ...review
+    reviews: review
   }
+  console.log(combinedData)
   return combinedData;
 });
 
 export const getPopularProducts = cache(async () => {
   const popularProducts = await prisma.product.findMany({
     where: {
-      viewsCount: { not: 0}
+      viewsCount: { not: 0 }
     },
     orderBy: {
       viewsCount: 'desc'
@@ -274,7 +299,7 @@ export const getOrderProducts = cache(async () => {
           quantity: true,
         },
       });
-      
+
 
       const address = await prisma.address.findFirst({
         where: {
@@ -289,8 +314,8 @@ export const getOrderProducts = cache(async () => {
           zip: true,
         }
       });
-      
-      
+
+
 
       const validOrderItems = Array.isArray(orderItems) ? orderItems : [];
       const orderData = {
@@ -326,7 +351,7 @@ export const getOrderProducts = cache(async () => {
       return orderData;
     })
   );
-  
+
   return allData;
 });
 
@@ -481,19 +506,19 @@ export const getPopularProductCategory = async () => {
       productSubCategory: 'desc',
     }
   })
-  
+
   const viewsCountByCategory: { productSubCategory: string; viewsCount: number }[] = [];
   products.forEach((item) => {
     const { productSubCategory, viewsCount } = item;
     const existingCategory = viewsCountByCategory.find((category) => category.productSubCategory === productSubCategory);
-  
+
     if (existingCategory) {
       existingCategory.viewsCount += viewsCount;
     } else {
       viewsCountByCategory.push({ productSubCategory, viewsCount });
     }
   });
-  const sortedData = viewsCountByCategory.sort((a, b) => b.viewsCount - a.viewsCount).slice(0, 5);  
+  const sortedData = viewsCountByCategory.sort((a, b) => b.viewsCount - a.viewsCount).slice(0, 5);
   return sortedData;
 }
 
