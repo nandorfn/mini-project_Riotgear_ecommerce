@@ -68,6 +68,7 @@ const Page = async ({
                 subTotal += total;
               }
             })
+             
 
             return (
               <Flex variant={'col'} className="shadow-md rounded-lg mb-5 relative" key={index}>

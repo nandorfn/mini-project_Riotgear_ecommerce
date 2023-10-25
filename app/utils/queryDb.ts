@@ -383,13 +383,14 @@ export const getUserOrder = cache(async (userId: string | undefined) => {
       const allUserOrder = []
       for (const order of allOrder) {
         const orderItemsWithProducts = await getOrderItemsWithProducts(order);
+        const reviews = await isOrderReviewed(order.orderId);
         const combinedData = {
           ...order,
-          orderItem: orderItemsWithProducts
+          isReviewed: reviews,
+          orderItem: orderItemsWithProducts,
         }
         allUserOrder.push(combinedData);
       }
-
       return allUserOrder;
     }
 
@@ -506,3 +507,12 @@ export const getAnalyticsData = async () => {
   };
 }
 
+const isOrderReviewed = async (orderId: string) => {
+  const reviews = await prisma.review.findMany({
+    where: {
+      orderId: orderId,
+    },
+  });
+
+  return reviews.length > 0;
+};
