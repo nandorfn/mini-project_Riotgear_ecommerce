@@ -6,6 +6,7 @@ import { Heading } from "@/app/components/Container/Heading";
 import { checkUserLogin } from "@/app/utils/auth";
 import { getUserProductCart } from "@/app/utils/queryDb";
 import { orderSummary } from "@/app/utils/utils";
+import { cart } from "@/app/utils/types";
 
 const OrderSummary: React.FC = async () => {
   const user = await checkUserLogin();
@@ -24,7 +25,7 @@ const OrderSummary: React.FC = async () => {
       <Flex variant={'col'}>
         <Heading className="border-t-2 flex w-full pt-5">ORDER ITEMS</Heading>
         <div className="grid grid-cols-5 mt-5 gap-3">
-          {productCart?.map((product) => (
+          {productCart?.map((product: cart) => (
             <figure key={product.id}>
               <Image
                 className="rounded-md"
