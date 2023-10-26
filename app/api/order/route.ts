@@ -1,9 +1,10 @@
 import { verifyAuth } from "@/app/utils/auth";
 import { checkStock, createOrderItem, createUserAddress, reduceProductStock } from "@/app/utils/queryDb";
-import { updateOrderStatus, userAddressSchema } from "@/app/utils/types";
+import { TOrderItem, updateOrderStatus, userAddressSchema } from "@/app/utils/types";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
 import prisma from "@/app/lib/prisma";
+import { ZodIssue } from "zod";
 
 export const POST = async (req: Request) => {
   const uuid = uuidv4();
@@ -20,7 +21,7 @@ export const POST = async (req: Request) => {
   // Check schema validation
   if (!result.success) {
     let zodErrors = {};
-    result.error.issues.forEach((issue) => {
+    result.error.issues.forEach((issue: ZodIssue) => {
       zodErrors = { ...zodErrors, [issue.path[0]]: issue.message }
     });
     return NextResponse.json({ errors: zodErrors }, { status: 400 });
@@ -70,7 +71,7 @@ export const POST = async (req: Request) => {
     })
 
     await prisma.$transaction([
-      ...orderItems.map(orderItem => {
+      ...orderItems.map((orderItem: TOrderItem) => {
         return prisma.product.update({
           where: {
             productId: orderItem.productId
@@ -123,7 +124,7 @@ export const PATCH = async (req: Request) => {
 
   if (!result.success) {
     let zodErrors = {};
-    result.error.issues.forEach((issue) => {
+    result.error.issues.forEach((issue: ZodIssue) => {
       zodErrors = { ...zodErrors, [issue.path[0]]: issue.message }
     });
     return NextResponse.json(zodErrors, { status: 401 });
@@ -156,7 +157,7 @@ export const PATCH = async (req: Request) => {
       })
   
       await prisma.$transaction([
-        ...orderItems.map(orderItem => {
+        ...orderItems.map((orderItem: TOrderItem) => {
           return prisma.product.update({
             where: {
               productId: orderItem.productId

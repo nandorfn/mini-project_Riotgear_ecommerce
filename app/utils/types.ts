@@ -168,3 +168,12 @@ export type FaqItem = {
   q: string;
   a: string;
 };
+
+export type TOrderItem = {
+  id: number;
+  orderId: string;
+  productId: string;
+  quantity: number;
+  createdAt: Date;
+  updatedAt: Date;
+}

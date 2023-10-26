@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import prisma from "@/app/lib/prisma";
 import type { Product } from "@prisma/client";
 import { productForm } from "@/app/utils/types";
+import { ZodIssue } from "zod";
 
 
 export const POST = async (req: Request) => {
@@ -23,7 +24,7 @@ export const POST = async (req: Request) => {
 
   if (!result.success) {
     let zodErrors = {};
-    result.error.issues.forEach((issue) => {
+    result.error.issues.forEach((issue: ZodIssue) => {
       zodErrors = { ...zodErrors, [issue.path[0]]: issue.message }
     });
     return NextResponse.json({ errors: zodErrors }, { status: 400 });
@@ -50,7 +51,7 @@ export const POST = async (req: Request) => {
 
 }
 
-export const GET = async (request: Request) => {
+export const GET = async () => {
   const product = await prisma.product.findMany();
   return NextResponse.json(product, { status: 200 });
 }

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
 import type { User } from '@prisma/client'
 import prisma from "@/app/lib/prisma";
+import { ZodIssue } from "zod";
 
 export const POST = async (req: Request) => {
   const body: User = await req.json();
@@ -11,7 +12,7 @@ export const POST = async (req: Request) => {
   let zodErrors = {}
   
   if (!result.success){
-    result.error.issues.forEach((issue) => {
+    result.error.issues.forEach((issue: ZodIssue) => {
       zodErrors = {...zodErrors, [issue.path[0]]: issue.message}
     }); 
   } else {
