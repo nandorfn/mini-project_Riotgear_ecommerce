@@ -1,6 +1,5 @@
 import { HTMLAttributes } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import fbIcon from '@/app/assets/icon/Facebook.svg'
 import igIcon from '@/app/assets/icon/Instagram.png'
@@ -16,13 +15,12 @@ const Footer: React.FC<FooterProps> = ({className, ...props}) => {
 
   type Menu = {
     label: string,
-    link: string,
   }
   const menus = [
-    { label: 'Terms of Service', link: '/tos' },
-    { label: 'Privacy Policy', link: '/privacy-policy' },
-    { label: 'Cookie Policy', link: '/cookie-policy' },
-    { label: 'Partners', link: '/partners' },
+    { label: 'Terms of Service'},
+    { label: 'Privacy Policy'},
+    { label: 'Cookie Policy'},
+    { label: 'Partners' },
   ]
 
   return (
@@ -53,7 +51,7 @@ const Footer: React.FC<FooterProps> = ({className, ...props}) => {
           <ul className='flex flex-row flex-wrap justify-center gap-x-3'>
             {menus?.map((menu: Menu, index: number) =>
               <li key={index}>
-                <Link className=' hover:text-base-300' href={menu.link}>{menu.label}</Link>
+                {menu.label}
               </li>
             )}
           </ul>
