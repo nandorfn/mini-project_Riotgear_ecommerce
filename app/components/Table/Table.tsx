@@ -20,7 +20,7 @@ const Table = ({
           {/* head */}
           <thead>
             <tr>
-              {tableHead?.map((head, index) =>
+              {tableHead?.map((head: string, index: number) =>
                 <th key={index}>
                   {head}
                 </th>

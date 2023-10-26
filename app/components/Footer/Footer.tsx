@@ -13,6 +13,11 @@ import { cn } from '@/app/utils/utils'
 interface FooterProps extends HTMLAttributes<HTMLElement>{}
 
 const Footer: React.FC<FooterProps> = ({className, ...props}) => {
+
+  type Menu = {
+    label: string,
+    link: string,
+  }
   const menus = [
     { label: 'Terms of Service', link: '/tos' },
     { label: 'Privacy Policy', link: '/privacy-policy' },
@@ -46,7 +51,7 @@ const Footer: React.FC<FooterProps> = ({className, ...props}) => {
             &copy;2023 RIOTGEAR. All Right reserved
           </span>
           <ul className='flex flex-row flex-wrap justify-center gap-x-3'>
-            {menus?.map((menu, index) =>
+            {menus?.map((menu: Menu, index: number) =>
               <li key={index}>
                 <Link className=' hover:text-base-300' href={menu.link}>{menu.label}</Link>
               </li>

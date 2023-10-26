@@ -15,7 +15,7 @@ const Rating = ({ maxRating, itemId, onRatingChange, initialRating }: RatingProp
     
   return (
     <div className="rating">
-      {[...Array(maxRating).keys()].map((star) => {
+      {[...Array(maxRating).keys()].map((star: number) => {
         return (
             <input
               key={star}

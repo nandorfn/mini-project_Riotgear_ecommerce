@@ -38,7 +38,7 @@ variant,
   return (
     <>
       <section className={cn(cardContainerVariants({variant, className}))} {...props}>
-        {data.length > 0 ? data?.map((product) =>
+        {data.length > 0 ? data?.map((product: ProductData) =>
         <Suspense key={product.id} fallback={<ProductCardSkeleton/>}>
           <article>
             <ProductCard

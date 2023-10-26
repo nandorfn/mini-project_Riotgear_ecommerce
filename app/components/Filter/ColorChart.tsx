@@ -3,6 +3,11 @@ interface Props {
   value: string | null;
 }
 const ColorChart: React.FC<Props> = ({ handleInput, value }) => {
+
+  type Color = {
+    label: string,
+    color: string
+  }
   const color = [
     { label: 'Black', color: 'bg-black' },
     { label: 'Grey', color: 'bg-zinc-300' },
@@ -20,7 +25,7 @@ const ColorChart: React.FC<Props> = ({ handleInput, value }) => {
       <div>
         <label className="font-medium mb-3">Color
           <ul className="grid grid-cols-5 md:grid-cols-3 text-center">
-            {color?.map((item, index) =>
+            {color?.map((item: Color , index: number) =>
               <li key={index}>
                 <input
                   name="color"

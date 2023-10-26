@@ -14,6 +14,21 @@ import WrongCondition from "@/app/components/404/WrongCondition";
 import { Suspense } from "react";
 import OrderCardSkeleton from "@/app/components/Skeleton/OrderCardSkeleton";
 
+type OrderItem = {
+  id: number,
+  orderId: string,
+  productId: string,
+  quantity: number,
+  createdAt: Date,
+  updatedAt: Date,
+  productName: string,
+  productPrice: number,
+  productImgLink: string,
+  paymentMethod: string,
+  status: string,
+  orderDate: Date
+}
+
 
 const Page = async ({
   searchParams,
@@ -60,7 +75,7 @@ const Page = async ({
             link={'/store'}
             labelBtn={'CONTINUE SHOPPING'} />
 
-          : filteredOrders?.map((order, index) => {
+          : filteredOrders?.map((order: any, index: number) => {
             const inv = order.orderId.toUpperCase().split('-').join('').replace(/,/g, '');
             const date = order.createdAt.toLocaleDateString('en-US', {
               day: '2-digit',
@@ -68,13 +83,12 @@ const Page = async ({
               year: 'numeric'
             })
             let subTotal = 0;
-            order.orderItem.forEach((data) => {
+            order.orderItem.forEach((data: any) => {
               if (data.productPrice) {
                 const total = data.quantity * data.productPrice;
                 subTotal += total;
               }
             })
-
 
             return (
               <Flex variant={'col'} className="shadow-md rounded-lg mb-5 relative" key={index}>
@@ -90,7 +104,7 @@ const Page = async ({
                   />
                 </Flex>
                 <Colapse>
-                  {order.orderItem.map((item, index: number) => (
+                  {order.orderItem.map((item: OrderItem, index: number) => (
                     <Suspense key={item.id} fallback={<OrderCardSkeleton variant="variant1" />}>
                       {index === 0 && (
                         <HistoryOrderCard
@@ -112,7 +126,7 @@ const Page = async ({
                       )}
                     </Suspense>
                   ))}
-                  {order.orderItem.map((item, index: number) => (
+                  {order.orderItem.map((item: OrderItem, index: number) => (
                     <Suspense key={item.id} fallback={<OrderCardSkeleton variant="variant1" />}>
                       <div className="ms-1">
                         {index > 0 && (

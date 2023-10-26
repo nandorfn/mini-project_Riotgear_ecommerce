@@ -9,13 +9,14 @@ import ProductCard from "@/app/components/Card/ProductCard";
 import { Heading } from "@/app/components/Container/Heading";
 import ProductCardSkeleton from "@/app/components/Container/ProductCardSkeleton";
 import { getFeatured } from "@/app/utils/queryDb";
+import { ProductData } from "@/app/utils/types";
 
 const Featured = async () => {
   const products = await getFeatured();
   return (
     <>
       <section className="p-4 gap-4  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
-        {products?.map((product) =>
+        {products?.map((product: ProductData) =>
           <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
             <article key={product.id}>
               <ProductCard

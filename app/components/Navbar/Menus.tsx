@@ -4,6 +4,12 @@ interface Props {
 }
 
 const Menus: React.FC<Props> = ({ menuFor }) => {
+  type Menu = {
+    id: number;
+    label: string;
+    link: string;
+  }
+
   const menus = [
     {id:2, label: 'About', link: '/about' },
     {id:4, label: 'Blog', link: '/blog' },
@@ -12,7 +18,7 @@ const Menus: React.FC<Props> = ({ menuFor }) => {
   
   return (
     <>
-      {menus?.map((menu) =>
+      {menus?.map((menu: Menu) =>
         <li key={menu.id}>
           <Link className="hover:font-medium" href={menu.link}>{menu.label}</Link>
         </li>

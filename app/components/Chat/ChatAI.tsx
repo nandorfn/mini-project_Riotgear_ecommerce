@@ -54,7 +54,7 @@ const ChatAI: React.FC<Props> = ({
         <div className="divider my-0"></div>
         <Flex variant={'col'} className="px-4 overflow-y-scroll mb-[8rem] pb-20">
 
-          {data?.map((item, index) => {
+          {data?.map((item: MessageAI, index: number) => {
             return (
               <div key={index} className={`chat ${item.isBot ? 'chat-start' : 'chat-end'}`}>
                 <div

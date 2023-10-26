@@ -29,7 +29,7 @@ const ReviewWrap = ({ reviews }: Props) => {
           
           <UserRating userRating={averageRating} />
           <div className="flex breadcrumbs gap-3">
-          {reviews?.map((item) => (
+          {reviews?.map((item: Review) => (
             <ReviewCard
               key={item.id}
               review={item}
