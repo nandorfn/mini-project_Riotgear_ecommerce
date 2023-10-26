@@ -1,25 +1,26 @@
+import { Dispatch, SetStateAction } from "react";
 import { Button } from "@/app/components/Button/Button";
 import { Flex } from "@/app/components/Container/Flex";
-import { Dispatch, SetStateAction } from "react";
 
 
 type Props = {
   handleUpdateStatus: (e: React.SyntheticEvent) => void;
   status: string;
-  setModal: Dispatch<SetStateAction<boolean>>
+  setModal: Dispatch<SetStateAction<boolean>>;
+  loading: boolean;
 }
 
-const StatusBtn = ({ status, handleUpdateStatus, setModal }: Props) => {
+const StatusBtn = ({ status, handleUpdateStatus, setModal, loading }: Props) => {
   let buttonContent = null;
 
   switch (status) {
     case 'Ordered':
       buttonContent = (
       <>
-        <Button value={'Cancelled'} onClick={() => setModal(true)} variant={'red'} size="sm">
+        <Button disabled={loading}  value={'Cancelled'} onClick={() => setModal(true)} variant={'red'} size="sm">
           Cancel
         </Button>
-        <Button value={'InProgress'} onClick={handleUpdateStatus} variant={'success'} size="sm">
+        <Button disabled={loading} value={'InProgress'} onClick={handleUpdateStatus} variant={'success'} size="sm">
           Confirm
         </Button>
       </>
@@ -27,7 +28,7 @@ const StatusBtn = ({ status, handleUpdateStatus, setModal }: Props) => {
       break;
     case 'InProgress':
       buttonContent = (
-        <Button value={'Shipped'} onClick={handleUpdateStatus} clr={'blue'} size="sm">
+        <Button disabled={loading} value={'Shipped'} onClick={handleUpdateStatus} clr={'blue'} size="sm">
           Mark as Shipped
         </Button>
       );
@@ -41,7 +42,7 @@ const StatusBtn = ({ status, handleUpdateStatus, setModal }: Props) => {
       break;
     case 'Delivered':
       buttonContent = (
-        <Button value={'Completed'} onClick={handleUpdateStatus} variant={'success'} size="sm" >
+        <Button disabled={loading} value={'Completed'} onClick={handleUpdateStatus} variant={'success'} size="sm" >
           Mark as Completed
         </Button>
       );

@@ -5,7 +5,7 @@ import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { checkSubtotal } from "@/app/utils/utils";
 import axios from "axios";
-import StatusBtn from "../../../../components/Button/StatusBtn";
+import StatusBtn from "@/app/components/Button/StatusBtn";
 
 import { useState } from "react";
 import { InfoStatus } from "@/app/components/Container/InfoStatus";
@@ -19,6 +19,7 @@ const OrderCard = ({ orderItem }: order) => {
   const [order, setOrder] = useState(orderItem);
   let { subTotal } = checkSubtotal(order.orderItems);
   const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   let date = order.createdAt.toLocaleDateString('en-US', {
     day: '2-digit',
     month: 'long',
@@ -27,6 +28,7 @@ const OrderCard = ({ orderItem }: order) => {
   
   
   const handleUpdateStatus = async (e: React.SyntheticEvent) => {
+    setLoading(true);
     let { value } = e.target as HTMLButtonElement
     e.preventDefault();
     const data = {
@@ -44,6 +46,7 @@ const OrderCard = ({ orderItem }: order) => {
       })
       .finally(() => {
         setModal(false);
+        setLoading(false);
       })
   }
 
@@ -132,6 +135,7 @@ const OrderCard = ({ orderItem }: order) => {
               <Heading>Subtotal</Heading>
               <p className="text-error md:text-xl font-medium">{`Rp${subTotal.toLocaleString('ID-id')}`}</p>
               <StatusBtn
+                loading={loading}
                 status={order.status}
                 handleUpdateStatus={handleUpdateStatus}
                 setModal={setModal}

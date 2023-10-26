@@ -1,11 +1,11 @@
+import { Suspense } from "react";
+import OrderCardSkeleton from "@/app/components/Skeleton/OrderCardSkeleton";
 import { Heading } from "@/app/components/Container/Heading";
 import OrderCard from "./components/OrderCard";
 import { Flex } from "@/app/components/Container/Flex";
 import { getOrderProducts } from "@/app/utils/queryDb";
 import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
 import { Transparent } from "@/app/components/Container/Transparent";
-import { Suspense } from "react";
-import OrderCardSkeleton from "@/app/components/Skeleton/OrderCardSkeleton";
 
 const Page = async ({
   searchParams,

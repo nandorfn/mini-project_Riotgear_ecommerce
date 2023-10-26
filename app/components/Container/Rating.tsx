@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from 'react';
+import React from 'react';
 
 type RatingChangeCallback = (itemId: string, newRating: number) => void;
 type RatingProps = {

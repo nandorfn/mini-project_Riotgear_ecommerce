@@ -1,7 +1,7 @@
 import Image from "next/image";
-import HeroImgPrimary from '../../assets/Content/HeroImgPrimary.png'
-import HeroImgSecondary from '../../assets/Content/HeroImgSecondary.png'
-import { Flex } from "../Container/Flex";
+import HeroImgPrimary from '@/app/assets/Content/HeroImgPrimary.png'
+import HeroImgSecondary from '@/app/assets/Content/HeroImgSecondary.png'
+import { Flex } from "@/app/components/Container/Flex";
 
 const HeroImg: React.FC = () => {
     return (

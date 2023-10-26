@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { bebas_neue } from '@/app/utils/fonts';
 
 import blogBanner from '@/app/assets/Content/blog.png'
 import { getBlogArticles } from '@/app/utils/queryDb';
@@ -18,7 +17,7 @@ const page = async () => {
                 img={blogBanner}
             />
             <main className="max-w-6xl mx-auto h-[80vh]">
-                <h2 className={`text-center text-4xl font-medium mb ${bebas_neue.className}`}>BLOG</h2>
+                <h2 className={`text-center text-4xl font-medium mb`}>BLOG</h2>
                 <section className='flex flex-col gap-3 p-4'>
                     {articles?.map(item => (
 

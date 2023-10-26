@@ -1,12 +1,13 @@
-import fbIcon from '../../assets/icon/Facebook.svg'
-import igIcon from '../../assets/icon/Instagram.png'
-import xIcon from '../../assets/icon/TwitterX.png'
-import ttIcon from '../../assets/icon/TikTok.png'
-import RiotLogo from '../../assets/icon/RiotLogoBlack.svg'
-import Image from 'next/image';
-import Link from 'next/link'
-import { Flex } from '../Container/Flex'
 import { HTMLAttributes } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import fbIcon from '@/app/assets/icon/Facebook.svg'
+import igIcon from '@/app/assets/icon/Instagram.png'
+import xIcon from '@/app/assets/icon/TwitterX.png'
+import ttIcon from '@/app/assets/icon/TikTok.png'
+import RiotLogo from '@/app/assets/icon/RiotLogoBlack.svg'
+import { Flex } from '@/app/components/Container/Flex'
 import { cn } from '@/app/utils/utils'
 
 interface FooterProps extends HTMLAttributes<HTMLElement>{}

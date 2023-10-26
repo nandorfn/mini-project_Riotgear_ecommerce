@@ -10,12 +10,12 @@ import {
 } from '@/app/helpers/dataObject';
 import { productFormState } from '@/app/utils/types';
 
-import { Textarea } from "../Form/Textarea";
-import Input from "../Form/Input";
-import { Button } from '../Button/Button';
-import OptionInput from '../Form/Option';
-import { Flex } from '../Container/Flex';
-import { Heading } from '../Container/Heading';
+import { Textarea } from "@/app/components/Form/Textarea";
+import Input from "@/app/components/Form/Input";
+import { Button } from '@/app/components/Button/Button';
+import OptionInput from '@/app/components/Form/Option';
+import { Flex } from '@/app/components/Container/Flex';
+import { Heading } from '@/app/components/Container/Heading';
 
 interface Props {
   handleInput: (e: React.SyntheticEvent) => void;

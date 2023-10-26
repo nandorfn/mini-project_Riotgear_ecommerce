@@ -1,19 +1,24 @@
 'use client'
 import Image from "next/image";
-import { Flex } from "../Container/Flex";
-import { Heading } from "../Container/Heading";
-import Rating from "../Container/Rating";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Button } from "../Button/Button";
-import { Textarea } from "../Form/Textarea";
-import closeIcon from '@/app/assets/icon/closeIcon.svg'
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react";
 import axios from "axios";
+import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
+import Rating from "@/app/components/Container/Rating";
+import { Button } from "@/app/components/Button/Button";
+import { Textarea } from "@/app/components/Form/Textarea";
+import closeIcon from '@/app/assets/icon/closeIcon.svg'
 
 type RewiewProps = {
   data: any,
   itemId: string,
   modal: boolean,
-  setState: Dispatch<SetStateAction<{ itemId: string; modal: boolean; }>>
+  setState: Dispatch<SetStateAction<{ itemId: string; modal: boolean; loading: boolean }>>
   setOrderItem: Dispatch<any>
 }
 type SentData = {
@@ -58,9 +63,9 @@ const ReviewModal = ({ data, itemId, setState, setOrderItem }: RewiewProps) => {
         orderItems: sentData
       };
       await axios.post(`/api/review/${data.orderId}`, newRating)
-      .then(res => {
-        setOrderItem(res.data)
-      });
+        .then(res => {
+          setOrderItem(res.data)
+        });
     } catch (error) {
       console.log(error);
     } finally {
@@ -136,7 +141,6 @@ const ReviewModal = ({ data, itemId, setState, setOrderItem }: RewiewProps) => {
             : 'Submit'
           }
         </Button>
-
       </Flex>
     </>
   );

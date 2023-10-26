@@ -1,4 +1,4 @@
-import { Flex } from "../Container/Flex";
+import { Flex } from "@/app/components/Container/Flex";
 
 const ImageNotFound: React.FC = () => {
     return (

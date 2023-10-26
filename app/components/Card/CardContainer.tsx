@@ -4,7 +4,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 import { ProductData } from "@/app/utils/types";
 import { Text } from "../Container/Text";
 import ProductCard from "./ProductCard";
-import ProductCardSkeleton from "../Container/ProductCardSkeleton";
+import ProductCardSkeleton from "@/app/components/Container/ProductCardSkeleton";
 
 const cardContainerVariants = cva(
   'grid gap-3 lg:gap-5 overflow-y-scroll mt-3 md:mt-0',

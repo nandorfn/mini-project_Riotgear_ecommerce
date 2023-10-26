@@ -1,6 +1,6 @@
 import { statusOptions } from "@/app/helpers/dataObject";
 import Link from "next/link";
-import { Button } from "../Button/Button";
+import { Button } from "@/app/components/Button/Button";
 
 const StatusOrderWrapper = ({status}: {status?: string | string[]}) => {
   return (

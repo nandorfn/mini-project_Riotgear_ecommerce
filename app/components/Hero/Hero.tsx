@@ -1,10 +1,10 @@
 import Image, { StaticImageData } from "next/image";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "@/app/components/Navbar/Navbar";
 interface HeroProps {
   childComponent: React.ReactNode;
   img: StaticImageData;
 }
-const Hero: React.FC<HeroProps> = ({childComponent, img}) => {
+const Hero: React.FC<HeroProps> = ({ childComponent, img }) => {
   return (
     <>
       <header className="flex w-full md:mt-4 gap-4 justify-between p-4 max-w-6xl lg:mx-auto">
@@ -12,7 +12,7 @@ const Hero: React.FC<HeroProps> = ({childComponent, img}) => {
           <Navbar />
           {childComponent}
         </div>
-        
+
         <div className="w-1/4 hidden lg:block">
           <Image
             className="h-full rounded-xl"

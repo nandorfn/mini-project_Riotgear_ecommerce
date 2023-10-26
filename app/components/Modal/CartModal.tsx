@@ -1,7 +1,7 @@
-import { Button } from "../Button/Button";
-import { Flex } from "../Container/Flex";
-import { Heading } from "../Container/Heading";
-import { Transparent } from "../Container/Transparent";
+import { Button } from "@/app/components/Button/Button";
+import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
+import { Transparent } from "@/app/components/Container/Transparent";
 
 type ModalProps = {
   id?: string;
@@ -12,6 +12,7 @@ type ModalProps = {
   modal: boolean,
   setModal: (state: boolean) => void,
   action: any,
+  loading?: boolean
 }
 
 const CartModal = ({
@@ -22,7 +23,8 @@ const CartModal = ({
   modal,
   setModal,
   action,
-  id
+  id,
+  loading
 }: ModalProps) => {
   return (
     <>
@@ -33,7 +35,7 @@ const CartModal = ({
             {children}
           </Flex>
           <Flex variant={'row'} className="gap-5 justify-between">
-              <Button id={id} onClick={action} size={'half'} variant={'black'}>{btnLeft}</Button>
+            <Button disabled={loading} id={id} onClick={action} size={'half'} variant={'black'}>{btnLeft}</Button>
             <Button onClick={() => setModal(!modal)} size={'half'} variant={'white'}>{btnRight}</Button>
           </Flex>
         </Flex>

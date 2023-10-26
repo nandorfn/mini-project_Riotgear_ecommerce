@@ -10,6 +10,11 @@ export const POST = async (req: Request) => {
         'X-CSCAPI-KEY': apikey
       }
     })
+    
+    if (!res.ok) {
+      return NextResponse.json({errors: 'Failed to fetch Data'}, { status: 200})
+    }
+    
     const data = await res.json()
     return NextResponse.json({data,  status: 200 })
   }

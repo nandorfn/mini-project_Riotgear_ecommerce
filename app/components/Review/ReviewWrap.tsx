@@ -1,6 +1,6 @@
-import ReviewCard from "../Card/ReviewCard";
-import { Heading } from "../Container/Heading";
-import UserRating from "../Container/UserRating";
+import ReviewCard from "@/app/components/Card/ReviewCard";
+import { Heading } from "@/app/components/Container/Heading";
+import UserRating from "@/app/components/Container/UserRating";
 
 export type Review = {
   id: number,

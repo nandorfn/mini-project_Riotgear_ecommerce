@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
-import { Flex } from "../Container/Flex";
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Heading } from "../Container/Heading";
+import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
 
 interface OrderCardSkeletonProps {
   variant: 'variant1' | 'variant2';

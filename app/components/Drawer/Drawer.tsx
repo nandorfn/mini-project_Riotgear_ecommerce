@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import Menus from '../Navbar/Menus';
-import Avatar from '../Avatar';
+import Menus from '@/app/components/Navbar/Menus';
+import Avatar from '@/app/components/Avatar';
 import { checkUserLogin } from '@/app/utils/auth';
-import { Button } from '../Button/Button';
+import { Button } from '@/app/components/Button/Button';
 
 const Drawer = async () => {
   const user = await checkUserLogin();

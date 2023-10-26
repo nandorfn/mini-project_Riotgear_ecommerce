@@ -1,12 +1,13 @@
 'use client'
-import chatIcon from '@/app/assets/icon/chat.png'
-import { Button } from '../Button/Button';
-import Image from 'next/image';
-import ChatAI from './ChatAI';
 import { useState } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
+
+import ChatAI from './ChatAI';
 import useForm from '@/app/hooks/useForm';
-import { Transparent } from '../Container/Transparent';
+import chatIcon from '@/app/assets/icon/chat.png'
+import { Button } from '@/app/components/Button/Button';
+import { Transparent } from '@/app/components/Container/Transparent';
 
 const initialState = {
   modal: false,

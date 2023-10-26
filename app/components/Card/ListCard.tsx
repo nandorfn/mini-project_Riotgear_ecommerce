@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Flex } from "../Container/Flex";
-import { Heading } from "../Container/Heading";
+import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
 
 const ListCard = ({data}: {data: any}) => {
   return (

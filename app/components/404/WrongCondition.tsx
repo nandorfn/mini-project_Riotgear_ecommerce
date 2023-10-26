@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Flex } from "../Container/Flex";
-import { Button } from "../Button/Button";
-import { Text } from "../Container/Text";
+import { Flex } from "@/app/components/Container/Flex";
+import { Button } from "@/app/components/Button/Button";
+import { Text } from "@/app/components/Container/Text";
 
 type Props = {
   text: string;

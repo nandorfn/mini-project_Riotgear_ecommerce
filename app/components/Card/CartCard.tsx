@@ -11,7 +11,7 @@ import { Text } from "@/app/components/Container/Text";
 import { Flex } from "@/app/components/Container/Flex";
 import CartModal from "@/app/components/Modal/CartModal";
 import closeIcon from '@/app/assets/icon/closeIcon.svg'
-import { Transparent } from "../Container/Transparent";
+import { Transparent } from "@/app/components/Container/Transparent";
 
 interface CartCardProps {
   data: cart;

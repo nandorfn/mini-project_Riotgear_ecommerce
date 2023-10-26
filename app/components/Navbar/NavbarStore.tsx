@@ -49,7 +49,7 @@ const NavbarStore = async () => {
                 {userAccess &&
                   <>
                     <Link className='pe-2' href={'/store/order'}>
-                      <figure className='w-8 h-8 relative'>
+                      <figure className='w-7 h-7 relative'>
                         <Image
                           className='hover:w-6'
                           src={archive}
@@ -59,7 +59,7 @@ const NavbarStore = async () => {
                       </figure>
                     </Link>
                     <Link className='pe-2' href={'/store/cart'}>
-                      <figure className='w-6 h-6 relative'>
+                      <figure className='w-5 h-5 relative'>
                         <Image
                           className='hover:w-6'
                           src={cart}

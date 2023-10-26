@@ -1,14 +1,14 @@
 'use client'
 import Image from "next/image";
-import { Button } from "../Button/Button";
-import wishlistIcon from '../../assets/icon/wishlist.svg'
 import Link from "next/link";
-import { PurchaseBtn } from "../Button/PurchaseBtn";
+import wishlistIcon from '@/app/assets/icon/wishlist.svg'
 import useAddCart from "@/app/hooks/useAddCart";
-import CartModal from "../Modal/CartModal";
-import { Heading } from "../Container/Heading";
+import { Button } from "@/app/components/Button/Button";
+import { PurchaseBtn } from "@/app/components/Button/PurchaseBtn";
+import CartModal from "@/app/components/Modal/CartModal";
+import { Heading } from "@/app/components/Container/Heading";
 
-const FloatingNav =  ({stock, id, user}: PurchaseBtn) => {
+const FloatingNav = ({ stock, id, user }: PurchaseBtn) => {
   const {
     quantity,
     handlePostCart,
@@ -21,8 +21,8 @@ const FloatingNav =  ({stock, id, user}: PurchaseBtn) => {
       <div className="flex w-screen bg-white py-4">
         {!user
           ? <Link className="flex w-full mx-4" href={'/login'}>
-              <Button variant={'red'} className="text-white" size={'full'}>LOGIN TO CHECKOUT</Button>
-            </Link>
+            <Button variant={'red'} className="text-white" size={'full'}>LOGIN TO CHECKOUT</Button>
+          </Link>
           : <div className="px-4 flex w-full justify-between">
             <Button onClick={handlePostCart} variant={'red'} className='w-[70%]'>Add to cart</Button>
             <Button className="w-[26%]">
@@ -33,7 +33,7 @@ const FloatingNav =  ({stock, id, user}: PurchaseBtn) => {
           </div>
         }
       </div>
-      
+
       {modal &&
         <CartModal
           setModal={setModal}

@@ -46,4 +46,4 @@ const Textarea: React.FC<TextAreaProps> = forwardRef(({
 });
 
 Textarea.displayName = 'Textarea';
-export { Textarea, textAreaVariants}
+export { Textarea, textAreaVariants }

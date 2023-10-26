@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import avatar from '@/app/assets/icon/user.png'
-import { HTMLAttributes } from 'react';
-import { Review } from '../Review/ReviewWrap';
 import { cn } from '@/app/utils/utils';
-import Rating from '../Container/Rating';
-import UserRating from '../Container/UserRating';
+import { HTMLAttributes } from 'react';
+import avatar from '@/app/assets/icon/user.png'
+import { Review } from '@/app/components/Review/ReviewWrap';
+import UserRating from '@/app/components/Container/UserRating';
 
 interface ReviewCard extends HTMLAttributes<HTMLElement>{
   review: Review

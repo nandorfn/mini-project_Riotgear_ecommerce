@@ -1,15 +1,15 @@
 'use client'
 import Image from "next/image";
-import { Button } from "../Button/Button";
-import { Flex } from "../Container/Flex";
-import { Heading } from "../Container/Heading";
-import { Textarea } from "../Form/Textarea";
+import Markdown from "marked-react";
+import { Button } from "@/app/components/Button/Button";
+import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
+import { Textarea } from "@/app/components/Form/Textarea";
 import paperPlane from '@/app/assets/icon/paperPlane.svg'
 import signout from '@/app/assets/icon/signout.svg'
 import chatIcon from '@/app/assets/icon/chat.png'
 import { Dispatch, SetStateAction } from "react";
 import { MessageAI } from "./ChatWrapper";
-import Markdown from "marked-react";
 
 type Props = {
   setModal: Dispatch<SetStateAction<boolean>>

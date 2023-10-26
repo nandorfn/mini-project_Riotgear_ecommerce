@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import StarLogo from '../../assets/icon/Star.svg'
-import { Flex } from '../Container/Flex';
-import { Heading } from '../Container/Heading';
-import { Text } from '../Container/Text';
+import StarLogo from '@/app/assets/icon/Star.svg'
+import { Flex } from '@/app/components/Container/Flex';
+import { Heading } from '@/app/components/Container/Heading';
+import { Text } from '@/app/components/Container/Text';
 
 interface Product {
   productImg: string,

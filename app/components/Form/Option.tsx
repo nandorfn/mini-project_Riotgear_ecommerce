@@ -23,15 +23,15 @@ const OptionInput: React.FC<Props> = ({
 
   return (
     <>
-        <label className="flex flex-col font-medium">
-          {label}
+      <label className="flex flex-col font-medium">
+        {label}
         <select
           name={name}
           aria-label="Default select example"
-          onChange={(e) => handleInput(e)}          
+          onChange={(e) => handleInput(e)}
           value={value ?? ''}
-          className={`form-control font-normal select ${addClass} ${error 
-            ? "border-1 border-danger" 
+          className={`form-control font-normal select ${addClass} ${error
+            ? "border-1 border-danger"
             : ""}`
           }>
           {optionValue.map((option: any) => (
@@ -40,7 +40,7 @@ const OptionInput: React.FC<Props> = ({
             </option>
           ))}
         </select>
-        </label>
+      </label>
     </>
   );
 }

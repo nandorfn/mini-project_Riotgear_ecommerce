@@ -8,17 +8,25 @@ import { Flex } from "@/app/components/Container/Flex";
 import dots from '@/app/assets/icon/dots.svg'
 import ReviewModal from "@/app/components/Modal/ReviewModal";
 import { Transparent } from "@/app/components/Container/Transparent";
+import { Heading } from "@/app/components/Container/Heading";
+import CartModal from "@/app/components/Modal/CartModal";
 
 const OrderStatus = ({ order }: { order: any }) => {
   const [orderItem, setOrderItem] = useState(order);
+  const [modal, setModal] = useState(false);
   const [state, setState] = useState({
     itemId: '',
     modal: false,
+    loading: false,
   })
-  
+
 
 
   const handleConfirmOrder = async (e: React.SyntheticEvent) => {
+    setState({
+      ...state,
+      loading: true,
+    })
     e.preventDefault();
     const data = {
       orderId: order.orderId,
@@ -30,6 +38,13 @@ const OrderStatus = ({ order }: { order: any }) => {
           ...order,
           status: res.data.status
         })
+      })
+      .finally(() => {
+        setState({
+          ...state,
+          loading: false,
+        })
+        setModal(false);
       })
   }
 
@@ -43,6 +58,20 @@ const OrderStatus = ({ order }: { order: any }) => {
   }
   return (
     <>
+      {modal &&
+        <CartModal
+          loading={state.loading}
+          setModal={setModal}
+          modal={modal}
+          action={handleConfirmOrder}
+          title="COMPLETE THE ORDER"
+          btnLeft="YES"
+          btnRight="NO">
+          <Heading variant={'five'} bold={'normal'}>Are you sure your purchases have arived?</Heading>
+        </CartModal>
+
+      }
+
       {state.modal &&
         <Transparent>
           <ReviewModal
@@ -83,7 +112,7 @@ const OrderStatus = ({ order }: { order: any }) => {
           <Button size={'sm'} >View Transaction Details</Button>
         </Link>
         {orderItem.status === 'Shipped' &&
-          <Button onClick={handleConfirmOrder} size={'sm'} variant={'success'}>
+          <Button onClick={() => setModal(true)} size={'sm'} variant={'success'}>
             Recieve Order
           </Button>
         }

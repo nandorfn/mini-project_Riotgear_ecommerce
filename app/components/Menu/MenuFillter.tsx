@@ -1,15 +1,20 @@
 'use client'
 import Image from "next/image";
-import filterIcon from '../../assets/icon/list.svg'
-import OptionInput from "../Form/Option";
-import { genderOption, priceRange, sizeChart, sortByOptions } from "@/app/helpers/dataObject";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import Checkbox from "../Form/Checkbox";
-import ColorChart from "../Filter/ColorChart";
 import { useCallback, useEffect, useState } from "react";
-import List from "../List";
-import { Button } from "../Button/Button";
-import { Flex } from "../Container/Flex";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  genderOption,
+  priceRange,
+  sizeChart,
+  sortByOptions
+} from "@/app/helpers/dataObject";
+import filterIcon from '@/app/assets/icon/list.svg'
+import OptionInput from "@/app/components/Form/Option";
+import Checkbox from "@/app/components/Form/Checkbox";
+import ColorChart from "@/app/components/Filter/ColorChart";
+import List from "@/app/components/List";
+import { Button } from "@/app/components/Button/Button";
+import { Flex } from "@/app/components/Container/Flex";
 
 
 
@@ -26,12 +31,12 @@ const MenuFilter: React.FC = () => {
   const paramsToCheck = ['sort', 'priceRanges', 'color', 'gender', 'size', 'category', 'search'];
   const hasQueryString = paramsToCheck.some(param => searchParams.get(param) !== null);
   const [queryExist, setQueryExist] = useState(hasQueryString)
-  
+
   useEffect(() => {
     setQueryExist(hasQueryString);
   }, [hasQueryString]);
-  
-  
+
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams)
@@ -60,15 +65,15 @@ const MenuFilter: React.FC = () => {
   return (
     <>
       <aside className="flex flex-col gap-5 bg-base-200 rounded-xl p-5">
-        <figure className="flex gap-3 justify-between">
+        <figure className="flex flex-row md:flex-col ld:flex-row gap-3 justify-between">
           <Flex className="gap-3" align={'iCenter'}>
             <Image src={filterIcon} alt="Filter icon" />
             <h1 className="font-medium text-lg">Filter</h1>
           </Flex>
           {queryExist &&
-            <Button 
-              onClick={deleteUrlState} 
-              clr={'zinc'} 
+            <Button
+              onClick={deleteUrlState}
+              clr={'zinc'}
               size={'sm'}
               font={'med'}>Clear Filter
             </Button>
@@ -91,28 +96,28 @@ const MenuFilter: React.FC = () => {
             addClass="flex flex-col gap-2 mt-2"
           />
         </label>
-        
+
         <div className="flex flex-col gap-2">
-        <label htmlFor="sizeChart" className="font-medium ">Size</label>
-        <List
-          name="sizeChart"
-          data={sizeChart}
-          renderItem={(size) => {
-            const { label, value } = size;
-            const isSelected = value === sizes;
-            return (
-              <Button
-                onClick={(e) => handleClick(e)}
-                name={'size'}
-                value={value}
-                size={'sm'}
-                font={'normal'}
-                variant={isSelected ? 'checked' : 'sizeBtn'}>{label}
-              </Button>
-            )
-          }}
+          <label htmlFor="sizeChart" className="font-medium ">Size</label>
+          <List
+            name="sizeChart"
+            data={sizeChart}
+            renderItem={(size) => {
+              const { label, value } = size;
+              const isSelected = value === sizes;
+              return (
+                <Button
+                  onClick={(e) => handleClick(e)}
+                  name={'size'}
+                  value={value}
+                  size={'sm'}
+                  font={'normal'}
+                  variant={isSelected ? 'checked' : 'sizeBtn'}>{label}
+                </Button>
+              )
+            }}
           />
-          </div>
+        </div>
         <ColorChart
           value={color}
           handleInput={handleInput}
