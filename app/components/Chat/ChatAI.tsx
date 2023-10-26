@@ -30,7 +30,7 @@ const ChatAI: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Flex variant={'col'} className="h-screen w-3/4 md:w-[38rem] bg-white top-0 end-0 py-4 z-50 rounded-s-3xl shadow-lg fixed">
+      <Flex variant={'col'} className=" h-full md:h-screen w-3/4 md:w-[38rem] bg-white top-0 end-0 py-4 z-50 rounded-s-3xl shadow-lg fixed">
         {loading &&
           <>
             <div className="absolute w-full h-screen opacity-50 blur-lg">

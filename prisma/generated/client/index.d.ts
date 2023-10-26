@@ -7977,6 +7977,7 @@ export namespace Prisma {
     productId: string | null
     orderId: string | null
     userId: string | null
+    usernames: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7988,6 +7989,7 @@ export namespace Prisma {
     productId: string | null
     orderId: string | null
     userId: string | null
+    usernames: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7999,6 +8001,7 @@ export namespace Prisma {
     productId: number
     orderId: number
     userId: number
+    usernames: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -8022,6 +8025,7 @@ export namespace Prisma {
     productId?: true
     orderId?: true
     userId?: true
+    usernames?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8033,6 +8037,7 @@ export namespace Prisma {
     productId?: true
     orderId?: true
     userId?: true
+    usernames?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8044,6 +8049,7 @@ export namespace Prisma {
     productId?: true
     orderId?: true
     userId?: true
+    usernames?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8142,6 +8148,7 @@ export namespace Prisma {
     productId: string
     orderId: string
     userId: string
+    usernames: string
     createdAt: Date
     updatedAt: Date
     _count: ReviewCountAggregateOutputType | null
@@ -8172,6 +8179,7 @@ export namespace Prisma {
     productId?: boolean
     orderId?: boolean
     userId?: boolean
+    usernames?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -8186,6 +8194,7 @@ export namespace Prisma {
     productId?: boolean
     orderId?: boolean
     userId?: boolean
+    usernames?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -8211,6 +8220,7 @@ export namespace Prisma {
       productId: string
       orderId: string
       userId: string
+      usernames: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["review"]>
@@ -8618,6 +8628,7 @@ export namespace Prisma {
     readonly productId: FieldRef<"Review", 'String'>
     readonly orderId: FieldRef<"Review", 'String'>
     readonly userId: FieldRef<"Review", 'String'>
+    readonly usernames: FieldRef<"Review", 'String'>
     readonly createdAt: FieldRef<"Review", 'DateTime'>
     readonly updatedAt: FieldRef<"Review", 'DateTime'>
   }
@@ -10062,6 +10073,7 @@ export namespace Prisma {
     productId: 'productId',
     orderId: 'orderId',
     userId: 'userId',
+    usernames: 'usernames',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10174,7 +10186,8 @@ export namespace Prisma {
     text: 'text',
     productId: 'productId',
     orderId: 'orderId',
-    userId: 'userId'
+    userId: 'userId',
+    usernames: 'usernames'
   };
 
   export type ReviewOrderByRelevanceFieldEnum = (typeof ReviewOrderByRelevanceFieldEnum)[keyof typeof ReviewOrderByRelevanceFieldEnum]
@@ -10796,6 +10809,7 @@ export namespace Prisma {
     productId?: StringFilter<"Review"> | string
     orderId?: StringFilter<"Review"> | string
     userId?: StringFilter<"Review"> | string
+    usernames?: StringFilter<"Review"> | string
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
     order?: XOR<OrderRelationFilter, OrderWhereInput>
@@ -10810,6 +10824,7 @@ export namespace Prisma {
     productId?: SortOrder
     orderId?: SortOrder
     userId?: SortOrder
+    usernames?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     order?: OrderOrderByWithRelationAndSearchRelevanceInput
@@ -10828,6 +10843,7 @@ export namespace Prisma {
     productId?: StringFilter<"Review"> | string
     orderId?: StringFilter<"Review"> | string
     userId?: StringFilter<"Review"> | string
+    usernames?: StringFilter<"Review"> | string
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
     order?: XOR<OrderRelationFilter, OrderWhereInput>
@@ -10842,6 +10858,7 @@ export namespace Prisma {
     productId?: SortOrder
     orderId?: SortOrder
     userId?: SortOrder
+    usernames?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ReviewCountOrderByAggregateInput
@@ -10861,6 +10878,7 @@ export namespace Prisma {
     productId?: StringWithAggregatesFilter<"Review"> | string
     orderId?: StringWithAggregatesFilter<"Review"> | string
     userId?: StringWithAggregatesFilter<"Review"> | string
+    usernames?: StringWithAggregatesFilter<"Review"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
   }
@@ -11497,6 +11515,7 @@ export namespace Prisma {
   export type ReviewCreateInput = {
     text: string
     rating: number
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
     order: OrderCreateNestedOneWithoutReviewInput
@@ -11511,6 +11530,7 @@ export namespace Prisma {
     productId: string
     orderId: string
     userId: string
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11518,6 +11538,7 @@ export namespace Prisma {
   export type ReviewUpdateInput = {
     text?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutReviewNestedInput
@@ -11532,6 +11553,7 @@ export namespace Prisma {
     productId?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11543,6 +11565,7 @@ export namespace Prisma {
     productId: string
     orderId: string
     userId: string
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11550,6 +11573,7 @@ export namespace Prisma {
   export type ReviewUpdateManyMutationInput = {
     text?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11561,6 +11585,7 @@ export namespace Prisma {
     productId?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12182,6 +12207,7 @@ export namespace Prisma {
     productId?: SortOrder
     orderId?: SortOrder
     userId?: SortOrder
+    usernames?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12198,6 +12224,7 @@ export namespace Prisma {
     productId?: SortOrder
     orderId?: SortOrder
     userId?: SortOrder
+    usernames?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12209,6 +12236,7 @@ export namespace Prisma {
     productId?: SortOrder
     orderId?: SortOrder
     userId?: SortOrder
+    usernames?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13042,6 +13070,7 @@ export namespace Prisma {
   export type ReviewCreateWithoutProductInput = {
     text: string
     rating: number
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
     order: OrderCreateNestedOneWithoutReviewInput
@@ -13054,6 +13083,7 @@ export namespace Prisma {
     rating: number
     orderId: string
     userId: string
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13144,6 +13174,7 @@ export namespace Prisma {
     productId?: StringFilter<"Review"> | string
     orderId?: StringFilter<"Review"> | string
     userId?: StringFilter<"Review"> | string
+    usernames?: StringFilter<"Review"> | string
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
   }
@@ -13207,6 +13238,7 @@ export namespace Prisma {
   export type ReviewCreateWithoutUserInput = {
     text: string
     rating: number
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
     order: OrderCreateNestedOneWithoutReviewInput
@@ -13219,6 +13251,7 @@ export namespace Prisma {
     rating: number
     productId: string
     orderId: string
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13696,6 +13729,7 @@ export namespace Prisma {
   export type ReviewCreateWithoutOrderInput = {
     text: string
     rating: number
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
@@ -13708,6 +13742,7 @@ export namespace Prisma {
     rating: number
     productId: string
     userId: string
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14525,6 +14560,7 @@ export namespace Prisma {
     rating: number
     orderId: string
     userId: string
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14548,6 +14584,7 @@ export namespace Prisma {
   export type ReviewUpdateWithoutProductInput = {
     text?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutReviewNestedInput
@@ -14560,6 +14597,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     orderId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14570,6 +14608,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     orderId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14626,6 +14665,7 @@ export namespace Prisma {
     rating: number
     productId: string
     orderId: string
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14676,6 +14716,7 @@ export namespace Prisma {
   export type ReviewUpdateWithoutUserInput = {
     text?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutReviewNestedInput
@@ -14688,6 +14729,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     productId?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14698,6 +14740,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     productId?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14847,6 +14890,7 @@ export namespace Prisma {
     rating: number
     productId: string
     userId: string
+    usernames: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14892,6 +14936,7 @@ export namespace Prisma {
   export type ReviewUpdateWithoutOrderInput = {
     text?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
@@ -14904,6 +14949,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     productId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14914,6 +14960,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     productId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    usernames?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

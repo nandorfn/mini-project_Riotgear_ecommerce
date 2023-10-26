@@ -9,7 +9,7 @@ const Drawer = async () => {
 
   return (
     <>
-      <div className="drawer-side md:hidden h-full z-50">
+      <div className="drawer-side md:hidden h-full z-[100]">
         <label htmlFor="my-drawer" className="drawer-overlay"></label>
         <ul className='menu w-80 pt-4 min-h-full bg-[#EBEBED] text-lg relative'>
           {!user

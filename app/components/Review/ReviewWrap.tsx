@@ -4,6 +4,7 @@ import UserRating from "@/app/components/Container/UserRating";
 
 export type Review = {
   id: number,
+  usernames: string,
   text: string,
   rating: number,
   productId: string

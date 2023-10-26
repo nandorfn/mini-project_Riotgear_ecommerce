@@ -21,11 +21,12 @@ export const POST = async (req: Request) => {
     const {review, rating, id} = item;
     await prisma.review.create({
       data: {
+        usernames: verifiedToken.username,
         text: review,
         rating: rating,
         productId: id,
         userId: verifiedToken.userId,
-        orderId: body.orderId
+        orderId: body.orderId,
       }
     })
   }

@@ -16,7 +16,7 @@ const ReviewCard: React.FC<ReviewCard> = ({
 }) => {
   return (
     <>
-      <article className={cn('flex flex-col bg-base-200 rounded-xl gap-3 p-3', className)} {...props}>
+      <article className={cn('flex flex-col w-fit bg-base-200 rounded-xl gap-3 p-3', className)} {...props}>
         <figure className='flex items-center gap-3'>
           <div className="avatar">
             <div className="w-11 rounded-full">
@@ -27,7 +27,7 @@ const ReviewCard: React.FC<ReviewCard> = ({
             </div>
           </div>
           <div>
-            <h4 className='font-medium'>{'Nando'}</h4>
+            <h4 className='font-medium'>{review.usernames}</h4>
             <p className='text-base-300 text-sm'>{review.createdAt.toLocaleDateString('ID-id')}</p>
           </div>
         </figure>

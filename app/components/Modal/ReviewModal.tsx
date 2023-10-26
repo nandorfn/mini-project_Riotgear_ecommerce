@@ -87,7 +87,7 @@ const ReviewModal = ({ data, itemId, setState, setOrderItem }: RewiewProps) => {
 
   return (
     <>
-      <Flex variant={'col'} className="fixed max-w-md left-1/2 right-1/2 -translate-x-56 h-fit bg-base-100 shadow-lg p-5 rounded-lg z-50 gap-6">
+      <Flex variant={'col'} className="fixed max-w-sm md:max-w-md left-[57%] md:left-1/2 md:right-1/2 -translate-x-56 h-fit bg-base-100 shadow-lg p-5 rounded-lg z-10 gap-6">
         <Flex align={'between'}>
           <Heading variant={'five'}>Reviews</Heading>
           <button onClick={closeModal}>
