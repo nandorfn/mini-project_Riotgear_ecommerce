@@ -104,6 +104,9 @@ const OrderStatus = ({ order }: { order: any }) => {
               </Button>
             </li>
           }
+          {!orderItem.isReviewed && (orderItem.status === 'Delivered' || orderItem.status === 'Completed') && (
+            <Button id={order.orderId} size={'sm'} variant={'success'} className="mt-2" onClick={onReview}>Add review</Button>
+          )}
         </ul>
       </details>
 
