@@ -55,28 +55,6 @@ export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
 export type Article = $Result.DefaultSelection<Prisma.$ArticlePayload>
 
 /**
- * Enums
- */
-export namespace $Enums {
-  export const OrderStatus: {
-  Ordered: 'Ordered',
-  InProgress: 'InProgress',
-  Shipped: 'Shipped',
-  Delivered: 'Delivered',
-  Cancelled: 'Cancelled',
-  InReturn: 'InReturn',
-  Completed: 'Completed'
-};
-
-export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
-
-}
-
-export type OrderStatus = $Enums.OrderStatus
-
-export const OrderStatus: typeof $Enums.OrderStatus
-
-/**
  * ##  Prisma Client ʲˢ
  * 
  * Type-safe database client for TypeScript & Node.js
@@ -4926,7 +4904,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     paymentMethod: string | null
-    status: $Enums.OrderStatus | null
+    status: string | null
   }
 
   export type OrderMaxAggregateOutputType = {
@@ -4936,7 +4914,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     paymentMethod: string | null
-    status: $Enums.OrderStatus | null
+    status: string | null
   }
 
   export type OrderCountAggregateOutputType = {
@@ -5083,7 +5061,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     paymentMethod: string
-    status: $Enums.OrderStatus
+    status: string
     _count: OrderCountAggregateOutputType | null
     _avg: OrderAvgAggregateOutputType | null
     _sum: OrderSumAggregateOutputType | null
@@ -5154,7 +5132,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       paymentMethod: string
-      status: $Enums.OrderStatus
+      status: string
     }, ExtArgs["result"]["order"]>
     composites: {}
   }
@@ -5562,7 +5540,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
     readonly paymentMethod: FieldRef<"Order", 'String'>
-    readonly status: FieldRef<"Order", 'OrderStatus'>
+    readonly status: FieldRef<"Order", 'String'>
   }
     
 
@@ -10161,7 +10139,8 @@ export namespace Prisma {
   export const OrderOrderByRelevanceFieldEnum: {
     orderId: 'orderId',
     userId: 'userId',
-    paymentMethod: 'paymentMethod'
+    paymentMethod: 'paymentMethod',
+    status: 'status'
   };
 
   export type OrderOrderByRelevanceFieldEnum = (typeof OrderOrderByRelevanceFieldEnum)[keyof typeof OrderOrderByRelevanceFieldEnum]
@@ -10277,20 +10256,6 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'OrderStatus'
-   */
-  export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'OrderStatus[]'
-   */
-  export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
     
   /**
    * Deep Input Types
@@ -10587,7 +10552,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     paymentMethod?: StringFilter<"Order"> | string
-    status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    status?: StringFilter<"Order"> | string
     orderedItems?: OrderItemListRelationFilter
     review?: ReviewListRelationFilter
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -10619,7 +10584,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     paymentMethod?: StringFilter<"Order"> | string
-    status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    status?: StringFilter<"Order"> | string
     orderedItems?: OrderItemListRelationFilter
     review?: ReviewListRelationFilter
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -10651,7 +10616,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     paymentMethod?: StringWithAggregatesFilter<"Order"> | string
-    status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
+    status?: StringWithAggregatesFilter<"Order"> | string
   }
 
   export type AddressWhereInput = {
@@ -11291,7 +11256,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     orderedItems?: OrderItemCreateNestedManyWithoutOrderInput
     review?: ReviewCreateNestedManyWithoutOrderInput
     user: UserCreateNestedOneWithoutOrderInput
@@ -11305,7 +11270,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     orderedItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
     review?: ReviewUncheckedCreateNestedManyWithoutOrderInput
     address?: AddressUncheckedCreateNestedManyWithoutOrderInput
@@ -11316,7 +11281,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     orderedItems?: OrderItemUpdateManyWithoutOrderNestedInput
     review?: ReviewUpdateManyWithoutOrderNestedInput
     user?: UserUpdateOneRequiredWithoutOrderNestedInput
@@ -11330,7 +11295,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     orderedItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
     review?: ReviewUncheckedUpdateManyWithoutOrderNestedInput
     address?: AddressUncheckedUpdateManyWithoutOrderNestedInput
@@ -11343,7 +11308,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
   }
 
   export type OrderUpdateManyMutationInput = {
@@ -11351,7 +11316,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
   }
 
   export type OrderUncheckedUpdateManyInput = {
@@ -11361,7 +11326,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
   }
 
   export type AddressCreateInput = {
@@ -12050,13 +12015,6 @@ export namespace Prisma {
     quantity?: SortOrder
   }
 
-  export type EnumOrderStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
-  }
-
   export type OrderOrderByRelevanceInput = {
     fields: OrderOrderByRelevanceFieldEnum | OrderOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -12099,16 +12057,6 @@ export namespace Prisma {
 
   export type OrderSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumOrderStatusFilter<$PrismaModel>
-    _max?: NestedEnumOrderStatusFilter<$PrismaModel>
   }
 
   export type OrderRelationFilter = {
@@ -12762,10 +12710,6 @@ export namespace Prisma {
     connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
   }
 
-  export type EnumOrderStatusFieldUpdateOperationsInput = {
-    set?: $Enums.OrderStatus
-  }
-
   export type OrderItemUpdateManyWithoutOrderNestedInput = {
     create?: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput> | OrderItemCreateWithoutOrderInput[] | OrderItemUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[]
@@ -13095,23 +13039,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
-  }
-
-  export type NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumOrderStatusFilter<$PrismaModel>
-    _max?: NestedEnumOrderStatusFilter<$PrismaModel>
-  }
-
   export type ReviewCreateWithoutProductInput = {
     text: string
     rating: number
@@ -13336,7 +13263,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     orderedItems?: OrderItemCreateNestedManyWithoutOrderInput
     review?: ReviewCreateNestedManyWithoutOrderInput
     address?: AddressCreateNestedManyWithoutOrderInput
@@ -13348,7 +13275,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     orderedItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
     review?: ReviewUncheckedCreateNestedManyWithoutOrderInput
     address?: AddressUncheckedCreateNestedManyWithoutOrderInput
@@ -13492,7 +13419,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     paymentMethod?: StringFilter<"Order"> | string
-    status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    status?: StringFilter<"Order"> | string
   }
 
   export type AddressUpsertWithWhereUniqueWithoutUserInput = {
@@ -13969,7 +13896,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     orderedItems?: OrderItemCreateNestedManyWithoutOrderInput
     review?: ReviewCreateNestedManyWithoutOrderInput
     user: UserCreateNestedOneWithoutOrderInput
@@ -13982,7 +13909,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     orderedItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
     review?: ReviewUncheckedCreateNestedManyWithoutOrderInput
   }
@@ -14046,7 +13973,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     orderedItems?: OrderItemUpdateManyWithoutOrderNestedInput
     review?: ReviewUpdateManyWithoutOrderNestedInput
     user?: UserUpdateOneRequiredWithoutOrderNestedInput
@@ -14059,7 +13986,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     orderedItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
     review?: ReviewUncheckedUpdateManyWithoutOrderNestedInput
   }
@@ -14159,7 +14086,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     review?: ReviewCreateNestedManyWithoutOrderInput
     user: UserCreateNestedOneWithoutOrderInput
     address?: AddressCreateNestedManyWithoutOrderInput
@@ -14172,7 +14099,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     review?: ReviewUncheckedCreateNestedManyWithoutOrderInput
     address?: AddressUncheckedCreateNestedManyWithoutOrderInput
   }
@@ -14250,7 +14177,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     review?: ReviewUpdateManyWithoutOrderNestedInput
     user?: UserUpdateOneRequiredWithoutOrderNestedInput
     address?: AddressUpdateManyWithoutOrderNestedInput
@@ -14263,7 +14190,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     review?: ReviewUncheckedUpdateManyWithoutOrderNestedInput
     address?: AddressUncheckedUpdateManyWithoutOrderNestedInput
   }
@@ -14273,7 +14200,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     orderedItems?: OrderItemCreateNestedManyWithoutOrderInput
     user: UserCreateNestedOneWithoutOrderInput
     address?: AddressCreateNestedManyWithoutOrderInput
@@ -14286,7 +14213,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
     orderedItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
     address?: AddressUncheckedCreateNestedManyWithoutOrderInput
   }
@@ -14396,7 +14323,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     orderedItems?: OrderItemUpdateManyWithoutOrderNestedInput
     user?: UserUpdateOneRequiredWithoutOrderNestedInput
     address?: AddressUpdateManyWithoutOrderNestedInput
@@ -14409,7 +14336,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     orderedItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
     address?: AddressUncheckedUpdateManyWithoutOrderNestedInput
   }
@@ -14717,7 +14644,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentMethod: string
-    status?: $Enums.OrderStatus
+    status?: string
   }
 
   export type AddressCreateManyUserInput = {
@@ -14803,7 +14730,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     orderedItems?: OrderItemUpdateManyWithoutOrderNestedInput
     review?: ReviewUpdateManyWithoutOrderNestedInput
     address?: AddressUpdateManyWithoutOrderNestedInput
@@ -14815,7 +14742,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
     orderedItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
     review?: ReviewUncheckedUpdateManyWithoutOrderNestedInput
     address?: AddressUncheckedUpdateManyWithoutOrderNestedInput
@@ -14827,7 +14754,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentMethod?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: StringFieldUpdateOperationsInput | string
   }
 
   export type AddressUpdateWithoutUserInput = {

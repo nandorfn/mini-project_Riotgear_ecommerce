@@ -4,7 +4,6 @@ import { updateOrderStatus, userAddressSchema } from "@/app/utils/types";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
 import prisma from "@/app/lib/prisma";
-import type { OrderStatus } from "@prisma/client";
 
 export const POST = async (req: Request) => {
   const uuid = uuidv4();
@@ -110,10 +109,12 @@ export const POST = async (req: Request) => {
 
 }
 
+
 type orderStatus = {
   orderId: string;
-  status: keyof typeof OrderStatus;
-}
+  status: string;
+};
+
 export const PATCH = async (req: Request) => {
   const body: orderStatus = await req.json();
   const result = updateOrderStatus.safeParse(body);
@@ -132,7 +133,7 @@ export const PATCH = async (req: Request) => {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   }
 
-  let orderStatus: OrderStatus = 'Delivered';
+  let orderStatus: string = 'Delivered';
   if (verifiedToken.role === 'admin') {
     orderStatus = result.data.status;
   }

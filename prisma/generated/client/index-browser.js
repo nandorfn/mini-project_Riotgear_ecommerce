@@ -246,7 +246,8 @@ exports.Prisma.CartOrderByRelevanceFieldEnum = {
 exports.Prisma.OrderOrderByRelevanceFieldEnum = {
   orderId: 'orderId',
   userId: 'userId',
-  paymentMethod: 'paymentMethod'
+  paymentMethod: 'paymentMethod',
+  status: 'status'
 };
 
 exports.Prisma.AddressOrderByRelevanceFieldEnum = {
@@ -281,15 +282,7 @@ exports.Prisma.ArticleOrderByRelevanceFieldEnum = {
   userId: 'userId',
   thumbnail: 'thumbnail'
 };
-exports.OrderStatus = exports.$Enums.OrderStatus = {
-  Ordered: 'Ordered',
-  InProgress: 'InProgress',
-  Shipped: 'Shipped',
-  Delivered: 'Delivered',
-  Cancelled: 'Cancelled',
-  InReturn: 'InReturn',
-  Completed: 'Completed'
-};
+
 
 exports.Prisma.ModelName = {
   Product: 'Product',

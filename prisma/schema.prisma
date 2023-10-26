@@ -71,16 +71,6 @@ model Cart {
   product     Product  @relation(fields: [productId], references: [productId])
 }
 
-enum OrderStatus {
-  Ordered
-  InProgress
-  Shipped
-  Delivered
-  Cancelled
-  InReturn
-  Completed
-}
-
 model Order {
   id            Int         @id @default(autoincrement())
   orderId       String      @unique
@@ -88,7 +78,7 @@ model Order {
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   paymentMethod String
-  status        OrderStatus @default(Ordered)
+  status        String      @default("Ordered")
   orderedItems  OrderItem[]
   review        Review[]
   user          User        @relation(fields: [userId], references: [userId])
