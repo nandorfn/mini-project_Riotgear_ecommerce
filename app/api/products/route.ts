@@ -2,16 +2,16 @@ import { NextResponse } from "next/server";
 import { verifyAuth } from "@/app/utils/auth";
 import { v4 as uuidv4 } from 'uuid';
 import prisma from "@/app/lib/prisma";
-import type { Product } from "@prisma/client";
 import { productForm } from "@/app/utils/types";
 import { ZodIssue } from "zod";
+import { TProductData } from "./[id]/route";
 
 
 export const POST = async (req: Request) => {
   const uuid = uuidv4();
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
-  const body: Product = await req.json();
+  const body: TProductData = await req.json();
   const result = productForm.safeParse(body);
 
 

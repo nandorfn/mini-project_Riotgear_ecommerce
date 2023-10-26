@@ -1,9 +1,21 @@
 import { registerServerSchema } from "@/app/utils/types";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
-import type { User } from '@prisma/client'
 import prisma from "@/app/lib/prisma";
 import { ZodIssue } from "zod";
+
+type User = {
+  id: number;
+  userId: string;
+  name: string;
+  email: string;
+  password: string;
+  salt: string;
+  avatar: string;
+  role: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 export const POST = async (req: Request) => {
   const body: User = await req.json();

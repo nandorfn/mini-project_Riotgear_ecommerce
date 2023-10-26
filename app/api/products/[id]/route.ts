@@ -1,7 +1,23 @@
 import { NextResponse } from "next/server";
-import type { Product } from "@prisma/client";
 import { verifyAuth } from "@/app/utils/auth";
 import prisma from "@/app/lib/prisma";
+
+export type TProductData = {
+  id: number;
+  productId: string;
+  productName: string;
+  productMainCategory: string;
+  productSubCategory: string;
+  productImgLink: string;
+  productSize: string;
+  productGender: string;
+  productColor: string;
+  productStock: number;
+  productDesc: string;
+  productPrice: number;
+  featured: boolean;
+};
+
 
 export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
   const token = req.headers.get('cookie')?.split('=')[1];
@@ -28,7 +44,7 @@ export const PATCH = async (req: Request, { params }: {
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   } else {
-    const body: Product = await req.json();
+    const body: TProductData = await req.json();
     const product = await prisma.product.update({
       where: {
         productId: params.id
