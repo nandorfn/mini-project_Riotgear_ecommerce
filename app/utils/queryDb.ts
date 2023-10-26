@@ -1,5 +1,4 @@
 import { cache } from 'react';
-export type { Product } from '@prisma/client'
 import prisma from '../lib/prisma';
 import { cart } from './types';
 
