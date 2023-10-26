@@ -1,6 +1,6 @@
 import { cache } from 'react';
 import prisma from '../lib/prisma';
-import { ProductData, TOrderItem, cart } from './types';
+import { ProductData, cart } from './types';
 
 export const revalidate = 3600
 
@@ -67,7 +67,7 @@ export const getItem = cache(async (filters: any) => {
         },
       });
 
-      const totalRatings = reviews.reduce((total, review) => total + review.rating, 0);
+      const totalRatings = reviews.reduce((total: number, review: any) => total + review.rating, 0);
       const averageRating = reviews.length > 0 ? totalRatings / reviews.length : 0;
 
       return {
