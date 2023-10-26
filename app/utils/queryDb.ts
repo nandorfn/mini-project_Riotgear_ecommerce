@@ -1,7 +1,7 @@
-import { Cart } from '@prisma/client';
 import { cache } from 'react';
 export type { Product } from '@prisma/client'
 import prisma from '../lib/prisma';
+import { cart } from './types';
 
 export const revalidate = 3600
 
@@ -185,7 +185,7 @@ export const getUserProductCart = async (userId: string) => {
   return combinedData.userCart;
 }
 
-type selectCart = Pick<Cart, 'productId' | 'quantity'>;
+type selectCart = Pick<cart, 'productId' | 'quantity'>;
 export const createOrderItem = async (productCart: selectCart[], orderId: string) => {
   const createdOrderItems = [];
 
