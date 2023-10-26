@@ -6,6 +6,7 @@ import ChatAI from './ChatAI';
 import { useState } from 'react';
 import axios from 'axios';
 import useForm from '@/app/hooks/useForm';
+import { Transparent } from '../Container/Transparent';
 
 const initialState = {
   modal: false,
@@ -65,7 +66,7 @@ const ChatWrapper: React.FC = () => {
         <Image src={chatIcon} width={50} alt='Chat Icon' />
       </Button>
       {modal &&
-        <div className='relative'>
+        <Transparent>
           <ChatAI
             command={form.command}
             data={messages}
@@ -74,7 +75,7 @@ const ChatWrapper: React.FC = () => {
             handleSubmit={onSubmit}
             setModal={setModal}
           />
-        </div>
+        </Transparent>
       }
     </>
   );

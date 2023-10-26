@@ -20,14 +20,14 @@ const TableBody: React.FC<Props> = ({
     handleEdit(id);
     handleEditModal();
   }
-  
+
 
   return (
     <>
       {dataMapping?.map((product: any, index: number) =>
         <tr className='capitalize' key={index}>
           <th>{index + 1}</th>
-          <td>{product.productName}</td>
+          <td className=' line-clamp-1'>{product.productName}</td>
           <td>{product.productMainCategory}</td>
           <td>{product.productSubCategory}</td>
           <td>{product.productColor}</td>
@@ -35,22 +35,26 @@ const TableBody: React.FC<Props> = ({
           <td>{product.productStock}</td>
           <td>{`Rp${product.productPrice.toLocaleString('id-ID')}`}</td>
           <td className="flex flex-row gap-3">
-            <button
-              onClick={() => handleEditProduct(product.productId)}
-            >
-              <Image
-                src={editIcon}
-                alt="Edit Icon"
-              />
-            </button>
-            <button
-              onClick={() => handleDelete(product.productId)}
-            >
-              <Image
-                src={deleteIcon}
-                alt="Delete Icon"
-              />
-            </button>
+              <button
+                onClick={() => handleEditProduct(product.productId)}
+              >
+                <Image
+                  src={editIcon}
+                  width={26}
+                  height={26}
+                  alt="Edit Icon"
+                />
+              </button>
+              <button
+                onClick={() => handleDelete(product.productId)}
+              >
+                <Image
+                  width={20}
+                  height={20}
+                  src={deleteIcon}
+                  alt="Delete Icon"
+                />
+              </button>
           </td>
         </tr>
       )}

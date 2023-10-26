@@ -6,6 +6,8 @@ import skateBg from '../../assets/Content/Skate.png'
 import shoesBg from '../../assets/Content/Shoes.png'
 import { getFeatured } from "@/app/utils/queryDb";
 import { Heading } from "../Container/Heading";
+import { Suspense } from "react";
+import ProductCardSkeleton from "../Container/ProductCardSkeleton";
 
 const Featured = async () => {
   const products = await getFeatured();
@@ -13,14 +15,16 @@ const Featured = async () => {
     <>
       <section className="p-4 gap-4  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
         {products?.map((product) =>
-          <article className="" key={product.id}>
-            <ProductCard
-              productId={product.productId}
-              productImg={product.productImgLink}
-              productName={product.productName}
-              productPrice={product.productPrice}
-            />
-          </article>
+          <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
+            <article key={product.id}>
+              <ProductCard
+                productId={product.productId}
+                productImg={product.productImgLink}
+                productName={product.productName}
+                productPrice={product.productPrice}
+              />
+            </article>
+          </Suspense>
 
         )}
       </section>

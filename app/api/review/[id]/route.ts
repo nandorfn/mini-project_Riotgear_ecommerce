@@ -1,6 +1,7 @@
 import { verifyAuth } from "@/app/utils/auth";
 import { NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
+import { getUserOrder } from "@/app/utils/queryDb";
 
 
 export const POST = async (req: Request) => {
@@ -16,10 +17,9 @@ export const POST = async (req: Request) => {
     return NextResponse.json({ errors: 'Invalid Data' }, { status: 400 });
   } 
   
-  const createdReviews = [];
   for (const item of body.orderItems) {
     const {review, rating, id} = item;
-    const result = await prisma.review.create({
+    await prisma.review.create({
       data: {
         text: review,
         rating: rating,
@@ -28,10 +28,11 @@ export const POST = async (req: Request) => {
         orderId: body.orderId
       }
     })
-    createdReviews.push(result);
   }
     
+  const orders = await getUserOrder(verifiedToken.userId);
+  const filteredOrders = orders?.filter((order) => order.orderId === body.orderId);
   
   
-  return NextResponse.json(createdReviews, { status: 201});
+  return NextResponse.json(filteredOrders, { status: 201});
 }

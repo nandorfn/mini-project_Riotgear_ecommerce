@@ -10,6 +10,7 @@ import StatusBtn from "../../../../components/Button/StatusBtn";
 import { useState } from "react";
 import { InfoStatus } from "@/app/components/Container/InfoStatus";
 import CollapseDetails from "@/app/(pages)/store/order/components/CollapseDetails";
+import CartModal from "@/app/components/Modal/CartModal";
 type order = {
   orderItem: any
 }
@@ -17,11 +18,14 @@ type order = {
 const OrderCard = ({ orderItem }: order) => {
   const [order, setOrder] = useState(orderItem);
   let { subTotal } = checkSubtotal(order.orderItems);
+  const [modal, setModal] = useState(false);
   let date = order.createdAt.toLocaleDateString('en-US', {
     day: '2-digit',
     month: 'long',
     year: 'numeric'
   });
+  
+  
   const handleUpdateStatus = async (e: React.SyntheticEvent) => {
     let { value } = e.target as HTMLButtonElement
     e.preventDefault();
@@ -38,6 +42,9 @@ const OrderCard = ({ orderItem }: order) => {
           })
         }
       })
+      .finally(() => {
+        setModal(false);
+      })
   }
 
   const {
@@ -52,6 +59,20 @@ const OrderCard = ({ orderItem }: order) => {
   const billAddress = `${address}, ${district}, ${city}, ${country}, ${zip}`;
   return (
     <>
+      {modal &&
+        <CartModal
+          setModal={setModal}
+          modal={modal}
+          action={handleUpdateStatus}
+          title="REMOVE ORDER"
+          btnLeft="YES"
+          btnRight="NO">
+          <Heading variant={'five'} bold={'normal'}>Are you sure you want to cancel this order?</Heading>
+        </CartModal>
+
+      }
+      
+      
       <Flex variant={'col'} className="border-[1px] rounded-xl shadow-sm gap-3 pb-4">
         <Flex className="gap-3 border-b py-2 px-5 rounded-t-xl bg-base-200">
           <Flex variant={'row'} align={'iCenter'} className="gap-3 w-3/4">
@@ -113,6 +134,7 @@ const OrderCard = ({ orderItem }: order) => {
               <StatusBtn
                 status={order.status}
                 handleUpdateStatus={handleUpdateStatus}
+                setModal={setModal}
               />
             </Flex>
           </Flex>

@@ -32,8 +32,11 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
 
                 <Flex variant={'col'}>
                     <Heading variant={'fourthRwd'} className="mt-3 mb-5">Payment Details</Heading>
+                    {orderStatus && orderStatus[0] === 'Cancelled' &&
+                        <p className="italic text-xs md:text-base text-base-300">Sorry we can&apos;t accept your order, for that we will refund your balance within 2x24 hours.</p>
+                    }
                     {orderStatus && orderStatus[0] === 'Ordered' &&
-                        <p className="italictext-xs md:text-base text-base-300">Thank you. Your order has been received. If you didn&apos;t complete the payment 24 hours from now, your order will be cancelled.</p>
+                        <p className="italic text-xs md:text-base text-base-300">Thank you. Your order has been received. If you didn&apos;t complete the payment 24 hours from now, your order will be cancelled.</p>
                     }
                     <Flex variant={'colToRow'} className="p-4 mt-5 md:px-4 md:py-2 bg-base-200 rounded-md md:justify-between">
                         <Text fs={'lg'} className="md:w-1/5">{`Order Number: ${order[0].id }`}</Text>

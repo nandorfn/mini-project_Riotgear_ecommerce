@@ -27,7 +27,7 @@ export const POST = async (req: Request) => {
     return NextResponse.json({ errors: zodErrors }, { status: 400 });
   }
 
-  // check stock valid
+  // check stock isValid
   const hasSufficientStock = await checkStock(verifiedToken.userId);
   if (!hasSufficientStock) {
     return NextResponse.json({ errors: 'Product stock is less than user request' }, { status: 400 });
@@ -40,6 +40,7 @@ export const POST = async (req: Request) => {
       paymentMethod: result.data.paymentMethod,
     }
   });
+
   if (!order) {
     return NextResponse.json({ errors: 'Internal server error' }, { status: 500 });
   }
@@ -62,26 +63,51 @@ export const POST = async (req: Request) => {
     await reduceProductStock(verifiedToken.userId);
     return NextResponse.json(order, { status: 201 });
   } else {
-    // Delete all records
-    await prisma.address.deleteMany({
+    // Order failed => restore product stock and delete record & udate order status to Cancellled
+    const orderItems = await prisma.orderItem.findMany({
       where: {
         orderId: order.orderId
       }
-    });
+    })
 
-    await prisma.orderItem.deleteMany({
-      where: {
-        orderId: order.orderId
-      }
-    });
+    await prisma.$transaction([
+      ...orderItems.map(orderItem => {
+        return prisma.product.update({
+          where: {
+            productId: orderItem.productId
+          },
+          data: {
+            productStock: {
+              increment: orderItem.quantity
+            }
+          }
+        });
+      }),
 
-    await prisma.order.deleteMany({
-      where: {
-        orderId: order.orderId
-      }
-    });
-    return NextResponse.json({ errors: 'Internal Server Error' }, { status: 500 });
+      prisma.address.deleteMany({
+        where: {
+          orderId: order.orderId
+        }
+      }),
+      prisma.orderItem.deleteMany({
+        where: {
+          orderId: order.orderId
+        }
+      }),
+      prisma.order.update({
+        where: {
+          orderId: order.orderId
+        },
+        data: {
+          status: 'Cancelled'
+        }
+      })
+
+
+    ]);
+    return NextResponse.json({ errors: 'Order Failed' }, { status: 400 })
   }
+
 }
 
 type orderStatus = {
@@ -103,7 +129,7 @@ export const PATCH = async (req: Request) => {
   }
 
   if (!verifiedToken) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   }
 
   let orderStatus: OrderStatus = 'Delivered';
@@ -112,6 +138,40 @@ export const PATCH = async (req: Request) => {
   }
 
   try {
+    if (orderStatus === 'Cancelled') {
+      const order = await prisma.order.update({
+        where: {
+          orderId: result.data.orderId,
+        },
+        data: {
+          status: orderStatus,
+        },
+      });
+    
+      const orderItems = await prisma.orderItem.findMany({
+        where: {
+          orderId: order.orderId
+        }
+      })
+  
+      await prisma.$transaction([
+        ...orderItems.map(orderItem => {
+          return prisma.product.update({
+            where: {
+              productId: orderItem.productId
+            },
+            data: {
+              productStock: {
+                increment: orderItem.quantity
+              }
+            }
+          });
+        }),
+      ])
+      
+      return NextResponse.json({status: 200})
+    }
+  
     const order = await prisma.order.update({
       where: {
         orderId: result.data.orderId,

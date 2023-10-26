@@ -11,6 +11,8 @@ import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
 import { InfoStatus } from "@/app/components/Container/InfoStatus";
 import CollapseDetails from "./components/CollapseDetails";
 import WrongCondition from "@/app/components/404/WrongCondition";
+import { Suspense } from "react";
+import OrderCardSkeleton from "@/app/components/Skeleton/OrderCardSkeleton";
 
 
 const Page = async ({
@@ -25,6 +27,7 @@ const Page = async ({
     filteredOrders = allOrder.filter((order) => order.status === searchParams.status);
   }
 
+
   return (
     <>
       <main className="px-3 min-h-[74vh]">
@@ -37,7 +40,7 @@ const Page = async ({
         <Heading variant={'fourthRwd'} className="md:mb-6">YOUR ORDER</Heading>
         <Flex align={'iCenter'} className=" lg:px-0 my-4 gap-3">
           <Heading variant={'five'}>Status</Heading>
-          <div className=" stats">
+          <div className="stats">
             <Flex align={'iCenter'} className="gap-3 breadcrumbs">
               <StatusOrderWrapper
                 status={searchParams.status}
@@ -51,19 +54,11 @@ const Page = async ({
             link={'/login'}
             labelBtn={'LOGIN'} />
         }
-        {allOrder?.length === 0 &&
-          <WrongCondition
-            text={'Your Have No Purchase History.'}
-            link={'/store'}
-            labelBtn={'CONTINUE SHOPPING'} />
-        }
-        
-
         {filteredOrders?.length === 0
           ? <WrongCondition
-          text={'Your Have No Orders At This Status.'}
-          link={'/store'}
-          labelBtn={'CONTINUE SHOPPING'} />
+            text={'Your Have No Orders At This Status.'}
+            link={'/store'}
+            labelBtn={'CONTINUE SHOPPING'} />
 
           : filteredOrders?.map((order, index) => {
             const inv = order.orderId.toUpperCase().split('-').join('').replace(/,/g, '');
@@ -96,7 +91,7 @@ const Page = async ({
                 </Flex>
                 <Colapse>
                   {order.orderItem.map((item, index: number) => (
-                    <div key={item.id}>
+                    <Suspense key={item.id} fallback={<OrderCardSkeleton variant="variant1" />}>
                       {index === 0 && (
                         <HistoryOrderCard
                           img={item.productImgLink}
@@ -115,20 +110,22 @@ const Page = async ({
                           </>
                         </HistoryOrderCard>
                       )}
-                    </div>
+                    </Suspense>
                   ))}
                   {order.orderItem.map((item, index: number) => (
-                    <div className="ms-1" key={item.id}>
-                      {index > 0 && (
-                        <HistoryOrderCard
-                          img={item.productImgLink}
-                          name={item.productName}
-                          quantity={item.quantity}
-                          price={item.productPrice}
-                          total={subTotal}
-                        />
-                      )}
-                    </div>
+                    <Suspense key={item.id} fallback={<OrderCardSkeleton variant="variant1" />}>
+                      <div className="ms-1">
+                        {index > 0 && (
+                          <HistoryOrderCard
+                            img={item.productImgLink}
+                            name={item.productName}
+                            quantity={item.quantity}
+                            price={item.productPrice}
+                            total={subTotal}
+                          />
+                        )}
+                      </div>
+                    </Suspense>
 
                   ))}
                 </Colapse>

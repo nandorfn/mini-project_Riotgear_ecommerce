@@ -11,6 +11,7 @@ import { Button } from "@/app/components/Button/Button";
 import TableBody from "@/app/components/Table/TableBody";
 import { headTableProduct } from "@/app/helpers/dataObject";
 import { Transparent } from "@/app/components/Container/Transparent";
+import { Flex } from "@/app/components/Container/Flex";
 
 
 const Page: React.FC = () => {
@@ -109,9 +110,9 @@ const Page: React.FC = () => {
           <span className="loading loading-spinner loading-lg"></span>
         </Transparent>
         :
-        <section className="relative">
+        <section className="relative px-4 lg:px-0 z-0">
           <h2 className="text-2xl font-medium">List Products</h2>
-          <div className="flex flex-row w-2/4 items-center gap-3 mt-2 mb-4">
+          <div className="flex flex-row md:w-2/4 items-center gap-3 mt-2 mb-4">
             <Input
               name="Search"
               value={search}
@@ -122,12 +123,13 @@ const Page: React.FC = () => {
             <Button
               className="mt-2"
               onClick={handleAddModal}
-              variant={'success'} size={'base'} >Add Product
+              variant={'success'} size={'base'} >ADD PRODUCT
             </Button>
           </div>
-          <div className="overflow-x-auto p-1 mt-3">
-            <table className="table table-zebra bg-base-100">
-              <thead>
+          <div className="stats mt-1 md:w-full">
+          <Flex className="gap-3 breadcrumbs">
+            <table className="table table-zebra table-xs md:table-md table-pin-rows table-pin-cols bg-base-100 ">
+              <thead className="">
                 <tr>
                   {headTableProduct?.map((head, index) =>
                     <th key={index}>{head}</th>
@@ -151,6 +153,7 @@ const Page: React.FC = () => {
                 }
               </tbody>
             </table>
+          </Flex>
           </div>
           {modal.editModal &&
             <FormEditProduct

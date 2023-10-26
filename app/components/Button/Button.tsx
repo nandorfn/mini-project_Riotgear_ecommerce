@@ -35,6 +35,7 @@ const buttonVariants = cva(
       },
       size: {
         sm: 'btn-sm',
+        smWide: 'btn-sm btn-wide',
         base: 'w-36',
         lg: 'btn-lg',
         wide: 'btn-wide',

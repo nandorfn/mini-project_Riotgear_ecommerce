@@ -1,20 +1,22 @@
 import { Button } from "@/app/components/Button/Button";
 import { Flex } from "@/app/components/Container/Flex";
+import { Dispatch, SetStateAction } from "react";
 
 
 type Props = {
   handleUpdateStatus: (e: React.SyntheticEvent) => void;
   status: string;
+  setModal: Dispatch<SetStateAction<boolean>>
 }
 
-const StatusBtn = ({ status, handleUpdateStatus }: Props) => {
+const StatusBtn = ({ status, handleUpdateStatus, setModal }: Props) => {
   let buttonContent = null;
 
   switch (status) {
     case 'Ordered':
       buttonContent = (
       <>
-        <Button value={'Cancelled'} onClick={handleUpdateStatus} variant={'red'} size="sm">
+        <Button value={'Cancelled'} onClick={() => setModal(true)} variant={'red'} size="sm">
           Cancel
         </Button>
         <Button value={'InProgress'} onClick={handleUpdateStatus} variant={'success'} size="sm">

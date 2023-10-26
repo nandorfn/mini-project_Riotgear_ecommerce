@@ -13,8 +13,6 @@ const usePostData = ({ setData }: usePostDataProps) => {
   const sendData = async (data: ProductData) => {
     try {
       const response = await axios.post("/api/products", data);
-      console.log(response);
-
       if (response.status === 201) { 
         setData((prevState: ProductData[]) => [
           ...prevState,

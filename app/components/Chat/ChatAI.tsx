@@ -30,15 +30,15 @@ const ChatAI: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Flex variant={'col'} className="h-screen w-[38rem] bg-white top-0 end-0 py-4 z-50 rounded-s-3xl shadow-lg fixed">
+      <Flex variant={'col'} className="h-screen w-3/4 md:w-[38rem] bg-white top-0 end-0 py-4 z-50 rounded-s-3xl shadow-lg fixed">
         {loading &&
           <>
             <div className="absolute w-full h-screen opacity-50 blur-lg">
             </div>
-            <span className="absolute z-50 left-1/2 right-1/2  top-1/2 opacity-30 loading loading-dots loading-lg"></span>
+            <span className="absolute z-[48] left-1/2 right-1/2  top-1/2 opacity-30 loading loading-dots loading-lg"></span>
           </>
         }
-        <Flex variant={'row'} align={'iCenter'} className="justify-between px-4">
+        <Flex variant={'row'} align={'iCenter'} className="justify-between px-4 pb-3">
           <figure className="flex items-center flex-row gap-3">
             <Image
               src={chatIcon}
@@ -47,7 +47,7 @@ const ChatAI: React.FC<Props> = ({
             />
             <Heading variant={'five'}>Chat AI Bot</Heading>
           </figure>
-          <Button onClick={() => setModal(false)} className="btn-sm">
+          <Button onClick={() => setModal(false)} className="btn-sm z-50">
             <Image src={signout} width={20} alt="Close Chat" />
           </Button>
         </Flex>

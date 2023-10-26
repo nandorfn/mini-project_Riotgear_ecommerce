@@ -8,13 +8,13 @@ import { Button } from "../Button/Button";
 import { Textarea } from "../Form/Textarea";
 import closeIcon from '@/app/assets/icon/closeIcon.svg'
 import axios from "axios";
-import { useRouter } from "next/navigation";
 
 type RewiewProps = {
   data: any,
   itemId: string,
   modal: boolean,
   setState: Dispatch<SetStateAction<{ itemId: string; modal: boolean; }>>
+  setOrderItem: Dispatch<any>
 }
 type SentData = {
   id: string,
@@ -22,7 +22,7 @@ type SentData = {
   review: string,
 }
 
-const ReviewModal = ({ data, itemId, setState, modal }: RewiewProps) => {
+const ReviewModal = ({ data, itemId, setState, setOrderItem }: RewiewProps) => {
   const matchingOrderItem = data.orderItem.filter((item: any) => item.orderId === itemId);
   const [sentData, setSentData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -50,8 +50,6 @@ const ReviewModal = ({ data, itemId, setState, modal }: RewiewProps) => {
     }))
   }
 
-  const router = useRouter();
-
   const submitReview = async (e: React.SyntheticEvent) => {
     try {
       setLoading(true);
@@ -60,6 +58,9 @@ const ReviewModal = ({ data, itemId, setState, modal }: RewiewProps) => {
         orderItems: sentData
       };
       await axios.post(`/api/review/${data.orderId}`, newRating)
+      .then(res => {
+        setOrderItem(res.data)
+      });
     } catch (error) {
       console.log(error);
     } finally {

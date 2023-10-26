@@ -10,26 +10,26 @@ import HeroTitleOnyl from '@/app/components/Hero/HeroTitleOnyl';
 
 const page = async () => {
     const articles = await getBlogArticles();
-    
+
     return (
         <>
-            <section className="max-w-6xl mx-auto">
-                <Hero
-                    childComponent={<HeroTitleOnyl />}
-                    img={blogBanner}
-                />
+            <Hero
+                childComponent={<HeroTitleOnyl />}
+                img={blogBanner}
+            />
+            <main className="max-w-6xl mx-auto h-[80vh]">
                 <h2 className={`text-center text-4xl font-medium mb ${bebas_neue.className}`}>BLOG</h2>
                 <section className='flex flex-col gap-3 p-4'>
                     {articles?.map(item => (
-                    
-                    <Link href={`/blog/article?id=${item.id}`} key={item.id}>
-                        <ArticleCard data={item} />
-                    </Link>
+
+                        <Link href={`/blog/article?id=${item.id}`} key={item.id}>
+                            <ArticleCard data={item} />
+                        </Link>
                     ))
-                    
+
                     }
                 </section>
-            </section>
+            </main>
         </>
     );
 };

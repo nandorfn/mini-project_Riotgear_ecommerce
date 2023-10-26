@@ -12,9 +12,9 @@ const MdBody = ({content, thumbnail}: Article) => {
   const clean = DOMPurify.sanitize(content)
     return (
         <>
-          <article className="prose lg:prose-xl max-w-4xl prose-stone md:shadow-lg px-4 md:py-8 md:px-28 rounded-xl">
+          <article className="prose lg:prose-xl max-w-4xl prose-stone">
           <Image
-          className="mx-auto"
+          className="mx-auto rounded-lg"
           src={thumbnail}
           width={750}
           height={750}

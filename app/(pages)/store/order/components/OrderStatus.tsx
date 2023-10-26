@@ -7,14 +7,16 @@ import { Button } from "@/app/components/Button/Button";
 import { Flex } from "@/app/components/Container/Flex";
 import dots from '@/app/assets/icon/dots.svg'
 import ReviewModal from "@/app/components/Modal/ReviewModal";
-import Transparent from "@/app/components/Container/Transparent";
+import { Transparent } from "@/app/components/Container/Transparent";
 
 const OrderStatus = ({ order }: { order: any }) => {
   const [orderItem, setOrderItem] = useState(order);
   const [state, setState] = useState({
     itemId: '',
-    modal: false
+    modal: false,
   })
+  
+
 
   const handleConfirmOrder = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -48,6 +50,7 @@ const OrderStatus = ({ order }: { order: any }) => {
             data={orderItem}
             itemId={state.itemId}
             setState={setState}
+            setOrderItem={setOrderItem}
           />
         </Transparent>
       }
