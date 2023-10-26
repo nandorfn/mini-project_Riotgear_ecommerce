@@ -526,7 +526,7 @@ export const getPopularProductCategory = async () => {
   })
 
   const viewsCountByCategory: { productSubCategory: string; viewsCount: number }[] = [];
-  products.forEach((item) => {
+  products.forEach((item: any) => {
     const { productSubCategory, viewsCount } = item;
     const existingCategory = viewsCountByCategory.find((category) => category.productSubCategory === productSubCategory);
 
