@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
+import { PrismaClient } from '@/prisma/generated/client/index';
 let prisma: PrismaClient;
 
 if (process.env.NODE_ENV === "production") {
