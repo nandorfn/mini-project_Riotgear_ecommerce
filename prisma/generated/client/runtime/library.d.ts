@@ -1088,6 +1088,18 @@ declare type Error_2 = {
     detail: string | undefined;
     column: string | undefined;
     hint: string | undefined;
+} | {
+    kind: 'Mysql';
+    code: number;
+    message: string;
+    state: string;
+} | {
+    kind: 'Sqlite';
+    /**
+     * Sqlite extended error code: https://www.sqlite.org/rescode.html
+     */
+    extendedCode: number;
+    message: string;
 };
 
 declare interface ErrorCapturingDriverAdapter extends DriverAdapter {

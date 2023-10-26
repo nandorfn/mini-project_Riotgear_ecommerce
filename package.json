@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "vercel-build": "prisma generate && next build",
+    "postinstall": "prisma generate",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "build-all": "npm run postinstall && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
-    "@prisma/client": "^5.5.0",
+    "@prisma/client": "^5.5.2",
     "@uiw/react-md-editor": "^3.6.0",
     "axios": "^1.5.1",
     "bcrypt": "^5.1.1",
@@ -51,6 +53,7 @@
     "@types/uuid": "^9.0.4",
     "autoprefixer": "latest",
     "daisyui": "^3.8.1",
+    "encoding": "^0.1.13",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
