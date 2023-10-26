@@ -1,6 +1,6 @@
 import { cache } from 'react';
 import prisma from '../lib/prisma';
-import { cart } from './types';
+import { ProductData, TOrderItem, cart } from './types';
 
 export const revalidate = 3600
 
@@ -57,7 +57,7 @@ export const getItem = cache(async (filters: any) => {
   });
 
   const productsWithReviews = await Promise.all(
-    items.map(async (product) => {
+    items.map(async (product: ProductData) => {
       const reviews = await prisma.review.findMany({
         where: {
           productId: product.productId,
@@ -172,8 +172,18 @@ export const getUserProductCart = async (userId: string) => {
     const product = await getProduct(cartItem.productId);
     products.push(product);
   }
+  
+  type CartItem = {
+    id: number;
+    userId: string;
+    productId: string;
+    quantity: number;
+    createdAt: Date;
+    updatedAt: Date;
+}
+  
   const combinedData = {
-    userCart: userCart.map(cartItem => {
+    userCart: userCart.map((cartItem: CartItem) => {
       const product = products.find(productItem => productItem.productId === cartItem.productId);
       return {
         ...cartItem,
@@ -285,9 +295,19 @@ export const reduceProductStock = async (userId: string) => {
 
 export const getOrderProducts = cache(async () => {
   const allOrder = await prisma.order.findMany();
+  
+  type TOrder = {
+    id: number;
+    orderId: string;
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    paymentMethod: string;
+    status: string;
+}
 
   const allData = await Promise.all(
-    allOrder.map(async (order) => {
+    allOrder.map(async (order: TOrder) => {
       const orderItems = await prisma.orderItem.findMany({
         where: {
           orderId: order.orderId,
@@ -323,7 +343,7 @@ export const getOrderProducts = cache(async () => {
       };
 
       const products = await Promise.all(
-        orderItems.map(async (item) => {
+        orderItems.map(async (item: any) => {
           const product = await prisma.product.findFirst({
             where: {
               productId: item.productId,
@@ -340,7 +360,7 @@ export const getOrderProducts = cache(async () => {
         })
       );
 
-      orderData.orderItems = orderItems.map((item, index) => ({
+      orderData.orderItems = orderItems.map((item: any, index: number) => ({
         productId: item.productId,
         quantity: item.quantity,
         ...products[index],
