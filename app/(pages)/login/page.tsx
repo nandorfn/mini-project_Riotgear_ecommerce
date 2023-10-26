@@ -1,11 +1,12 @@
 'use client'
 import Link from "next/link";
+import useLoginForm from "@/app/hooks/useLoginForm";
 import { Button } from "@/app/components/Button/Button";
 import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { Text } from "@/app/components/Container/Text";
-import useLoginForm from "@/app/hooks/useLoginForm";
-import Transparent from "@/app/components/Container/Transparent";
+import { Transparent } from "@/app/components/Container/Transparent";
+
 
 const Page = () => {
   const {

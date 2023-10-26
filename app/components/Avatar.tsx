@@ -4,8 +4,8 @@ import avatar from "@/app/assets/icon/user.png";
 import { userAvatar } from "@/app/utils/types";
 import { getData } from "../utils/api";
 import { useState } from "react";
-import Transparent from "./Container/Transparent";
 import { useRouter } from "next/navigation";
+import { Transparent } from "./Container/Transparent";
 
 const Avatar = ({ username, icon }: userAvatar) => {
   const [loading, setLoading] = useState(false);
@@ -29,11 +29,11 @@ const Avatar = ({ username, icon }: userAvatar) => {
           <span className="loading loading-spinner loading-lg"></span>
         </Transparent>
 
-        : <div className="flex-none z-50">
-          <ul className="menu menu-horizontal">
+        : 
+          <ul className="z-50 menu p-0 menu-horizontal">
             <li>
               <details className="p-0">
-                <summary className="py-2 px-4">
+                <summary className="py-2 px-2">
                   <div className="avatar items-center gap-2">
                     <div className="w-8 rounded-full">
                       <Image
@@ -52,7 +52,6 @@ const Avatar = ({ username, icon }: userAvatar) => {
               </details>
             </li>
           </ul>
-        </div>
       }
     </>
   );

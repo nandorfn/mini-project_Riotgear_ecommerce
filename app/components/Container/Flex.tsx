@@ -1,7 +1,7 @@
-import { bebas_neue } from "@/app/utils/fonts";
 import { cn } from "@/app/utils/utils";
-import { VariantProps, cva } from 'class-variance-authority';
 import { AllHTMLAttributes } from "react";
+import { VariantProps, cva } from 'class-variance-authority';
+import { bebas_neue } from "@/app/utils/fonts";
 
 const FlexVariants = cva(
   'flex w-full',

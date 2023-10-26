@@ -1,10 +1,22 @@
 import Image from 'next/image';
+import { cn } from '@/app/utils/utils';
+import { HTMLAttributes } from 'react';
 import avatar from '@/app/assets/icon/user.png'
+import { Review } from '@/app/components/Review/ReviewWrap';
+import UserRating from '@/app/components/Container/UserRating';
 
-const ReviewCard: React.FC = () => {
+interface ReviewCard extends HTMLAttributes<HTMLElement>{
+  review: Review
+}
+
+const ReviewCard: React.FC<ReviewCard> = ({ 
+  review,
+  className,
+  ...props
+}) => {
   return (
     <>
-      <article className="flex flex-col bg-base-200 rounded-xl gap-3 p-3">
+      <article className={cn('flex flex-col bg-base-200 rounded-xl gap-3 p-3', className)} {...props}>
         <figure className='flex items-center gap-3'>
           <div className="avatar">
             <div className="w-11 rounded-full">
@@ -15,18 +27,12 @@ const ReviewCard: React.FC = () => {
             </div>
           </div>
           <div>
-            <h4 className='font-medium'>Theresa Web</h4>
-            <p className='text-base-300 text-sm'>30/11/2023</p>
+            <h4 className='font-medium'>{'Nando'}</h4>
+            <p className='text-base-300 text-sm'>{review.createdAt.toLocaleDateString('ID-id')}</p>
           </div>
         </figure>
-        <div className="rating rating-sm">
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-        </div>
-        <p className='whitespace-normal text-base-300 w-[18rem] line-clamp-2'>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu</p>
+        <UserRating userRating={review.rating} />
+        <p className='whitespace-normal text-base-300 w-[18rem] line-clamp-2'>{review.text}</p>
       </article>
     </>
   );

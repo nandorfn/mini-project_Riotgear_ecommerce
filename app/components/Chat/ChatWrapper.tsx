@@ -1,11 +1,13 @@
 'use client'
-import chatIcon from '@/app/assets/icon/chat.png'
-import { Button } from '../Button/Button';
-import Image from 'next/image';
-import ChatAI from './ChatAI';
 import { useState } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
+
+import ChatAI from './ChatAI';
 import useForm from '@/app/hooks/useForm';
+import chatIcon from '@/app/assets/icon/chat.png'
+import { Button } from '@/app/components/Button/Button';
+import { Transparent } from '@/app/components/Container/Transparent';
 
 const initialState = {
   modal: false,
@@ -61,11 +63,11 @@ const ChatWrapper: React.FC = () => {
 
   return (
     <>
-      <Button onClick={() => setModal(!modal)} className='fixed btn-ghost z-50 bottom-10 end-10'>
+      <Button onClick={() => setModal(!modal)} className='fixed btn-ghost z-[49] bottom-8 end-4 md:bottom-10 md:end-10'>
         <Image src={chatIcon} width={50} alt='Chat Icon' />
       </Button>
       {modal &&
-        <div className='relative'>
+        <Transparent>
           <ChatAI
             command={form.command}
             data={messages}
@@ -74,7 +76,7 @@ const ChatWrapper: React.FC = () => {
             handleSubmit={onSubmit}
             setModal={setModal}
           />
-        </div>
+        </Transparent>
       }
     </>
   );

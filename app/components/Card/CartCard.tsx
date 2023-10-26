@@ -9,9 +9,9 @@ import { cart } from "@/app/utils/types";
 import { Heading } from "@/app/components/Container/Heading";
 import { Text } from "@/app/components/Container/Text";
 import { Flex } from "@/app/components/Container/Flex";
-import Transparent from "@/app/components/Container/Transparent";
 import CartModal from "@/app/components/Modal/CartModal";
 import closeIcon from '@/app/assets/icon/closeIcon.svg'
+import { Transparent } from "@/app/components/Container/Transparent";
 
 interface CartCardProps {
   data: cart;
@@ -25,7 +25,8 @@ interface CartCardProps {
     dataId: '',
     loading: false,
   })
-
+  
+  const subTotalItem = data.productInfo.productPrice * state.quantity;
   const {
     productName,
     productImgLink,
@@ -99,7 +100,7 @@ interface CartCardProps {
           <span className="loading loading-spinner loading-lg"></span>
         </Transparent>
 
-        : <article className="flex flex-row relative gap-5">
+        : <article className="flex flex-row relative gap-5 border-b pb-5">
           <button
             className="absolute end-0 top-0" onClick={() => setModal(true)}>
             <Image
@@ -114,8 +115,8 @@ interface CartCardProps {
               height={190}
               src={productImgLink} alt="product image" />
           </figure>
-          <Flex variant={'col'} align={'between'} className="w-2/3 max-w-md pe-4">
-            <Flex variant={'col'} className="md:gap-3">
+          <Flex variant={'col'} align={'between'} className="w-2/3">
+            <Flex variant={'col'} className="md:gap-3 pe-6">
               <Heading className="line-clamp-2">{productName}</Heading>
               <Text className="capitalize">{`Color: ${productColor}`}</Text>
               <Text className="uppercase">{`Size: ${productSize}`}</Text>
@@ -123,22 +124,27 @@ interface CartCardProps {
 
             <Flex variant={'col'} className="md:gap-3">
               <Heading>{`Rp${productPrice.toLocaleString('ID-id')}`}</Heading>
-              <label className="flex flex-col">
-                Quantity
-                <select
-                  value={state.quantity}
-                  id={idCart}
-                  onChange={(e) => handleQuantity(e)}
-                  className="px-4 py-2 rounded-md w-full max-w-[5.4rem] md:mt-3"
-                  name="selectQuantity">
-                  {options?.map((data) =>
-                    <option
-                      key={data}
-                      value={data}>{data}
-                    </option>
-                  )}
-                </select>
-              </label>
+              <Flex variant={'row'}>
+                <label className="flex flex-col">
+                  Quantity
+                  <select
+                    value={state.quantity}
+                    id={idCart}
+                    onChange={(e) => handleQuantity(e)}
+                    className="px-4 py-2 rounded-md w-full max-w-[5.4rem] md:mt-3"
+                    name="selectQuantity">
+                    {options?.map((data) =>
+                      <option
+                        key={data}
+                        value={data}>{data}
+                      </option>
+                    )}
+                  </select>
+                </label>
+                <Flex className=" justify-end items-end">
+                  <h1 className="md:font-medium md:text-md">{`SUBTOTAL: Rp${subTotalItem.toLocaleString('ID-id')}`}</h1>
+                </Flex>
+              </Flex>
             </Flex>
           </Flex>
         </article>

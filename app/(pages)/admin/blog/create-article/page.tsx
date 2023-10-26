@@ -4,14 +4,15 @@ import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import rehypeSanitize from "rehype-sanitize";
-
-import { Flex } from "@/app/components/Container/Flex";
-import Input from "@/app/components/Form/Input";
-import useForm from "@/app/hooks/useForm";
-import { Button } from "@/app/components/Button/Button";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import Transparent from "@/app/components/Container/Transparent";
+import axios from "axios";
+
+import useForm from "@/app/hooks/useForm";
+import { Flex } from "@/app/components/Container/Flex";
+import { Button } from "@/app/components/Button/Button";
+import Input from "@/app/components/Form/Input";
+import { Transparent } from "@/app/components/Container/Transparent";
+
 
 const MDEditor = dynamic(
     () => import("@uiw/react-md-editor"),
@@ -44,7 +45,9 @@ const Page: React.FC = () => {
                     alert('Something went wrong')
                 }
             })
-            .finally(() => { setLoading(false) })
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     return (

@@ -1,5 +1,4 @@
 import { InputHTMLAttributes } from "react";
-
 interface InputProps extends InputHTMLAttributes<HTMLFormElement> {
   name: string,
   value: string,

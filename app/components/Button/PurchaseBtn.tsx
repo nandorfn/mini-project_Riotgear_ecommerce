@@ -1,9 +1,9 @@
 'use client'
-import wishlistIcon from '../../assets/icon/wishlist.svg'
+import wishlistIcon from '@/app/assets/icon/wishlist.svg'
 import Image from "next/image";
 import { Button } from './Button';
-import CartModal from '../Modal/CartModal';
-import { Heading } from '../Container/Heading';
+import CartModal from '@/app/components/Modal/CartModal';
+import { Heading } from '@/app/components/Container/Heading';
 import useAddCart from '@/app/hooks/useAddCart';
 
 export type PurchaseBtn = {

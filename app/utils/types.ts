@@ -31,14 +31,31 @@ export const userAddressSchema = z.object({
   name: z.string().min(1, 'Name cannot be empty'),
   phone: z.string().refine((str) => phoneRegex.test(str), {message: "Please enter a valid phone number" }),
   email: z.string().email({message: "Please enter a valid email address" }),  
-  country: z.string().min(2, 'Please select a country'),
-  city: z.string().min(2, 'Please select a city'),
+  country: z.string().min(1, 'Please select a country'),
+  city: z.string().min(1, 'Please select a city'),
   district: z.string().min(1, 'Please select a district'),
   address: z.string().min(2, 'Please input a valid street address'),
   zip: z.string().min(2, 'Postal code cannot be empty'),
   paymentMethod: z.any().refine((str) => str !== null, {message: 'Please choose a payment method'} ),
 })
 export type TUserAddressSchema = z.infer<typeof userAddressSchema>
+
+
+export const productForm = z.object({
+  productName: z.string().min(4, 'Product Name at least 4 characters'),
+  productMainCategory: z.string().min(2, 'Please select product main category'),
+  productSubCategory: z.string().min(2, 'Please select product sub category'),
+  productImgLink: z.string().min(10, 'Image Link at least 10 characters'),
+  productSize: z.string().min(1, 'Please select product size'),
+  productGender: z.string().min(1, 'Please select product gender'),
+  productColor: z.string().min(1, 'Please select product color'),
+  productStock: z.number().min(1, 'Please input product stock'),
+  productDesc: z.string(),
+  productPrice: z.number().min(1, 'Please input product price'),
+  featured: z.boolean()
+  
+})
+export type TProductForm = z.infer<typeof productForm>
 
 export const tokenSchema = z.object({
   username: z.string(),
@@ -118,6 +135,7 @@ export type ProductData = {
   productDesc: string;
   productPrice: number;
   featured: number | boolean;
+  reviews?: any;
 };
 export type ArticleModel = {
   id: number;

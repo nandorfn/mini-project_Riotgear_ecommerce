@@ -5,11 +5,12 @@ import { Flex } from "@/app/components/Container/Flex";
 import { Heading } from "@/app/components/Container/Heading";
 import { checkSubtotal } from "@/app/utils/utils";
 import axios from "axios";
-import StatusBtn from "../../../../components/Button/StatusBtn";
+import StatusBtn from "@/app/components/Button/StatusBtn";
 
 import { useState } from "react";
 import { InfoStatus } from "@/app/components/Container/InfoStatus";
 import CollapseDetails from "@/app/(pages)/store/order/components/CollapseDetails";
+import CartModal from "@/app/components/Modal/CartModal";
 type order = {
   orderItem: any
 }
@@ -17,12 +18,17 @@ type order = {
 const OrderCard = ({ orderItem }: order) => {
   const [order, setOrder] = useState(orderItem);
   let { subTotal } = checkSubtotal(order.orderItems);
+  const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   let date = order.createdAt.toLocaleDateString('en-US', {
     day: '2-digit',
     month: 'long',
     year: 'numeric'
   });
+  
+  
   const handleUpdateStatus = async (e: React.SyntheticEvent) => {
+    setLoading(true);
     let { value } = e.target as HTMLButtonElement
     e.preventDefault();
     const data = {
@@ -38,9 +44,38 @@ const OrderCard = ({ orderItem }: order) => {
           })
         }
       })
+      .finally(() => {
+        setModal(false);
+        setLoading(false);
+      })
   }
+
+  const {
+    name,
+    country,
+    city,
+    district,
+    address,
+    zip
+  } = order.address;
+
+  const billAddress = `${address}, ${district}, ${city}, ${country}, ${zip}`;
   return (
     <>
+      {modal &&
+        <CartModal
+          setModal={setModal}
+          modal={modal}
+          action={handleUpdateStatus}
+          title="REMOVE ORDER"
+          btnLeft="YES"
+          btnRight="NO">
+          <Heading variant={'five'} bold={'normal'}>Are you sure you want to cancel this order?</Heading>
+        </CartModal>
+
+      }
+      
+      
       <Flex variant={'col'} className="border-[1px] rounded-xl shadow-sm gap-3 pb-4">
         <Flex className="gap-3 border-b py-2 px-5 rounded-t-xl bg-base-200">
           <Flex variant={'row'} align={'iCenter'} className="gap-3 w-3/4">
@@ -56,7 +91,7 @@ const OrderCard = ({ orderItem }: order) => {
             />
           </div>
         </Flex>
-        
+
         <Flex variant={'colToRow'} className="bg-base-100 md:pe-4">
           <Collapse>
             {order.orderItems.map((item: any, index: number) => (
@@ -92,18 +127,18 @@ const OrderCard = ({ orderItem }: order) => {
           <Flex variant={'colToRow'} className="px-5 -mt-10 md:mt-0 md:px-0">
             <Flex variant={'col'}>
               <Heading>Billing Address</Heading>
-              <p>{'Nando'}</p>
-              <div>
-                <p>Kebon Jeruk, Jakarta Barat, Indonesia</p>
-              </div>
+              <p>{name}</p>
+              <p>{billAddress}</p>
             </Flex>
             <div className="divider hidden md:block lg:divider-horizontal"></div>
             <Flex variant={'col'} className="gap-3 md:w-[50%] relative">
               <Heading>Subtotal</Heading>
               <p className="text-error md:text-xl font-medium">{`Rp${subTotal.toLocaleString('ID-id')}`}</p>
               <StatusBtn
+                loading={loading}
                 status={order.status}
                 handleUpdateStatus={handleUpdateStatus}
+                setModal={setModal}
               />
             </Flex>
           </Flex>

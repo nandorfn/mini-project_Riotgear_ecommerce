@@ -1,4 +1,4 @@
-import { Button } from "@/app/components/Button/Button";
+import Link from "next/link";
 import HistoryOrderCard from "@/app/components/Card/HistoryOrderCard";
 import Colapse from "@/app/components/Container/Colapse";
 import { Flex } from "@/app/components/Container/Flex";
@@ -6,11 +6,13 @@ import { Heading } from "@/app/components/Container/Heading";
 import { Text } from "@/app/components/Container/Text";
 import { checkUserLogin } from "@/app/utils/auth";
 import { getUserOrder } from "@/app/utils/queryDb";
-import Link from "next/link";
 import OrderStatus from "./components/OrderStatus";
 import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
 import { InfoStatus } from "@/app/components/Container/InfoStatus";
 import CollapseDetails from "./components/CollapseDetails";
+import WrongCondition from "@/app/components/404/WrongCondition";
+import { Suspense } from "react";
+import OrderCardSkeleton from "@/app/components/Skeleton/OrderCardSkeleton";
 
 
 const Page = async ({
@@ -25,6 +27,7 @@ const Page = async ({
     filteredOrders = allOrder.filter((order) => order.status === searchParams.status);
   }
 
+
   return (
     <>
       <main className="px-3 min-h-[74vh]">
@@ -37,7 +40,7 @@ const Page = async ({
         <Heading variant={'fourthRwd'} className="md:mb-6">YOUR ORDER</Heading>
         <Flex align={'iCenter'} className=" lg:px-0 my-4 gap-3">
           <Heading variant={'five'}>Status</Heading>
-          <div className=" stats">
+          <div className="stats">
             <Flex align={'iCenter'} className="gap-3 breadcrumbs">
               <StatusOrderWrapper
                 status={searchParams.status}
@@ -45,14 +48,17 @@ const Page = async ({
             </Flex>
           </div>
         </Flex>
-
+        {!user &&
+          <WrongCondition
+            text={'You must be logged in, to view order history'}
+            link={'/login'}
+            labelBtn={'LOGIN'} />
+        }
         {filteredOrders?.length === 0
-          ? <Flex variant={'col'} align={'center'} className="h-[60vh] gap-5">
-              <Text fs={'xl'}>Your Have No Purchase History.</Text>
-              <Link href={'/store'}>
-                <Button variant={'black'}>CONTINUE SHOPPING</Button>
-              </Link>
-            </Flex>
+          ? <WrongCondition
+            text={'Your Have No Orders At This Status.'}
+            link={'/store'}
+            labelBtn={'CONTINUE SHOPPING'} />
 
           : filteredOrders?.map((order, index) => {
             const inv = order.orderId.toUpperCase().split('-').join('').replace(/,/g, '');
@@ -69,6 +75,7 @@ const Page = async ({
               }
             })
 
+
             return (
               <Flex variant={'col'} className="shadow-md rounded-lg mb-5 relative" key={index}>
                 <Flex align={'iCenter'} className="justify-between pt-2 px-5 mb-2">
@@ -84,7 +91,7 @@ const Page = async ({
                 </Flex>
                 <Colapse>
                   {order.orderItem.map((item, index: number) => (
-                    <div key={item.id}>
+                    <Suspense key={item.id} fallback={<OrderCardSkeleton variant="variant1" />}>
                       {index === 0 && (
                         <HistoryOrderCard
                           img={item.productImgLink}
@@ -103,20 +110,22 @@ const Page = async ({
                           </>
                         </HistoryOrderCard>
                       )}
-                    </div>
+                    </Suspense>
                   ))}
                   {order.orderItem.map((item, index: number) => (
-                    <div className="ms-1" key={item.id}>
-                      {index > 0 && (
-                        <HistoryOrderCard
-                          img={item.productImgLink}
-                          name={item.productName}
-                          quantity={item.quantity}
-                          price={item.productPrice}
-                          total={subTotal}
-                        />
-                      )}
-                    </div>
+                    <Suspense key={item.id} fallback={<OrderCardSkeleton variant="variant1" />}>
+                      <div className="ms-1">
+                        {index > 0 && (
+                          <HistoryOrderCard
+                            img={item.productImgLink}
+                            name={item.productName}
+                            quantity={item.quantity}
+                            price={item.productPrice}
+                            total={subTotal}
+                          />
+                        )}
+                      </div>
+                    </Suspense>
 
                   ))}
                 </Colapse>

@@ -1,7 +1,7 @@
-import { bebas_neue } from "@/app/utils/fonts";
-import { cn } from "@/app/utils/utils";
-import { VariantProps, cva } from 'class-variance-authority';
 import { AllHTMLAttributes } from "react";
+import { cn } from "@/app/utils/utils";
+import { bebas_neue } from "@/app/utils/fonts";
+import { VariantProps, cva } from 'class-variance-authority';
 
 const headingVariants = cva(
   'text-base',

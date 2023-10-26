@@ -1,5 +1,4 @@
 import { checkboxOptionType } from "@/app/helpers/dataObject";
-
 interface Props {
   data: checkboxOptionType[];
   addClass: string;

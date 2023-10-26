@@ -1,11 +1,11 @@
 import Image from 'next/image';
+import { HTMLAttributes } from 'react';
+import Link from 'next/link';
+import { cn } from '@/app/utils/utils';
 import BrandLogo from '@/app/assets/icon/RiotLogoBlack.svg'
 import MenuBtn from '@/app/assets/icon/MenuIcon.svg'
+import { Flex } from '@/app/components/Container/Flex';
 import Menus from './Menus';
-import Link from 'next/link';
-import { Flex } from '../Container/Flex';
-import { HTMLAttributes } from 'react';
-import { cn } from '@/app/utils/utils';
 
 interface NavbarProps extends HTMLAttributes<HTMLElement>{}
 

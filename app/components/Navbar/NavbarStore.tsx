@@ -17,7 +17,7 @@ const NavbarStore = async () => {
   return (
     <>
       <header className='z-40 bg-white'>
-        <nav className='md:bg-base-200 flex flex-row justify-between px-2 rounded-xl mt-3 mx-3'>
+        <nav className='md:bg-base-200 flex flex-row justify-between px-2 py-2 rounded-xl mt-3 mx-3'>
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-row items-center justify-between">
@@ -46,32 +46,37 @@ const NavbarStore = async () => {
                 />
               </label>
               <div className='hidden md:flex md:gap-2 md:items-center'>
-                <Link className='pe-2' href={'/store/order'}>
-                  <Image
-                    className='hover:w-6'
-                    src={archive}
-                    width={25}
-                    height={25}
-                    alt='cart icon'
-                  />
-                </Link>
-                <Link className='pe-2' href={'/store/cart'}>
-                  <Image
-                    className='hover:w-6'
-                    src={cart}
-                    width={20}
-                    height={20}
-                    alt='cart icon'
-                  />
-                </Link>
+                {userAccess &&
+                  <>
+                    <Link className='pe-2' href={'/store/order'}>
+                      <figure className='w-7 h-7 relative'>
+                        <Image
+                          className='hover:w-6'
+                          src={archive}
+                          fill={true}
+                          alt='cart icon'
+                        />
+                      </figure>
+                    </Link>
+                    <Link className='pe-2' href={'/store/cart'}>
+                      <figure className='w-5 h-5 relative'>
+                        <Image
+                          className='hover:w-6'
+                          src={cart}
+                          fill={true}
+                          alt='cart icon'
+                        />
+                      </figure>
+                    </Link>
+                    <div className='border-s-2 h-8 border-[#D9D9D9]'></div>
+                  </>
+                }
 
-                <div className='border-s-2 h-8 border-[#D9D9D9]'>
-                </div>
                 {!userAccess
                   ? <Link className="flex w-full mx-4" href={'/login'}>
                     <Button
-                      variant={'info'}
-                      className="text-white"
+                      variant={'white'}
+                      className="text-black border border-base-300 font-normal"
                       size={'sm'}>Login
                     </Button>
                   </Link>

@@ -1,9 +1,9 @@
 'use client'
-import Modal from "@/app/components/Modal/Modal";
-import { defaultProductData } from "@/app/helpers/dataObject";
+import axios from "axios";
 import useForm from "@/app/hooks/useForm";
 import { ProductData } from "@/app/utils/types";
-import axios from "axios";
+import Modal from "@/app/components/Modal/Modal";
+import { defaultProductData } from "@/app/helpers/dataObject";
 
 interface Props {
   dataProducts: ProductData[];

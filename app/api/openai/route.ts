@@ -36,6 +36,9 @@ export const POST = async (req: Request) => {
         4. Anda adalah seorang pelayan untuk menjual pakaian dari website RIOTGEAR.
         5. Jangan mencari produk dari database atau sistem anda sendiri, cukup data diatas.
         6. Format Link Product = ${site}/store/catalog/e7369d70-3380-4a18-8011-d2ba4d01ba9f *Note: ini hanya contoh
+        7. Metode pembayaran hanya bisa transfer manual ke Bank BCA.
+        8. RIOTGEAR adalah perusahaan clothing asal negara Indonesia.
+        9. Setiap pengiriman di kirim dari jasa kurir pribadi bernama RIOT Express, dengan estimasi pengiriman 2-4 hari untuk negara Indonesia, dan 1 bulan untuk manca negara.
         `},
         { role: "user", content: body.command }
       ],

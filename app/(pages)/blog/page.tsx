@@ -1,34 +1,34 @@
-import { bebas_neue } from '@/app/utils/fonts';
+import Link from 'next/link';
+
 import blogBanner from '@/app/assets/Content/blog.png'
+import { getBlogArticles } from '@/app/utils/queryDb';
 import ArticleCard from '@/app/components/Card/ArticleCard';
 import Hero from '@/app/components/Hero/Hero';
 import HeroTitleOnyl from '@/app/components/Hero/HeroTitleOnyl';
-import { getBlogArticles } from '@/app/utils/queryDb';
-import Link from 'next/link';
 
 
 const page = async () => {
     const articles = await getBlogArticles();
-    
+
     return (
         <>
-            <section className="max-w-6xl mx-auto">
-                <Hero
-                    childComponent={<HeroTitleOnyl />}
-                    img={blogBanner}
-                />
-                <h2 className={`text-center text-4xl font-medium mb ${bebas_neue.className}`}>BLOG</h2>
+            <Hero
+                childComponent={<HeroTitleOnyl />}
+                img={blogBanner}
+            />
+            <main className="max-w-6xl mx-auto h-[80vh]">
+                <h2 className={`text-center text-4xl font-medium mb`}>BLOG</h2>
                 <section className='flex flex-col gap-3 p-4'>
                     {articles?.map(item => (
-                    
-                    <Link href={`/blog/article?id=${item.id}`} key={item.id}>
-                        <ArticleCard data={item} />
-                    </Link>
+
+                        <Link href={`/blog/article?id=${item.id}`} key={item.id}>
+                            <ArticleCard data={item} />
+                        </Link>
                     ))
-                    
+
                     }
                 </section>
-            </section>
+            </main>
         </>
     );
 };

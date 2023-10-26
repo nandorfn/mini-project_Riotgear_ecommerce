@@ -13,8 +13,8 @@ import { Text } from "@/app/components/Container/Text";
 import ErrorMsg from "@/app/components/ErrorMsg";
 import { Select } from "@/app/components/Form/Select";
 import { Textarea } from "@/app/components/Form/Textarea";
-import Transparent from "@/app/components/Container/Transparent";
 import bankIcon from '@/app/assets/icon/bank.svg'
+import { Transparent } from "@/app/components/Container/Transparent";
 
 type CheckoutBodyProps = {
     children: React.ReactNode;
@@ -26,7 +26,6 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
         register,
         handleSubmit,
         errors,
-        isSubmitting,
         onSubmit,
         watch,
         control,
@@ -80,60 +79,94 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
                                 />
                                 {errors.email && <ErrorMsg error={errors.email.message} />}
                             </label>
-
-                            <label className="flex flex-col font-medium">
-                                Country
-                                <Controller
-                                    render={({ field }) => (
-                                        <Select
-                                            {...field}
-                                            data={country}
-                                            variant={'border'}
-                                            className="mt-3"
+                            {!country
+                                ? <>
+                                    <label className="font-medium">
+                                        Country
+                                        <input
+                                            {...register("country")}
+                                            type="text"
+                                            placeholder="Input your country"
+                                            className="input input-bordered w-full font-normal mt-3"
                                         />
-                                    )}
-                                    name="country"
-                                    control={control}
-                                    defaultValue=""
-                                />
-                                {errors.country && <ErrorMsg error={errors.country.message} />}
-                            </label>
-
-                            <label className="flex flex-col font-medium ">
-                                City
-                                <Controller
-                                    name="city"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <Select
-                                            {...field}
-                                            data={cities}
-                                            variant={'border'}
-                                            className="mt-3"
+                                        {errors.country && <ErrorMsg error={errors.country.message} />}
+                                    </label>
+                                    <label className="font-medium">
+                                        City
+                                        <input
+                                            {...register("city")}
+                                            type="text"
+                                            placeholder="Input your city"
+                                            className="input input-bordered w-full font-normal mt-3"
                                         />
-                                    )}
-                                />
-                                {errors.city && <ErrorMsg error={errors.city.message} />}
-                            </label>
-
-                            <label className="flex flex-col font-medium ">
-                                District
-                                <Controller
-                                    name="district"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <Select
-                                            {...field}
-                                            data={districts}
-                                            variant={'border'}
-                                            className="mt-3"
+                                        {errors.city && <ErrorMsg error={errors.city.message} />}
+                                    </label>
+                                    <label className="font-medium">
+                                        District
+                                        <input
+                                            {...register("district")}
+                                            type="text"
+                                            placeholder="Input your district"
+                                            className="input input-bordered w-full font-normal mt-3"
                                         />
-                                    )}
-                                />
-                                {errors.district && <ErrorMsg error={errors.district.message} />}
-                            </label>
+                                        {errors.district && <ErrorMsg error={errors.district.message} />}
+                                    </label>
+                                </>
+                                : <>
+                                    <label className="flex flex-col font-medium">
+                                        Country
+                                        <Controller
+                                            render={({ field }) => (
+                                                <Select
+                                                    {...field}
+                                                    data={country}
+                                                    variant={'border'}
+                                                    className="mt-3"
+                                                />
+                                            )}
+                                            name="country"
+                                            control={control}
+                                            defaultValue=""
+                                        />
+                                        {errors.country && <ErrorMsg error={errors.country.message} />}
+                                    </label>
+                                    <label className="flex flex-col font-medium ">
+                                        City
+                                        <Controller
+                                            name="city"
+                                            control={control}
+                                            defaultValue=""
+                                            render={({ field }) => (
+                                                <Select
+                                                    {...field}
+                                                    data={cities}
+                                                    variant={'border'}
+                                                    className="mt-3"
+                                                />
+                                            )}
+                                        />
+                                        {errors.city && <ErrorMsg error={errors.city.message} />}
+                                    </label>
+                                    <label className="flex flex-col font-medium ">
+                                        District
+                                        <Controller
+                                            name="district"
+                                            control={control}
+                                            defaultValue=""
+                                            render={({ field }) => (
+                                                <Select
+                                                    {...field}
+                                                    data={districts}
+                                                    variant={'border'}
+                                                    className="mt-3"
+                                                />
+                                            )}
+                                        />
+                                        {errors.district && <ErrorMsg error={errors.district.message} />}
+                                    </label>
+                                </>
+                            }
+
 
                             <label className="font-medium flex flex-col">
                                 Street Address
@@ -191,12 +224,17 @@ const CheckoutBody = ({ children, userId }: CheckoutBodyProps) => {
                                     <Button size={'full'} variant={'white'}>BACK TO STORE</Button>
                                 </Link>
                                 <Button
+                                    className="disabled:opacity-50"
                                     size={'half'}
                                     variant={'red'}
                                     type="submit"
-                                    disabled={isSubmitting}
+                                    disabled={loading}
                                 >
-                                    ORDER
+                                    {loading
+                                        ? <span className="loading loading-spinner"></span>
+                                        : 'ORDER'
+
+                                    }
                                 </Button>
                             </Flex>
                         </form>

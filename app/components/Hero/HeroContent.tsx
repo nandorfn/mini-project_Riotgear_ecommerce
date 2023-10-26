@@ -1,10 +1,11 @@
 import Image from "next/image";
-import HeroImgPrimary from '../../assets/Content/HeroImgPrimary.png'
-import HeroImgSecondary from '../../assets/Content/HeroImgSecondary.png'
-import { Heading } from "../Container/Heading";
-import { Text } from "../Container/Text";
+
+import HeroImgPrimary from '@/app/assets/Content/HeroImgPrimary.png'
+import HeroImgSecondary from '@/app/assets/Content/HeroImgSecondary.png'
+import { Heading } from "@/app/components/Container/Heading";
+import { Text } from "@/app/components/Container/Text";
+import { Flex } from "@/app/components/Container/Flex";
 import { heroContent } from "@/app/helpers/dataObject";
-import { Flex } from "../Container/Flex";
 
 const HeroContent: React.FC = () => {
   return (

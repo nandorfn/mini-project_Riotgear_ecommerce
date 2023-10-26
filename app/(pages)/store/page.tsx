@@ -11,7 +11,6 @@ const page = async ({
   searchParams: { [key: string]: string | string[] | undefined }
 }) => {
   const products = await getItem(searchParams);
-
   return (
     <>
       <Flex variant={'row'} className="md:px-4 gap-5">
