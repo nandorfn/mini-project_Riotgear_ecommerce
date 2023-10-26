@@ -6,6 +6,7 @@ import ProductCardSkeleton from "@/app/components/Container/ProductCardSkeleton"
 import { Suspense } from "react";
 import ProductCard from "@/app/components/Card/ProductCard";
 import { Flex } from "@/app/components/Container/Flex";
+import { ProductData } from "@/app/utils/types";
 
 const page = async ({
   searchParams,
@@ -29,7 +30,7 @@ const page = async ({
           />
         </div>
         <Flex variant={'col'} className="w-1/5 gap-3">
-          {featured?.slice(0, 4).map((product) => (
+          {featured?.slice(0, 4).map((product: ProductData) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
               <article>
                 <ProductCard

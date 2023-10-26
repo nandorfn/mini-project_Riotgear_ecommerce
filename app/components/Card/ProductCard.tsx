@@ -7,8 +7,8 @@ import { Text } from '@/app/components/Container/Text';
 
 interface Product {
   productImg: string,
-  productId: string,
-  productName: string,
+  productId?: string,
+  productName?: string,
   productPrice: number,
   reviews?: any,
 }
