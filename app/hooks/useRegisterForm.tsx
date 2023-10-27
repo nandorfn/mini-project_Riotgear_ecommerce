@@ -32,10 +32,8 @@ const useRegisterForm = () => {
     axios.post('/api/register', newData)
       .then(response => {
         if (response.status === 200) {
-          setLoading(false);
           router.push('/login')
         } else {
-          setLoading(false);
           alert('Submitting form failed');
         }
       })
@@ -60,6 +58,7 @@ const useRegisterForm = () => {
           alert("Something went wrong");
         }
       })
+      .finally(() => setLoading(false));
     reset();
   }
   return {

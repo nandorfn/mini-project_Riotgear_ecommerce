@@ -13,9 +13,8 @@ import { Heading } from "@/app/components/Container/Heading";
 import couponIcon from '@/app/assets/icon/coupon.svg'
 import arrowRight from '@/app/assets/icon/arrow-right.svg'
 import { Text } from "@/app/components/Container/Text";
-import WrongCondition from "@/app/components/404/WrongCondition";
 
-const DataProducts = ({ products, user }: DataProductProps) => {
+const DataProducts = ({ products }: DataProductProps) => {
   const [productCart, setProductCard] = useState<cart[]>(products);
   let subTotal = 0;
   productCart.forEach((product) => {
@@ -23,20 +22,13 @@ const DataProducts = ({ products, user }: DataProductProps) => {
     subTotal += total;
   })
   let tax = subTotal * 11 / 100;
+  
   return (
     <>
       {
-        !user
-        && <WrongCondition
-          text="You must logged in to acces product Cart"
-          link="/login"
-          labelBtn="LOGIN TO ACCESS CART"
-        />
-      }
-
-      {
         productCart.length > 0
-          ? <Flex variant={'colToRow'} className="gap-10">
+          ?
+          <Flex variant={'colToRow'} className="gap-10">
             <Flex variant={'col'} className="w-full md:w-2/3 gap-5">
               {productCart?.map((data: cart) => (
                 <CartCard
@@ -81,14 +73,15 @@ const DataProducts = ({ products, user }: DataProductProps) => {
               </Flex>
             </Flex>
           </Flex>
-          : <Flex variant={'col'} align={'center'} className="h-[60vh] gap-5">
+          :
+          <Flex variant={'col'} align={'center'} className="h-[60vh] gap-5">
             <Text fs={'xl'}>Your cart is currently empty.</Text>
             <Link href={'/store'}>
               <Button variant={'black'}>CONTINUE SHOPPING</Button>
             </Link>
           </Flex>
-      }
 
+      }
     </>
   );
 };

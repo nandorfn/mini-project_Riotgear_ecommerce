@@ -7,18 +7,17 @@ import prisma from "@/app/lib/prisma";
 import { ZodIssue } from "zod";
 
 export const POST = async (req: Request) => {
-  const uuid = uuidv4();
   const token = req.headers.get('cookie')?.split('=')[1];
-  const body = await req.json();
   const verifiedToken = token && (await verifyAuth(token));
-  const result = userAddressSchema.safeParse(body);
-
+  
   // Check user token
   if (!verifiedToken) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   }
-
+  
   // Check schema validation
+  const body = await req.json();
+  const result = userAddressSchema.safeParse(body);
   if (!result.success) {
     let zodErrors = {};
     result.error.issues.forEach((issue: ZodIssue) => {
@@ -26,13 +25,14 @@ export const POST = async (req: Request) => {
     });
     return NextResponse.json({ errors: zodErrors }, { status: 400 });
   }
-
+  
   // check stock isValid
   const hasSufficientStock = await checkStock(verifiedToken.userId);
   if (!hasSufficientStock) {
     return NextResponse.json({ errors: 'Product stock is less than user request' }, { status: 400 });
   }
-
+  
+  const uuid = uuidv4();
   const order = await prisma.order.create({
     data: {
       orderId: uuid,
@@ -94,12 +94,9 @@ export const POST = async (req: Request) => {
           orderId: order.orderId
         }
       }),
-      prisma.order.update({
+      prisma.order.delete({
         where: {
           orderId: order.orderId
-        },
-        data: {
-          status: 'Cancelled'
         }
       })
 

@@ -8,20 +8,22 @@ import { TProductData } from "./[id]/route";
 
 
 export const POST = async (req: Request) => {
-  const uuid = uuidv4();
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
-  const body: TProductData = await req.json();
-  const result = productForm.safeParse(body);
-
-
+  
+  // Check Role
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   }
+  
+  // Check form data
+  const body: TProductData = await req.json();
   if (!body) {
     return NextResponse.json({ errors: 'Request Data Invalid' }, { status: 400 });
   }
-
+  
+  // form data validation
+  const result = productForm.safeParse(body);
   if (!result.success) {
     let zodErrors = {};
     result.error.issues.forEach((issue: ZodIssue) => {
@@ -29,7 +31,10 @@ export const POST = async (req: Request) => {
     });
     return NextResponse.json({ errors: zodErrors }, { status: 400 });
   }
-
+  
+  
+  // create data
+  const uuid = uuidv4();
   const product = await prisma.product.create({
     data: {
       productId: uuid,

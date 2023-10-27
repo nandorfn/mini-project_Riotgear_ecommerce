@@ -35,7 +35,13 @@ const CartModal = ({
             {children}
           </Flex>
           <Flex variant={'row'} className="gap-5 justify-between">
-            <Button disabled={loading} id={id} onClick={action} size={'half'} variant={'black'}>{btnLeft}</Button>
+            <Button disabled={loading} id={id} onClick={action} size={'half'} variant={'black'}>
+            {loading
+              ?  <span className="loading loading-spinner"></span>
+              : btnLeft
+            }
+              
+            </Button>
             <Button onClick={() => setModal(!modal)} size={'half'} variant={'white'}>{btnRight}</Button>
           </Flex>
         </Flex>
