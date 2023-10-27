@@ -1,4 +1,6 @@
 import { Flex } from "@/app/components/Container/Flex";
+import { Heading } from "@/app/components/Container/Heading";
+import { Text } from "@/app/components/Container/Text";
 
 const ImageNotFound: React.FC = () => {
     return (
@@ -8,10 +10,9 @@ const ImageNotFound: React.FC = () => {
             clr={'white'} 
             align={'center'} 
             rounded={'xl'} 
-            font={'neue'} 
             className='text-6xl h-[500px] border-accent border-2'>
-            <p>Sorry...</p>
-            <h1>Image Not Found</h1>
+            <Text>Sorry...</Text>
+            <Heading>Image Not Found</Heading>
           </Flex>
         </>
     );

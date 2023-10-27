@@ -32,7 +32,7 @@ const OrderStatus = ({ order }: { order: any }) => {
       orderId: order.orderId,
       status: 'Delivered'
     }
-    await axios.patch(`/api/order`, data)
+    await axios.patch(`/api/orders`, data)
       .then((res) => {
         setOrderItem({
           ...order,

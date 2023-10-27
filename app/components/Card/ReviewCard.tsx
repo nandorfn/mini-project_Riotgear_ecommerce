@@ -27,7 +27,7 @@ const ReviewCard: React.FC<ReviewCard> = ({
             </div>
           </div>
           <div>
-            <h4 className='font-medium'>{review.usernames}</h4>
+            <h4 className='font-medium'>{review.username}</h4>
             <p className='text-base-300 text-sm'>{review.createdAt.toLocaleDateString('ID-id')}</p>
           </div>
         </figure>

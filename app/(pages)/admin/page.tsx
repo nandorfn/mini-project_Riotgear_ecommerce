@@ -16,49 +16,62 @@ const page = async () => {
     scaledViewsCount: (item.viewsCount / maxValue) * 90
   }));
 
+
   return (
     <>
       <Heading fs={'xl2'} className="px-4 lg:px-0">Dashboard</Heading>
       <div className="grid px-4 lg:px-0 grid-cols-1 lg:grid-cols-2 gap-10">
-        <Flex variant={'col'} className=" gap-2 bg-zinc-100 rounded-xl shadow-sm p-5">
-          <Heading variant={'five'} className="mb-2">Popular Products</Heading>
-          <ListCard data={popularProducts} />
-        </Flex>
+        {
+          popularProducts.length > 1 &&
+          <Flex variant={'col'} className=" gap-2 bg-zinc-100 rounded-xl shadow-sm p-5">
+            <Heading variant={'five'} className="mb-2">Popular Products</Heading>
+            <ListCard data={popularProducts} />
+          </Flex>
+        }
         <Flex variant={'col'} className="gap-10">
-          <Flex variant={'col'} className="gap-2 bg-zinc-100 h-fit p-5 rounded-xl">
-            <Heading variant={'five'}>Sales Statistic</Heading>
-            <div className="stats shadow bg-primary">
-              <div className="stat place-items-center">
-                <div className="stat-title font-bold text-xl text-black">Income</div>
-                <div className="stat-value text-white">{`Rp${analytics.totalIncome.toLocaleString('ID-id')}`}</div>
+          {
+            analytics &&
+            <Flex variant={'col'} className="gap-2 bg-zinc-100 h-fit p-5 rounded-xl">
+              <Heading variant={'five'}>Sales Statistic</Heading>
+              <div className="stats shadow bg-primary">
+                <div className="stat place-items-center">
+                  <div className="stat-title font-bold text-xl text-black">Income</div>
+                  <div className="stat-value text-white">{`Rp${analytics.totalIncome.toLocaleString('ID-id')}`}</div>
+                </div>
+                <div className="stat place-items-center">
+                  <div className="stat-title font-bold text-xl text-black">Product Sold</div>
+                  <div className="stat-value text-secondary">{analytics.totalProductSell}</div>
+                </div>
+                <div className="stat place-items-center">
+                  <div className="stat-title font-bold text-xl text-black">Users</div>
+                  <div className="stat-value text-white">{analytics.totalUser}</div>
+                </div>
               </div>
-              <div className="stat place-items-center">
-                <div className="stat-title font-bold text-xl text-black">Product Sold</div>
-                <div className="stat-value text-secondary">{analytics.totalProductSell}</div>
-              </div>
-              <div className="stat place-items-center">
-                <div className="stat-title font-bold text-xl text-black">Users</div>
-                <div className="stat-value text-white">{analytics.totalUser}</div>
-              </div>
-            </div>
-          </Flex>
-          <Flex variant={'col'} className="gap-2 bg-zinc-100 h-fit p-5 rounded-xl">
-            <Heading variant={'five'}>Popular Category</Heading>
-            <Progress data={scaledData} />
-          </Flex>
-          <Flex variant={'col'} className="gap-2 bg-zinc-100 h-fit p-5 rounded-xl">
-            <Heading variant={'five'}>Daily Income In A Month</Heading>
-            <LineChart sourceData={analytics.daily} />
-          </Flex>
+            </Flex>
+          }
+          {
+            scaledData &&
+            <Flex variant={'col'} className="gap-2 bg-zinc-100 h-fit p-5 rounded-xl">
+              <Heading variant={'five'}>Popular Category</Heading>
+              <Progress data={scaledData} />
+            </Flex>
+          }
+          {
+            analytics.daily &&
+            <Flex variant={'col'} className="gap-2 bg-zinc-100 h-fit p-5 rounded-xl">
+              <Heading variant={'five'}>Daily Income In A Month</Heading>
+              <LineChart sourceData={analytics.daily} />
+            </Flex>
+          }
 
         </Flex>
-        <Flex variant={'col'} className=" gap-2 bg-zinc-100 rounded-xl shadow-sm p-5">
-          <Heading variant={'five'} className="mb-2">Featured Products</Heading>
-          <ListCard data={featuredProducts} />
-        </Flex>
-
-
-
+        {
+          featuredProducts &&
+          <Flex variant={'col'} className=" gap-2 bg-zinc-100 rounded-xl shadow-sm p-5">
+            <Heading variant={'five'} className="mb-2">Featured Products</Heading>
+            <ListCard data={featuredProducts} />
+          </Flex>
+        }
       </div>
     </>
   );

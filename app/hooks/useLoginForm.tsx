@@ -23,8 +23,8 @@ const useLoginForm = () => {
     axios.post('/api/login', data)
       .then(response => {
         if (response.data.status === 200) {
-          setLoading(false);
           router.refresh()
+          setLoading(false);
         }
       })
       .catch(error => {

@@ -1,5 +1,4 @@
 import Image, { StaticImageData } from 'next/image';
-import { bebas_neue } from '@/app/utils/fonts';
 
 interface PropsParent {
   imgSrc: StaticImageData;
@@ -17,7 +16,7 @@ const CategoryCard: React.FC<PropsParent> = ({imgSrc, label}) => {
           />
         </figure>
         <div className="card-body flex justify-center items-center">
-          <h2 className={`card-title text-6xl hover:text-base-100 ${bebas_neue.className}`}>{label}</h2>
+          <h2 className={`card-title text-6xl hover:text-base-100`}>{label}</h2>
         </div>
       </div>
     </>

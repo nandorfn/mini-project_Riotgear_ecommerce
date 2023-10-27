@@ -5,7 +5,7 @@ const HeroTitleOnyl: React.FC = () => {
     return (
         <>
           <article className="mt-3 md:mt-16 hidden md:flex">
-            <Heading fs={'main'} ff={'neue'}>{heroContent.title}</Heading>
+            <Heading fs={'main'}>{heroContent.title}</Heading>
           </article>
         </>
     );

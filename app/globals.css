@@ -21,10 +21,6 @@ body {
   background: #fff;
 }
 
-.font-bebas {
-  font-family: var(--font-bebas-neue);
-}
-
 ::-webkit-scrollbar {
     display: none;
 }

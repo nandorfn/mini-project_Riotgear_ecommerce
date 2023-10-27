@@ -37,7 +37,7 @@ const Page: React.FC = () => {
     const onSubmit = (e: React.SyntheticEvent) => {
         setLoading(true);
         e.preventDefault();
-        axios.post(`/api/blog`, data)
+        axios.post(`/api/blogs`, data)
             .then(res => {
                 if (res.status === 201) {
                     router.push('/admin/blog')

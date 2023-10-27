@@ -1,7 +1,6 @@
 import { cn } from "@/app/utils/utils";
 import { AllHTMLAttributes } from "react";
 import { VariantProps, cva } from 'class-variance-authority';
-import { bebas_neue } from "@/app/utils/fonts";
 
 const FlexVariants = cva(
   'flex w-full',
@@ -27,9 +26,6 @@ const FlexVariants = cva(
         xl: 'rounded-xl',
         full: 'rounded-full'
       },
-      font: {
-        neue: bebas_neue.className
-      },
       gap: {
         2: 'gap-2',
         3: 'gap-3',
@@ -49,12 +45,11 @@ const Flex: React.FC<FlexProps> = ({
   clr,
   align,
   rounded,
-  font,
   ...props
 }) => {
     return (
         <>
-          <div className={cn(FlexVariants({variant, clr, align, rounded, font, className}))}{...props} />
+          <div className={cn(FlexVariants({variant, clr, align, rounded, className}))}{...props} />
         </>
     );
 };

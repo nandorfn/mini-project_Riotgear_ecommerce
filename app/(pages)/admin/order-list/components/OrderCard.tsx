@@ -35,7 +35,7 @@ const OrderCard = ({ orderItem }: order) => {
       orderId: order.orderId,
       status: value
     }
-    await axios.patch(`/api/order`, data)
+    await axios.patch(`/api/orders`, data)
       .then((res) => {
         if (res.status === 200) {
           setOrder({

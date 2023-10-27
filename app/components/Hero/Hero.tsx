@@ -17,6 +17,7 @@ const Hero: React.FC<HeroProps> = ({ childComponent, img }) => {
           <Image
             className="h-full rounded-xl"
             src={img}
+            priority
             alt="Event"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
         </div>

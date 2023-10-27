@@ -97,7 +97,6 @@ export type cart = {
 }
 export type DataProductProps = {
   products: cart[];
-  user: undefined | userJwtSchema;
 }
 
 export type order = {

@@ -63,7 +63,7 @@ const ReviewModal = ({ data, itemId, setState, setOrderItem }: RewiewProps) => {
         orderId: data.orderId,
         orderItems: sentData
       };
-      await axios.post(`/api/review/${data.orderId}`, newRating)
+      await axios.post(`/api/reviews/${data.orderId}`, newRating)
         .then(res => {
           setOrderItem(res.data)
         });

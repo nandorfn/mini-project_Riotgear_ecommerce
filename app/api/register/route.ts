@@ -27,6 +27,8 @@ export const POST = async (req: Request) => {
     result.error.issues.forEach((issue: ZodIssue) => {
       zodErrors = {...zodErrors, [issue.path[0]]: issue.message}
     }); 
+    
+    return NextResponse.json({errors: zodErrors}, {status: 400})
   } else {
     await prisma.user.create({
       data: {
@@ -38,10 +40,7 @@ export const POST = async (req: Request) => {
         password: result.data.hashedPassword,
       }
     })
+    
+    return NextResponse.json({status: 201})
   }
-  return NextResponse.json(
-    Object.keys(zodErrors).length > 0
-    ? { errors: zodErrors }
-    : { success: true }
-  )
 }

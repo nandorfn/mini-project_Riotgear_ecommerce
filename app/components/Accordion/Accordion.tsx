@@ -1,20 +1,24 @@
+'use client'
 import Image from 'next/image';
 import arrowDown from '@/app/assets/icon/arrow-down.svg'
 import { Heading } from '@/app/components/Container/Heading';
+import Markdown from 'marked-react';
 
-interface AccordionProps {
+type AccordionProps = {
   label: string;
-  content?: string;
+  content: string;
 }
 
-const Accordion: React.FC<AccordionProps> = ({ label, content }) => {
+const Accordion = ({ label, content }: AccordionProps) => {
   return (
     <>
       <div className="collapse">
         <input type="checkbox" />
         <div className="collapse-title px-0 text-base md:text-xl font-medium flex justify-between">
-          <Heading variant={'five'}>{label}</Heading>
-          <Image 
+          <Heading variant={'five'}>
+            {label}
+          </Heading>
+          <Image
             width={20}
             height={20}
             src={arrowDown}
@@ -22,13 +26,13 @@ const Accordion: React.FC<AccordionProps> = ({ label, content }) => {
           />
         </div>
         <div className="collapse-content px-0">
+          <div className='truncate whitespace-normal text-base-300'>
           {content &&
-            <p className='truncate whitespace-normal text-base-300'
-              dangerouslySetInnerHTML=
-              {{
-                __html: content?.replace(/\n/g, "<br>")
-              }} />
+            <Markdown>
+              {content}
+            </Markdown>
           }
+          </div>
         </div>
       </div>
     </>

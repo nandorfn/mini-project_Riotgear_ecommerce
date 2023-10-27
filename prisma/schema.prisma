@@ -4,20 +4,26 @@
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
-  output   = "./generated/client"
+  output   = "./testProd/client"
 }
 
 // datasource db {
 //   provider = "postgresql"
 //   url = env("DATABASE_URL")
 // }
-
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url  	= env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
+
+
+// datasource db {
+//   provider = "postgresql"
+//   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+// }
 
 
 model Product {
@@ -78,7 +84,7 @@ model Order {
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   paymentMethod String
-  status        String      @default("Ordered")
+  status        String
   orderedItems  OrderItem[]
   review        Review[]
   user          User        @relation(fields: [userId], references: [userId])
@@ -121,7 +127,7 @@ model Review {
   productId           String  
   orderId             String
   userId              String 
-  usernames           String
+  username            String
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
   order               Order @relation(fields: [orderId], references: [orderId])

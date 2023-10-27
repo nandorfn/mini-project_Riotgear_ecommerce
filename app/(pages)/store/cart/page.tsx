@@ -6,6 +6,7 @@ import { Heading } from "@/app/components/Container/Heading";
 import { verifyAuth } from "@/app/utils/auth";
 import { getUserProductCart } from "@/app/utils/queryDb";
 import DataProducts from "./components/DataProducts";
+import WrongCondition from "@/app/components/404/WrongCondition";
 
 const Page: React.FC = async () => {
   const cookieStore = cookies();
@@ -24,10 +25,18 @@ const Page: React.FC = async () => {
         </div>
 
         <Heading variant={'fourthRwd'} className=" mb-5 md:mb-10">SHOPPING CART</Heading>
-        <DataProducts
-          products={productCart}
-          user={user}
-        />
+        {!user
+          ?
+          <WrongCondition
+            text="You must logged in to acces product Cart"
+            link="/login"
+            labelBtn="LOGIN TO ACCESS CART"
+          />
+          :
+          <DataProducts
+            products={productCart}
+          />
+        }
       </main>
     </>
   );

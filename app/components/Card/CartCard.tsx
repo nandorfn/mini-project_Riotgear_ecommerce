@@ -15,10 +15,11 @@ import { Transparent } from "@/app/components/Container/Transparent";
 
 interface CartCardProps {
   data: cart;
-  handleProduct: Dispatch<SetStateAction<cart[]>>;
+  productCart: cart[];
+  setProductCart: Dispatch<SetStateAction<cart[]>>;
 }
 
-  const CartCard: React.FC<CartCardProps> = ({ data, handleProduct }) => {
+  const CartCard: React.FC<CartCardProps> = ({ data, setProductCart, productCart }) => {
   const [modal, setModal] = useState(false);
   const [state, setState] = useState({
     quantity: data.quantity,
@@ -46,8 +47,28 @@ interface CartCardProps {
     });
   }
   
+  const updateCartQuantity = (id: number, quantity: number) => {
+    let items = [...productCart];
+    const indexToEdit = items.findIndex((item) => item.id === id)
+    let item = items[indexToEdit];
+    item.quantity = quantity;
+    items[indexToEdit] = item;
+    setProductCart(items)    
+  }
+  
+  const deleteCart = (id: number) => {
+    let carts = [...productCart];
+    const indexToDelete = carts.findIndex((item) => item.id === id);
+    
+    if (indexToDelete !== -1) {
+      carts.splice(indexToDelete, 1);
+      setProductCart(carts);
+    }
+    
+  }
+  
   const prevQuantity = usePrevious(state.quantity);
-  const queryProduct = `/api/cart`
+  const queryProduct = `/api/carts`
   useEffect(() => {
     if (prevQuantity !== state.quantity && state.dataId !== '') {
       setState({
@@ -56,11 +77,11 @@ interface CartCardProps {
       })
       axios.patch(`${queryProduct}/${state.dataId}`, state.quantity)
         .then((response) => {
-          handleProduct(response.data)
           setState({
             ...state,
             loading: false
           })
+          updateCartQuantity(response.data.id, response.data.quantity)
         })
     }
 
@@ -75,7 +96,13 @@ interface CartCardProps {
     })
     await deleteData(`${queryProduct}/${id}`)
       .then((res) => {
-        handleProduct(res.data)
+        if (res.status === 200) {
+          deleteCart(res.data.id)
+        } else {
+          alert('Failed to delete product')
+        }
+      })
+      .finally(() => {
         setState({
           ...state,
           loading: false
@@ -122,7 +149,7 @@ interface CartCardProps {
               <Text className="uppercase">{`Size: ${productSize}`}</Text>
             </Flex>
 
-            <Flex variant={'col'} className="md:gap-3">
+            <Flex variant={'col'} className="md:gap-3 mt-3 md:mt-0">
               <Heading>{`Rp${productPrice.toLocaleString('ID-id')}`}</Heading>
               <Flex variant={'row'}>
                 <label className="flex flex-col">
@@ -141,8 +168,9 @@ interface CartCardProps {
                     )}
                   </select>
                 </label>
-                <Flex className=" justify-end items-end">
-                  <h1 className="md:font-medium md:text-md">{`SUBTOTAL: Rp${subTotalItem.toLocaleString('ID-id')}`}</h1>
+                <Flex className=" justify-end items-end gap-1">
+                  <h1 className="hidden md:block md:font-medium md:text-md">SUBTOTAL:</h1>
+                  <h1 className="md:font-medium md:text-md">{`Rp${subTotalItem.toLocaleString('ID-id')}`}</h1>
                 </Flex>
               </Flex>
             </Flex>
@@ -152,6 +180,7 @@ interface CartCardProps {
       {modal &&
         <CartModal
           id={idCart}
+          loading={state.loading}
           setModal={setModal}
           modal={modal}
           action={handleDelete}

@@ -296,6 +296,10 @@ export const reduceProductStock = async (userId: string) => {
 export const getOrderProducts = cache(async () => {
   const allOrder = await prisma.order.findMany();
   
+  if (!allOrder || allOrder.length === 0) {
+    return [];
+  }
+
   type TOrder = {
     id: number;
     orderId: string;
@@ -304,7 +308,7 @@ export const getOrderProducts = cache(async () => {
     updatedAt: Date;
     paymentMethod: string;
     status: string;
-}
+  }
 
   const allData = await Promise.all(
     allOrder.map(async (order: TOrder) => {
@@ -317,7 +321,6 @@ export const getOrderProducts = cache(async () => {
           quantity: true,
         },
       });
-
 
       const address = await prisma.address.findFirst({
         where: {
@@ -332,8 +335,6 @@ export const getOrderProducts = cache(async () => {
           zip: true,
         }
       });
-
-
 
       const validOrderItems = Array.isArray(orderItems) ? orderItems : [];
       const orderData = {
@@ -372,6 +373,7 @@ export const getOrderProducts = cache(async () => {
 
   return allData;
 });
+
 
 
 const getOrderItemsWithProducts = async (order: any) => {
@@ -460,58 +462,68 @@ export const getUserCurrentOrder = cache(async (orderId: any) => {
 
 
 export const getIncomeSales = async () => {
-  const completedOrders = await prisma.order.findMany({
-    where: {
-      status: 'Completed'
-    },
-    take: 30
-  });
-
-  const incomeData = {
-    daily: {} as Record<string, number>,
-    monthly: {} as Record<string, number>,
-    totalIncome: 0,
-    totalProductSell: 0,
-  };
-
-  for (const order of completedOrders) {
-    const orderItems = await prisma.orderItem.findMany({
+  try {
+    const completedOrders = await prisma.order.findMany({
       where: {
-        orderId: order.orderId
-      }
+        status: 'Completed'
+      },
+      take: 30
     });
 
-    for (const item of orderItems) {
-      const product = await prisma.product.findFirst({
+    if (completedOrders.length === 0) {
+      throw new Error('No completed orders found.');
+    }
+
+    const incomeData = {
+      daily: {} as Record<string, number>,
+      monthly: {} as Record<string, number>,
+      totalIncome: 0,
+      totalProductSell: 0,
+    };
+
+    for (const order of completedOrders) {
+      const orderItems = await prisma.orderItem.findMany({
         where: {
-          productId: item.productId
+          orderId: order.orderId
         }
       });
 
-      if (product?.productPrice) {
-        const itemIncome = item.quantity * product.productPrice;
-        incomeData.totalIncome += itemIncome;
-        incomeData.totalProductSell += item.quantity;
+      for (const item of orderItems) {
+        const product = await prisma.product.findFirst({
+          where: {
+            productId: item.productId
+          }
+        });
 
-        const orderDate = order.createdAt.toISOString().split('T')[0];
-        if (incomeData.daily[orderDate]) {
-          incomeData.daily[orderDate] += itemIncome;
-        } else {
-          incomeData.daily[orderDate] = itemIncome;
-        }
+        if (product?.productPrice) {
+          const itemIncome = item.quantity * product.productPrice;
+          incomeData.totalIncome += itemIncome;
+          incomeData.totalProductSell += item.quantity;
 
-        const orderMonth = order.createdAt.toISOString().split('-').slice(0, 2).join('-');
-        if (incomeData.monthly[orderMonth]) {
-          incomeData.monthly[orderMonth] += itemIncome;
-        } else {
-          incomeData.monthly[orderMonth] = itemIncome;
+          const orderDate = order.createdAt.toISOString().split('T')[0];
+          if (incomeData.daily[orderDate]) {
+            incomeData.daily[orderDate] += itemIncome;
+          } else {
+            incomeData.daily[orderDate] = itemIncome;
+          }
+
+          const orderMonth = order.createdAt.toISOString().split('-').slice(0, 2).join('-');
+          if (incomeData.monthly[orderMonth]) {
+            incomeData.monthly[orderMonth] += itemIncome;
+          } else {
+            incomeData.monthly[orderMonth] = itemIncome;
+          }
         }
       }
     }
-  }
 
-  return incomeData;
+    return incomeData;
+  } catch (error) {
+
+    return { daily: {}, monthly: {}, totalIncome: 0, totalProductSell: 0 };
+  }
 }
+
 
 
 export const getPopularProductCategory = async () => {
