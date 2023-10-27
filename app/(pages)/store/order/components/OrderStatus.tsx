@@ -99,7 +99,7 @@ const OrderStatus = ({ order }: { order: any }) => {
           </li>
           {orderItem.status === 'Shipped' &&
             <li className="mt-2">
-              <Button onClick={handleConfirmOrder} size={'sm'} variant={'success'}>
+              <Button onClick={() => setModal(true)} size={'sm'} variant={'success'}>
                 Recieve Order
               </Button>
             </li>
