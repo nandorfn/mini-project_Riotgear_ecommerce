@@ -1,17 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuth } from "@/app/utils/auth";
-import { getUserProductCart } from "@/app/utils/queryDb";
 import prisma from "@/app/lib/prisma";
 
 export const PATCH = async (req: NextRequest, { params }: { params: { id: string } }) => {
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
-  
+
   if (!verifiedToken) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
-  } else {
+  }
+
+  try {
     const quantity = await req.json();
-    await prisma.cart.update({
+    const updatedCart = await prisma.cart.update({
       where: {
         id: Number(params.id),
       },
@@ -20,31 +21,38 @@ export const PATCH = async (req: NextRequest, { params }: { params: { id: string
       }
     })
 
-    const newProductQuantity = await getUserProductCart(verifiedToken.userId);
-    return NextResponse.json(newProductQuantity, { status: 200 });
+    if (!updatedCart) {
+      throw new Error('Internal server error')
+    } else {
+      return NextResponse.json(updatedCart, { status: 200 });
+    }
+  } catch (error) {
+    return NextResponse.json({ errors: error }, { status: 500 })
   }
+
 }
 
 export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token))
-  
+
   if (!verifiedToken) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
-  } else {
+  }
+
+  try {
     const deleteCart = await prisma.cart.delete({
       where: {
         id: Number(params.id)
       }
     });
-
     if (!deleteCart) {
-      return NextResponse.json({ errors: 'Bad Request' }, { status: 400 });
+      throw new Error('Deleted Data Not Found');
     } else {
-      let updateCart = await getUserProductCart(verifiedToken.userId);
-      return NextResponse.json(updateCart, { status: 200 });
+      return NextResponse.json(deleteCart, { status: 200 });
     }
 
+  } catch (error) {
+    return NextResponse.json({ errors: error }, { status: 404 });
   }
-
 }

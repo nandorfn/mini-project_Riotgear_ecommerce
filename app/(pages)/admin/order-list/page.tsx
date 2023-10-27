@@ -5,7 +5,6 @@ import OrderCard from "./components/OrderCard";
 import { Flex } from "@/app/components/Container/Flex";
 import { getOrderProducts } from "@/app/utils/queryDb";
 import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
-import { Transparent } from "@/app/components/Container/Transparent";
 import WrongCondition from "@/app/components/404/WrongCondition";
 
 const Page = async ({

@@ -15,10 +15,11 @@ import { Transparent } from "@/app/components/Container/Transparent";
 
 interface CartCardProps {
   data: cart;
-  handleProduct: Dispatch<SetStateAction<cart[]>>;
+  productCart: cart[];
+  setProductCart: Dispatch<SetStateAction<cart[]>>;
 }
 
-  const CartCard: React.FC<CartCardProps> = ({ data, handleProduct }) => {
+  const CartCard: React.FC<CartCardProps> = ({ data, setProductCart, productCart }) => {
   const [modal, setModal] = useState(false);
   const [state, setState] = useState({
     quantity: data.quantity,
@@ -46,6 +47,26 @@ interface CartCardProps {
     });
   }
   
+  const updateCartQuantity = (id: number, quantity: number) => {
+    let items = [...productCart];
+    const indexToEdit = items.findIndex((item) => item.id === id)
+    let item = items[indexToEdit];
+    item.quantity = quantity;
+    items[indexToEdit] = item;
+    setProductCart(items)    
+  }
+  
+  const deleteCart = (id: number) => {
+    let carts = [...productCart];
+    const indexToDelete = carts.findIndex((item) => item.id === id);
+    
+    if (indexToDelete !== -1) {
+      carts.splice(indexToDelete, 1);
+      setProductCart(carts);
+    }
+    
+  }
+  
   const prevQuantity = usePrevious(state.quantity);
   const queryProduct = `/api/carts`
   useEffect(() => {
@@ -56,11 +77,11 @@ interface CartCardProps {
       })
       axios.patch(`${queryProduct}/${state.dataId}`, state.quantity)
         .then((response) => {
-          handleProduct(response.data)
           setState({
             ...state,
             loading: false
           })
+          updateCartQuantity(response.data.id, response.data.quantity)
         })
     }
 
@@ -75,7 +96,13 @@ interface CartCardProps {
     })
     await deleteData(`${queryProduct}/${id}`)
       .then((res) => {
-        handleProduct(res.data)
+        if (res.status === 200) {
+          deleteCart(res.data.id)
+        } else {
+          alert('Failed to delete product')
+        }
+      })
+      .finally(() => {
         setState({
           ...state,
           loading: false
@@ -152,6 +179,7 @@ interface CartCardProps {
       {modal &&
         <CartModal
           id={idCart}
+          loading={state.loading}
           setModal={setModal}
           modal={modal}
           action={handleDelete}
