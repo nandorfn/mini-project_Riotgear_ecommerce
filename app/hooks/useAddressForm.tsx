@@ -22,7 +22,7 @@ const useAddressForm = (userId: string) => {
 
   const onSubmit = async (data: TUserAddressSchema) => {
     setLoading(true);
-    axios.post(`/api/order`, data)
+    axios.post(`/api/orders`, data)
       .then((res) => {
           if (res.status === 201) {
             setLoading(false);
