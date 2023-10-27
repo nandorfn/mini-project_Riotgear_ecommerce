@@ -149,7 +149,7 @@ interface CartCardProps {
               <Text className="uppercase">{`Size: ${productSize}`}</Text>
             </Flex>
 
-            <Flex variant={'col'} className="md:gap-3">
+            <Flex variant={'col'} className="md:gap-3 mt-3 md:mt-0">
               <Heading>{`Rp${productPrice.toLocaleString('ID-id')}`}</Heading>
               <Flex variant={'row'}>
                 <label className="flex flex-col">
@@ -168,8 +168,9 @@ interface CartCardProps {
                     )}
                   </select>
                 </label>
-                <Flex className=" justify-end items-end">
-                  <h1 className="md:font-medium md:text-md">{`SUBTOTAL: Rp${subTotalItem.toLocaleString('ID-id')}`}</h1>
+                <Flex className=" justify-end items-end gap-1">
+                  <h1 className="hidden md:block md:font-medium md:text-md">SUBTOTAL:</h1>
+                  <h1 className="md:font-medium md:text-md">{`Rp${subTotalItem.toLocaleString('ID-id')}`}</h1>
                 </Flex>
               </Flex>
             </Flex>

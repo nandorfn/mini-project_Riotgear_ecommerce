@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import ProductCard from "@/app/components/Card/ProductCard";
 import { Flex } from "@/app/components/Container/Flex";
 import { ProductData } from "@/app/utils/types";
+import Footer from "@/app/components/Footer/Footer";
 
 const page = async ({
   searchParams,
@@ -22,14 +23,14 @@ const page = async ({
   return (
     <>
       <Navbar className="max-w-6xl md:mx-4 xl:mx-auto mt-4 mb-10" />
-      <main className="flex flex-row w-full justify-center max-w-6xl mx-auto gap-10 shadow-lg px-10 pb-10 rounded-xl">
-        <div className="w-4/5">
+      <main className="flex flex-row w-full justify-center max-w-6xl mx-auto gap-10 shadow-lg px-4 md:px-10 pb-10 rounded-xl">
+        <div className="md:w-4/5">
           <MdBody
             thumbnail={article.thumbnail}
             content={article.content}
           />
         </div>
-        <Flex variant={'col'} className="w-1/5 gap-3">
+        <Flex variant={'col'} className="w-1/5 gap-3 hidden md:flex">
           {featured?.slice(0, 4).map((product: ProductData) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
               <article>
@@ -45,6 +46,9 @@ const page = async ({
           }
         </Flex>
       </main>
+      <Footer
+        className="max-w-6xl"
+      />
     </>
   );
 };

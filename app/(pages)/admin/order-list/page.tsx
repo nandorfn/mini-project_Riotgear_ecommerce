@@ -25,6 +25,13 @@ const Page = async ({
       {allOrder.length === 0
         ?
         <>
+          <WrongCondition
+            text="Order list is empty"
+            link="/admin"
+            labelBtn="GO BACK"
+          />
+        </>
+        : <>
           <Heading fs={'xl2'} className="mx-4 lg:mx-0">Order List</Heading>
           <Flex align={'iCenter'} className="px-4 lg:px-0 gap-3">
             <Heading variant={'five'}>Status</Heading>
@@ -36,13 +43,6 @@ const Page = async ({
               </Flex>
             </div>
           </Flex>
-          <WrongCondition
-            text="Order list is empty"
-            link="/admin"
-            labelBtn="GO BACK"
-          />
-        </>
-        : <>
           <ul className="px-4 lg:px-0 flex flex-col gap-5">
             {filteredOrders?.map((order, index) => (
               <li key={order.id}>

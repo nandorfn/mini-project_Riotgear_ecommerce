@@ -14,7 +14,7 @@ const HeroContent: React.FC = () => {
         <Heading fs={'xl5'} className="w-full lg:w-[28rem]">
           {heroContent.title}
         </Heading>
-        <Text clr={'grey'} className="w-full lg:w-[34rem]">
+        <Text clr={'base3'} className="w-full lg:w-[34rem]">
           {heroContent.desc}
         </Text>
       </article>

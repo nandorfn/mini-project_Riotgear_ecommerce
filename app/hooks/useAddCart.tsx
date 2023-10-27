@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 const useAddCart = ({user, id, stock}: PurchaseBtn) => {
   const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState('1');
   const data = {
     userId: user?.userId,
@@ -13,9 +14,11 @@ const useAddCart = ({user, id, stock}: PurchaseBtn) => {
   }
   const query = `/api/carts`
   const handlePostCart = async (e: React.SyntheticEvent) => {
+    setLoading(true);
     setModal(!modal)
     e.preventDefault();
     await postData(query, data)
+    .then(() => setLoading(false))
   }
 
   const options = [];
@@ -35,6 +38,7 @@ const useAddCart = ({user, id, stock}: PurchaseBtn) => {
     quantity,
     setQuantity,
     options,
+    loading,
     handlePostCart,
     modal,
     setModal,

@@ -17,6 +17,7 @@ const PurchaseBtn = ({ user, id, stock }: PurchaseBtn) => {
     quantity,
     setQuantity,
     options,
+    loading,
     handlePostCart,
     modal,
     setModal,
@@ -31,7 +32,7 @@ const PurchaseBtn = ({ user, id, stock }: PurchaseBtn) => {
         )}
       </select>
       <div className="flex flex-row w-full justify-between gap-3 sticky sm:absolute sm:bottom-0">
-        <Button onClick={handlePostCart} variant={'red'} className='md:w-[70%]'>Add to cart</Button>
+        <Button disabled={loading} onClick={handlePostCart} variant={'red'} className='md:w-[70%]'>Add to cart</Button>
         <Button className="md:w-[26%]">
           <Image
             src={wishlistIcon}

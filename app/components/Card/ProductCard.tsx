@@ -33,6 +33,7 @@ const ProductCard: React.FC<Product> = ({
               alt="Jacket"
               width={500}
               height={500}
+              priority
             />
           </figure>
 

@@ -6,6 +6,12 @@ import { v4 as uuidv4 } from 'uuid';
 import prisma from "@/app/lib/prisma";
 import { ZodIssue } from "zod";
 
+type orderStatus = {
+  orderId: string;
+  status: string;
+};
+
+
 export const POST = async (req: Request) => {
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
@@ -17,6 +23,7 @@ export const POST = async (req: Request) => {
   
   // Check schema validation
   const body = await req.json();
+  console.log(body);
   const result = userAddressSchema.safeParse(body);
   if (!result.success) {
     let zodErrors = {};
@@ -33,11 +40,13 @@ export const POST = async (req: Request) => {
   }
   
   const uuid = uuidv4();
+  const Ordered = 'Ordered';
   const order = await prisma.order.create({
     data: {
       orderId: uuid,
       userId: verifiedToken.userId,
       paymentMethod: result.data.paymentMethod,
+      status: Ordered
     }
   });
 
@@ -107,11 +116,6 @@ export const POST = async (req: Request) => {
 
 }
 
-
-type orderStatus = {
-  orderId: string;
-  status: string;
-};
 
 export const PATCH = async (req: Request) => {
   const body: orderStatus = await req.json();

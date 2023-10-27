@@ -1,6 +1,5 @@
 import { AllHTMLAttributes } from "react";
 import { cn } from "@/app/utils/utils";
-import { bebas_neue } from "@/app/utils/fonts";
 import { VariantProps, cva } from 'class-variance-authority';
 
 const headingVariants = cva(
@@ -35,9 +34,6 @@ const headingVariants = cva(
       normal: 'font-normal',
       medium: 'font-medium'
     },
-    ff: {
-      neue: bebas_neue.className
-    }
   },
   defaultVariants: {
     bold: 'medium'

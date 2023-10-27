@@ -10,7 +10,6 @@ const ImageNotFound: React.FC = () => {
             clr={'white'} 
             align={'center'} 
             rounded={'xl'} 
-            font={'neue'} 
             className='text-6xl h-[500px] border-accent border-2'>
             <Text>Sorry...</Text>
             <Heading>Image Not Found</Heading>
