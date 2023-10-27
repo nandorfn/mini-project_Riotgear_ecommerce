@@ -6,6 +6,7 @@ import { Flex } from "@/app/components/Container/Flex";
 import { getOrderProducts } from "@/app/utils/queryDb";
 import StatusOrderWrapper from "@/app/components/Container/StatusOrderWrapper";
 import { Transparent } from "@/app/components/Container/Transparent";
+import WrongCondition from "@/app/components/404/WrongCondition";
 
 const Page = async ({
   searchParams,
@@ -23,11 +24,8 @@ const Page = async ({
   return (
     <>
       {allOrder.length === 0
-        ? <Transparent>
-          <span className="loading loading-spinner loading-lg"></span>
-        </Transparent>
-        
-        : <>
+        ?
+        <>
           <Heading fs={'xl2'} className="mx-4 lg:mx-0">Order List</Heading>
           <Flex align={'iCenter'} className="px-4 lg:px-0 gap-3">
             <Heading variant={'five'}>Status</Heading>
@@ -39,13 +37,20 @@ const Page = async ({
               </Flex>
             </div>
           </Flex>
+          <WrongCondition
+            text="Order list is empty"
+            link="/admin"
+            labelBtn="GO BACK"
+          />
+        </>
+        : <>
           <ul className="px-4 lg:px-0 flex flex-col gap-5">
             {filteredOrders?.map((order, index) => (
               <li key={order.id}>
                 <Suspense fallback={<OrderCardSkeleton variant="variant2" />}>
-                <OrderCard
-                  orderItem={order}
-                />
+                  <OrderCard
+                    orderItem={order}
+                  />
                 </Suspense>
               </li>
             ))

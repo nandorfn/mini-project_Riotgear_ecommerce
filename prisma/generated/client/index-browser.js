@@ -190,7 +190,7 @@ exports.Prisma.ReviewScalarFieldEnum = {
   productId: 'productId',
   orderId: 'orderId',
   userId: 'userId',
-  usernames: 'usernames',
+  username: 'username',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -274,7 +274,7 @@ exports.Prisma.ReviewOrderByRelevanceFieldEnum = {
   productId: 'productId',
   orderId: 'orderId',
   userId: 'userId',
-  usernames: 'usernames'
+  username: 'username'
 };
 
 exports.Prisma.ArticleOrderByRelevanceFieldEnum = {
