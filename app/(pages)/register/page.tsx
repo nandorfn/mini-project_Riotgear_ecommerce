@@ -38,7 +38,8 @@ const Page = () => {
                 className="input input-bordered w-full"
               />
             </label>
-            {errors.name &&
+            {
+              errors.name &&
               <span className="text-red-500">{errors.name.message}</span>
             }
             <label>
@@ -50,7 +51,8 @@ const Page = () => {
                 className="input input-bordered w-full"
               />
             </label>
-            {errors.email &&
+            {
+              errors.email &&
               <span className="text-red-500">{errors.email.message}</span>
             }
 
@@ -63,7 +65,8 @@ const Page = () => {
                 className="input input-bordered w-full"
               />
             </label>
-            {errors.password &&
+            {
+              errors.password &&
               <span className="text-red-500">{errors.password.message}</span>
             }
 
@@ -76,7 +79,8 @@ const Page = () => {
                 className="input input-bordered w-full"
               />
             </label>
-            {errors.confirmPassword &&
+            {
+              errors.confirmPassword &&
               <span className="text-red-500">{errors.confirmPassword.message}</span>
             }
 
@@ -89,7 +93,8 @@ const Page = () => {
                 size={'half'}
                 type="submit"
                 disabled={isSubmitting}
-              >Register
+              >
+                Register
               </Button>
             </Flex>
           </form>

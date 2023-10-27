@@ -12,7 +12,7 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await axios.get('/api/blog')
+        await axios.get('/api/blogs')
           .then(res => {
             setArticles(res.data);
           })

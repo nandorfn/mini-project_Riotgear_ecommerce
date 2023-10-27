@@ -36,7 +36,6 @@ const MenuFilter: React.FC = () => {
     setQueryExist(hasQueryString);
   }, [hasQueryString]);
 
-
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams)
@@ -65,7 +64,7 @@ const MenuFilter: React.FC = () => {
   return (
     <>
       <aside className="flex flex-col gap-5 bg-base-200 rounded-xl p-5">
-        <figure className="flex flex-row md:flex-col ld:flex-row gap-3 justify-between">
+        <figure className="flex flex-row md:flex-col lg:flex-row gap-3 justify-between">
           <Flex className="gap-3" align={'iCenter'}>
             <Image src={filterIcon} alt="Filter icon" />
             <h1 className="font-medium text-lg">Filter</h1>

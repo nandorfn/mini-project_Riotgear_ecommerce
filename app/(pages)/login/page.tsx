@@ -21,8 +21,8 @@ const Page = () => {
     <>
       {loading
         ? <Transparent>
-            <span className="loading loading-spinner loading-lg"></span>
-          </Transparent>
+          <span className="loading loading-spinner loading-lg"></span>
+        </Transparent>
         : <div className="mx-4">
           <Heading fs={'xl3'}>
             Hello again! Sign in here.
@@ -37,10 +37,10 @@ const Page = () => {
                 className="input input-bordered w-full"
               />
             </label>
-            {errors.email &&
+            {
+              errors.email &&
               <span className="text-red-500">{errors.email.message}</span>
             }
-
             <label>
               Password
               <input
@@ -50,20 +50,30 @@ const Page = () => {
                 className="input input-bordered w-full"
               />
             </label>
-            {errors.password &&
+            {
+              errors.password &&
               <span className="text-red-500">{errors.password.message}</span>
             }
-
             <Flex align={'between'}>
-              <Link className="w-[48.5%]" href={'/store'}>
-                <Button variant={'default'} size={'full'} type="button">Return to Store</Button>
+              <Link
+                className="w-[48.5%]"
+                href={'/store'}
+              >
+                <Button
+                  variant={'default'}
+                  size={'full'}
+                  type="button"
+                >
+                  Return to Store
+                </Button>
               </Link>
               <Button
                 variant={'login'}
                 size={'half'}
                 type="submit"
                 disabled={isSubmitting}
-              >Login
+              >
+                Login
               </Button>
             </Flex>
           </form>
