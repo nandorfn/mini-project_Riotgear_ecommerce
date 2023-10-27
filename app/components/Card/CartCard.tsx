@@ -47,7 +47,7 @@ interface CartCardProps {
   }
   
   const prevQuantity = usePrevious(state.quantity);
-  const queryProduct = `/api/cart`
+  const queryProduct = `/api/carts`
   useEffect(() => {
     if (prevQuantity !== state.quantity && state.dataId !== '') {
       setState({
