@@ -16,9 +16,9 @@ export const POST = async (req: Request) => {
         productId: existingCart.productId
       }
     });
-    
+
     if (product) {
-      const newQuantity = Math.min(existingCart.quantity + 1, product.productStock);
+      const newQuantity = Math.min(existingCart.quantity + Number(body.quantity), Math.min(product.productStock, 10));
       const updatedCartItem = await prisma.cart.update({
         where: {
           id: existingCart.id
