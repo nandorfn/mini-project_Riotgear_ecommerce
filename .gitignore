@@ -17,6 +17,7 @@
 
 # production
 /build
+/lib/prisma.ts
 
 # misc
 .DS_Store
