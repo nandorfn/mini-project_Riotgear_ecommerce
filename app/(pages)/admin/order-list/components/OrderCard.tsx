@@ -92,10 +92,10 @@ const OrderCard = ({ orderItem }: order) => {
           </div>
         </Flex>
 
-        <Flex variant={'colToRow'} className="bg-base-100 md:pe-4">
+        <Flex variant={'colToRow'} className="bg-base-100 md:pe-3">
           <Collapse>
             {order.orderItems.map((item: any, index: number) => (
-              <Flex key={index} className="gap-3">
+              <article key={index}>
                 {index === 0 && (
                   <>
                     <HistoryOrderCard
@@ -107,11 +107,12 @@ const OrderCard = ({ orderItem }: order) => {
                       collapseAdmin={<CollapseDetails data={order.orderItems} />} />
                   </>
                 )}
-              </Flex>
+              </article>
 
             ))}
+            <Flex variant={'col'} className="md:gap-3 mb-2 md:mb-0 ms-1 -mt-1 md:-mt-4" >
             {order.orderItems.map((item: any, index: number) => (
-              <Flex key={index} className="gap-3 ms-1 -mt-4 md:mt-0">
+              <article key={index} className=" -mt-3 md:mt-0 md:pe-2">
                 {index > 0 && (
                   <HistoryOrderCard
                     isAdmin={true}
@@ -121,8 +122,9 @@ const OrderCard = ({ orderItem }: order) => {
                     img={order.orderItems[index].productImgLink}
                   />
                 )}
-              </Flex>
+              </article>
             ))}
+            </Flex>
           </Collapse>
           <Flex variant={'colToRow'} className="px-5 -mt-10 md:mt-0 md:px-0">
             <Flex variant={'col'}>
