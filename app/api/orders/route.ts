@@ -23,7 +23,6 @@ export const POST = async (req: Request) => {
   
   // Check schema validation
   const body = await req.json();
-  console.log(body);
   const result = userAddressSchema.safeParse(body);
   if (!result.success) {
     let zodErrors = {};

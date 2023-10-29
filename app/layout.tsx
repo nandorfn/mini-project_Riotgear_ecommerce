@@ -7,6 +7,8 @@ import Head from 'next/head'
 const rubik = Rubik({ subsets: ['latin']})
 const ogImg = 'https://ucarecdn.com/41824360-e893-40b5-840a-d5c72ea70b16/Twitterpost1.png'
 export const metadata: Metadata = {
+  title: 'RIOTGEAR',
+  description: 'Streetwear Brand',
   metadataBase: new URL('https://riotgear.vercel.app'),
   openGraph: {
     title: 'RIOTGEAR',

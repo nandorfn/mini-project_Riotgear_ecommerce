@@ -1,12 +1,15 @@
 import { z } from "zod";
 const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 
+
+// Schema Login Form
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 export type TLoginSchema = z.infer<typeof loginSchema>;
 
+// Schema Register Server Form
 export const registerServerSchema = z.object({
   name: z.string().min(1, 'Name cannot be empty'),
   email: z.string().email(),
@@ -15,6 +18,7 @@ export const registerServerSchema = z.object({
 });
 export type TRegisterServerSchema = z.infer<typeof registerServerSchema>;
 
+// Scheme Register Client
 export const registerSchema = z.object({
   name: z.string().min(1, 'Name cannot be empty'),
   email: z.string().email(),
@@ -27,6 +31,8 @@ export const registerSchema = z.object({
   });
 export type TRegisterSchema = z.infer<typeof registerSchema>;
 
+
+// Schema user address form
 export const userAddressSchema = z.object({
   name: z.string().min(1, 'Name cannot be empty'),
   phone: z.string().refine((str) => phoneRegex.test(str), {message: "Please enter a valid phone number" }),
@@ -40,7 +46,7 @@ export const userAddressSchema = z.object({
 })
 export type TUserAddressSchema = z.infer<typeof userAddressSchema>
 
-
+// Schema product form
 export const productForm = z.object({
   productName: z.string().min(4, 'Product Name at least 4 characters'),
   productMainCategory: z.string().min(2, 'Please select product main category'),
@@ -57,6 +63,7 @@ export const productForm = z.object({
 })
 export type TProductForm = z.infer<typeof productForm>
 
+// Token schema
 export const tokenSchema = z.object({
   username: z.string(),
   userId: z.string(),
@@ -66,6 +73,7 @@ export const tokenSchema = z.object({
 })
 export type JwtSchema = z.infer<typeof tokenSchema>;
 
+// Schema Article
 export const articleSchema = z.object({
   title: z.string().min(8, 'Title must be at least 8 characters'),
   content: z.string().min(8, 'Content must be at least 8 characters'),
@@ -73,6 +81,7 @@ export const articleSchema = z.object({
 });
 export type TArticleSchema = z.infer<typeof articleSchema>;
 
+// Auth
 export type userAvatar = {
   username: string
   icon: string
@@ -85,6 +94,7 @@ export type userJwtSchema = {
   iat: number;
   exp: number;
 }
+
 // Cart Pages
 export type cart = {
   productInfo: any;
@@ -98,7 +108,7 @@ export type cart = {
 export type DataProductProps = {
   products: cart[];
 }
-
+// Order
 export type order = {
   id?: number,
   orderId?: string,
@@ -136,7 +146,8 @@ export type ProductData = {
   featured: number | boolean;
   reviews?: any;
 };
-export type ArticleModel = {
+
+export type TArticle = {
   id: number;
   title: string;
   content: string;
@@ -144,8 +155,10 @@ export type ArticleModel = {
   userId: string;
   thumbnail: string;
   viewsCount: number;
-  createdAt: Date;  
+  createdAt: Date;
 };
+export type ArticleModel = TArticle & { updatedAt?: Date };
+
 
 export type productFormState = {
   productId: string;
@@ -176,3 +189,35 @@ export type TOrderItem = {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type TProduct = {
+  id?: number;
+  productId?: string;
+  productName: string;
+  productMainCategory: string;
+  productSubCategory: string;
+  productImgLink: string;
+  productSize: string;
+  productGender: string;
+  productColor: string;
+  productStock: number;
+  productDesc: string;
+  productPrice: number;
+  viewsCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+  featured: boolean;
+};
+
+
+export type TReview = {
+  id: number;
+  text: string;
+  rating: number;
+  productId: string;
+  orderId: string;
+  userId: string;
+  username: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
