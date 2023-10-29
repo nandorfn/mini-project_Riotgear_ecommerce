@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/app/components/Button/Button";
 import { headTableArticle } from "@/app/helpers/dataObject";
+import { TArticle } from "@/app/utils/types";
 
 const Page = () => {
-  const [articles, setArticles] = useState<any>([])
+  const [articles, setArticles] = useState<TArticle[]>([])
 
   useEffect(() => {
     const fetchData = async () => {

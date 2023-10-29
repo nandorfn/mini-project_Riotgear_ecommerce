@@ -33,7 +33,7 @@ const page = async ({
         <Flex variant={'col'} className="w-1/5 gap-3 hidden md:flex">
           {featured?.slice(0, 4).map((product: ProductData) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
-              <article>
+              <article key={product.id}>
                 <ProductCard
                   productId={product.productId}
                   productImg={product.productImgLink}

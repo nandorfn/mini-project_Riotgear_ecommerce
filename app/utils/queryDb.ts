@@ -263,8 +263,7 @@ async function checkStockOrReduceStock(userId: string, operation: 'check' | 'red
     } else if (operation === 'reduce') {
       if (product.quantity > productStored.productStock) {
         return false;
-      } else if (product.quantity < productStored.productStock) {
-        // Kurangi jumlah stok produk
+      } else {
         await prisma.product.update({
           where: {
             productId: product.productId
