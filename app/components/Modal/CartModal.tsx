@@ -12,7 +12,8 @@ type ModalProps = {
   modal: boolean,
   setModal: (state: boolean) => void,
   action: any,
-  loading?: boolean
+  loading?: boolean,
+  confirmValue?: string,
 }
 
 const CartModal = ({
@@ -24,7 +25,8 @@ const CartModal = ({
   setModal,
   action,
   id,
-  loading
+  loading,
+  confirmValue
 }: ModalProps) => {
   return (
     <>
@@ -35,7 +37,7 @@ const CartModal = ({
             {children}
           </Flex>
           <Flex variant={'row'} className="gap-5 justify-between">
-            <Button disabled={loading} id={id} onClick={action} size={'half'} variant={'black'}>
+            <Button value={confirmValue} disabled={loading} id={id} onClick={action} size={'half'} variant={'black'}>
             {loading
               ?  <span className="loading loading-spinner"></span>
               : btnLeft
