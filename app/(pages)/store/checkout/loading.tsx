@@ -25,7 +25,7 @@ export default function Loading() {
       </div>
 
       <Heading variant={'fourthRwd'} className=" mb-5 md:mb-10">CHECKOUT</Heading>
-      <CheckoutBody userId={'182718218281'}>
+      <CheckoutBody userId={''}>
         <Flex variant={'col'} className="gap-4 rounded-lg h-fit">
           <Flex variant={'col'} className={"gap-4"}>
             <Heading>{`ORDER SUMMARY`}</Heading>

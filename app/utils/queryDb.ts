@@ -130,7 +130,7 @@ export const getBlogArticles = cache(async () => {
 })
 
 export const getArticle = cache(async (filter: any) => {
-  return await prisma.article.findFirst({
+  const article = await prisma.article.findFirst({
     where: {
       id: Number(filter.id),
     },
@@ -142,8 +142,25 @@ export const getArticle = cache(async (filter: any) => {
       createdAt: true,
       thumbnail: true,
       viewsCount: true,
-    }
+    },
   })
+  
+  if (!article) {
+    return null;
+  } else {
+    await prisma.article.update({
+      where: {
+        id: article.id,
+      },
+      data: {
+        viewsCount: {
+          increment: 1,
+        }
+      }
+    })
+    return article;
+  }
+  
 })
 
 export const getRecomendProduct = async (category: string, existId: string) => {

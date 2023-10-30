@@ -6,7 +6,6 @@ import HeroImgDesktop from './assets/Content/HeroImgDesktop.png'
 import Footer from './components/Footer/Footer'
 
 export default function Home() {
-
   return (
     <>
       <Hero

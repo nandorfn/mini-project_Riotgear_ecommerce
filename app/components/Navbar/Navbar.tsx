@@ -13,7 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({className, ...props}) => {
 
   return (
     <>
-        <nav className={cn('md:bg-accent flex flex-row justify-between px-3 rounded-xl p-4', className)} {...props}>
+        <nav className={cn('md:bg-accent flex flex-row justify-between px-3 rounded-xl p-4 h-fit', className)} {...props}>
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             
