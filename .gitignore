@@ -2,6 +2,7 @@
 
 # prisma dev
 /prisma
+/lib/prisma
 
 # dependencies
 /node_modules
