@@ -78,7 +78,7 @@ const ChatAI: React.FC<Props> = ({
               onChange={handleInput}
               variant={'border'}
               size={'wide'}
-              className="resize-y border-secondary"
+              className="resize-y border-info"
               rows={3}
               placeholder="type a messages..."
             />

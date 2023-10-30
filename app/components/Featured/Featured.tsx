@@ -34,7 +34,7 @@ const Featured = async () => {
         <Heading fs={'xl3'} className="p-4 md:text-5xl">
           Upgrade Your Style with Our Streetwear Collection
         </Heading>
-        <div className="p-4 gap-3 grid grid-cols-1 sm:grid-cols-2">
+        <div className="p-4 gap-4 xl:gap-6 grid grid-cols-1 sm:grid-cols-2">
           <CategoryCard imgSrc={shirtBg} label="Top" />
           <CategoryCard imgSrc={jacketBg} label="Outwear" />
           <CategoryCard imgSrc={skateBg} label="Bottom" />

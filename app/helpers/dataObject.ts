@@ -78,17 +78,11 @@ export const subCategory = [
   { id: 13, type: 'bottom', label: 'Chino', value: 'chino' },
   { id: 14, type: 'bottom', label: 'Wide Pants', value: 'wide-pants' },
   { id: 15, type: 'bottom', label: 'Casual Pants', value: 'casual-pants' },
-  // Sneaker
-  { id: 17, type:'shoes', label: 'Skate Shoes', value: 'skate-shoes' },
-  { id: 18, type:'shoes', label: 'Sneaker', value: 'sneaker' },
-  { id: 19, type:'shoes', label: 'Running Shoes', value: 'running-shoes' },
   // Accessories
   { id: 21, type: 'accessories', label: 'Bags', value: 'bags' },
   { id: 22, type: 'accessories', label: 'Scarves', value: 'scarves' },
   { id: 23, type: 'accessories', label: 'Gloves', value: 'gloves' },
   { id: 24, type: 'accessories', label: 'Hats', value: 'hats' },
-  { id: 25, type: 'accessories', label: 'Belts', value: 'belt' },
-  
 ];
 export const subCategoryOption = [
   { id: 0, type: '', label: 'Choose', value: '' },

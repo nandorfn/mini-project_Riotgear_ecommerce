@@ -64,6 +64,7 @@ const OrderCard = ({ orderItem }: order) => {
     <>
       {modal &&
         <CartModal
+          confirmValue='Cancelled'
           setModal={setModal}
           modal={modal}
           action={handleUpdateStatus}

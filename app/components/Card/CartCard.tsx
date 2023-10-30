@@ -94,6 +94,7 @@ interface CartCardProps {
       ...state,
       loading: true
     })
+    console.log(id)
     await deleteData(`${queryProduct}/${id}`)
       .then((res) => {
         if (res.status === 200) {

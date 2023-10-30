@@ -15,12 +15,12 @@ type orderStatus = {
 export const POST = async (req: Request) => {
   const token = req.headers.get('cookie')?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
-  
+
   // Check user token
   if (!verifiedToken) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   }
-  
+
   // Check schema validation
   const body = await req.json();
   const result = userAddressSchema.safeParse(body);
@@ -31,13 +31,13 @@ export const POST = async (req: Request) => {
     });
     return NextResponse.json({ errors: zodErrors }, { status: 400 });
   }
-  
+
   // check stock isValid
   const hasSufficientStock = await checkStock(verifiedToken.userId);
   if (!hasSufficientStock) {
     return NextResponse.json({ errors: 'Product stock is less than user request' }, { status: 400 });
   }
-  
+
   const uuid = uuidv4();
   const Ordered = 'Ordered';
   const order = await prisma.order.create({
@@ -66,11 +66,9 @@ export const POST = async (req: Request) => {
   // Create / Record OrderItem & User Address
   const orderItem = await createOrderItem(productCart, order.orderId);
   const orderAddress = await createUserAddress(result, verifiedToken.userId, order.orderId);
+  const reduceStock = await reduceProductStock(verifiedToken.userId);
 
-  if (orderItem && orderAddress) {
-    await reduceProductStock(verifiedToken.userId);
-    return NextResponse.json(order, { status: 201 });
-  } else {
+  if (!orderItem && !orderAddress && !reduceStock) {
     // Order failed => restore product stock and delete record & udate order status to Cancellled
     const orderItems = await prisma.orderItem.findMany({
       where: {
@@ -111,17 +109,16 @@ export const POST = async (req: Request) => {
 
     ]);
     return NextResponse.json({ errors: 'Order Failed' }, { status: 400 })
+  } else {
+    return NextResponse.json(order, { status: 201 });
   }
-
 }
 
 
 export const PATCH = async (req: Request) => {
   const body: orderStatus = await req.json();
   const result = updateOrderStatus.safeParse(body);
-  const token = req.headers.get('cookie')?.split('=')[1];
-  const verifiedToken = token && (await verifyAuth(token));
-
+  
   if (!result.success) {
     let zodErrors = {};
     result.error.issues.forEach((issue: ZodIssue) => {
@@ -129,7 +126,9 @@ export const PATCH = async (req: Request) => {
     });
     return NextResponse.json(zodErrors, { status: 401 });
   }
-
+  
+  const token = req.headers.get('cookie')?.split('=')[1];
+  const verifiedToken = token && (await verifyAuth(token));
   if (!verifiedToken) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });
   }
@@ -149,13 +148,13 @@ export const PATCH = async (req: Request) => {
           status: orderStatus,
         },
       });
-    
+
       const orderItems = await prisma.orderItem.findMany({
         where: {
           orderId: order.orderId
         }
       })
-  
+
       await prisma.$transaction([
         ...orderItems.map((orderItem: TOrderItem) => {
           return prisma.product.update({
@@ -170,10 +169,10 @@ export const PATCH = async (req: Request) => {
           });
         }),
       ])
-      
-      return NextResponse.json({status: 200})
+
+      return NextResponse.json({ status: 200 })
     }
-  
+
     const order = await prisma.order.update({
       where: {
         orderId: result.data.orderId,
