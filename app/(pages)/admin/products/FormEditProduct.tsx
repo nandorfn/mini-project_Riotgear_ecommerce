@@ -35,10 +35,10 @@ const FormEditProduct: React.FC<Props> = ({
       productStock: parseInt(form.productStock),
       productPrice: parseFloat(form.productPrice),
     };
-    axios.patch(`/api/products/${editedData?.productId}`, updatedProduct)
+    axios.patch(`/api/products/${editedData?.id}`, updatedProduct)
       .then(response => {
         const indexData = dataProducts.findIndex((product) =>
-          product.productId === response.data.productId
+          product.id === response.data.id
         );
 
         if (indexData !== -1) {

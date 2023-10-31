@@ -1,17 +1,12 @@
-import { cookies } from "next/headers";
 import Link from "next/link";
-
-import { JwtSchema } from "@/app/utils/types";
 import { Heading } from "@/app/components/Container/Heading";
-import { verifyAuth } from "@/app/utils/auth";
+import { checkUserLogin } from "@/app/utils/auth";
 import { getUserProductCart } from "@/app/utils/queryDb";
 import DataProducts from "./components/DataProducts";
 import WrongCondition from "@/app/components/404/WrongCondition";
 
 const Page: React.FC = async () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get('token');
-  const user: JwtSchema | undefined = token && (await verifyAuth(token.value))
+  const user = await checkUserLogin();
   const productCart = await getUserProductCart(user?.userId ?? '');
   return (
     <>

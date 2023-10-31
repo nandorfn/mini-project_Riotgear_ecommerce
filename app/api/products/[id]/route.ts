@@ -28,8 +28,8 @@ export const DELETE = async (req: Request, { params }: { params: { id: string } 
   } else {
     const product = await prisma.product.delete({
       where: {
-        productId: params.id
-      }
+        id: Number(params.id)
+        }
     });
     return NextResponse.json(product, { status: 200 });
   }
@@ -47,7 +47,7 @@ export const PATCH = async (req: Request, { params }: {
     const body: TProductData = await req.json();
     const product = await prisma.product.update({
       where: {
-        productId: params.id
+        id: Number(params.id)
       },
       data: {
         productId: body.productId,

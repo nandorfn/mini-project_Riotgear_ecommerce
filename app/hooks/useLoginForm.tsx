@@ -24,7 +24,6 @@ const useLoginForm = () => {
       .then(response => {
         if (response.data.status === 200) {
           router.refresh()
-          setLoading(false);
         }
       })
       .catch(error => {

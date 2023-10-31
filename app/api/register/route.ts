@@ -29,7 +29,14 @@ export const POST = async (req: Request) => {
     }); 
     
     return NextResponse.json({errors: zodErrors}, {status: 400})
-  } else {
+  }
+  const existingEmail = await prisma.user.findFirst({
+    where: {
+      email: result.data.email
+    }
+  })
+  
+  if (!existingEmail) {
     await prisma.user.create({
       data: {
         userId: id,
@@ -42,5 +49,8 @@ export const POST = async (req: Request) => {
     })
     
     return NextResponse.json({status: 201})
+  }
+  else {
+    return NextResponse.json({errors: 'Email is registered'}, {status: 400})
   }
 }
