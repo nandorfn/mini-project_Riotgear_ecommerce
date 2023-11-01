@@ -18,8 +18,12 @@ const DataProducts = ({ products }: DataProductProps) => {
   const [productCart, setProductCard] = useState<cart[]>(products);
   let subTotal = 0;
   productCart.forEach((product) => {
-    const total = product.quantity * product.productInfo.productPrice;
-    subTotal += total;
+    if (product.productInfo.productStock === 0) {
+      subTotal += 0;
+    } else {
+      const total = product.quantity * product.productInfo.productPrice;
+      subTotal += total;
+    }
   })
   let tax = subTotal * 11 / 100;
   
@@ -62,6 +66,7 @@ const DataProducts = ({ products }: DataProductProps) => {
                 <Heading>TERMS OF USE</Heading>
                 <p>By clicking the checkout button you agree to our terms and conditions</p>
               </Flex>
+
 
               <Flex variant={'col'} className="gap-3">
                 <Link href={'/store/checkout'}>

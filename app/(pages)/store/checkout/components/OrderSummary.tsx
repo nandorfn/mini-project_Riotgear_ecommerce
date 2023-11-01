@@ -13,7 +13,8 @@ const OrderSummary: React.FC = async () => {
   const productCart = await getUserProductCart(user?.userId ?? '');
   let { subTotal, tax } = orderSummary(productCart);
   
-  if (productCart.length === 0) redirect('/store')
+  if (productCart.length === 0) redirect('/store');
+  if (productCart.some((item) => item.productInfo.productStock === 0)) redirect('/store/cart');
 
   return (
     <>

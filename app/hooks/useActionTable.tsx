@@ -54,6 +54,7 @@ const useActionTable = (
     }));
     axios.delete(`${query}/${id}`)
     .then((res) => {
+      console.log(res);
       const filterData = data.filter((item: unknown) => {
         if (typeof item === 'object' && item !== null && 'id' in item) {
           return (item as { id: number }).id !== id;
@@ -77,6 +78,17 @@ const useActionTable = (
         toast.error('Data failed to delete!', {
           position: "top-center",
           autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });  
+        toast.info('Note: Products that have been sold or have been added to a user cart cannot be deleted!', {
+          position: "top-center",
+          delay: 1200,
+          autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
