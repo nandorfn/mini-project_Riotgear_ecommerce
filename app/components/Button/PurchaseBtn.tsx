@@ -25,20 +25,26 @@ const PurchaseBtn = ({ user, id, stock }: PurchaseBtn) => {
 
   return (
     <>
-      <h4 className="font-medium text-xl">Quantity</h4>
-      <select onChange={(e) => setQuantity(e.target.value)} className="px-4 py-2 rounded-md w-full max-w-[5.4rem]" name="selectQuantity">
-        {options?.map((data) =>
-          <option key={data} value={data}>{data}</option>
-        )}
-      </select>
-      <div className="flex flex-row w-full justify-between gap-3 sticky sm:absolute sm:bottom-0">
-        <Button disabled={loading} onClick={handlePostCart} variant={'red'} className='md:w-[70%]'>Add to cart</Button>
-        <Button className="md:w-[26%]">
-          <Image
-            src={wishlistIcon}
-            alt="Wishlist Icon" />
-        </Button>
-      </div>
+      {stock === 0
+        ? <Heading>Out Of Stock</Heading>
+        :
+        <>
+          <h4 className="font-medium text-xl">Quantity</h4>
+          <select onChange={(e) => setQuantity(e.target.value)} className="px-4 py-2 rounded-md w-full max-w-[5.4rem]" name="selectQuantity">
+            {options?.map((data) =>
+              <option key={data} value={data}>{data}</option>
+            )}
+          </select>
+          <div className="flex flex-row w-full justify-between gap-3 sticky sm:absolute sm:bottom-0">
+            <Button disabled={loading} onClick={handlePostCart} variant={'red'} className='md:w-[70%]'>Add to cart</Button>
+            <Button className="md:w-[26%]">
+              <Image
+                src={wishlistIcon}
+                alt="Wishlist Icon" />
+            </Button>
+          </div>
+        </>
+      }
 
       {modal &&
         <CartModal

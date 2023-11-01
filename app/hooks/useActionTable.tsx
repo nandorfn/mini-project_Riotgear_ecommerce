@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ProductData } from "../utils/types";
 
 const useActionTable = (
-  data: any[], 
+  data: ProductData[], 
   setData: Dispatch<SetStateAction<ProductData[]>>,
   setFilteredData: Dispatch<SetStateAction<ProductData[]>>, 
   setEditedData: Dispatch<SetStateAction<ProductData | undefined>>,
