@@ -1,6 +1,8 @@
 import axios from "axios";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ProductData } from "../utils/types";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useActionTable = (
   data: ProductData[], 
@@ -59,8 +61,30 @@ const useActionTable = (
         return true;
       });
       setData(filterData);
+      toast.success('Data deleted succesfully!', {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     })
-      .catch(error => { console.error(error) })
+      .catch(error => { 
+        console.error(error) 
+        toast.error('Data failed to delete!', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });  
+      })
       .finally(() => {
         setModal((prevState) => ({
           ...prevState,
@@ -77,6 +101,7 @@ const useActionTable = (
       return true;
     })];
     setEditedData(dataToEdit[0]);
+
   };
 
   const handleInput = (e: React.SyntheticEvent) => {
