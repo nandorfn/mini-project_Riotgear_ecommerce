@@ -23,25 +23,23 @@ const FormProduct: React.FC<Props> = ({
   const { sendData } = usePostData({
     setData: setDataProducts
   });
-  
+
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     sendData(dataProduct);
-      handleModal();
-      setForm(defaultProductData);
+    handleModal();
+    setForm(defaultProductData);
   }
-  
+
   return (
-    <>
-        <Modal
-          handleInput={handleInput}
-          handleModal={handleModal}
-          handleSubmit={handleSubmit}
-          loading={loading}
-          form={form}
-          label={"Add Product"}
-        />
-    </>
+    <Modal
+      handleInput={handleInput}
+      handleModal={handleModal}
+      handleSubmit={handleSubmit}
+      loading={loading}
+      form={form}
+      label={"Add Product"}
+    />
   );
 };
 

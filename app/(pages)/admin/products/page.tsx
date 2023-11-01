@@ -12,6 +12,7 @@ import { headTableProduct } from "@/app/helpers/dataObject";
 import { Transparent } from "@/app/components/Container/Transparent";
 import { Flex } from "@/app/components/Container/Flex";
 import useActionTable from "@/app/hooks/useActionTable";
+import { ToastContainer } from "react-toastify";
 
 
 const Page: React.FC = () => {
@@ -43,6 +44,7 @@ const Page: React.FC = () => {
         </Transparent>
         :
         <section className="relative px-4 lg:px-0 z-0">
+        <ToastContainer />
           <h2 className="text-2xl font-medium">List Products</h2>
           <div className="flex flex-row md:w-2/4 items-center gap-3 mt-2 mb-4">
             <Input
