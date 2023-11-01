@@ -32,7 +32,7 @@ const DataProducts = ({ products }: DataProductProps) => {
       {
         productCart.length > 0
           ?
-          <Flex className="gap-10 flex-col lg:flex-row lg:h-[60vh]">
+          <Flex className="gap-10 flex-col lg:flex-row lg:min-h-[60vh]">
             <Flex variant={'col'} className="w-full lg:w-2/3 gap-5">
               {productCart?.map((data: cart) => (
                 <CartCard
