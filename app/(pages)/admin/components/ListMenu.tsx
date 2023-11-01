@@ -24,16 +24,14 @@ const ListMenu = async () => {
         </div>
       </li>
       {menus?.map((menu, index) =>
-        <>
-          <li key={index}
-            className={`hover:bg-[#C2F377] rounded-lg`}>
-            <Link
-              className={`hover:text-neutral text-white font-medium `}
-              href={menu.Link}>
-              {menu.label}
-            </Link>
-          </li>
-        </>
+        <li key={index}
+          className={`hover:bg-[#C2F377] rounded-lg`}>
+          <Link
+            className={`hover:text-neutral text-white font-medium `}
+            href={menu.Link}>
+            {menu.label}
+          </Link>
+        </li>
       )}
 
     </ul>

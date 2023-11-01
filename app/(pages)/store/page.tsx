@@ -1,4 +1,5 @@
 import { CardContainer } from "@/app/components/Card/CardContainer";
+import ChatWrapper from "@/app/components/Chat/ChatWrapper";
 import { Flex } from "@/app/components/Container/Flex";
 import MenuFilter from "@/app/components/Menu/MenuFillter";
 import ScrollMenuContainer from "@/app/components/Menu/ScrollMenuContainer";
@@ -11,7 +12,6 @@ const page = async ({
 }) => {
   const products = await getItem(searchParams);
   return (
-    <>
       <Flex variant={'row'} className="md:px-4 gap-5">
         <div className="w-[27.6%] h-screen mt-5 hidden md:block overflow-hidden">
           <MenuFilter />
@@ -25,9 +25,9 @@ const page = async ({
               data={products}
             />
           </div>
+          <ChatWrapper />
         </div>
       </Flex>
-    </>
   );
 };
 

@@ -7,7 +7,10 @@ export const revalidate = 3600
 export const getFeatured = async () => {
   const productFeatured = await prisma.product.findMany({
     where: {
-      featured: true
+      featured: true,
+      productStock: {
+        gt: 0,
+      }
     },
     take: 12,
 
@@ -52,6 +55,9 @@ export const getItem = cache(async (filters: any) => {
         gte: priceRanges ? priceRanges[0] : undefined,
         lte: priceRanges ? priceRanges[1] : undefined,
       },
+      productStock: {
+        gt: 0,
+      }
     },
     orderBy: sortOptions,
   });

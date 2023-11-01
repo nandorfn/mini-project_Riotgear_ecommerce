@@ -19,14 +19,14 @@ interface CartCardProps {
   setProductCart: Dispatch<SetStateAction<cart[]>>;
 }
 
-  const CartCard: React.FC<CartCardProps> = ({ data, setProductCart, productCart }) => {
+const CartCard: React.FC<CartCardProps> = ({ data, setProductCart, productCart }) => {
   const [modal, setModal] = useState(false);
   const [state, setState] = useState({
     quantity: data.quantity,
     dataId: '',
     loading: false,
   })
-  
+
   const subTotalItem = data.productInfo.productPrice * state.quantity;
   const {
     productName,
@@ -46,27 +46,27 @@ interface CartCardProps {
       dataId: id
     });
   }
-  
+
   const updateCartQuantity = (id: number, quantity: number) => {
     let items = [...productCart];
     const indexToEdit = items.findIndex((item) => item.id === id)
     let item = items[indexToEdit];
     item.quantity = quantity;
     items[indexToEdit] = item;
-    setProductCart(items)    
+    setProductCart(items)
   }
-  
+
   const deleteCart = (id: number) => {
     let carts = [...productCart];
     const indexToDelete = carts.findIndex((item) => item.id === id);
-    
+
     if (indexToDelete !== -1) {
       carts.splice(indexToDelete, 1);
       setProductCart(carts);
     }
-    
+
   }
-  
+
   const prevQuantity = usePrevious(state.quantity);
   const queryProduct = `/api/carts`
   useEffect(() => {
@@ -94,7 +94,6 @@ interface CartCardProps {
       ...state,
       loading: true
     })
-    console.log(id)
     await deleteData(`${queryProduct}/${id}`)
       .then((res) => {
         if (res.status === 200) {
@@ -136,7 +135,7 @@ interface CartCardProps {
               height={20}
               src={closeIcon} alt="close icon" />
           </button>
-          <figure className="w-1/3">
+          <figure className="w-1/3 relative">
             <Image
               className="rounded-md md:rounded-lg"
               width={253}
@@ -149,32 +148,42 @@ interface CartCardProps {
               <Text className="capitalize">{`Color: ${productColor}`}</Text>
               <Text className="uppercase">{`Size: ${productSize}`}</Text>
             </Flex>
-
-            <Flex variant={'col'} className="md:gap-3 mt-3 md:mt-0">
-              <Heading>{`Rp${productPrice.toLocaleString('ID-id')}`}</Heading>
-              <Flex variant={'row'}>
-                <label className="flex flex-col">
-                  Quantity
-                  <select
-                    value={state.quantity}
-                    id={idCart}
-                    onChange={(e) => handleQuantity(e)}
-                    className="px-4 py-2 rounded-md w-full max-w-[5.4rem] md:mt-3"
-                    name="selectQuantity">
-                    {options?.map((data) =>
-                      <option
-                        key={data}
-                        value={data}>{data}
-                      </option>
-                    )}
-                  </select>
-                </label>
-                <Flex className=" justify-end items-end gap-1">
-                  <h1 className="hidden md:block md:font-medium md:text-md">SUBTOTAL:</h1>
-                  <h1 className="md:font-medium md:text-md">{`Rp${subTotalItem.toLocaleString('ID-id')}`}</h1>
+            {productStock !== 0
+              ?
+              <Flex variant={'col'} className="md:gap-3 mt-3 md:mt-0">
+                <Heading>{`Rp${productPrice.toLocaleString('ID-id')}`}</Heading>
+                <Flex variant={'row'}>
+                  <label className="flex flex-col">
+                    {'Quantity'}
+                    <select
+                      value={state.quantity}
+                      id={idCart}
+                      onChange={(e) => handleQuantity(e)}
+                      className="px-4 py-2 rounded-md w-full max-w-[5.4rem] md:mt-3"
+                      name="selectQuantity">
+                      {options?.map((data) =>
+                        <option
+                          key={data}
+                          value={data}>{data}
+                        </option>
+                      )}
+                    </select>
+                  </label>
+                  <Flex className=" justify-end items-end gap-1">
+                    <h1 className="hidden md:block md:font-medium md:text-md">SUBTOTAL:</h1>
+                    <h1 className="md:font-medium md:text-md">{`Rp${subTotalItem.toLocaleString('ID-id')}`}</h1>
+                  </Flex>
                 </Flex>
               </Flex>
-            </Flex>
+
+              : 
+                <Flex variant={'col'}>
+                  <Heading>This product is out of stock</Heading>
+                  <p className=" text-error">Note: You cannot checkout if there are empty products!</p>
+                </Flex>
+                
+
+            }
           </Flex>
         </article>
       }

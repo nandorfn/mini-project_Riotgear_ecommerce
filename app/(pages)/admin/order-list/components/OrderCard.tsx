@@ -98,7 +98,6 @@ const OrderCard = ({ orderItem }: order) => {
             {order.orderItems.map((item: any, index: number) => (
               <article key={index}>
                 {index === 0 && (
-                  <>
                     <HistoryOrderCard
                       isAdmin={true}
                       name={item.productName}
@@ -106,7 +105,6 @@ const OrderCard = ({ orderItem }: order) => {
                       price={item.productPrice}
                       img={order.orderItems[index].productImgLink}
                       collapseAdmin={<CollapseDetails data={order.orderItems} />} />
-                  </>
                 )}
               </article>
 

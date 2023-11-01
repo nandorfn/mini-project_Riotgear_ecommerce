@@ -11,28 +11,26 @@ const page = async () => {
     const articles = await getBlogArticles();
 
     return (
-        <>
-            <LayoutHome
-                heroChildren={<HeroTitleOnyl />}
-                banner={blogBanner}
-            >
-                <main className="max-w-6xl mx-auto h-[80vh]">
-                    <h2 className={`text-center text-4xl font-medium mb`}>BLOG</h2>
-                    <section className='flex flex-col gap-3 p-4'>
-                        {articles?.map((item: TArticle) => (
-                            <Link
-                                href={`/blog/article?id=${item.id}`}
-                                key={item.id}
-                            >
-                                <ArticleCard data={item} />
-                            </Link>
-                        ))
+        <LayoutHome
+            heroChildren={<HeroTitleOnyl />}
+            banner={blogBanner}
+        >
+            <main className="max-w-6xl mx-auto h-[80vh]">
+                <h2 className={`text-center text-4xl font-medium mb`}>BLOG</h2>
+                <section className='flex flex-col gap-3 p-4'>
+                    {articles?.map((item: TArticle) => (
+                        <Link
+                            href={`/blog/article?id=${item.id}`}
+                            key={item.id}
+                        >
+                            <ArticleCard data={item} />
+                        </Link>
+                    ))
 
-                        }
-                    </section>
-                </main>
-            </LayoutHome>
-        </>
+                    }
+                </section>
+            </main>
+        </LayoutHome>
     );
 };
 

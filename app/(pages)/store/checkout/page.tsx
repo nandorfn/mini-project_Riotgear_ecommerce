@@ -3,9 +3,7 @@ import { Heading } from "@/app/components/Container/Heading";
 import CheckoutBody from "./components/CheckoutBody";
 import OrderSummary from "./components/OrderSummary";
 import { checkUserLogin } from "@/app/utils/auth";
-import { Button } from "@/app/components/Button/Button";
-import { Flex } from "@/app/components/Container/Flex";
-import { Text } from "@/app/components/Container/Text";
+import WrongCondition from "@/app/components/404/WrongCondition";
 
 const Page: React.FC = async () => {
   const user = await checkUserLogin();
@@ -23,12 +21,11 @@ const Page: React.FC = async () => {
 
         <Heading variant={'fourthRwd'} className=" mb-5 md:mb-10">CHECKOUT</Heading>
         {!user
-          ? <Flex variant={'col'} className="h-[60vh] gap-5" align={'center'}>
-              <Text fs={'xl'}>You must Login</Text>
-              <Link href={'/login'}>
-                <Button size={'wide'}>Login</Button>
-              </Link>
-            </Flex>
+          ? <WrongCondition
+          text={'You must be logged in, to access this route'}
+          link={'/login'}
+          labelBtn={'LOGIN TO ACCESS'}
+          />
           : <CheckoutBody userId={user.userId}>
               <OrderSummary />
             </CheckoutBody>

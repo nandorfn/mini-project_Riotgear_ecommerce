@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import FormProduct from "./FormProduct";
 import FormEditProduct from "./FormEditProduct";
@@ -12,97 +11,31 @@ import TableBody from "@/app/components/Table/TableBody";
 import { headTableProduct } from "@/app/helpers/dataObject";
 import { Transparent } from "@/app/components/Container/Transparent";
 import { Flex } from "@/app/components/Container/Flex";
+import useActionTable from "@/app/hooks/useActionTable";
+import { ToastContainer } from "react-toastify";
 
 
 const Page: React.FC = () => {
   const [dataProducts, setDataProducts] = useState<ProductData[]>([])
   const [filteredData, setFilteredData] = useState<ProductData[]>([])
   const [editedProduct, setEditedProduct] = useState<ProductData>()
-  const [search, setSearch] = useState('');
-  const [modal, setModal] = useState({
-    editModal: false,
-    addModal: false,
-    loading: false
-  })
 
+  const {
+    modal,
+    search,
+    handleInput,
+    handleAddModal,
+    handleEdit,
+    handleEditModal,
+    handleDelete
+  } = useActionTable(
+    dataProducts,
+    setDataProducts,
+    setFilteredData,
+    setEditedProduct,
+    '/api/products'
+  )
 
-  useEffect(() => {
-    if (dataProducts.length === 0) {
-      setModal((prevState) => ({
-        ...prevState,
-        loading: true
-      }));
-      axios.get('/api/products')
-        .then(response => {
-          const newDataProducts = [
-            ...dataProducts,
-            ...response.data
-          ];
-          setDataProducts(newDataProducts);
-        })
-        .catch(error => {
-          console.error(error);
-        })
-        .finally(() => {
-          setModal((prevState) => ({
-            ...prevState,
-            loading: false
-          }));
-        })
-    }
-  }, []);
-
-  const handleDelete = (id: string) => {
-    setModal((prevState) => ({
-      ...prevState,
-      loading: true
-    }));
-    axios.delete(`/api/products/${id}`)
-      .then(() => {
-        const filteredProducts = [
-          ...dataProducts.filter((product) =>
-            product.productId !== id
-          )];
-        setDataProducts(filteredProducts)
-      })
-      .catch(error => { console.error(error) })
-      .finally(() => {
-        setModal((prevState) => ({
-          ...prevState,
-          loading: false
-        }));
-      });
-  }
-
-  const handleEdit = (id: string) => {
-    const dataToEdit = [...dataProducts.filter((product) => product.productId === id)];
-    setEditedProduct(dataToEdit[0]);
-  };
-
-  const handleInput = (e: React.SyntheticEvent) => {
-    const { value } = (e.target as HTMLInputElement);
-    setSearch(value)
-    onFilter(value);
-  }
-  const handleAddModal = () => {
-    setModal((prevState) => ({
-      ...prevState,
-      addModal: !prevState.addModal
-    }));
-  };
-  const handleEditModal = () => {
-    setModal((prevState) => ({
-      ...prevState,
-      editModal: !prevState.editModal
-    }));
-  };
-
-  const onFilter = (query: string) => {
-    let filter = dataProducts?.filter((item) =>
-      item.productName.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredData(filter)
-  }
   return (
     <>
       {modal.loading
@@ -111,6 +44,7 @@ const Page: React.FC = () => {
         </Transparent>
         :
         <section className="relative px-4 lg:px-0 z-0">
+        <ToastContainer />
           <h2 className="text-2xl font-medium">List Products</h2>
           <div className="flex flex-row md:w-2/4 items-center gap-3 mt-2 mb-4">
             <Input
@@ -118,7 +52,7 @@ const Page: React.FC = () => {
               value={search}
               type="text"
               handleInput={handleInput}
-              placeholder="Find products"
+              placeholder="Find products by name"
             />
             <Button
               className="mt-2"

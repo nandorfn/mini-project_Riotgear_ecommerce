@@ -1,4 +1,5 @@
 import prisma from "@/app/lib/prisma";
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
@@ -27,6 +28,7 @@ export const POST = async (req: Request) => {
           quantity: newQuantity
         }
       });
+      revalidateTag('/store/cart')
       return NextResponse.json(updatedCartItem, { status: 200 });
     } else {
       return NextResponse.json({ errors: "Product doesn't exist!" }, { status: 404 });

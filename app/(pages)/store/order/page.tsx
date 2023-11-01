@@ -67,7 +67,7 @@ const Page = async ({
           <WrongCondition
             text={'You must be logged in, to view order history'}
             link={'/login'}
-            labelBtn={'LOGIN'} />
+            labelBtn={'LOGIN TO ACCESS ORDER HISTORY'} />
         }
         {filteredOrders?.length === 0
           ? <WrongCondition

@@ -18,7 +18,7 @@ const ScrollMenuContainer: React.FC = () => {
   const handleClick = () => {
     setInput(!input);
     if (search !== '') {
-      if (storePath === '/') {
+      if (storePath === '/' || storePath === '/login') {
         router.push(`/store?search=${search}`);
         setSearch('');
       } else {

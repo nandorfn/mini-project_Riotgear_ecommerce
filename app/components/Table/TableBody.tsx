@@ -5,9 +5,9 @@ import Image from "next/image";
 
 interface Props {
   dataMapping: ProductData[];
-  handleEdit: (id: string) => void;
+  handleEdit: (id: number) => void;
   handleEditModal: () => void;
-  handleDelete: (id: string) => void;
+  handleDelete: (id: number) => void;
 }
 
 const TableBody: React.FC<Props> = ({
@@ -16,7 +16,7 @@ const TableBody: React.FC<Props> = ({
   handleEditModal,
   handleDelete,
 }) => {
-  const handleEditProduct = (id: string) => {
+  const handleEditProduct = (id: number) => {
     handleEdit(id);
     handleEditModal();
   }
@@ -36,7 +36,7 @@ const TableBody: React.FC<Props> = ({
           <td>{`Rp${product.productPrice.toLocaleString('id-ID')}`}</td>
           <td className="flex flex-row gap-3">
               <button
-                onClick={() => handleEditProduct(product.productId)}
+                onClick={() => handleEditProduct(product.id)}
               >
                 <Image
                   src={editIcon}
@@ -46,7 +46,7 @@ const TableBody: React.FC<Props> = ({
                 />
               </button>
               <button
-                onClick={() => handleDelete(product.productId)}
+                onClick={() => handleDelete(product.id)}
               >
                 <Image
                   width={20}
