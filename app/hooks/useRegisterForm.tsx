@@ -37,7 +37,8 @@ const useRegisterForm = () => {
           alert('Submitting form failed');
         }
       })
-      .catch(errors => {
+      .catch(error => {
+        let errors = error.response.data.errors
         if (errors.name) {
           setError("name", {
             type: "server",

@@ -51,6 +51,6 @@ export const POST = async (req: Request) => {
     return NextResponse.json({status: 201})
   }
   else {
-    return NextResponse.json({errors: 'Email is registered'}, {status: 400})
+    return NextResponse.json({errors: { email: 'Email is already registered!'}}, {status: 400})
   }
 }
