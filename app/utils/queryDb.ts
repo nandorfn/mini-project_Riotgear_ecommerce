@@ -445,6 +445,9 @@ export const getUserOrder = cache(async (userId: string | undefined) => {
     const allOrder = await prisma.order.findMany({
       where: {
         userId: userId,
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
     });
 
