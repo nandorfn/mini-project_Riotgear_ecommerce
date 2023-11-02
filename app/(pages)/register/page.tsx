@@ -30,7 +30,7 @@ const Page = () => {
           </Heading>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-3 mt-3">
             <label>
-              Name
+              {'Name'}
               <input
                 {...register("name")}
                 type="text"
@@ -43,7 +43,7 @@ const Page = () => {
               <span className="text-red-500">{errors.name.message}</span>
             }
             <label>
-              Email
+              {'Email'}
               <input
                 {...register("email")}
                 type="email"
@@ -57,7 +57,7 @@ const Page = () => {
             }
 
             <label>
-              Password
+              {'Password'}
               <input
                 {...register("password")}
                 type="password"
@@ -71,7 +71,7 @@ const Page = () => {
             }
 
             <label>
-              Confirm Password
+              {'Confirm Password'}
               <input
                 {...register("confirmPassword")}
                 type="password"

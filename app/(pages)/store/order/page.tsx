@@ -128,7 +128,7 @@ const Page = async ({
                   ))}
                   {order.orderItem.map((item: OrderItem, index: number) => (
                     <Suspense key={item.id} fallback={<OrderCardSkeleton variant="variant1" />}>
-                      <div className="ms-1">
+                      <div className="ms-1 mb-2">
                         {index > 0 && (
                           <HistoryOrderCard
                             img={item.productImgLink}
