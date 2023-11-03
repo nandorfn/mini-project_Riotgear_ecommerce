@@ -28,7 +28,7 @@ const ReviewWrap = ({ reviews }: Props) => {
         <section className="md:mt-3 flex flex-col gap-3 whitespace-nowrap">
           <Heading variant={'five'}>Reviews</Heading>
           
-          <UserRating userRating={averageRating} />
+          <UserRating userRating={Math.round(averageRating * 10)/10} />
           <div className="flex breadcrumbs gap-3">
           {reviews?.map((item: Review) => (
             <ReviewCard

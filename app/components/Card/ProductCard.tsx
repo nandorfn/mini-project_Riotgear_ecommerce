@@ -55,7 +55,7 @@ const ProductCard: React.FC<Product> = ({
                 <Flex align={'iCenter'} className='gap-1'>
                   <Image className='w-6' src={StarLogo} alt='star logo' />
                   <Text clr={'zinc5'} className='mt-[0.2rem]' fs={'sm'}>
-                    {`${averageRating} (${totalReviews} Reviews)`}
+                    {`${Math.round(averageRating * 10) / 10} (${totalReviews} Reviews)`}
                   </Text>
                 </Flex>
               }
