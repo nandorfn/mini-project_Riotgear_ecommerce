@@ -18,7 +18,8 @@ const useAddCart = ({user, id, stock}: PurchaseBtn) => {
     setModal(!modal)
     e.preventDefault();
     await postData(query, data)
-    .then(() => setLoading(false))
+    .catch((error) => console.log(error))
+    .finally(() => setLoading(false));
   }
 
   const options = [];
