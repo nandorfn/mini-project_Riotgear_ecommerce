@@ -48,6 +48,7 @@ const PurchaseBtn = ({ user, id, stock }: PurchaseBtn) => {
 
       {modal &&
         <CartModal
+          loading={loading}
           setModal={setModal}
           modal={modal}
           title="1 ITEMS ADDED TO YOUR CART"

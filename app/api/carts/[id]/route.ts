@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuth } from "@/app/utils/auth";
 import prisma from "@/app/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 export const PATCH = async (req: NextRequest, { params }: { params: { id: string } }) => {
   const token = req.headers.get('cookie')?.split('=')[1];
@@ -49,6 +50,7 @@ export const DELETE = async (req: Request, { params }: { params: { id: string } 
     if (!deleteCart) {
       throw new Error('Deleted Data Not Found');
     } else {
+      revalidatePath('/store/cart')
       return NextResponse.json(deleteCart, { status: 200 });
     }
 
