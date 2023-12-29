@@ -8,7 +8,9 @@ import { TProductData } from "./[id]/route";
 
 
 export const POST = async (req: Request) => {
-  const token = req.headers.get('cookie')?.split('=')[1];
+  const cookies = req.headers.get('cookie')?.split(';')
+  const tokenString = cookies?.find(str => str.startsWith('token='));
+  const token = tokenString?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
   
   // Check Role
