@@ -13,7 +13,9 @@ type orderStatus = {
 
 
 export const POST = async (req: Request) => {
-  const token = req.headers.get('cookie')?.split('=')[1];
+  const cookies = req.headers.get('cookie')?.split(';')
+  const tokenString = cookies?.find(str => str.startsWith('token='));
+  const token = tokenString?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
 
   // Check user token
@@ -127,7 +129,9 @@ export const PATCH = async (req: Request) => {
     return NextResponse.json(zodErrors, { status: 401 });
   }
   
-  const token = req.headers.get('cookie')?.split('=')[1];
+  const cookies = req.headers.get('cookie')?.split(';')
+  const tokenString = cookies?.find(str => str.startsWith('token='));
+  const token = tokenString?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
   if (!verifiedToken) {
     return NextResponse.json({ errors: 'Unauthorized' }, { status: 401 });

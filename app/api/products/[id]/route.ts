@@ -20,7 +20,9 @@ export type TProductData = {
 
 
 export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
-  const token = req.headers.get('cookie')?.split('=')[1];
+  const cookies = req.headers.get('cookie')?.split(';')
+  const tokenString = cookies?.find(str => str.startsWith('token='));
+  const token = tokenString?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
 
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {
@@ -38,7 +40,9 @@ export const DELETE = async (req: Request, { params }: { params: { id: string } 
 export const PATCH = async (req: Request, { params }: {
   params: { id: string }
 }) => {
-  const token = req.headers.get('cookie')?.split('=')[1];
+  const cookies = req.headers.get('cookie')?.split(';')
+  const tokenString = cookies?.find(str => str.startsWith('token='));
+  const token = tokenString?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
 
   if (!verifiedToken || (verifiedToken && verifiedToken.role !== 'admin')) {

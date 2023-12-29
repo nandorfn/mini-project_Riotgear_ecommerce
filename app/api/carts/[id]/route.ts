@@ -4,7 +4,9 @@ import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const PATCH = async (req: NextRequest, { params }: { params: { id: string } }) => {
-  const token = req.headers.get('cookie')?.split('=')[1];
+  const cookies = req.headers.get('cookie')?.split(';')
+  const tokenString = cookies?.find(str => str.startsWith('token='));
+  const token = tokenString?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token));
 
   if (!verifiedToken) {
@@ -34,7 +36,9 @@ export const PATCH = async (req: NextRequest, { params }: { params: { id: string
 }
 
 export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
-  const token = req.headers.get('cookie')?.split('=')[1];
+  const cookies = req.headers.get('cookie')?.split(';')
+  const tokenString = cookies?.find(str => str.startsWith('token='));
+  const token = tokenString?.split('=')[1];
   const verifiedToken = token && (await verifyAuth(token))
 
   if (!verifiedToken) {
